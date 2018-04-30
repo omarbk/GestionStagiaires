@@ -12,7 +12,7 @@
         </a>
 
         <a class="navbar-brand" href="#">
-            <img src="storage/images/logo.png" alt="logo">
+            <img src="storage/images/logoStagiaire.png" alt="logo">
         </a>
 
         <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">

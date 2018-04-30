@@ -51,26 +51,7 @@ Vue.component('app-addusers', require('./components/User/AddUsers.vue'));
 Vue.component('app-affusers', require('./components/User/AffUsers.vue'));
 Vue.component('app-edituser', require('./components/User/EditUser.vue'));
 Vue.component('app-userconnect', require('./components/User/UserConnect.vue'));
-/* Compagnies*/
-Vue.component('app-addcompagnie', require('./components/Compagnie/AddCompagnie.vue'));
-Vue.component('app-affcompagnie', require('./components/Compagnie/AffCompagnie.vue'));
-Vue.component('app-editcompagnie', require('./components/Compagnie/EditCompagnie.vue'));
-Vue.component('app-detailscompagnie', require('./components/Compagnie/CompagnieDetails.vue'));
-/* Devis  */
-Vue.component('app-adddevis', require('./components/Vente/Devis/AddDevis.vue'));
-Vue.component('app-affdevis', require('./components/Vente/Devis/AffDevis.vue'));
-Vue.component('app-detailsdevis', require('./components/Vente/Devis/DevisDetails.vue'));
-Vue.component('app-editdevis', require('./components/Vente/Devis/EditDevis.vue'));
-/* Factures  */
-Vue.component('app-addfacture', require('./components/Vente/Facture/AddFacture.vue'));
-Vue.component('app-afffactures', require('./components/Vente/Facture/AffFactures.vue'));
-Vue.component('app-detailsfacture', require('./components/Vente/Facture/FactureDetails.vue'));
-Vue.component('app-editfacture', require('./components/Vente/Facture/EditFacture.vue'));
- /* Avoir Factures */
- Vue.component('app-addavoirfacture', require('./components/Vente/AvoirFacture/AddAvoirFacture.vue'));
- Vue.component('app-affavoirfactures', require('./components/Vente/AvoirFacture/AffAvoirFactures.vue'));
- Vue.component('app-detailsavoirfacture', require('./components/Vente/AvoirFacture/AvoirFactureDetails.vue'));
- Vue.component('app-editavoirfacture', require('./components/Vente/AvoirFacture/EditAvoirFacture.vue'));
+
 
 // afficher un nombre de phrase limité 
 /*Vue.filter('readMore', function (text, length, suffix) {

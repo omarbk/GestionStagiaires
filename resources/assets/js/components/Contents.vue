@@ -11,7 +11,7 @@
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <span class="h4 d-block font-weight-normal mb-2">54</span>
-                                    <span class="font-weight-light">Total Users</span>
+                                    <span class="font-weight-light">vu par évaluateur</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -25,12 +25,12 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">$32,400</span>
-                                    <span class="font-weight-light">Income</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">40</span>
+                                    <span class="font-weight-light">vu par Etudiants</span>
                                 </div>
 
                                 <div class="h2 text-muted">
-                                    <i class="icon icon-wallet"></i>
+                                   <i class="icon icon-people"></i>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@ var stackedLine = new Chart(ctxL, {
         }
     }
 });
- this.getArticlePlusVente(ctx);
+// this.getArticlePlusVente(ctx);
   
             console.log('---- test labels 2 ')
             console.log(this.labels2)
@@ -211,32 +211,15 @@ var stackedLine = new Chart(ctxL, {
 
                        async getArticlePlusVente(ctx){
                             this.loading= true;
-               let art = await  axios.get('/getArticlePlusVente')
-                .then((response) => {
-                 // console.log('shit');
-                
-
-                    this.articles = response.data.articles;
-      
-                    for(var i=0;i<this.articles.length;i++){
-                         this.labels2[i] = this.articles[i].designation
-                      this.votes2[i]= this.articles[i].count
-                    
-                     
-                    }  
-                    this.loading = false
-                })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });
+             
                   var stackedChart = await  new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: this.labels2,
+                    labels: this.labels,
                     datasets: [
                         {
-                            label: "# articles",
-                            data: this.votes2,
+                            label: "# labels",
+                            data: this.votes,
                             backgroundColor: [
                                 "rgba(255, 99, 132, 0.6)",
                                 "rgba(54, 162, 235, 0.6)",
