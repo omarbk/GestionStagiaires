@@ -5,7 +5,7 @@
         <a href="javascript:void(0)" aria-label="Previous" v-on:click.prevent="changePage(pagination.current_page - 1)" class="page-link">
             <span aria-hidden="true">&laquo;</span>
             </a>
-        </li>
+        </li> 
     <li v-for="page in pagesNumber" :class="{'active': page == pagination.current_page}" class="page-item">
         <a href="javascript:void(0)" v-on:click.prevent="changePage(page)" class="page-link" >{{ page }}</a>
         </li>
