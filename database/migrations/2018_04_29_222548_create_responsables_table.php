@@ -23,6 +23,8 @@ class CreateResponsablesTable extends Migration
             $table->string('tel_responsable')->nullable();
             $table->date('dateNaissance_responsable')->nullable();
             $table->string('service_responsable')->nullable();
+            $table->integer('fk_user')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

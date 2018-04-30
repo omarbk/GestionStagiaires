@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHospitaliersTable extends Migration
+class CreateStageGroupesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateHospitaliersTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_hospitaliers', function (Blueprint $table) {
-            $table->increments('id_service_hosp');
-            $table->integer('fk_service');
-            $table->integer('fk_hospitalier');
-            $table->softDeletes();
+        Schema::create('stage_groupes', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateHospitaliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_hospitaliers');
+        Schema::dropIfExists('stage_groupes');
     }
 }

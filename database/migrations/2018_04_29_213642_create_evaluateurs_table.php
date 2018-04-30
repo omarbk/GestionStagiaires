@@ -26,6 +26,8 @@ class CreateEvaluateursTable extends Migration
             $table->string('specialite_evaluateur')->nullable();
             $table->string('type_evaluateur')->nullable();
             $table->integer('fk_hospitalier')->nullable();
+            $table->integer('fk_user')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

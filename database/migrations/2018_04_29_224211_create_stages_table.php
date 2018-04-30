@@ -17,7 +17,6 @@ class CreateStagesTable extends Migration
             $table->increments('id_stages');
             $table->string('intitule_stage')->nullable();
             $table->string('objectif_stage')->nullable();
-            $table->string('objectif_stage')->nullable();
             $table->integer('fk_hospitalier')->nullable();
             $table->integer('fk_evaluateur')->nullable();
             $table->integer('fk_responsable')->nullable();
