@@ -13,6 +13,14 @@ import ShowResponsables from './components/Responsable/ShowResponsables.vue'
 import AddResponsable from './components/Responsable/AddResponsable.vue'
 
 
+//Groupes
+import ShowGroupes from './components/Groupe/ShowGroupes.vue'
+import ShowGroupe from './components/Groupe/ShowGroupe.vue'
+import AddGroupe from './components/Groupe/AddGroupe.vue'
+import EditGroupe from './components/Groupe/EditGroupe.vue'
+
+
+
 
 
 
@@ -95,6 +103,28 @@ const  router = new VueRouter({
             component: AddResponsable,
             name: "AddResponsable"
          },
+ // Groupe 
+         {
+            path:"/ShowGroupes",
+            component: ShowGroupes,
+            name: "ShowGroupes"
+         },
+         {
+            path:"/ShowGroupe",
+            component: ShowGroupe,
+            name: "ShowGroupe"
+         },
+         {
+            path:"/AddGroupe",
+            component:AddGroupe,
+            name: "AddGroupe"
+         },
+         {
+            path:"/EditGroupe/:id_groupe",
+            component: EditGroupe,
+            name: "EditGroupe"
+         },
+         
 
 
 

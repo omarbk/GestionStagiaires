@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col">
         <br>
-    <h5><i class="fas fa-address-book"></i> Compte de {{compte.nom_compte}} </h5>
+    <h5><i class="fas fa-address-book"></i> Groupe de {{compte.nom_compte}} </h5>
     </div>
 </div>
 <hr>

@@ -14,16 +14,19 @@ class CreateCalendriersTable extends Migration
     public function up()
     {
         Schema::create('calendriers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_calendrier');
+            $table->string('nomMoisDebut')->nullable();
+            $table->string('nomMoisFin')->nullable();
             $table->string('mois_stage_cal')->nullable();
-            $table->string('debut_semaine_cal')->nullable();
-            $table->string('fin_semaine_cal')->nullable();
+            $table->integer('debut_semaine_cal')->nullable();
+            $table->integer('fin_semaine_cal')->nullable();
+            $table->integer('NbJours')->nullable();
             $table->string('lundi_cal')->nullable();
             $table->string('mardi_cal')->nullable();
             $table->string('mercredi_cal')->nullable();
             $table->string('jeudi_cal')->nullable();
             $table->string('vendredi_cal')->nullable();
-            $table->string('fk_groupe')->nullable();
+            $table->integer('fk_groupe')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -217,6 +217,17 @@ Route::get('/getBonLivraisonBL/{id_bl}','FactureController@getBonLivraisonBL');
 Route::get('/getArticlePlusVente','DashboardController@getArticlePlusVente');
 
 
+
+//groupe
+Route::post('/addGroupe','GroupeController@addGroupe');
+Route::get('/getGroupes','GroupeController@getGroupes');
+Route::delete('/deleteGroupe/{id_groupe}','GroupeController@deleteGroupe');
+
+Route::get('/getGroupe/{id_groupe}','GroupeController@getGroupe');
+Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
+Route::post('/updateGroupe','GroupeController@updateGroupe');
+
+
 Auth::routes();
 
 

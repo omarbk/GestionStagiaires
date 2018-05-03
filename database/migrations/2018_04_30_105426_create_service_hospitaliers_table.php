@@ -19,6 +19,7 @@ class CreateServiceHospitaliersTable extends Migration
             $table->integer('fk_stage');
             $table->integer('fk_groupe');
             $table->softDeletes();
+            $table->timestamps();
 
         });
     }

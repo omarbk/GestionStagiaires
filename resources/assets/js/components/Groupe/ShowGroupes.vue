@@ -13,73 +13,20 @@
 <div v-if="!loading">
      <div class="row">
         <div class="col">
-    <b-btn v-b-modal.modalPrevent class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
-       <b-modal id="modalPrevent"
-             ref="modal"
-             title="+ Compte"
-             @ok="addCompte"
-             ok-title="Suivant" >
-      <form @submit.stop.prevent="handleSubmit">
-
-
-<div class="row" >
-        
-        <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" v-model="user.email" placeholder="Email">
-            </div>
-            <div class="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" v-model="user.password" placeholder="Password">
-            </div>
-
-            </div>
-
-            <div class="row">
-                            <div class="form-group col-md-6">
-                            <label for="inputEmail4">Name</label>
-                            <input type="text" class="form-control" id="inputname4" v-model="user.names" placeholder="User Name">
-                            </div>
-                            <div class="form-group col-md-6">
-                            <label for="inputState">Role</label>
-
-                            <input type="text" readonly class="form-control" id="role" v-model="user.role" placeholder="Email">
-
-                            </div> 
-
-            </div>
-   
-
-            <div class="form-group">
-                <label for="inputPassword4">Photo</label>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Upload</span>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input"  v-on:change="onImageChange"  id="inputGroupFile01">
-                <label class="custom-file-label"  for="inputGroupFile01">{{fileName}}</label>
-            </div>
-            </div>
-            </div>
-
-
-      
-      </form>
-
-    </b-modal>
+    <router-link class="float-right btn btn-secondary" :to="'/AddGroupe'" ><i class="fas fa-plus-circle"/> Ajouter </router-link>
+       
   </div>
     </div>
-    </div>  
+    
             <div v-if="Testopen.testnotifAdd" class="alert alert-success alert-dismissible fade show notifArticle" role="alert">
-        <strong>Compte bien ajouter !</strong> 
+        <strong>Groupe bien ajouter !</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
 
         <div v-if="Testopen.testnotifEdit" class="alert alert-success alert-dismissible fade show notifArticle" role="alert">
-        <strong>Compte bien modifier !</strong> 
+        <strong>Groupe bien modifier !</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -121,27 +68,19 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>nom_compte</th>
-                                        <th>responsable</th>
-                                        <th>type_compte</th>
-                                        <th>fixe</th>
-                                        <th>portable</th>
-                                        <th>email</th>
+                                        <th>Nom Groupe</th>
+                                        <th>année Universitaire</th>                                       
                                         <th>options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="compte of comptes.data" :key="compte.id_compte" >
-                                        <td>{{compte.nom_compte}}</td>
-                                        <td>{{compte.responsable}}</td>
-                                        <td>{{compte.type_compte}}</td>
-                                        <td>{{compte.fixe}} </td>    
-                                        <td>{{compte.portable}} </td>  
-                                        <td>{{compte.email}} </td>    
+                                    <tr  v-for="groupe of groupes.data" :key="groupe.id_groupe" >
+                                        <td>{{groupe.nom_groupe}}</td>
+                                        <td>{{groupe.annee_universitaire_groupe}}</td> 
                                         <td  class="optionsWidth"> 
-                                            <a href="#"    @click="redirect_To_ShowCompte(compte.id_compte)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
-                                         <router-link class="btn btn-success " :to="'/EditCompte/'+compte.id_compte"><i class="fas fa-edit d-inline-block"></i></router-link>
-                                             <a @click="deleteCompte(compte)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></td>                                 
+                                            <a href="#"    @click="redirect_To_ShowGroupe(groupe.id_groupe)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
+                                         <router-link class="btn btn-success " :to="'/EditGroupe/'+groupe.id_groupe"><i class="fas fa-edit d-inline-block"></i></router-link>
+                                             <a @click="deleteGroupe(groupe)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></td>                                 
                                     </tr>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     </div>
@@ -153,15 +92,16 @@
                     <div>
               
             </div>
+            </div>  
     </div>
     
-    <vue-pagination  :pagination="comptes"
-                     @paginate="getcomptes()"
+    <vue-pagination  :pagination="groupes"
+                     @paginate="getGroupes()"
                      :offset="4">
     </vue-pagination>
     </div>
     <!-- fin affiche -->
-    
+   
 </template>
 
 <script>
@@ -173,6 +113,11 @@ import  Pagination from '../Pagination.vue';
          },
 
           data: () => ({
+             groupe:{
+            id_groupe:0,
+            nom_groupe: "",
+            annee_universitaire_groupe:""     
+            },
               test1 : {
                   searchQuery: 0,
                    calculee: 0,
@@ -210,6 +155,16 @@ import  Pagination from '../Pagination.vue';
                         data: [],
 
               },
+                groupes:{
+                        total: 0,
+                        per_page: 2,
+                        from: 1,
+                        to: 0,
+                        current_page: 1,
+                        data: [],
+                },
+
+
                offset: 4,
 
 
@@ -249,45 +204,68 @@ import  Pagination from '../Pagination.vue';
       }),
  
  methods:{
-      onImageChange(e) {
-                let files = e.target.files || e.dataTransfer.files;
-                this.fileName=files[0].name;
-
-                if (!files.length)
-                    return;
-                this.createImage(files[0]);
+     
+        getGroupes(){
+                axios.get('/getGroupes?page='+this.groupes.current_page+'')
+                .then((response) => {
+                 // console.log('shit');
+                    this.groupes = response.data.groupes;
+                  
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+          },
+              fetchData () {
+      //this.error = this.post = null
+      this.loading = true
+      // replace `getPost` with your data fetching util / API wrapper
+   
+   axios.get('/getGroupes?page='+this.groupes.current_page+'')
+                .then((response) => {
+                 // console.log('shit');
+                    this.groupes = response.data.groupes;
+                    this.loading =  false
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
     },
+    deleteGroupe:function(groupe){
 
-    createImage(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                    vm.user.photo = e.target.result;
-                };
-                reader.readAsDataURL(file);
-    },
-     // ajouter un user
-    addCompte() {
-               
-    this.$router.push({ name: 'AddResponsable', params: { user: this.user }});
+        console.log(groupe);
+                        this.$swal({
+                        title: 'Etes-vous sur?',
+                        text: "Vous ne serez pas capable de revenir a cela!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui, supprimez-le!'
+                                                }).then((result) => {
+                        if (result.value) {
+                            axios.delete('/deleteGroupe/'+groupe.id_groupe).then(
+                                        response => {
+                                
+                                            this.getGroupes();
+                                        });
+                        this.$swal(
+                        'Supprimé!',
+                        'Votre groupe a été supprimé',
+                        'success'
+                        )
+  }
+})
 
-              /*  axios.post('/addUsers',this.user)
-                
-                    .then(response => {
-                        this.$router.push('/getUsers/add');
-                    })
-                    .catch(function (resp) {
-                       
-                    });*/
-            
-    },
-       
+        },
+               redirect_To_ShowGroupe(id_groupe){
+                   //  this.$router.push('/ShowGroupe/'+id_groupe);
+                      this.$router.push({ name: 'ShowGroupe', params: { id_groupe: id_groupe  }});
+            },
 
 
   },
- 
-   
-      /*  mounted(){
+     mounted(){
            
           if( this.$route.params.success == "addsuccess"){
              
@@ -313,132 +291,12 @@ import  Pagination from '../Pagination.vue';
     // already being observed
     this.fetchData()
   },
-  watch: {
-    // call again the method if the route changes
-    '$route': 'fetchData',
-  
-   'test1.searchQuery':
-     function(val){
-      //console.log(val)
-      this.test1.calculee = +val + 1
-      console.log(this.test1.calculee)  
-     }
- 
-  },
-
-      methods: {
-          notifArticle(){
-              let this1 = this
-               setTimeout(function () { this1.Testopen.testnotifAdd = false }, 1000);
-          },
-          searchComptes(event){
-             console.log(this.search);
-             this.comptes.current_page=1;
-             if(this.search === ""){
-                //console.log('test2');
-                    this.getcomptes();}
-                else {
-                     // console.log('test1');
-                axios.get('/searchComptes/'+this.search+'?page='+this.comptes.current_page+'')
-                .then((response) => {
-                  
-                    this.comptes = response.data.comptes;
-                  
-                })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });}
-                    
-          },
-
-            fetchData () {
-      //this.error = this.post = null
-      this.loading = true
-      // replace `getPost` with your data fetching util / API wrapper
-   
-      axios.get('/getComptes?page='+this.comptes.current_page+'')
-                .then((response) => {
-                  
-                    this.comptes = response.data.comptes;
-                  this.loading = false;
-                })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });
-    },
-          getcomptes(){
-                axios.get('/getComptes?page='+this.comptes.current_page+'')
-                .then((response) => {
-                 // console.log('shit');
-                    this.comptes = response.data.comptes;
-                  
-                })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });
-          },
-
-
-
-
-             deleteCompte:function(compte){
-
-
-                        this.$swal({
-                        title: 'Etes-vous sur?',
-                        text: "Vous ne serez pas capable de revenir a cela!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Oui, supprimez-le!'
-                                                }).then((result) => {
-                        if (result.value) {
-                            axios.delete('/deleteCompte/'+compte.id_compte).then(
-                                        response => {
-                                
-                                            this.getcomptes();
-                                        });
-                        this.$swal(
-                        'Supprimé!',
-                        'Votre compte a été supprimé',
-                        'success'
-                        )
+  watch:{
+      '$route': 'fetchData',
   }
-})
-
-        },
-        getCompte:function(compte){
-              
-                  axios.get('/getCompte/'+compte.id_compte).then(
-                  response => {
-                       
-                    this.compte= response.data.compte;
-                    this.modalShow = !this.modalShow
-                  });         
-        },
-                redirect_To_ShowCompte(id_compte){
-                     this.$router.push('/ShowCompte/'+id_compte);
-            },
-
-         /*   generatePdfHtml(){
-                let doc = new this.$Jspdf();
-                
-                doc.fromHTML(window.$('#testdiv').get(0));
-                //doc.text(20,20,'test pdf ');
-                doc.save('test.pdf')
-            }*/
-               
-      
-
-
-   /*  }, computed:{
-       
-       
+ 
+   
      
-     
-            
-      }, */
 
       
        
