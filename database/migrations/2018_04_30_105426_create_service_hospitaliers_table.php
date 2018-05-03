@@ -19,6 +19,7 @@ class CreateServiceHospitaliersTable extends Migration
             $table->integer('fk_service');
             $table->integer('fk_hospitalier');
             $table->softDeletes();
+            $table->timestamps();
 
         });
     }

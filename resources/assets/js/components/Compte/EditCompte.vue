@@ -373,11 +373,6 @@
                   });  
           },
          updateCompte: function(){
-              /*  console.log(this.compte)
-                console.log('----- contact')
-                console.log(this.contacts)
-                console.log('condition_facture')
-                console.log(this.condition_facture)*/
 
                   axios.post('/updateCompte',{compte: this.compte, contacts: this.contacts, condition_facture: this.condition_facture,suppContacts: this.suppContacts}).then( response => {             
                     this.$router.push({ name: 'ShowComptes', params: { success: "editsuccess"  }});

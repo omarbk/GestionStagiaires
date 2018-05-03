@@ -22,6 +22,14 @@ import EditService from './components/Service/EditService.vue'
 import ShowHospitaliers from './components/Hospitalier/ShowHospitaliers.vue'
 import AddHospitalier from './components/Hospitalier/AddHospitalier.vue'
 import EditHospitalier from './components/Hospitalier/EditHospitalier.vue'
+//Groupes
+import ShowGroupes from './components/Groupe/ShowGroupes.vue'
+import ShowGroupe from './components/Groupe/ShowGroupe.vue'
+import AddGroupe from './components/Groupe/AddGroupe.vue'
+import EditGroupe from './components/Groupe/EditGroupe.vue'
+
+
+
 
 
 
@@ -116,6 +124,28 @@ const  router = new VueRouter({
             component: EditResponsable,
            // name: "EditResponsable"
          },
+ // Groupe 
+         {
+            path:"/ShowGroupes",
+            component: ShowGroupes,
+            name: "ShowGroupes"
+         },
+         {
+            path:"/ShowGroupe",
+            component: ShowGroupe,
+            name: "ShowGroupe"
+         },
+         {
+            path:"/AddGroupe",
+            component:AddGroupe,
+            name: "AddGroupe"
+         },
+         {
+            path:"/EditGroupe/:id_groupe",
+            component: EditGroupe,
+            name: "EditGroupe"
+         },
+         
 
  // ----------------Service
         {

@@ -30,7 +30,7 @@
                         </router-link>
                     </li>                      
                     <li class="nav-item">
-                      <router-link :to="'/'" class="nav-link active">
+                      <router-link :to="'/ShowGroupes'" class="nav-link active">
                             <i class="fab fa-gofore"></i>Groupes
                         </router-link>
                     </li>                     

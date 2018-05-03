@@ -254,6 +254,14 @@ Route::get('/getHospitalier/{id_hospitalier}','HospitalierController@getHospital
 Route::delete('/deleteHospitalier/{id_hospitalier}','HospitalierController@deleteHospitalier');
 Route::post('/updateHospitalier','HospitalierController@updateHospitalier');
 Route::get('/searchHospitalier/{search_H}','HospitalierController@searchHospitalier');
+//groupe
+Route::post('/addGroupe','GroupeController@addGroupe');
+Route::get('/getGroupes','GroupeController@getGroupes');
+Route::delete('/deleteGroupe/{id_groupe}','GroupeController@deleteGroupe');
+
+Route::get('/getGroupe/{id_groupe}','GroupeController@getGroupe');
+Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
+Route::post('/updateGroupe','GroupeController@updateGroupe');
 
 
 Auth::routes();

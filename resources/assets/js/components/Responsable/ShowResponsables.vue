@@ -175,7 +175,6 @@
     </vue-pagination>
     </div>
     <!-- fin affiche -->
-
 </template>
 
 <script>
