@@ -14,6 +14,8 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 
+import Multiselect from 'vue-multiselect';
+Vue.component('multiselect',Multiselect);
 
 import swal from 'sweetalert2'
 Vue.prototype.$swal=swal;
@@ -51,6 +53,23 @@ Vue.component('app-addusers', require('./components/User/AddUsers.vue'));
 Vue.component('app-affusers', require('./components/User/AffUsers.vue'));
 Vue.component('app-edituser', require('./components/User/EditUser.vue'));
 Vue.component('app-userconnect', require('./components/User/UserConnect.vue'));
+
+
+/* Responsable */
+Vue.component('app-addresponsable', require('./components/Responsable/AddResponsable.vue'));
+Vue.component('app-showresponsables', require('./components/Responsable/ShowResponsables.vue'));
+Vue.component('app-editresponsable', require('./components/Responsable/EditResponsable.vue'));
+
+/* Service */
+Vue.component('app-addservice', require('./components/Service/AddService.vue'));
+Vue.component('app-showservices', require('./components/Service/ShowServices.vue'));
+Vue.component('app-editservice', require('./components/Service/EditService.vue'));
+
+/* Hospitalier */
+Vue.component('app-addhospitalier', require('./components/Hospitalier/AddHospitalier.vue'));
+Vue.component('app-showhospitaliers', require('./components/Hospitalier/ShowHospitaliers.vue'));
+Vue.component('app-edithospitalier', require('./components/Hospitalier/EditHospitalier.vue'));
+//Vue.component('multiselect', require('./components/Hospitalier/EditHospitalier.vue'));
 
 
 // afficher un nombre de phrase limité 

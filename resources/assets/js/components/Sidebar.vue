@@ -11,7 +11,7 @@
                     </li>            
                     <li class="nav-item">
                       <router-link :to="'/Parametres'" class="nav-link active">
-                            <i class="fas fa-cogs"></i>Paramètres
+                        <i class="fas fa-cog"></i> Paramètres
                         </router-link>
                     </li>
                     <li class="nav-item">
@@ -36,7 +36,7 @@
                     </li>                     
                  
                     <li class="nav-item">
-                      <router-link :to="'/'" class="nav-link active">
+                      <router-link :to="'/ShowHospitaliers'" class="nav-link active">
                             <i class="far fa-hospital"></i>Hospitaliers
                         </router-link>
                     </li>               
@@ -49,8 +49,13 @@
                       <router-link :to="'/'" class="nav-link active">
                             <i class="far fa-sticky-note"></i>Etats
                         </router-link>
-                    </li>                           
-                            
+                    </li>  
+                    <li class="nav-item">
+                      <router-link :to="'/ShowServices'" class="nav-link active">
+                            <i class="fas fa-cogs"></i>Services
+                        </router-link>
+                    </li>                          
+                               
                                  
               
                     

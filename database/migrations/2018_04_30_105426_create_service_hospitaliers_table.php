@@ -15,9 +15,9 @@ class CreateServiceHospitaliersTable extends Migration
     {
         Schema::create('service_hospitaliers', function (Blueprint $table) {
             
-            $table->increments('id_stage_groupe');
-            $table->integer('fk_stage');
-            $table->integer('fk_groupe');
+            $table->increments('id_service_hospitalier');
+            $table->integer('fk_service');
+            $table->integer('fk_hospitalier');
             $table->softDeletes();
 
         });

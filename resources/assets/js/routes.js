@@ -11,8 +11,17 @@ import UserConnect from './components/User/UserConnect.vue'
 // Responsables 
 import ShowResponsables from './components/Responsable/ShowResponsables.vue'
 import AddResponsable from './components/Responsable/AddResponsable.vue'
+import EditResponsable from './components/Responsable/EditResponsable.vue'
 
+// Services 
+import ShowServices from './components/Service/ShowServices.vue'
+import AddService from './components/Service/AddService.vue'
+import EditService from './components/Service/EditService.vue'
 
+// Hospitaliers 
+import ShowHospitaliers from './components/Hospitalier/ShowHospitaliers.vue'
+import AddHospitalier from './components/Hospitalier/AddHospitalier.vue'
+import EditHospitalier from './components/Hospitalier/EditHospitalier.vue'
 
 
 
@@ -86,19 +95,69 @@ const  router = new VueRouter({
             path:"/Parametres",
             component: Parametres
          },
+
+ // ----------------Responsable
          {
             path:"/ShowResponsables",
-            component: ShowResponsables
+            component: ShowResponsables,
+            name:"ShowResponsables"
+         },
+         {
+            path:"/ShowResponsables/:success",
+            component: ShowResponsables,
          },
          {
             path:"/AddResponsable",
             component: AddResponsable,
             name: "AddResponsable"
          },
+         {
+            path:"/EditResponsable/:id_responsable",
+            component: EditResponsable,
+           // name: "EditResponsable"
+         },
 
+ // ----------------Service
+        {
+            path:"/ShowServices",
+            component: ShowServices,
+            name:"ShowServices"
+        },
+        {
+            path:"/ShowServices/:success",
+            component: ShowServices,
+        },
+        {
+            path:"/AddService",
+            component: AddService,
+            name: "AddService"
+        },
+        {
+            path:"/EditService/:id_service",
+            component: EditService,
+        // name: "EditService"
+        },
 
-
-            
+  // ----------------Hospitalier
+  {
+    path:"/ShowHospitaliers",
+    component: ShowHospitaliers,
+    name:"ShowHospitaliers"
+},
+{
+    path:"/ShowHospitaliers/:success",
+    component: ShowHospitaliers,
+},
+{
+    path:"/AddHospitalier",
+    component: AddHospitalier,
+    name: "AddHospitalier"
+},
+{
+    path:"/EditHospitalier/:id_hospitalier",
+    component: EditHospitalier,
+// name: "EditHospitalier"
+},           
 
         
 

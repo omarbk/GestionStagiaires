@@ -46,7 +46,7 @@ Route::post('/addUsers','Auth\RegisterController@store')->name('addUsers');
 Route::get('/getUsers','Auth\RegisterController@getUsers');
 Route::delete('/deleteUser/{id}','Auth\RegisterController@destroy');
 Route::get('/editUser/{id}','Auth\RegisterController@editUser');
-Route::put('/updateUser','Auth\RegisterController@updateUser');
+//Route::put('/updateUser','Auth\RegisterController@updateUser');
 Route::get('/getProfile','Auth\RegisterController@getProfile');
 
 
@@ -80,23 +80,23 @@ Route::get('/getTypePaiement','ParametresController@getTypePaiement');
 Route::delete('/deleteTypePaiement/{id_type_paiement}','ParametresController@deleteTypePaiement');
  //---------------------------------------------------------------------       
 
-                //Devis
-        // ajouter devis,commande devis, et mode paiement de devis
-Route::post('/addDevis','DevisController@addDevis')->name('addDevis');
-Route::get('/countDevis','DevisController@countDevis');
-Route::get('/getPrixArticle/{fk_article}','DevisController@getPrixArticle');
-Route::get('/getDevis','DevisController@getDevis');
-Route::get('/getDevisD/{id_devis}','DevisController@getDevisD');
-Route::get('/getCommandes/{fk_document}','DevisController@getCommandes');
-Route::get('/getPaiement/{fk_document}','DevisController@getPaiement');
-Route::get('/tauxTva/{fk_tva_cmd}','DevisController@tauxTva');
-Route::post('/updateDevis','DevisController@updateDevis');
-Route::delete('/deleteDevis/{id_devis}','DevisController@deleteDevis');
-Route::get('/searchDevis/{search_D}','DevisController@searchDevis');
-Route::post('/updateStatusDevis','DevisController@updateStatusDevis');
+                //Desponsables
+        // ajouter desponsables,commande desponsables, et mode paiement de desponsables
+Route::post('/addDesponsables','DesponsablesController@addDesponsables')->name('addDesponsables');
+Route::get('/countDesponsables','DesponsablesController@countDesponsables');
+Route::get('/getPrixArticle/{fk_article}','DesponsablesController@getPrixArticle');
+Route::get('/getDesponsables','DesponsablesController@getDesponsables');
+Route::get('/getDesponsablesD/{id_desponsables}','DesponsablesController@getDesponsablesD');
+Route::get('/getCommandes/{fk_document}','DesponsablesController@getCommandes');
+Route::get('/getPaiement/{fk_document}','DesponsablesController@getPaiement');
+Route::get('/tauxTva/{fk_tva_cmd}','DesponsablesController@tauxTva');
+Route::post('/updateDesponsables','DesponsablesController@updateDesponsables');
+Route::delete('/deleteDesponsables/{id_desponsables}','DesponsablesController@deleteDesponsables');
+Route::get('/searchDesponsables/{search_D}','DesponsablesController@searchDesponsables');
+Route::post('/updateStatusDesponsables','DesponsablesController@updateStatusDesponsables');
 
-Route::get('/pdf_d/{reference_d}','DevisController@pdf_d');
-Route::get('/getDevisCompte/{idCompte}','DevisController@getDevisCompte');
+Route::get('/pdf_d/{reference_d}','DesponsablesController@pdf_d');
+Route::get('/getDesponsablesCompte/{idCompte}','DesponsablesController@getDesponsablesCompte');
 
 
 //----------------------------------------------------------------------
@@ -123,7 +123,7 @@ Route::post('/addCFacture','CompteController@addCondtionFacture');
 Route::post('/updateCFacture','CompteController@updateCondtionFacture');
 Route::get('/getCFacture/{fk_compte}','CompteController@getCondtionFacture');
 
-      // compte: remise recupere pour devis
+      // compte: remise recupere pour desponsables
 Route::get('/getRemise/{fk_compte}','CompteController@getRemise');
 
 
@@ -215,6 +215,45 @@ Route::get('/getBonLivraisonBL/{id_bl}','FactureController@getBonLivraisonBL');
 
 //Dashboard 
 Route::get('/getArticlePlusVente','DashboardController@getArticlePlusVente');
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------------------------Gestion Stagiaires
+//Responsable
+Route::post('/addUser','ResponsableController@addUser');
+Route::post('/addResponsable','ResponsableController@addResponsable');
+Route::get('/countUser','ResponsableController@countUser');
+Route::get('/getResponsables','ResponsableController@getResponsables');
+Route::get('/getResponsable/{id_responsable}','ResponsableController@getResponsable');
+Route::delete('/deleteResponsable/{fk_user}','ResponsableController@deleteResponsable');
+//Route::post('/updateUser','ResponsableController@updateUser');
+Route::post('/updateResponsable','ResponsableController@updateResponsable');
+Route::get('/searchResponsable/{search_R}','ResponsableController@searchResponsable');
+
+//Service
+Route::post('/addService','ServiceController@addService');
+Route::get('/getServices','ServiceController@getServices');
+Route::get('/getServicesS','ServiceController@getServicesS');
+
+Route::get('/getService/{id_Service}','ServiceController@getService');
+Route::delete('/deleteService/{fk_user}','ServiceController@deleteService');
+Route::post('/updateService','ServiceController@updateService');
+Route::get('/searchService/{search_S}','ServiceController@searchService');
+
+//Hospitalier
+Route::post('/addHospitalier','HospitalierController@addHospitalier');
+Route::get('/getHospitaliers','HospitalierController@getHospitaliers');
+Route::get('/getHospitalier/{id_hospitalier}','HospitalierController@getHospitalier');
+Route::delete('/deleteHospitalier/{id_hospitalier}','HospitalierController@deleteHospitalier');
+Route::post('/updateHospitalier','HospitalierController@updateHospitalier');
+Route::get('/searchHospitalier/{search_H}','HospitalierController@searchHospitalier');
 
 
 Auth::routes();

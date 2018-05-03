@@ -19,7 +19,6 @@ class CreateResponsablesTable extends Migration
             $table->string('prenom_responsable')->nullable();
             $table->string('photo_responsable')->nullable();
             $table->string('adresse_responsable')->nullable();
-            $table->string('email_responsable')->nullable();
             $table->string('tel_responsable')->nullable();
             $table->date('dateNaissance_responsable')->nullable();
             $table->string('service_responsable')->nullable();

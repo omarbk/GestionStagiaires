@@ -15,6 +15,9 @@ class CreateStageGroupesTable extends Migration
     {
         Schema::create('stage_groupes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('fk_groupe');
+            $table->integer('fk_stage');
+
             $table->timestamps();
         });
     }
