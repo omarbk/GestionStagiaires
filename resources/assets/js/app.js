@@ -14,8 +14,9 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 
-import Multiselect from 'vue-multiselect';
-Vue.component('multiselect',Multiselect);
+//require('vue-multiselect/dist/vue-multiselect.min.css') 
+
+
 
 import swal from 'sweetalert2'
 Vue.prototype.$swal=swal;

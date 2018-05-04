@@ -263,6 +263,13 @@ Route::get('/getGroupe/{id_groupe}','GroupeController@getGroupe');
 Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
 
+// Stagiaire 
+Route::post('/addUser','StagiaireController@addUser');
+Route::post('/addStagiaire','StagiaireController@addStagiaire');
+Route::get('/countUser','StagiaireController@countUser');
+Route::get('/getStagiaires','StagiaireController@getStagiaires');
+Route::get('/getStagiaire/{id_stagiaire}','StagiaireController@getStagiaire');
+Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire');
 
 Auth::routes();
 
