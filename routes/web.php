@@ -251,6 +251,7 @@ Route::get('/searchService/{search_S}','ServiceController@searchService');
 Route::post('/addHospitalier','HospitalierController@addHospitalier');
 Route::get('/getHospitaliers','HospitalierController@getHospitaliers');
 Route::get('/getHospitalier/{id_hospitalier}','HospitalierController@getHospitalier');
+Route::get('/getService_Hospitalier/{id_hospitalier}','HospitalierController@getService_Hospitalier');
 Route::delete('/deleteHospitalier/{id_hospitalier}','HospitalierController@deleteHospitalier');
 Route::post('/updateHospitalier','HospitalierController@updateHospitalier');
 Route::get('/searchHospitalier/{search_H}','HospitalierController@searchHospitalier');

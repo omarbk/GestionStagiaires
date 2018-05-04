@@ -25,7 +25,7 @@
                         </router-link>
                     </li> 
                     <li class="nav-item">
-                      <router-link :to="'/'" class="nav-link active">
+                      <router-link :to="'/ShowEvaluateurs'" class="nav-link active">
                             <i class="far fa-address-card"></i>Evaluateurs
                         </router-link>
                     </li>                      

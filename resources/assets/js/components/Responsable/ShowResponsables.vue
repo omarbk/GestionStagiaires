@@ -120,9 +120,7 @@
             </div>
             </div>
         </div>
-         <div>
-              
-            </div>
+       
              <div>
               
                 <b-modal ok-only  v-model="modalShow" no-fade

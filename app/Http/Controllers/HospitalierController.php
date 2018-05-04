@@ -39,28 +39,28 @@ class HospitalierController extends Controller
 
 //id_service_hospitalier
      public function addService_Hospitalier(Request $request,$id_hospitalier){
-        // dd($request);
-        for($i=0;$i<count($request->commandes);$i++) {  
+         //dd($request);
+        for($i=0;$i<count($request->service_hospitaliers);$i++) {  
      $service_hospitalier = new Service_hospitalier();
-     $service_hospitalier->fk_service = $request->service_hospitaliers[$i]['fk_service'];
-     $service_hospitalier->fk_hospitalier=$request->service_hospitaliers[$i]['fk_hospitalier'];
+     $service_hospitalier->fk_service = $request->service_hospitaliers[$i]['id_service'];
+     $service_hospitalier->fk_hospitalier=$id_hospitalier;
 
-     $hospitalier->save();
+     $service_hospitalier->save();
         }
      return Response()->json(['etat'=>true]);
      }
 
      public function updateService_Hospitalier(Request $request , $id_hospitalier){
 
-        for($i=0;$i<count($request->suppService_Hospitaliers);$i++){
-         $serviceHospitalier = Service_Hospitalier::find($request->suppService_Hospitaliers[$i]['id_service_hospitalier']);
+        for($i=0;$i<count($request->suppServices);$i++){
+         $serviceHospitalier = Service_Hospitalier::find($request->suppServices[$i]['id_service_hospitalier']);
          $serviceHospitalier->delete();
  
          }
          for($i=0;$i<count($request->service_hospitaliers);$i++){
              if (!isset($request->service_hospitaliers[$i]['id_service_hospitalier'])) {
                 $serviceHospitalier = new Service_Hospitalier();  
-                $serviceHospitalier->fk_service=$request->service_hospitaliers[$i]['fk_service'];
+                $serviceHospitalier->fk_service=$request->service_hospitaliers[$i]['id_service'];
                 $serviceHospitalier->fk_hospitalier=$id_hospitalier;
                
                 $serviceHospitalier->save();
@@ -87,9 +87,10 @@ class HospitalierController extends Controller
 
     public function getHospitalier($id_hospitalier){
         // $devi= Devi::find($id_devis);
-         $hospitalier= Hospitalier::leftJoin('service_hospitaliers', 'hospitaliers.id_hospitalier', '=', 'service_hospitaliers.fk_hospitalier')
+       /*  $hospitalier= Hospitalier::leftJoin('service_hospitaliers', 'hospitaliers.id_hospitalier', '=', 'service_hospitaliers.fk_hospitalier')
                ->select('hospitaliers.*', 'service_hospitaliers.*')
-               ->where('id_hospitalier', $id_hospitalier)->get();
+               ->where('id_hospitalier', $id_hospitalier)->get();*/
+               $hospitalier= Hospitalier::where('id_hospitalier', $id_hospitalier)->get();
          return Response()->json(['hospitalier' => $hospitalier]);
     } 
 
@@ -100,7 +101,9 @@ class HospitalierController extends Controller
 
     public function getService_Hospitalier($id_hospitalier){
         // $devi= Devi::find($id_devis);
-         $serviceHospitalier= Service_Hospitalier::where('fk_hospitalier', $id_hospitalier)->get();
+         $serviceHospitalier= Service_Hospitalier::leftJoin('services', 'service_hospitaliers.fk_service', '=', 'services.id_service')
+         ->select('services.*', 'service_hospitaliers.*')
+         ->where('fk_hospitalier', $id_hospitalier)->get();
          return Response()->json(['serviceHospitalier' => $serviceHospitalier]);
     } 
     

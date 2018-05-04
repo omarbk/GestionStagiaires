@@ -40,20 +40,24 @@
                     <input type="text" class="form-control" id="adresse"  v-model="hospitalier.adresse_hospitalier">
                     </div>
                 </div>
-                <div>
-    
-                    
- <div>
-  <label class="typo__label">Tagging</label>
-  <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="services" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+                <div class="form-group row">
+                    <label class="typo__label col-sm-3">Services</label>
+                    <div class="col-sm-6">
+
+  <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="nom_service" track-by="nom_service"  :options="services" :multiple="true" :taggable="true" ></multiselect>
   <pre class="language-json"><code>{{ value  }}</code></pre>
-</div>
+                      </div>
+                </div>
+                <div>
+   
    
   
 </div>
             </div> 
+            <div class="col-md-3">
+                <button  class="btn mb-3  btn-success">Enregister</button>
+            </div>
     </div>
-     <button  class="btn mb-3  btn-success">Enregister</button>
 
      </form>
 </div>
@@ -66,8 +70,8 @@
 //import Underscore from 'underscore/underscore.js';
     export default{
 
-          data() {
-              return{
+          data:()=>({
+             
              nameFile : "Choose file",
             hospitalier: { 
                     id_hospitalier : 0,
@@ -85,32 +89,28 @@
                },    
       value: [],
       services: [],
-        service:{
-              id_service : 0,
-                    nom_service : "",
-                    besoin_service : "",
-                    duree_service : "",
-        }
+        service_hospitaliers:[],
 
-              }
-      },
+              
+          }),
  
       methods: { 
         
-           addTag (newTag) {
+        /*   addTag (newTag) {
+               console.log('sssssssssssss')
       const tag = {
-        name: newTag,
+        nom_service: newTag,
         //code: newTag
         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
       }
       this.options.push(tag)
       this.value.push(tag)
-           },
+           },*/
           addHospitalier(){ 
               console.log("test")
            console.log(this.hospitalier);
                
-              axios.post('/addHospitalier',{hospitalier:this.hospitalier}).then(response => {  
+              axios.post('/addHospitalier',{hospitalier:this.hospitalier,service_hospitaliers:this.value}).then(response => {  
                     console.log(response.data.hospitalier);   
                     console.log('hospitalier Bien ajouter !');
                     this.$router.push({ name: 'ShowHospitaliers', params: { success: "add"  }});
@@ -132,7 +132,6 @@ getServicesS(){
       },
 mounted(){
     this.getServicesS();
-    
 }
     }
     

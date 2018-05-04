@@ -80,7 +80,9 @@
                                         <td>{{hospitalier.adresse_hospitalier}} </td>
                                         <td>{{ hospitalier.tel_hospitalier}}</td> 
                                         <td  class="optionsWidth"> 
-                                            <a href="#"  class="btn btn-primary"   ><i class="fas fa-eye d-inline-block"></i></a>
+                                            <a href="#"  class="btn btn-primary" @click="getHospitalier(hospitalier)"  >
+                                                <i class="fas fa-eye d-inline-block"></i>
+                                            </a>
                                             <a href="#" @click="redirect_To_EditHospitalier(hospitalier)"  class="btn btn-success" >
                                                 <i class="fas fa-edit d-inline-block"></i>
                                             </a>
@@ -103,6 +105,43 @@
     </vue-pagination>
     </div>
        </div>
+        <div>
+              
+                <b-modal ok-only  v-model="modalShow" no-fade
+                :title="'Hospitalier'"
+                :body-bg-variant="+' '+modalShow+''+hospitalier.nom_hospitalier+''+hospitalier.tel_hospitalier+''+hospitalier.adresse_hospitalier+''">
+                 <div class="row" v-if="modalShow">
+                      
+                         <div class="col">
+                   <span>Nom Hospitalier : </span>{{hospitalier.nom_hospitalier}}
+                   <hr>
+                   <span>Téléphone : </span>{{hospitalier.tel_hospitalier}}
+                   <hr>
+                    <span>Adresse :  </span>{{hospitalier.adresse_hospitalier}}
+                   <hr>
+                   </div>
+                                                   
+                   
+                   <div class="col">
+                       <div class="pull-right">
+                     
+                   <span>List Services : </span>
+<div  v-for="service of services" :key="service.id_service" >
+
+                  + {{service.nom_service}}
+</div>
+                     </div>
+                     
+                     </div>
+                     </div>
+                    <div slot="modal-footer" class="w-100">
+                    <p class="float-left"> </p>
+                    <b-btn size="sm" class="float-right" variant="primary" @click="modalShow=false">
+                    Fermer
+                    </b-btn>
+                </div>
+                </b-modal>
+            </div>
     </div>
 </div>
     <!-- fin affiche -->
@@ -144,7 +183,7 @@ import  Pagination from '../Pagination.vue';
                     nom_hospitalier : "",
                     adresse_hospitalier : "",
                     tel_hospitalier : "",
-                    
+                    //nom_service:"",
                 
               },
              hospitaliers:{
@@ -157,6 +196,7 @@ import  Pagination from '../Pagination.vue';
                         data: [],
 
               },
+              services:[],
                offset: 4,
 
 
@@ -180,13 +220,31 @@ import  Pagination from '../Pagination.vue';
                     console.log('handle server error from here');
                 });
     },
-   
+    
+    getService_Hospitalier(hospitalier){
+    axios.get('/getService_Hospitalier/'+hospitalier.id_hospitalier).then(
+                  response => {
+                       
+                    this.services= response.data.serviceHospitalier;
+                                  console.log(this.services)
+                    this.modalShow = !this.modalShow
+
+                  });
+   },
     redirect_To_EditHospitalier(hospitalier){
                      this.$router.push('/EditHospitalier/'+hospitalier.id_hospitalier);
         //this.$router.push({ name: 'Edithospitalier', params: {hospitalier:this.hospitalier}});
 //console.log(hospitalier)
             },
-     
+    getHospitalier(hospitalier){
+                  axios.get('/getHospitalier/'+hospitalier.id_hospitalier).then(
+                  response => {
+                       
+                    this.hospitalier= response.data.hospitalier[0];
+                                  console.log(this.hospitalier)
+                    this.getService_Hospitalier(hospitalier);
+                  });         
+    },
         searchHospitalier(event){
              console.log(this.search);
              this.hospitaliers.current_page=1;

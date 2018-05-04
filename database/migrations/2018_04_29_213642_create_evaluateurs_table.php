@@ -14,7 +14,7 @@ class CreateEvaluateursTable extends Migration
     public function up()
     {
         Schema::create('evaluateurs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_evaluateur');
             $table->string('nom_evaluateur')->nullable();
             $table->string('prenom_evaluateur')->nullable();
             $table->string('photo_evaluateur')->nullable();
