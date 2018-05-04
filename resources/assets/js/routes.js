@@ -28,7 +28,11 @@ import ShowGroupe from './components/Groupe/ShowGroupe.vue'
 import AddGroupe from './components/Groupe/AddGroupe.vue'
 import EditGroupe from './components/Groupe/EditGroupe.vue'
 
-
+//stagiaire
+//Groupes
+import ShowStagiaires from './components/Stagiaire/ShowStagiaires.vue'
+import AddStagiaire  from './components/Stagiaire/AddStagiaire.vue'
+import EditStagiaire  from './components/Stagiaire/EditStagiaire.vue'
 
 
 
@@ -187,7 +191,26 @@ const  router = new VueRouter({
     path:"/EditHospitalier/:id_hospitalier",
     component: EditHospitalier,
 // name: "EditHospitalier"
-},           
+},    
+
+
+// ------------ stagiaire 
+{
+    path:"/ShowStagiaires",
+    component: ShowStagiaires,
+    name: "ShowStagiaires"
+ },
+
+ {
+    path:"/AddStagiaire",
+    component:AddStagiaire,
+    name: "AddStagiaire"
+ },
+ {
+    path:"/EditStagiaire/:id_stagiaire",
+    component: EditStagiaire,
+    name: "EditStagiaire"
+ },      
 
         
 

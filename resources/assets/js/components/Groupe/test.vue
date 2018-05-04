@@ -1,7 +1,7 @@
 <template>
   <div>
           <div class="text-center pull-right" >
-    <h2>Modifier un stagiaire</h2>
+    <h2>Ajouter un stagiaire</h2>
     <hr>   
     </div>   
    
@@ -38,7 +38,16 @@
                     <input type="text" class="form-control" id="stagiaire"  v-model="stagiaire.annee_universitaire_stagiaire">
                     </div>
                 </div>
-                
+                    <div class="form-group row">
+
+                    <label class="typo__label col-sm-4">Groupes</label>
+                    <div class="col-sm-8">
+                    <multiselect tag-position="bottom" v-model="value"
+                     tag-placeholder="Add this as new tag" placeholder="cherche un groupe" label="nom_groupe" track-by="id_groupe" 
+                    :optionHeight="30" @remove="removeG" :options="groupes" :multiple="true" :taggable="true" ></multiselect>
+                    </div>
+
+                    </div>
             </div> 
             <div class="col-md-6">
                <div class="form-group row">
@@ -92,10 +101,11 @@
 
 <script>
     
+ import Multiselect from 'vue-multiselect'
 
     export default{
         
-
+components: { Multiselect },
           data: () => ({
              nameFile : "Choose file",
             stagiaire: { 
@@ -118,18 +128,46 @@
                    email:"",
                    password:"",
                },
-       
+               groupes:[],
+         value: [],
+      options: [
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+         { name: 'Open Source', code: 'os' },
+          { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+           { name: 'Open Source', code: 'os' },
+        { name: 'Open Source', code: 'os' }
+      ]
       }),
  
       methods: {
-          addTag (newTag) {
+          removeG(removedOption,id){
+                console.log('---remove')
+                console.log(removedOption)
+          },
+    /*      addTag(newTag) {
+              console.log('$$$$$$ tag')
+              console.log(newTag)
       const tag = {
         name: newTag,
         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
       }
       this.options.push(tag)
       this.value.push(tag)
-    }, 
+
+    }, */
             onImageChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 this.nameFile = files[0].name;
@@ -200,26 +238,29 @@
                   });
             
         },
-        getStagiaire(id_stagiaire){
-                  axios.get('/getStagiaire/'+id_stagiaire).then(
-                  response => {
-                       
-                    this.stagiaire= response.data.stagiaire[0];
-                                 
+         getGroupes(){
+                axios.get('/getGroupes?page='+this.groupes.current_page+'')
+                .then((response) => {
+                 // console.log('shit');
+                    this.groupes = response.data.groupes.data;
+                    console.log(this.groupes);
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+          },
 
-                   
-        });
-
-        }
+ 
                      
       },
      
 
    mounted(){
-            
-           // this.stagiaire.fk_user=this.$route.params.id_stagiaire;
+            this.user=this.$route.params.user;
+            this.stagiaire.fk_user=this.$route.params.user.id;
+            this.getGroupes();
             // this.user.id=this.$route.params.user.id;
-           this.getStagiaire(this.$route.params.id_stagiaire)
+            console.log(this.$route.params.user.id)
 
 
    }  

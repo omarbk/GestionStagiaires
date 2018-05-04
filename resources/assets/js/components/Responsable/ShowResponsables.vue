@@ -281,6 +281,7 @@ import  Pagination from '../Pagination.vue';
     getResponsables(){//type_status
                 axios.get('/getResponsables?page='+this.responsables.current_page+'')
                 .then((response) => {
+                    console.log(response)
                     this.loading = false;
                     this.responsables = response.data.responsables;
                })
