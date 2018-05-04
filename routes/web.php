@@ -227,7 +227,7 @@ Route::get('/getArticlePlusVente','DashboardController@getArticlePlusVente');
 
 //----------------------------------------------------------Gestion Stagiaires
 //Responsable
-Route::post('/addUser','ResponsableController@addUser');
+Route::post('/addUserResponsable','ResponsableController@addUserResponsable');
 Route::post('/addResponsable','ResponsableController@addResponsable');
 Route::get('/countUser','ResponsableController@countUser');
 Route::get('/getResponsables','ResponsableController@getResponsables');
@@ -265,12 +265,15 @@ Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
 
 // Stagiaire 
-Route::post('/addUser','StagiaireController@addUser');
+Route::post('/addUserStagiaire','StagiaireController@addUserStagiaire');
 Route::post('/addStagiaire','StagiaireController@addStagiaire');
 Route::get('/countUser','StagiaireController@countUser');
 Route::get('/getStagiaires','StagiaireController@getStagiaires');
 Route::get('/getStagiaire/{id_stagiaire}','StagiaireController@getStagiaire');
 Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire');
+Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
+Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
+
 
 Auth::routes();
 

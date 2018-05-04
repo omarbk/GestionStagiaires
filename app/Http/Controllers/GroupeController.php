@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Groupe;
 use App\Calendrier;
-
+use App\Groupe_stagiaire;
+use App\Stagiaire;
 class GroupeController extends Controller
 {
     public function addGroupe(Request $request)
@@ -19,9 +20,32 @@ class GroupeController extends Controller
                 $groupe->save();
                 $id_groupe = $groupe->id_groupe;
                 $this->addCalendrier($request,$id_groupe);
+                $this->addGroupe_Stagiaires($request,$id_groupe);
                  return Response()->json(['etat' => true]);
             
     }
+   
+    public function addGroupe_Stagiaires(Request $request,$id_groupe)
+    { 
+        
+           for($i=0;$i<count($request->pushStagiaire);$i++) {    
+            $groupe_stagiaire = new Groupe_stagiaire();
+            $groupe_stagiaire->fk_stagiaire=$request->pushStagiaire[$i]['id_stagiaire'];
+            $groupe_stagiaire->fk_groupe=$id_groupe;
+            $groupe_stagiaire->save();
+           }
+                // return Response()->json(['etat' => true]);
+            
+    }
+
+
+
+
+
+
+
+
+
 
     public function addCalendrier(Request $request,$id_groupe)
     { 
@@ -52,6 +76,7 @@ class GroupeController extends Controller
     public function getGroupes(){
 
         $listeGroupes = Groupe::paginate(10);
+        
         return Response()->json(['groupes' => $listeGroupes ]);
      }
 
@@ -63,7 +88,10 @@ class GroupeController extends Controller
      }
      public function getGroupe($id_groupe){
         $groupe= Groupe::find($id_groupe);
-        return Response()->json(['groupe' => $groupe ]);
+        $groupe_stagiaire = Groupe_stagiaire::leftJoin('stagiaires', 'stagiaires.id_stagiaire', '=', 'groupe_stagiaires.fk_stagiaire')
+        ->select('stagiaires.*','groupe_stagiaires.*')
+        ->where('groupe_stagiaires.fk_groupe','=',$id_groupe)->get();
+        return Response()->json(['groupe' => $groupe,'groupe_stagiaire' => $groupe_stagiaire]);
      }
      
      public function getCalendriers($fk_groupe){
@@ -80,7 +108,7 @@ class GroupeController extends Controller
         $groupe->save();
         $id_groupe = $groupe->id_groupe;
         $this->updateCalendrier($request,$id_groupe);
-        
+        $this->updateGroupeStagiaire($request,$id_groupe);
 
         return Response()->json(['etat' => true]);
      }
@@ -127,6 +155,27 @@ class GroupeController extends Controller
          ]);
              }
          }
+  
+      }
+
+      public function updateGroupeStagiaire(Request $request , $id_groupe){
+
+       
+        
+        for($i=0;$i<count($request->suppStagiaires);$i++){
+         $calendrier = Groupe_stagiaire::where('fk_stagiaire',$request->suppStagiaires[$i]['id_stagiaire'])->where('fk_groupe', $id_groupe)->delete();
+ 
+         }
+        for($i=0;$i<count($request->pushStagiaire);$i++){
+             if (!isset($request->pushStagiaire[$i]['fk_groupe'])) {
+                $groupe_stagiaire = new Groupe_stagiaire();
+                $groupe_stagiaire->fk_stagiaire=$request->pushStagiaire[$i]['id_stagiaire'];
+                $groupe_stagiaire->fk_groupe=$id_groupe;
+                $groupe_stagiaire->save();
+             }    
+         }
+         
+ 
   
       }
 }

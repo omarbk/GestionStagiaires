@@ -16,11 +16,14 @@ Vue.use(BootstrapVue);
 
 //require('vue-multiselect/dist/vue-multiselect.min.css') 
 
-
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 
 import swal from 'sweetalert2'
 Vue.prototype.$swal=swal;
 
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
 
 import WrittenNumber from 'written-number'
 Vue.prototype.$WrittenNumber=WrittenNumber;

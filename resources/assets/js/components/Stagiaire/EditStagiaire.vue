@@ -7,7 +7,7 @@
    
 
 <div>
-        <form @submit.prevent="addStagiaire">
+        <form @submit.prevent="updateStagiaire">
          <div class="row" > 
          
             <div class="col-md-6">
@@ -188,14 +188,14 @@
                 reader.readAsDataURL(file);
             },
          
-          addStagiaire(){ 
+          updateStagiaire(){ 
               console.log("test")
            console.log(this.stagiaire);
                
-              axios.post('/addUser',{stagiaire:this.stagiaire,user:this.user}).then(response => {  
-                    console.log(response.data.user);   
+              axios.post('/updateStagiaire',{stagiaire:this.stagiaire}).then(response => {  
+                    console.log(response);   
                     console.log('stagiaire Bien ajouter !');
-                    //this.$router.push({ name: 'ShowStagiaires', params: { success: "add"  }});
+                    this.$router.push({ name: 'ShowStagiaires', params: { success: "add"  }});
 
                   });
             

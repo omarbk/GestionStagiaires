@@ -1,5 +1,6 @@
 <template>
     <div>
+      <notifications group="foo" />
     <div class="row">
         <div class="col">
         <router-link class="btn btn-primary mb-3  float-right " :to="'/ShowGroupes'"> <i class="fas fa-long-arrow-alt-left fontsize"></i> </router-link>
@@ -29,14 +30,19 @@
                     <input type="text" class="form-control" id="responsable"  v-model="groupe.annee_universitaire_groupe">
                     </div>
                 </div>
-
-              
-               
-
-
-                
-
             </div> 
+   <div class="col-md-6">
+   
+                    <div class="form-group row">
+                    <label class="typo__label col-sm-4">Stagiaires</label>
+                    <div class="col-sm-8">
+                    <multiselect   :custom-label="nameWithLang" tag-position="bottom" v-model="pushStagiaire"
+                     tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="prenom_stagiaire" 
+                    :optionHeight="30" @remove="removeStagiaire" :options="stagiaires" :multiple="true"  ></multiselect>
+                    </div>
+
+                    </div>
+   </div>              
     </div>
      
      <hr>
@@ -142,6 +148,10 @@
     export default{ 
         
           data: () => ({
+            
+
+            pushStagiaire:[],
+            stagiaires:[],
               testDeep : false,
              Mois:['jan','fév','mar','avr','mai','jun','juil','aoû','sep','oct','nov','déc'],
              groupe:{
@@ -167,6 +177,7 @@
               fk_groupe:0,
             },
             calendriers: [],
+             groupe_stagiaire:[],
              
       }),
       watch:{
@@ -290,8 +301,24 @@
                          return new Date(year, month, 0).getDate();
                      },
                     pushCalendrier(){
-                    console.log();
-                        
+                      if(this.calendrier.mois_stage_cal == ""){
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Champs vide',
+                                      text: 'Ajouter le mois!'
+                                    });
+                      }
+                      else if(this.calendrier.debut_semaine_cal == ""){
+                                  this.$notify({
+                                      group: 'foo',
+                                      title: 'Champs vide',
+                                      text: 'Ajouter le debut de la semaine!'
+                                    });
+                      }
+                    else {
+
+                    
+                     
                     this.calendriers.push({mois_stage_cal:this.calendrier.mois_stage_cal,
                                         debut_semaine_cal: this.calendrier.debut_semaine_cal,
                                         fin_semaine_cal: this.calendrier.fin_semaine_cal,
@@ -322,7 +349,9 @@
                                     fk_groupe:0,
                                     nomMoisDebut:"",
                                     nomMoisFin:""                                   
-                                    }   
+                                    }
+                                    }
+                                    
                 },
                     removeCalendrier(index) {
                       this.calendriers.splice(index,1);
@@ -414,10 +443,9 @@
               
                     }},
                     addGroupe(){
-
                         console.log("nbr jourrrr --------")
                         console.log(this.calendrier.NbJours)
-                         axios.post('/addGroupe',{calendriers:this.calendriers,groupe:this.groupe})
+                         axios.post('/addGroupe',{calendriers:this.calendriers,groupe:this.groupe,pushStagiaire:this.pushStagiaire})
                         .then(response => {         
                                 console.log("Groupe Bien ajouter ")
                             // this.$router.push('/');
@@ -462,12 +490,32 @@
                       else calendrier.vendredi_cal=".";
                         
 
-                    }
+                    },
+            getAllStagiaires(){//type_status
+                axios.get('/getAllStagiaires')
+                .then((response) => {
+                    this.loading = false;
+                    this.stagiaires = response.data.stagiaires;
+               })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+    },
+           removeStagiaire(removedOption,id){
+                console.log('---remove')
+                console.log(removedOption)
+          },
+           nameWithLang ({ nom_stagiaire, prenom_stagiaire }) {
+      return `${nom_stagiaire}-${prenom_stagiaire}`
+    }
                     
 
 
 
 
+                    },
+                    mounted(){
+                      this.getAllStagiaires();
                     }
                  
 
@@ -479,6 +527,7 @@
     }
     
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
  .thSmaine{

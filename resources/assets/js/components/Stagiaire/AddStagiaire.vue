@@ -192,7 +192,7 @@
               console.log("test")
            console.log(this.stagiaire);
                
-              axios.post('/addUser',{stagiaire:this.stagiaire,user:this.user}).then(response => {  
+              axios.post('/addUserStagiaire',{stagiaire:this.stagiaire,user:this.user}).then(response => {  
                     console.log(response.data.user);   
                     console.log('stagiaire Bien ajouter !');
                     this.$router.push({ name: 'ShowStagiaires', params: { success: "add"  }});
