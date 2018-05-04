@@ -41,6 +41,13 @@
             </div>
             </div>
         </div>
+        <div class="col-sm-6">
+           <ul class="list-group">
+            <li class="list-group-item active">Liste des stagiaires</li>
+            <li class="list-group-item" v-for="(Vgroupe_stagiaire,index) in groupe_stagiaire" :key="index">{{Vgroupe_stagiaire.nom_stagiaire}} {{Vgroupe_stagiaire.prenom_stagiaire}}</li>
+           
+            </ul>
+        </div>
    
         </div>
     <div class="row">
@@ -118,13 +125,14 @@
             annee_universitaire_groupe:""     
             },
 calendriers: [],
+groupe_stagiaire: [],
 
           }),
   
           methods:{
  fetchData () {
-          
-
+                    
+                console.log(this.$route.params.id_groupe)
                this.getGroupe(this.$route.params.id_groupe);
                this.getCalendriers(this.$route.params.id_groupe);
              
@@ -135,8 +143,13 @@ calendriers: [],
                             axios.get('/getGroupe/'+id_groupe).then(
                             response => {
                                 
+
                                 this.groupe= response.data.groupe;
-                           
+                                this.groupe_stagiaire = response.data.groupe_stagiaire;
+                                console.log('liste stagiaire')
+                                console.log(this.groupe_stagiaire)
+                                console.log('grouppppe')
+                                console.log(this.groupe);
                             });     
                     },
             getCalendriers:function(id_groupe){
@@ -211,5 +224,11 @@ a {
 .sizeJour{
     width: 42px;
     min-width: 70px;
+ }
+ .list-group-item.active{
+
+     background-color:#d4eddb;
+     border-color:#d4eddb;
+     color:#272727;
  }
 </style>

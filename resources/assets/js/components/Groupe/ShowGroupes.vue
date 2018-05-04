@@ -260,7 +260,8 @@ import  Pagination from '../Pagination.vue';
         },
                redirect_To_ShowGroupe(id_groupe){
                    //  this.$router.push('/ShowGroupe/'+id_groupe);
-                      this.$router.push({ name: 'ShowGroupe', params: { id_groupe: id_groupe  }});
+                   
+                      this.$router.push({ name: 'ShowGroupe', params: {id_groupe: id_groupe}});
             },
 
 

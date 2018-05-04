@@ -6,7 +6,7 @@
         </div>
     </div>   
         <div class="text-center pull-right" >
-    <h2>Ajouter Compte</h2>
+    <h2>Modifier Groupe</h2>
     <hr>   
     </div>
 
@@ -29,14 +29,19 @@
                     <input type="text" class="form-control" id="responsable"  v-model="groupe.annee_universitaire_groupe">
                     </div>
                 </div>
-
-              
-               
-
-
-                
-
             </div> 
+               <div class="col-md-6">
+   
+                    <div class="form-group row">
+                    <label class="typo__label col-sm-4">Stagiaires</label>
+                    <div class="col-sm-8">
+                    <multiselect   :custom-label="nameWithLang" tag-position="bottom" v-model="pushStagiaire"
+                     tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="prenom_stagiaire" 
+                    :optionHeight="30" @remove="removeStagiaire" :options="stagiaires" :multiple="true"  ></multiselect>
+                    </div>
+
+                 </div>
+   </div>        
     </div>
      
      <hr>
@@ -142,6 +147,9 @@
     export default{ 
         
           data: () => ({
+            stagiaires:[],
+            pushStagiaire:[],
+            suppStagiaires:[],
              suppCalendriers:[],
               testDeep : false,
              Mois:['jan','fév','mar','avr','mai','jun','juil','aoû','sep','oct','nov','déc'],
@@ -467,7 +475,7 @@
                     getGroupe:function(id_groupe){
                             axios.get('/getGroupe/'+id_groupe).then(
                             response => {
-                                
+                                this.pushStagiaire = response.data.groupe_stagiaire;
                                 this.groupe= response.data.groupe;
                            
                             });     
@@ -487,15 +495,37 @@
                   updateGroupe: function(){
                   console.log('add calendrier')
                   console.log(this.calendriers)          
-                  axios.post('/updateGroupe',{groupe: this.groupe, calendriers: this.calendriers,suppCalendriers: this.suppCalendriers})
+                  axios.post('/updateGroupe',{groupe: this.groupe, calendriers: this.calendriers,suppCalendriers: this.suppCalendriers,pushStagiaire:this.pushStagiaire,
+                  suppStagiaires: this.suppStagiaires})
                   .then( response => {             
                     this.$router.push({ name: 'ShowGroupes', params: { success: "editsuccess"  }});
                   
                   });
+
                   },
+                      nameWithLang ({ nom_stagiaire, prenom_stagiaire }) {
+      return `${nom_stagiaire}-${prenom_stagiaire}`
+    },
+                             removeStagiaire(removedOption,id){
+                               this.suppStagiaires.push(removedOption);
+
+                console.log('---remove')
+                console.log(this.suppStagiaires)
+          },
                                               
-                    },
+                   
+     getAllStagiaires(){//type_status
+                axios.get('/getAllStagiaires')
+                .then((response) => {
+                    this.loading = false;
+                    this.stagiaires = response.data.stagiaires;
+               })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+    }, },
                     mounted(){
+                      this.getAllStagiaires();
                       this.getGroupe(this.$route.params.id_groupe);
                       this.getCalendriers(this.$route.params.id_groupe);
                       
@@ -510,6 +540,7 @@
     }
     
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
  .thSmaine{

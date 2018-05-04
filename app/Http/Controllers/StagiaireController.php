@@ -20,7 +20,7 @@ class StagiaireController extends Controller
         return Response()->json(['count' => $count]);
     }
     
-    public function addUser(Request $request){
+    public function addUserStagiaire(Request $request){
        // dd($request);
     $user = new User();
     $user->id = $request->user['id'];
@@ -85,7 +85,7 @@ class StagiaireController extends Controller
     }
 
     public function updateStagiaire(Request $request){     
-         $stagiaire = Sesponsable::find($request->stagiaire['id_stagiaire']);
+         $stagiaire = Stagiaire::find($request->stagiaire['id_stagiaire']);
 
          
          if($request->stagiaire['photo_stagiaire'])
@@ -114,8 +114,8 @@ class StagiaireController extends Controller
          $stagiaire->prenom_stagiaire = $request->stagiaire['prenom_stagiaire'];
          $stagiaire->adresse_stagiaire = $request->stagiaire['adresse_stagiaire'];
          $stagiaire->tel_stagiaire = $request->stagiaire['tel_stagiaire'];
-         $stagiaire->dateNaissance_stagiaire = $request->stagiaire['dateNaissance_stagiaire'];
-         $stagiaire->service_stagiaire = $request->stagiaire['service_stagiaire'];
+         $stagiaire->specialite_stagiaire = $request->stagiaire['specialite_stagiaire'];
+         $stagiaire->annee_universitaire_stagiaire = $request->stagiaire['annee_universitaire_stagiaire'];
          $stagiaire->fk_user =  $request->stagiaire['fk_user'];;
                  $stagiaire->save();
                   return Response()->json(['etat' => true]);
@@ -128,6 +128,11 @@ class StagiaireController extends Controller
                     ->select('stagiaires.*', 'users.*')
                     ->where('users.role','=','stagiaire')
                     ->paginate(6);
+                 return Response()->json(['stagiaires' => $stagiaires ]);
+    }
+    public function getAllStagiaires(){
+     
+        $stagiaires = Stagiaire::all();
                  return Response()->json(['stagiaires' => $stagiaires ]);
     }
               

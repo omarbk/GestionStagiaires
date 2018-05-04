@@ -51015,10 +51015,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2__ = __webpack_require__(421);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_sweetalert2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_written_number__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_written_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_written_number__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes_js__ = __webpack_require__(435);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Auth_js__ = __webpack_require__(569);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_notification__ = __webpack_require__(629);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_notification___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_notification__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_written_number__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_written_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_written_number__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__routes_js__ = __webpack_require__(435);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Auth_js__ = __webpack_require__(569);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -51041,13 +51043,16 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
 Vue.prototype.$swal = __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default.a;
 
 
-Vue.prototype.$WrittenNumber = __WEBPACK_IMPORTED_MODULE_3_written_number___default.a;
+Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_notification___default.a);
+
+
+Vue.prototype.$WrittenNumber = __WEBPACK_IMPORTED_MODULE_4_written_number___default.a;
 
 
 
 
 //import Char from './Chart.min.js'
-Vue.use(__WEBPACK_IMPORTED_MODULE_5__Auth_js__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_6__Auth_js__["a" /* default */]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51097,7 +51102,7 @@ Vue.component('app-editevaluateur', __webpack_require__(612));
 global.jquery = jquery
 global.$ = jquery*/
 
-__WEBPACK_IMPORTED_MODULE_4__routes_js__["a" /* default */].beforeEach(function (to, from, next) {
+__WEBPACK_IMPORTED_MODULE_5__routes_js__["a" /* default */].beforeEach(function (to, from, next) {
     if (to.matched.some(function (record) {
         return record.meta.TopAdmin;
     })) {
@@ -51128,7 +51133,7 @@ __WEBPACK_IMPORTED_MODULE_4__routes_js__["a" /* default */].beforeEach(function 
 });
 var app = new Vue({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_4__routes_js__["a" /* default */]
+    router: __WEBPACK_IMPORTED_MODULE_5__routes_js__["a" /* default */]
 
 });
 
@@ -107626,6 +107631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/addUserResponsable', { responsable: this.responsable, user: this.user }).then(function (response) {
                 console.log(response.data.user);
+                console.log(response);
                 console.log('Responsable Bien ajouter !');
                 _this.$router.push({ name: 'ShowResponsables', params: { success: "add" } });
             });
@@ -111836,6 +111842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         redirect_To_ShowGroupe: function redirect_To_ShowGroupe(id_groupe) {
             //  this.$router.push('/ShowGroupe/'+id_groupe);
+
             this.$router.push({ name: 'ShowGroupe', params: { id_groupe: id_groupe } });
         }
     },
@@ -112279,7 +112286,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card-header[data-v-54032c32]{\r\n    background-color: #cac8c8;\n}\nspan[data-v-54032c32]{\r\n    color:#007ee4;\n}\n.fontsize[data-v-54032c32]{\r\n\r\n    font-size: 1.30rem;\n}\na[data-v-54032c32] {\r\n  color: #999;\r\n  color: black;\r\n    float: left;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\r\n    border: 1px solid #ddd;\n}\n.colBackround[data-v-54032c32]{\r\n    background-color: whitesmoke;\r\n    -webkit-box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n            box-shadow: 1px 1px 3px 4px #d2cfcf;\n}\n.colBackround2[data-v-54032c32]{\r\n    background-color: whitesmoke;\r\n    -webkit-box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n            box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n    padding-left:  0px;\r\n    margin-left:  0px;\r\n    padding-right: 0px;\n}\n.colBackround3[data-v-54032c32]{\r\n    background-color: #d8edff;\r\n    padding-left:  0px;\r\n    margin-left:  0px;\r\n    padding-right: 0px;\n}\n.badgeSize[data-v-54032c32]{\r\n    font-size: 14px;\n}\n.trJour[data-v-54032c32]{\r\n\r\n    background-color: #b6dfff;\n}\n.sizeJour[data-v-54032c32]{\r\n    width: 42px;\r\n    min-width: 70px;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-header[data-v-54032c32]{\r\n    background-color: #cac8c8;\n}\nspan[data-v-54032c32]{\r\n    color:#007ee4;\n}\n.fontsize[data-v-54032c32]{\r\n\r\n    font-size: 1.30rem;\n}\na[data-v-54032c32] {\r\n  color: #999;\r\n  color: black;\r\n    float: left;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\r\n    border: 1px solid #ddd;\n}\n.colBackround[data-v-54032c32]{\r\n    background-color: whitesmoke;\r\n    -webkit-box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n            box-shadow: 1px 1px 3px 4px #d2cfcf;\n}\n.colBackround2[data-v-54032c32]{\r\n    background-color: whitesmoke;\r\n    -webkit-box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n            box-shadow: 1px 1px 3px 4px #d2cfcf;\r\n    padding-left:  0px;\r\n    margin-left:  0px;\r\n    padding-right: 0px;\n}\n.colBackround3[data-v-54032c32]{\r\n    background-color: #d8edff;\r\n    padding-left:  0px;\r\n    margin-left:  0px;\r\n    padding-right: 0px;\n}\n.badgeSize[data-v-54032c32]{\r\n    font-size: 14px;\n}\n.trJour[data-v-54032c32]{\r\n\r\n    background-color: #b6dfff;\n}\n.sizeJour[data-v-54032c32]{\r\n    width: 42px;\r\n    min-width: 70px;\n}\n.list-group-item.active[data-v-54032c32]{\r\n\r\n     background-color:#d4eddb;\r\n     border-color:#d4eddb;\r\n     color:#272727;\n}\r\n", ""]);
 
 // exports
 
@@ -112290,6 +112297,13 @@ exports.push([module.i, "\n.card-header[data-v-54032c32]{\r\n    background-colo
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -112408,7 +112422,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 nom_groupe: "",
                 annee_universitaire_groupe: ""
             },
-            calendriers: []
+            calendriers: [],
+            groupe_stagiaire: []
 
         };
     },
@@ -112416,6 +112431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         fetchData: function fetchData() {
 
+            console.log(this.$route.params.id_groupe);
             this.getGroupe(this.$route.params.id_groupe);
             this.getCalendriers(this.$route.params.id_groupe);
         },
@@ -112427,6 +112443,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/getGroupe/' + id_groupe).then(function (response) {
 
                 _this.groupe = response.data.groupe;
+                _this.groupe_stagiaire = response.data.groupe_stagiaire;
+                console.log('liste stagiaire');
+                console.log(_this.groupe_stagiaire);
+                console.log('grouppppe');
+                console.log(_this.groupe);
             });
         },
         getCalendriers: function getCalendriers(id_groupe) {
@@ -112523,6 +112544,36 @@ var render = function() {
                     _c("p")
                   ])
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  [
+                    _c("li", { staticClass: "list-group-item active" }, [
+                      _vm._v("Liste des stagiaires")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.groupe_stagiaire, function(
+                      Vgroupe_stagiaire,
+                      index
+                    ) {
+                      return _c(
+                        "li",
+                        { key: index, staticClass: "list-group-item" },
+                        [
+                          _vm._v(
+                            _vm._s(Vgroupe_stagiaire.nom_stagiaire) +
+                              " " +
+                              _vm._s(Vgroupe_stagiaire.prenom_stagiaire)
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
               ])
             ]),
             _vm._v(" "),
@@ -112769,7 +112820,8 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(555)
+  __webpack_require__(621)
+  __webpack_require__(623)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
@@ -112814,46 +112866,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 555 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(556);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("4c857c74", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddGroupe.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddGroupe.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 556 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(7)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.thSmaine[data-v-82bdebf0]{\n    width: 147px;\n}\n.sizeSmaine[data-v-82bdebf0]{\n    width: 42px;\n    min-width: 59px;\n}\n.sizeJour[data-v-82bdebf0]{\n    width: 42px;\n    min-width: 70px;\n}\n.sizeMoisFin[data-v-82bdebf0]{\n         width: 42px;\n    min-width: 42px;\n}\n.sizeMois[data-v-82bdebf0]{\n   width: 155px;\n}\n.btnMarge[data-v-82bdebf0]{\n     padding-bottom: 10px;\n}\n.widthCard[data-v-82bdebf0]{\n     width: 270px;\n     height: 350px;\n}\n.widthTextCard[data-v-82bdebf0]{\n     width  : 236px;\n     height: 13px;\n}\na[data-v-82bdebf0] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.current[data-v-82bdebf0] {\n  color: red;\n}\nul[data-v-82bdebf0] {\n  padding: 0;\n  list-style-type: none;\n}\nli[data-v-82bdebf0] {\n  display: inline;\n  margin: 5px 5px;\n}\na.first[data-v-82bdebf0]::after {\n  content:'...'\n}\na.last[data-v-82bdebf0]::before {\n  content:'...'\n}\n.cardbox[data-v-82bdebf0]:hover{\n -webkit-box-shadow: 1px 2px 2px 2px #c9ced2;\n         box-shadow: 1px 2px 2px 2px #c9ced2;\n}\nul[data-v-82bdebf0]{\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\na[data-v-82bdebf0] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.fontsize[data-v-82bdebf0]{\n\n    font-size: 1.30rem;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 555 */,
+/* 556 */,
 /* 557 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -112998,12 +113012,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
   data: function data() {
     return {
+
+      pushStagiaire: [],
+      stagiaires: [],
       testDeep: false,
       Mois: ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'],
       groupe: {
@@ -113028,7 +113051,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         fk_groupe: 0
       },
-      calendriers: []
+      calendriers: [],
+      groupe_stagiaire: []
 
     };
   },
@@ -113137,39 +113161,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return new Date(year, month, 0).getDate();
     },
     pushCalendrier: function pushCalendrier() {
-      console.log();
+      if (this.calendrier.mois_stage_cal == "") {
+        this.$notify({
+          group: 'foo',
+          title: 'Champs vide',
+          text: 'Ajouter le mois!'
+        });
+      } else if (this.calendrier.debut_semaine_cal == "") {
+        this.$notify({
+          group: 'foo',
+          title: 'Champs vide',
+          text: 'Ajouter le debut de la semaine!'
+        });
+      } else {
 
-      this.calendriers.push({ mois_stage_cal: this.calendrier.mois_stage_cal,
-        debut_semaine_cal: this.calendrier.debut_semaine_cal,
-        fin_semaine_cal: this.calendrier.fin_semaine_cal,
-        lundi_cal: this.calendrier.lundi_cal,
-        mardi_cal: this.calendrier.mardi_cal,
-        mercredi_cal: this.calendrier.mercredi_cal,
-        jeudi_cal: this.calendrier.jeudi_cal,
-        vendredi_cal: this.calendrier.vendredi_cal,
-        JoursMoi: this.calendrier.JoursMoi,
-        NbJours: this.calendrier.NbJours,
-        nomMoisDebut: this.calendrier.nomMoisDebut,
-        nomMoisFin: this.calendrier.nomMoisFin
+        this.calendriers.push({ mois_stage_cal: this.calendrier.mois_stage_cal,
+          debut_semaine_cal: this.calendrier.debut_semaine_cal,
+          fin_semaine_cal: this.calendrier.fin_semaine_cal,
+          lundi_cal: this.calendrier.lundi_cal,
+          mardi_cal: this.calendrier.mardi_cal,
+          mercredi_cal: this.calendrier.mercredi_cal,
+          jeudi_cal: this.calendrier.jeudi_cal,
+          vendredi_cal: this.calendrier.vendredi_cal,
+          JoursMoi: this.calendrier.JoursMoi,
+          NbJours: this.calendrier.NbJours,
+          nomMoisDebut: this.calendrier.nomMoisDebut,
+          nomMoisFin: this.calendrier.nomMoisFin
 
-      });
+        });
 
-      this.calendrier = {
-        id_calendrier: 0,
-        mois_stage_cal: "",
-        debut_semaine_cal: 0,
-        fin_semaine_cal: 0,
-        lundi_cal: "",
-        mardi_cal: "",
-        mercredi_cal: "",
-        jeudi_cal: "",
-        vendredi_cal: "",
-        JoursMoi: [],
-        NbJours: 0,
-        fk_groupe: 0,
-        nomMoisDebut: "",
-        nomMoisFin: ""
-      };
+        this.calendrier = {
+          id_calendrier: 0,
+          mois_stage_cal: "",
+          debut_semaine_cal: 0,
+          fin_semaine_cal: 0,
+          lundi_cal: "",
+          mardi_cal: "",
+          mercredi_cal: "",
+          jeudi_cal: "",
+          vendredi_cal: "",
+          JoursMoi: [],
+          NbJours: 0,
+          fk_groupe: 0,
+          nomMoisDebut: "",
+          nomMoisFin: ""
+        };
+      }
     },
     removeCalendrier: function removeCalendrier(index) {
       this.calendriers.splice(index, 1);
@@ -113260,7 +113297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log("nbr jourrrr --------");
       console.log(this.calendrier.NbJours);
-      axios.post('/addGroupe', { calendriers: this.calendriers, groupe: this.groupe }).then(function (response) {
+      axios.post('/addGroupe', { calendriers: this.calendriers, groupe: this.groupe, pushStagiaire: this.pushStagiaire }).then(function (response) {
         console.log("Groupe Bien ajouter ");
         // this.$router.push('/');
         _this.$router.push({ name: 'ShowGroupes', params: { success: "addsuccess" } });
@@ -113282,9 +113319,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     ferierVendredi: function ferierVendredi(calendrier) {
       if (calendrier.vendredi_cal != "") calendrier.vendredi_cal = "";else calendrier.vendredi_cal = ".";
-    }
-  }
+    },
+    getAllStagiaires: function getAllStagiaires() {
+      var _this2 = this;
 
+      //type_status
+      axios.get('/getAllStagiaires').then(function (response) {
+        _this2.loading = false;
+        _this2.stagiaires = response.data.stagiaires;
+      }).catch(function () {
+        console.log('handle server error from here');
+      });
+    },
+    removeStagiaire: function removeStagiaire(removedOption, id) {
+      console.log('---remove');
+      console.log(removedOption);
+    },
+    nameWithLang: function nameWithLang(_ref) {
+      var nom_stagiaire = _ref.nom_stagiaire,
+          prenom_stagiaire = _ref.prenom_stagiaire;
+
+      return nom_stagiaire + '-' + prenom_stagiaire;
+    }
+  },
+  mounted: function mounted() {
+    this.getAllStagiaires();
+  }
 });
 
 /***/ }),
@@ -113295,127 +113355,550 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
+  return _c(
+    "div",
+    [
+      _c("notifications", { attrs: { group: "foo" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-primary mb-3  float-right ",
+                attrs: { to: "/ShowGroupes" }
+              },
+              [_c("i", { staticClass: "fas fa-long-arrow-alt-left fontsize" })]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-primary mb-3  float-right ",
-              attrs: { to: "/ShowGroupes" }
-            },
-            [_c("i", { staticClass: "fas fa-long-arrow-alt-left fontsize" })]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            _vm.addGroupe($event)
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.addGroupe($event)
+            }
           }
-        }
-      },
-      [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-4", attrs: { for: "nom_compte" } },
-                [_vm._v(" Nom groupe")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-8" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.groupe.nom_groupe,
-                      expression: "groupe.nom_groupe"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "nom_compte" },
-                  domProps: { value: _vm.groupe.nom_groupe },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-sm-4", attrs: { for: "nom_compte" } },
+                  [_vm._v(" Nom groupe")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.groupe.nom_groupe,
+                        expression: "groupe.nom_groupe"
                       }
-                      _vm.$set(_vm.groupe, "nom_groupe", $event.target.value)
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "nom_compte" },
+                    domProps: { value: _vm.groupe.nom_groupe },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.groupe, "nom_groupe", $event.target.value)
+                      }
                     }
-                  }
-                })
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-sm-4", attrs: { for: "responsable" } },
+                  [_vm._v(" année Universitaire")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.groupe.annee_universitaire_groupe,
+                        expression: "groupe.annee_universitaire_groupe"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "responsable" },
+                    domProps: { value: _vm.groupe.annee_universitaire_groupe },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.groupe,
+                          "annee_universitaire_groupe",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-4", attrs: { for: "responsable" } },
-                [_vm._v(" année Universitaire")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-8" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.groupe.annee_universitaire_groupe,
-                      expression: "groupe.annee_universitaire_groupe"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "responsable" },
-                  domProps: { value: _vm.groupe.annee_universitaire_groupe },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.groupe,
-                        "annee_universitaire_groupe",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("h4", [_vm._v("Ajouter calendrier")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table table-bordered" }, [
-                _vm._m(1),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group row" }, [
+                _c("label", { staticClass: "typo__label col-sm-4" }, [
+                  _vm._v("Stagiaires")
+                ]),
                 _vm._v(" "),
                 _c(
-                  "tbody",
+                  "div",
+                  { staticClass: "col-sm-8" },
                   [
-                    _vm._l(_vm.calendriers, function(calendrier, index) {
-                      return _c("tr", { key: index }, [
+                    _c("multiselect", {
+                      attrs: {
+                        "custom-label": _vm.nameWithLang,
+                        "tag-position": "bottom",
+                        "tag-placeholder": "Add this as new tag",
+                        placeholder: "cherche un groupe",
+                        "track-by": "prenom_stagiaire",
+                        optionHeight: 30,
+                        options: _vm.stagiaires,
+                        multiple: true
+                      },
+                      on: { remove: _vm.removeStagiaire },
+                      model: {
+                        value: _vm.pushStagiaire,
+                        callback: function($$v) {
+                          _vm.pushStagiaire = $$v
+                        },
+                        expression: "pushStagiaire"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("h4", [_vm._v("Ajouter calendrier")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table table-bordered" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    [
+                      _vm._l(_vm.calendriers, function(calendrier, index) {
+                        return _c("tr", { key: index }, [
+                          _c("th", { staticClass: "sizeMois" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: calendrier.mois_stage_cal,
+                                    expression: "calendrier.mois_stage_cal"
+                                  }
+                                ],
+                                staticClass: "form-control custom-select",
+                                attrs: { id: "month", title: "Mois" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      calendrier,
+                                      "mois_stage_cal",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { selected: "" } }, [
+                                  _vm._v("Choisir un Mois")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.Mois, function(Vmois, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: index + 1 }
+                                    },
+                                    [_vm._v(_vm._s(Vmois))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: calendrier.debut_semaine_cal,
+                                      expression: "calendrier.debut_semaine_cal"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "form-control custom-select sizeSmaine",
+                                  attrs: { id: "exampleFormControlSelect1" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        calendrier,
+                                        "debut_semaine_cal",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(calendrier.JoursMoi, function(
+                                  jour,
+                                  index
+                                ) {
+                                  return _c(
+                                    "option",
+                                    { key: index, domProps: { value: jour } },
+                                    [_vm._v(_vm._s(jour))]
+                                  )
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "input-group-prepend" },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-text",
+                                      attrs: { id: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(calendrier.nomMoisDebut) + " au"
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: calendrier.fin_semaine_cal,
+                                    expression: "calendrier.fin_semaine_cal"
+                                  }
+                                ],
+                                staticClass: "form-control sizeJour",
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: calendrier.fin_semaine_cal },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      calendrier,
+                                      "fin_semaine_cal",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "input-group-prepend" },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-text",
+                                      attrs: { id: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " +
+                                          _vm._s(calendrier.nomMoisFin) +
+                                          "."
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: calendrier.lundi_cal,
+                                  expression: "calendrier.lundi_cal"
+                                }
+                              ],
+                              staticClass: "form-control sizeJour",
+                              attrs: { type: "text", readonly: "" },
+                              domProps: { value: calendrier.lundi_cal },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    calendrier,
+                                    "lundi_cal",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _c("input", {
+                              attrs: { type: "checkbox", id: "exampleCheck1" },
+                              on: {
+                                click: function($event) {
+                                  _vm.ferierLundi(calendrier)
+                                }
+                              }
+                            }),
+                            _vm._v("ferié")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: calendrier.mardi_cal,
+                                  expression: "calendrier.mardi_cal"
+                                }
+                              ],
+                              staticClass: "form-control sizeJour",
+                              attrs: { type: "text", readonly: "" },
+                              domProps: { value: calendrier.mardi_cal },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    calendrier,
+                                    "mardi_cal",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _c("input", {
+                              attrs: { type: "checkbox", id: "exampleCheck2" },
+                              on: {
+                                click: function($event) {
+                                  _vm.ferierMardi(calendrier)
+                                }
+                              }
+                            }),
+                            _vm._v("ferié ")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: calendrier.mercredi_cal,
+                                  expression: "calendrier.mercredi_cal"
+                                }
+                              ],
+                              staticClass: "form-control sizeJour",
+                              attrs: { type: "text", readonly: "" },
+                              domProps: { value: calendrier.mercredi_cal },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    calendrier,
+                                    "mercredi_cal",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _c("input", {
+                              attrs: { type: "checkbox", id: "exampleCheck3" },
+                              on: {
+                                click: function($event) {
+                                  _vm.ferierMercredi(calendrier)
+                                }
+                              }
+                            }),
+                            _vm._v("ferié")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: calendrier.jeudi_cal,
+                                  expression: "calendrier.jeudi_cal"
+                                }
+                              ],
+                              staticClass: "form-control sizeJour",
+                              attrs: { type: "text", readonly: "" },
+                              domProps: { value: calendrier.jeudi_cal },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    calendrier,
+                                    "jeudi_cal",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _c("input", {
+                              attrs: { type: "checkbox", id: "exampleCheck4" },
+                              on: {
+                                click: function($event) {
+                                  _vm.ferierJeudi(calendrier)
+                                }
+                              }
+                            }),
+                            _vm._v("ferié")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: calendrier.vendredi_cal,
+                                  expression: "calendrier.vendredi_cal"
+                                }
+                              ],
+                              staticClass: "form-control sizeJour",
+                              attrs: { type: "text", readonly: "" },
+                              domProps: { value: calendrier.vendredi_cal },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    calendrier,
+                                    "vendredi_cal",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _c("input", {
+                              attrs: { type: "checkbox", id: "exampleCheck5" },
+                              on: {
+                                click: function($event) {
+                                  _vm.ferierVendredi(calendrier)
+                                }
+                              }
+                            }),
+                            _vm._v("ferié")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.removeCalendrier(index)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-trash-alt d-inline-block"
+                                })
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("tr", [
                         _c("th", { staticClass: "sizeMois" }, [
                           _c(
                             "select",
@@ -113424,7 +113907,7 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: calendrier.mois_stage_cal,
+                                  value: _vm.calendrier.mois_stage_cal,
                                   expression: "calendrier.mois_stage_cal"
                                 }
                               ],
@@ -113442,7 +113925,7 @@ var render = function() {
                                       return val
                                     })
                                   _vm.$set(
-                                    calendrier,
+                                    _vm.calendrier,
                                     "mois_stage_cal",
                                     $event.target.multiple
                                       ? $$selectedVal
@@ -113473,7 +113956,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("th", [
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(2, true),
+                            _vm._m(3),
                             _vm._v(" "),
                             _c(
                               "select",
@@ -113482,7 +113965,7 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: calendrier.debut_semaine_cal,
+                                    value: _vm.calendrier.debut_semaine_cal,
                                     expression: "calendrier.debut_semaine_cal"
                                   }
                                 ],
@@ -113501,7 +113984,7 @@ var render = function() {
                                         return val
                                       })
                                     _vm.$set(
-                                      calendrier,
+                                      _vm.calendrier,
                                       "debut_semaine_cal",
                                       $event.target.multiple
                                         ? $$selectedVal
@@ -113510,7 +113993,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              _vm._l(calendrier.JoursMoi, function(
+                              _vm._l(_vm.calendrier.JoursMoi, function(
                                 jour,
                                 index
                               ) {
@@ -113531,7 +114014,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    _vm._s(calendrier.nomMoisDebut) + " au"
+                                    _vm._s(_vm.calendrier.nomMoisDebut) + " au"
                                   )
                                 ]
                               )
@@ -113542,20 +114025,22 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: calendrier.fin_semaine_cal,
+                                  value: _vm.calendrier.fin_semaine_cal,
                                   expression: "calendrier.fin_semaine_cal"
                                 }
                               ],
-                              staticClass: "form-control sizeJour",
+                              staticClass: "form-control sizeMoisFin",
                               attrs: { type: "text", readonly: "" },
-                              domProps: { value: calendrier.fin_semaine_cal },
+                              domProps: {
+                                value: _vm.calendrier.fin_semaine_cal
+                              },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
                                   _vm.$set(
-                                    calendrier,
+                                    _vm.calendrier,
                                     "fin_semaine_cal",
                                     $event.target.value
                                   )
@@ -113572,7 +114057,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    " " + _vm._s(calendrier.nomMoisFin) + "."
+                                    " " +
+                                      _vm._s(_vm.calendrier.nomMoisFin) +
+                                      "."
                                   )
                                 ]
                               )
@@ -113581,403 +114068,38 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("th", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: calendrier.lundi_cal,
-                                expression: "calendrier.lundi_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeJour",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: calendrier.lundi_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  calendrier,
-                                  "lundi_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _c("input", {
-                            attrs: { type: "checkbox", id: "exampleCheck1" },
-                            on: {
-                              click: function($event) {
-                                _vm.ferierLundi(calendrier)
-                              }
-                            }
-                          }),
-                          _vm._v("ferié")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: calendrier.mardi_cal,
-                                expression: "calendrier.mardi_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeJour",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: calendrier.mardi_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  calendrier,
-                                  "mardi_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _c("input", {
-                            attrs: { type: "checkbox", id: "exampleCheck2" },
-                            on: {
-                              click: function($event) {
-                                _vm.ferierMardi(calendrier)
-                              }
-                            }
-                          }),
-                          _vm._v("ferié ")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: calendrier.mercredi_cal,
-                                expression: "calendrier.mercredi_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeJour",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: calendrier.mercredi_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  calendrier,
-                                  "mercredi_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _c("input", {
-                            attrs: { type: "checkbox", id: "exampleCheck3" },
-                            on: {
-                              click: function($event) {
-                                _vm.ferierMercredi(calendrier)
-                              }
-                            }
-                          }),
-                          _vm._v("ferié")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: calendrier.jeudi_cal,
-                                expression: "calendrier.jeudi_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeJour",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: calendrier.jeudi_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  calendrier,
-                                  "jeudi_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _c("input", {
-                            attrs: { type: "checkbox", id: "exampleCheck4" },
-                            on: {
-                              click: function($event) {
-                                _vm.ferierJeudi(calendrier)
-                              }
-                            }
-                          }),
-                          _vm._v("ferié")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: calendrier.vendredi_cal,
-                                expression: "calendrier.vendredi_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeJour",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: calendrier.vendredi_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  calendrier,
-                                  "vendredi_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _c("input", {
-                            attrs: { type: "checkbox", id: "exampleCheck5" },
-                            on: {
-                              click: function($event) {
-                                _vm.ferierVendredi(calendrier)
-                              }
-                            }
-                          }),
-                          _vm._v("ferié")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [
                           _c(
                             "a",
                             {
-                              staticClass: "btn btn-danger",
+                              staticClass: "btn btn-success",
                               on: {
                                 click: function($event) {
-                                  _vm.removeCalendrier(index)
+                                  _vm.pushCalendrier()
                                 }
                               }
                             },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-trash-alt d-inline-block"
-                              })
-                            ]
+                            [_c("i", { staticClass: "fas fa-plus-circle" })]
                           )
                         ])
                       ])
-                    }),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", { staticClass: "sizeMois" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.calendrier.mois_stage_cal,
-                                expression: "calendrier.mois_stage_cal"
-                              }
-                            ],
-                            staticClass: "form-control custom-select",
-                            attrs: { id: "month", title: "Mois" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.calendrier,
-                                  "mois_stage_cal",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { selected: "" } }, [
-                              _vm._v("Choisir un Mois")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.Mois, function(Vmois, index) {
-                              return _c(
-                                "option",
-                                { key: index, domProps: { value: index + 1 } },
-                                [_vm._v(_vm._s(Vmois))]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _c("div", { staticClass: "input-group" }, [
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.calendrier.debut_semaine_cal,
-                                  expression: "calendrier.debut_semaine_cal"
-                                }
-                              ],
-                              staticClass:
-                                "form-control custom-select sizeSmaine",
-                              attrs: { id: "exampleFormControlSelect1" },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.calendrier,
-                                    "debut_semaine_cal",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            _vm._l(_vm.calendrier.JoursMoi, function(
-                              jour,
-                              index
-                            ) {
-                              return _c(
-                                "option",
-                                { key: index, domProps: { value: jour } },
-                                [_vm._v(_vm._s(jour))]
-                              )
-                            })
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "input-group-prepend" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass: "input-group-text",
-                                attrs: { id: "" }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.calendrier.nomMoisDebut) + " au"
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.calendrier.fin_semaine_cal,
-                                expression: "calendrier.fin_semaine_cal"
-                              }
-                            ],
-                            staticClass: "form-control sizeMoisFin",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: _vm.calendrier.fin_semaine_cal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.calendrier,
-                                  "fin_semaine_cal",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "input-group-prepend" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass: "input-group-text",
-                                attrs: { id: "" }
-                              },
-                              [
-                                _vm._v(
-                                  " " + _vm._s(_vm.calendrier.nomMoisFin) + "."
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-success",
-                            on: {
-                              click: function($event) {
-                                _vm.pushCalendrier()
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fas fa-plus-circle" })]
-                        )
-                      ])
-                    ])
-                  ],
-                  2
-                )
+                    ],
+                    2
+                  )
+                ])
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn btn-primary mr-20 btn-success" }, [
+            _vm._v("Enregister")
           ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-primary mr-20 btn-success" }, [
-          _vm._v("Enregister")
-        ])
-      ]
-    )
-  ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -114049,7 +114171,8 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(560)
+  __webpack_require__(625)
+  __webpack_require__(627)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
@@ -114094,46 +114217,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 560 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(561);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("8fb5e6fc", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EditGroupe.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EditGroupe.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 561 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(7)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.thSmaine[data-v-52fe12ff]{\n    width: 147px;\n}\n.sizeSmaine[data-v-52fe12ff]{\n    width: 42px;\n    min-width: 59px;\n}\n.sizeJour[data-v-52fe12ff]{\n    width: 42px;\n    min-width: 70px;\n}\n.sizeMoisFin[data-v-52fe12ff]{\n         width: 42px;\n    min-width: 42px;\n}\n.sizeMois[data-v-52fe12ff]{\n   width: 155px;\n}\n.btnMarge[data-v-52fe12ff]{\n     padding-bottom: 10px;\n}\n.widthCard[data-v-52fe12ff]{\n     width: 270px;\n     height: 350px;\n}\n.widthTextCard[data-v-52fe12ff]{\n     width  : 236px;\n     height: 13px;\n}\na[data-v-52fe12ff] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.current[data-v-52fe12ff] {\n  color: red;\n}\nul[data-v-52fe12ff] {\n  padding: 0;\n  list-style-type: none;\n}\nli[data-v-52fe12ff] {\n  display: inline;\n  margin: 5px 5px;\n}\na.first[data-v-52fe12ff]::after {\n  content:'...'\n}\na.last[data-v-52fe12ff]::before {\n  content:'...'\n}\n.cardbox[data-v-52fe12ff]:hover{\n -webkit-box-shadow: 1px 2px 2px 2px #c9ced2;\n         box-shadow: 1px 2px 2px 2px #c9ced2;\n}\nul[data-v-52fe12ff]{\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\na[data-v-52fe12ff] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.fontsize[data-v-52fe12ff]{\n\n    font-size: 1.30rem;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 560 */,
+/* 561 */,
 /* 562 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -114278,12 +114363,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
   data: function data() {
     return {
+      stagiaires: [],
+      pushStagiaire: [],
+      suppStagiaires: [],
       suppCalendriers: [],
       testDeep: false,
       Mois: ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'],
@@ -114578,7 +114671,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       axios.get('/getGroupe/' + id_groupe).then(function (response) {
-
+        _this2.pushStagiaire = response.data.groupe_stagiaire;
         _this2.groupe = response.data.groupe;
       });
     },
@@ -114600,13 +114693,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log('add calendrier');
       console.log(this.calendriers);
-      axios.post('/updateGroupe', { groupe: this.groupe, calendriers: this.calendriers, suppCalendriers: this.suppCalendriers }).then(function (response) {
+      axios.post('/updateGroupe', { groupe: this.groupe, calendriers: this.calendriers, suppCalendriers: this.suppCalendriers, pushStagiaire: this.pushStagiaire,
+        suppStagiaires: this.suppStagiaires }).then(function (response) {
         _this4.$router.push({ name: 'ShowGroupes', params: { success: "editsuccess" } });
       });
-    }
+    },
+    nameWithLang: function nameWithLang(_ref) {
+      var nom_stagiaire = _ref.nom_stagiaire,
+          prenom_stagiaire = _ref.prenom_stagiaire;
 
+      return nom_stagiaire + '-' + prenom_stagiaire;
+    },
+    removeStagiaire: function removeStagiaire(removedOption, id) {
+      this.suppStagiaires.push(removedOption);
+
+      console.log('---remove');
+      console.log(this.suppStagiaires);
+    },
+    getAllStagiaires: function getAllStagiaires() {
+      var _this5 = this;
+
+      //type_status
+      axios.get('/getAllStagiaires').then(function (response) {
+        _this5.loading = false;
+        _this5.stagiaires = response.data.stagiaires;
+      }).catch(function () {
+        console.log('handle server error from here');
+      });
+    }
   },
   mounted: function mounted() {
+    this.getAllStagiaires();
     this.getGroupe(this.$route.params.id_groupe);
     this.getCalendriers(this.$route.params.id_groupe);
   }
@@ -114720,6 +114837,42 @@ var render = function() {
                   }
                 })
               ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "typo__label col-sm-4" }, [
+                _vm._v("Stagiaires")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-sm-8" },
+                [
+                  _c("multiselect", {
+                    attrs: {
+                      "custom-label": _vm.nameWithLang,
+                      "tag-position": "bottom",
+                      "tag-placeholder": "Add this as new tag",
+                      placeholder: "cherche un groupe",
+                      "track-by": "prenom_stagiaire",
+                      optionHeight: 30,
+                      options: _vm.stagiaires,
+                      multiple: true
+                    },
+                    on: { remove: _vm.removeStagiaire },
+                    model: {
+                      value: _vm.pushStagiaire,
+                      callback: function($$v) {
+                        _vm.pushStagiaire = $$v
+                      },
+                      expression: "pushStagiaire"
+                    }
+                  })
+                ],
+                1
+              )
             ])
           ])
         ]),
@@ -115319,7 +115472,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center pull-right" }, [
-      _c("h2", [_vm._v("Ajouter Compte")]),
+      _c("h2", [_vm._v("Modifier Groupe")]),
       _vm._v(" "),
       _c("hr")
     ])
@@ -118283,7 +118436,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "widthTextCard" }, [
                         _vm._v(
-                          "Service : " + _vm._s(stagiaire.service_stagiaire)
+                          "Service : " + _vm._s(stagiaire.specialite_stagiaire)
                         )
                       ]),
                       _vm._v(" "),
@@ -118914,7 +119067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log("test");
             console.log(this.stagiaire);
 
-            axios.post('/addUser', { stagiaire: this.stagiaire, user: this.user }).then(function (response) {
+            axios.post('/addUserStagiaire', { stagiaire: this.stagiaire, user: this.user }).then(function (response) {
                 console.log(response.data.user);
                 console.log('stagiaire Bien ajouter !');
                 _this.$router.push({ name: 'ShowStagiaires', params: { success: "add" } });
@@ -119580,22 +119733,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             reader.readAsDataURL(file);
         },
-        addStagiaire: function addStagiaire() {
+        updateStagiaire: function updateStagiaire() {
+            var _this = this;
+
             console.log("test");
             console.log(this.stagiaire);
 
-            axios.post('/addUser', { stagiaire: this.stagiaire, user: this.user }).then(function (response) {
-                console.log(response.data.user);
+            axios.post('/updateStagiaire', { stagiaire: this.stagiaire }).then(function (response) {
+                console.log(response);
                 console.log('stagiaire Bien ajouter !');
-                //this.$router.push({ name: 'ShowStagiaires', params: { success: "add"  }});
+                _this.$router.push({ name: 'ShowStagiaires', params: { success: "add" } });
             });
         },
         getStagiaire: function getStagiaire(id_stagiaire) {
-            var _this = this;
+            var _this2 = this;
 
             axios.get('/getStagiaire/' + id_stagiaire).then(function (response) {
 
-                _this.stagiaire = response.data.stagiaire[0];
+                _this2.stagiaire = response.data.stagiaire[0];
             });
         }
     },
@@ -119626,7 +119781,7 @@ var render = function() {
           on: {
             submit: function($event) {
               $event.preventDefault()
-              _vm.addStagiaire($event)
+              _vm.updateStagiaire($event)
             }
           }
         },
@@ -122492,6 +122647,1287 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-74982802", module.exports)
   }
 }
+
+/***/ }),
+/* 621 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(622);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("9872cbf6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 622 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n}\n.multiselect__spinner{position:absolute;right:1px;top:1px;width:48px;height:35px;background:#fff;display:block\n}\n.multiselect__spinner:after,.multiselect__spinner:before{position:absolute;content:\"\";top:50%;left:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:100%;border-color:#41b883 transparent transparent;border-style:solid;border-width:2px;-webkit-box-shadow:0 0 0 1px transparent;box-shadow:0 0 0 1px transparent\n}\n.multiselect__spinner:before{-webkit-animation:a 2.4s cubic-bezier(.41,.26,.2,.62);animation:a 2.4s cubic-bezier(.41,.26,.2,.62);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__spinner:after{-webkit-animation:a 2.4s cubic-bezier(.51,.09,.21,.8);animation:a 2.4s cubic-bezier(.51,.09,.21,.8);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__loading-enter-active,.multiselect__loading-leave-active{-webkit-transition:opacity .4s ease-in-out;transition:opacity .4s ease-in-out;opacity:1\n}\n.multiselect__loading-enter,.multiselect__loading-leave-active{opacity:0\n}\n.multiselect,.multiselect__input,.multiselect__single{font-family:inherit;font-size:16px;-ms-touch-action:manipulation;touch-action:manipulation\n}\n.multiselect{-webkit-box-sizing:content-box;box-sizing:content-box;display:block;position:relative;width:100%;min-height:40px;text-align:left;color:#35495e\n}\n.multiselect *{-webkit-box-sizing:border-box;box-sizing:border-box\n}\n.multiselect:focus{outline:none\n}\n.multiselect--disabled{opacity:.6\n}\n.multiselect--active{z-index:1\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,.multiselect--active:not(.multiselect--above) .multiselect__input,.multiselect--active:not(.multiselect--above) .multiselect__tags{border-bottom-left-radius:0;border-bottom-right-radius:0\n}\n.multiselect--active .multiselect__select{-webkit-transform:rotate(180deg);transform:rotate(180deg)\n}\n.multiselect--above.multiselect--active .multiselect__current,.multiselect--above.multiselect--active .multiselect__input,.multiselect--above.multiselect--active .multiselect__tags{border-top-left-radius:0;border-top-right-radius:0\n}\n.multiselect__input,.multiselect__single{position:relative;display:inline-block;min-height:20px;line-height:20px;border:none;border-radius:5px;background:#fff;padding:0 0 0 5px;width:100%;-webkit-transition:border .1s ease;transition:border .1s ease;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:8px;vertical-align:top\n}\n.multiselect__input::-webkit-input-placeholder{color:#35495e\n}\n.multiselect__input:-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::placeholder{color:#35495e\n}\n.multiselect__tag~.multiselect__input,.multiselect__tag~.multiselect__single{width:auto\n}\n.multiselect__input:hover,.multiselect__single:hover{border-color:#cfcfcf\n}\n.multiselect__input:focus,.multiselect__single:focus{border-color:#a8a8a8;outline:none\n}\n.multiselect__single{padding-left:5px;margin-bottom:8px\n}\n.multiselect__tags-wrap{display:inline\n}\n.multiselect__tags{min-height:40px;display:block;padding:8px 40px 0 8px;border-radius:5px;border:1px solid #e8e8e8;background:#fff;font-size:14px\n}\n.multiselect__tag{position:relative;display:inline-block;padding:4px 26px 4px 10px;border-radius:5px;margin-right:10px;color:#fff;line-height:1;background:#41b883;margin-bottom:5px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis\n}\n.multiselect__tag-icon{cursor:pointer;margin-left:7px;position:absolute;right:0;top:0;bottom:0;font-weight:700;font-style:normal;width:22px;text-align:center;line-height:22px;-webkit-transition:all .2s ease;transition:all .2s ease;border-radius:5px\n}\n.multiselect__tag-icon:after{content:\"\\D7\";color:#266d4d;font-size:14px\n}\n.multiselect__tag-icon:focus,.multiselect__tag-icon:hover{background:#369a6e\n}\n.multiselect__tag-icon:focus:after,.multiselect__tag-icon:hover:after{color:#fff\n}\n.multiselect__current{min-height:40px;overflow:hidden;padding:8px 12px 0;padding-right:30px;white-space:nowrap;border-radius:5px;border:1px solid #e8e8e8\n}\n.multiselect__current,.multiselect__select{line-height:16px;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;margin:0;text-decoration:none;cursor:pointer\n}\n.multiselect__select{position:absolute;width:40px;height:38px;right:1px;top:1px;padding:4px 8px;text-align:center;-webkit-transition:-webkit-transform .2s ease;transition:-webkit-transform .2s ease;transition:transform .2s ease;transition:transform .2s ease, -webkit-transform .2s ease\n}\n.multiselect__select:before{position:relative;right:0;top:65%;color:#999;margin-top:4px;border-style:solid;border-width:5px 5px 0;border-color:#999 transparent transparent;content:\"\"\n}\n.multiselect__placeholder{color:#adadad;display:inline-block;margin-bottom:10px;padding-top:2px\n}\n.multiselect--active .multiselect__placeholder{display:none\n}\n.multiselect__content-wrapper{position:relative;display:block;background:#fff;width:100%;max-height:240px;overflow:auto;border:1px solid #e8e8e8;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;z-index:1;-webkit-overflow-scrolling:touch\n}\n.multiselect__content{list-style:none;display:inline-block;padding:0;margin:0;min-width:100%;vertical-align:top\n}\n.multiselect--above .multiselect__content-wrapper{bottom:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom:none;border-top:1px solid #e8e8e8\n}\n.multiselect__content::webkit-scrollbar{display:none\n}\n.multiselect__element{display:block\n}\n.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap\n}\n.multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px;font-size:13px\n}\n.multiselect__option--highlight{background:#41b883;outline:none;color:#fff\n}\n.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff\n}\n.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700\n}\n.multiselect__option--selected:after{content:attr(data-selected);color:silver\n}\n.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect--disabled{background:#ededed;pointer-events:none\n}\n.multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select,.multiselect__option--disabled{background:#ededed;color:#a6a6a6\n}\n.multiselect__option--disabled{cursor:text;pointer-events:none\n}\n.multiselect__option--group{background:#ededed;color:#35495e\n}\n.multiselect__option--group.multiselect__option--highlight{background:#35495e;color:#fff\n}\n.multiselect__option--group.multiselect__option--highlight:after{background:#35495e\n}\n.multiselect__option--disabled.multiselect__option--highlight{background:#dedede\n}\n.multiselect__option--group-selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--group-selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect-enter-active,.multiselect-leave-active{-webkit-transition:all .15s ease;transition:all .15s ease\n}\n.multiselect-enter,.multiselect-leave-active{opacity:0\n}\n.multiselect__strong{margin-bottom:8px;line-height:20px;display:inline-block;vertical-align:top\n}\n[dir=rtl] .multiselect{text-align:right\n}\n[dir=rtl] .multiselect__select{right:auto;left:1px\n}\n[dir=rtl] .multiselect__tags{padding:8px 8px 0 40px\n}\n[dir=rtl] .multiselect__content{text-align:right\n}\n[dir=rtl] .multiselect__option:after{right:auto;left:0\n}\n[dir=rtl] .multiselect__clear{right:auto;left:12px\n}\n[dir=rtl] .multiselect__spinner{right:auto;left:1px\n}\n@-webkit-keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}\n@keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 623 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(624);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("ff98b196", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./AddGroupe.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-82bdebf0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./AddGroupe.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 624 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.thSmaine[data-v-82bdebf0]{\n    width: 147px;\n}\n.sizeSmaine[data-v-82bdebf0]{\n    width: 42px;\n    min-width: 59px;\n}\n.sizeJour[data-v-82bdebf0]{\n    width: 42px;\n    min-width: 70px;\n}\n.sizeMoisFin[data-v-82bdebf0]{\n         width: 42px;\n    min-width: 42px;\n}\n.sizeMois[data-v-82bdebf0]{\n   width: 155px;\n}\n.btnMarge[data-v-82bdebf0]{\n     padding-bottom: 10px;\n}\n.widthCard[data-v-82bdebf0]{\n     width: 270px;\n     height: 350px;\n}\n.widthTextCard[data-v-82bdebf0]{\n     width  : 236px;\n     height: 13px;\n}\na[data-v-82bdebf0] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.current[data-v-82bdebf0] {\n  color: red;\n}\nul[data-v-82bdebf0] {\n  padding: 0;\n  list-style-type: none;\n}\nli[data-v-82bdebf0] {\n  display: inline;\n  margin: 5px 5px;\n}\na.first[data-v-82bdebf0]::after {\n  content:'...'\n}\na.last[data-v-82bdebf0]::before {\n  content:'...'\n}\n.cardbox[data-v-82bdebf0]:hover{\n -webkit-box-shadow: 1px 2px 2px 2px #c9ced2;\n         box-shadow: 1px 2px 2px 2px #c9ced2;\n}\nul[data-v-82bdebf0]{\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\na[data-v-82bdebf0] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.fontsize[data-v-82bdebf0]{\n\n    font-size: 1.30rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 625 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(626);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("fc848eaa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 626 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n}\n.multiselect__spinner{position:absolute;right:1px;top:1px;width:48px;height:35px;background:#fff;display:block\n}\n.multiselect__spinner:after,.multiselect__spinner:before{position:absolute;content:\"\";top:50%;left:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:100%;border-color:#41b883 transparent transparent;border-style:solid;border-width:2px;-webkit-box-shadow:0 0 0 1px transparent;box-shadow:0 0 0 1px transparent\n}\n.multiselect__spinner:before{-webkit-animation:a 2.4s cubic-bezier(.41,.26,.2,.62);animation:a 2.4s cubic-bezier(.41,.26,.2,.62);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__spinner:after{-webkit-animation:a 2.4s cubic-bezier(.51,.09,.21,.8);animation:a 2.4s cubic-bezier(.51,.09,.21,.8);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__loading-enter-active,.multiselect__loading-leave-active{-webkit-transition:opacity .4s ease-in-out;transition:opacity .4s ease-in-out;opacity:1\n}\n.multiselect__loading-enter,.multiselect__loading-leave-active{opacity:0\n}\n.multiselect,.multiselect__input,.multiselect__single{font-family:inherit;font-size:16px;-ms-touch-action:manipulation;touch-action:manipulation\n}\n.multiselect{-webkit-box-sizing:content-box;box-sizing:content-box;display:block;position:relative;width:100%;min-height:40px;text-align:left;color:#35495e\n}\n.multiselect *{-webkit-box-sizing:border-box;box-sizing:border-box\n}\n.multiselect:focus{outline:none\n}\n.multiselect--disabled{opacity:.6\n}\n.multiselect--active{z-index:1\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,.multiselect--active:not(.multiselect--above) .multiselect__input,.multiselect--active:not(.multiselect--above) .multiselect__tags{border-bottom-left-radius:0;border-bottom-right-radius:0\n}\n.multiselect--active .multiselect__select{-webkit-transform:rotate(180deg);transform:rotate(180deg)\n}\n.multiselect--above.multiselect--active .multiselect__current,.multiselect--above.multiselect--active .multiselect__input,.multiselect--above.multiselect--active .multiselect__tags{border-top-left-radius:0;border-top-right-radius:0\n}\n.multiselect__input,.multiselect__single{position:relative;display:inline-block;min-height:20px;line-height:20px;border:none;border-radius:5px;background:#fff;padding:0 0 0 5px;width:100%;-webkit-transition:border .1s ease;transition:border .1s ease;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:8px;vertical-align:top\n}\n.multiselect__input::-webkit-input-placeholder{color:#35495e\n}\n.multiselect__input:-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::placeholder{color:#35495e\n}\n.multiselect__tag~.multiselect__input,.multiselect__tag~.multiselect__single{width:auto\n}\n.multiselect__input:hover,.multiselect__single:hover{border-color:#cfcfcf\n}\n.multiselect__input:focus,.multiselect__single:focus{border-color:#a8a8a8;outline:none\n}\n.multiselect__single{padding-left:5px;margin-bottom:8px\n}\n.multiselect__tags-wrap{display:inline\n}\n.multiselect__tags{min-height:40px;display:block;padding:8px 40px 0 8px;border-radius:5px;border:1px solid #e8e8e8;background:#fff;font-size:14px\n}\n.multiselect__tag{position:relative;display:inline-block;padding:4px 26px 4px 10px;border-radius:5px;margin-right:10px;color:#fff;line-height:1;background:#41b883;margin-bottom:5px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis\n}\n.multiselect__tag-icon{cursor:pointer;margin-left:7px;position:absolute;right:0;top:0;bottom:0;font-weight:700;font-style:normal;width:22px;text-align:center;line-height:22px;-webkit-transition:all .2s ease;transition:all .2s ease;border-radius:5px\n}\n.multiselect__tag-icon:after{content:\"\\D7\";color:#266d4d;font-size:14px\n}\n.multiselect__tag-icon:focus,.multiselect__tag-icon:hover{background:#369a6e\n}\n.multiselect__tag-icon:focus:after,.multiselect__tag-icon:hover:after{color:#fff\n}\n.multiselect__current{min-height:40px;overflow:hidden;padding:8px 12px 0;padding-right:30px;white-space:nowrap;border-radius:5px;border:1px solid #e8e8e8\n}\n.multiselect__current,.multiselect__select{line-height:16px;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;margin:0;text-decoration:none;cursor:pointer\n}\n.multiselect__select{position:absolute;width:40px;height:38px;right:1px;top:1px;padding:4px 8px;text-align:center;-webkit-transition:-webkit-transform .2s ease;transition:-webkit-transform .2s ease;transition:transform .2s ease;transition:transform .2s ease, -webkit-transform .2s ease\n}\n.multiselect__select:before{position:relative;right:0;top:65%;color:#999;margin-top:4px;border-style:solid;border-width:5px 5px 0;border-color:#999 transparent transparent;content:\"\"\n}\n.multiselect__placeholder{color:#adadad;display:inline-block;margin-bottom:10px;padding-top:2px\n}\n.multiselect--active .multiselect__placeholder{display:none\n}\n.multiselect__content-wrapper{position:relative;display:block;background:#fff;width:100%;max-height:240px;overflow:auto;border:1px solid #e8e8e8;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;z-index:1;-webkit-overflow-scrolling:touch\n}\n.multiselect__content{list-style:none;display:inline-block;padding:0;margin:0;min-width:100%;vertical-align:top\n}\n.multiselect--above .multiselect__content-wrapper{bottom:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom:none;border-top:1px solid #e8e8e8\n}\n.multiselect__content::webkit-scrollbar{display:none\n}\n.multiselect__element{display:block\n}\n.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap\n}\n.multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px;font-size:13px\n}\n.multiselect__option--highlight{background:#41b883;outline:none;color:#fff\n}\n.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff\n}\n.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700\n}\n.multiselect__option--selected:after{content:attr(data-selected);color:silver\n}\n.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect--disabled{background:#ededed;pointer-events:none\n}\n.multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select,.multiselect__option--disabled{background:#ededed;color:#a6a6a6\n}\n.multiselect__option--disabled{cursor:text;pointer-events:none\n}\n.multiselect__option--group{background:#ededed;color:#35495e\n}\n.multiselect__option--group.multiselect__option--highlight{background:#35495e;color:#fff\n}\n.multiselect__option--group.multiselect__option--highlight:after{background:#35495e\n}\n.multiselect__option--disabled.multiselect__option--highlight{background:#dedede\n}\n.multiselect__option--group-selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--group-selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect-enter-active,.multiselect-leave-active{-webkit-transition:all .15s ease;transition:all .15s ease\n}\n.multiselect-enter,.multiselect-leave-active{opacity:0\n}\n.multiselect__strong{margin-bottom:8px;line-height:20px;display:inline-block;vertical-align:top\n}\n[dir=rtl] .multiselect{text-align:right\n}\n[dir=rtl] .multiselect__select{right:auto;left:1px\n}\n[dir=rtl] .multiselect__tags{padding:8px 8px 0 40px\n}\n[dir=rtl] .multiselect__content{text-align:right\n}\n[dir=rtl] .multiselect__option:after{right:auto;left:0\n}\n[dir=rtl] .multiselect__clear{right:auto;left:12px\n}\n[dir=rtl] .multiselect__spinner{right:auto;left:1px\n}\n@-webkit-keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}\n@keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 627 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(628);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("8e18e9fa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./EditGroupe.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52fe12ff\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./EditGroupe.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 628 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.thSmaine[data-v-52fe12ff]{\n    width: 147px;\n}\n.sizeSmaine[data-v-52fe12ff]{\n    width: 42px;\n    min-width: 59px;\n}\n.sizeJour[data-v-52fe12ff]{\n    width: 42px;\n    min-width: 70px;\n}\n.sizeMoisFin[data-v-52fe12ff]{\n         width: 42px;\n    min-width: 42px;\n}\n.sizeMois[data-v-52fe12ff]{\n   width: 155px;\n}\n.btnMarge[data-v-52fe12ff]{\n     padding-bottom: 10px;\n}\n.widthCard[data-v-52fe12ff]{\n     width: 270px;\n     height: 350px;\n}\n.widthTextCard[data-v-52fe12ff]{\n     width  : 236px;\n     height: 13px;\n}\na[data-v-52fe12ff] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.current[data-v-52fe12ff] {\n  color: red;\n}\nul[data-v-52fe12ff] {\n  padding: 0;\n  list-style-type: none;\n}\nli[data-v-52fe12ff] {\n  display: inline;\n  margin: 5px 5px;\n}\na.first[data-v-52fe12ff]::after {\n  content:'...'\n}\na.last[data-v-52fe12ff]::before {\n  content:'...'\n}\n.cardbox[data-v-52fe12ff]:hover{\n -webkit-box-shadow: 1px 2px 2px 2px #c9ced2;\n         box-shadow: 1px 2px 2px 2px #c9ced2;\n}\nul[data-v-52fe12ff]{\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\na[data-v-52fe12ff] {\n  color: #999;\n  color: black;\n    float: left;\n    padding: 8px 16px;\n    text-decoration: none;\n    border: 1px solid #ddd;\n}\n.fontsize[data-v-52fe12ff]{\n\n    font-size: 1.30rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 629 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory(__webpack_require__(64));
+	else if(typeof define === 'function' && define.amd)
+		define(["vue"], factory);
+	else if(typeof exports === 'object')
+		exports["vue-notification"] = factory(require("vue"));
+	else
+		root["vue-notification"] = factory(root["vue"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_20__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/dist/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return events; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+var events = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notifications_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notifications_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notifications_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events__ = __webpack_require__(1);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+
+
+
+var Notify = {
+  install: function install(Vue) {
+    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    if (this.installed) {
+      return;
+    }
+
+    this.installed = true;
+    this.params = params;
+
+    Vue.component('notifications', __WEBPACK_IMPORTED_MODULE_0__Notifications_vue___default.a);
+
+    Vue.prototype.$notify = function (params) {
+      if (typeof params === 'string') {
+        params = { title: '', text: params };
+      }
+
+      if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
+        __WEBPACK_IMPORTED_MODULE_1__events__["a" /* events */].$emit('add', params);
+      }
+    };
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Notify);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(17)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(5),
+  /* template */
+  __webpack_require__(15),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'CssGroup',
+  props: ['name']
+});
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__defaults__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__VelocityGroup_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__VelocityGroup_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__VelocityGroup_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__CssGroup_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__CssGroup_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__CssGroup_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__parser__ = __webpack_require__(8);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+var STATE = {
+  IDLE: 0,
+  DESTROYED: 2
+};
+
+var Component = {
+  name: 'Notifications',
+  components: {
+    VelocityGroup: __WEBPACK_IMPORTED_MODULE_4__VelocityGroup_vue___default.a,
+    CssGroup: __WEBPACK_IMPORTED_MODULE_5__CssGroup_vue___default.a
+  },
+  props: {
+    group: {
+      type: String,
+      default: ''
+    },
+
+    width: {
+      type: [Number, String],
+      default: 300
+    },
+
+    reverse: {
+      type: Boolean,
+      default: false
+    },
+
+    position: {
+      type: [String, Array],
+      default: function _default() {
+        return __WEBPACK_IMPORTED_MODULE_3__defaults__["a" /* default */].position;
+      }
+    },
+
+    classes: {
+      type: String,
+      default: 'vue-notification'
+    },
+
+    animationType: {
+      type: String,
+      default: 'css',
+      validator: function validator(value) {
+        return value === 'css' || value === 'velocity';
+      }
+    },
+
+    animation: {
+      type: Object,
+      default: function _default() {
+        return __WEBPACK_IMPORTED_MODULE_3__defaults__["a" /* default */].velocityAnimation;
+      }
+    },
+
+    animationName: {
+      type: String,
+      default: __WEBPACK_IMPORTED_MODULE_3__defaults__["a" /* default */].cssAnimation
+    },
+
+    speed: {
+      type: Number,
+      default: 300
+    },
+
+    cooldown: {
+      type: Number,
+      default: 0
+    },
+
+    duration: {
+      type: Number,
+      default: 3000
+    },
+
+    delay: {
+      type: Number,
+      default: 0
+    },
+
+    max: {
+      type: Number,
+      default: Infinity
+    }
+  },
+  data: function data() {
+    return {
+      list: [],
+      velocity: __WEBPACK_IMPORTED_MODULE_0__index__["default"].params.velocity
+    };
+  },
+  mounted: function mounted() {
+    __WEBPACK_IMPORTED_MODULE_1__events__["a" /* events */].$on('add', this.addItem);
+  },
+
+  computed: {
+    actualWidth: function actualWidth() {
+      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__parser__["a" /* default */])(this.width);
+    },
+    isVA: function isVA() {
+      return this.animationType === 'velocity';
+    },
+    componentName: function componentName() {
+      return this.isVA ? 'VelocityGroup' : 'CssGroup';
+    },
+    styles: function styles() {
+      var _listToDirection = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util__["a" /* listToDirection */])(this.position),
+          x = _listToDirection.x,
+          y = _listToDirection.y;
+
+      var width = this.actualWidth.value;
+      var suffix = this.actualWidth.type;
+
+      var styles = _defineProperty({
+        width: width + suffix
+      }, y, '0px');
+
+      if (x === 'center') {
+        styles['left'] = 'calc(50% - ' + width / 2 + suffix + ')';
+      } else {
+        styles[x] = '0px';
+      }
+
+      return styles;
+    },
+    active: function active() {
+      return this.list.filter(function (v) {
+        return v.state !== STATE.DESTROYED;
+      });
+    },
+    botToTop: function botToTop() {
+      return this.styles.hasOwnProperty('bottom');
+    }
+  },
+  methods: {
+    addItem: function addItem(event) {
+      var _this = this;
+
+      event.group = event.group || '';
+
+      if (this.group !== event.group) {
+        return;
+      }
+
+      if (event.clean || event.clear) {
+        this.destroyAll();
+        return;
+      }
+
+      var duration = typeof event.duration === 'number' ? event.duration : this.duration;
+
+      var speed = typeof event.speed === 'number' ? event.speed : this.speed;
+
+      var title = event.title,
+          text = event.text,
+          type = event.type,
+          data = event.data;
+
+
+      var item = {
+        id: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util__["b" /* Id */])(),
+        title: title,
+        text: text,
+        type: type,
+        state: STATE.IDLE,
+        speed: speed,
+        length: duration + 2 * speed,
+        data: data
+      };
+
+      if (duration >= 0) {
+        item.timer = setTimeout(function () {
+          _this.destroy(item);
+        }, item.length);
+      }
+
+      var direction = this.reverse ? !this.botToTop : this.botToTop;
+
+      var indexToDestroy = -1;
+
+      if (direction) {
+        this.list.push(item);
+
+        if (this.active.length > this.max) {
+          indexToDestroy = -1;
+        }
+      } else {
+        this.list.unshift(item);
+
+        if (this.active.length > this.max) {
+          indexToDestroy = this.active.length - 1;
+        }
+      }
+
+      if (indexToDestroy !== -1) {
+        this.destroy(this.active[indexToDestroy]);
+      }
+    },
+    notifyClass: function notifyClass(item) {
+      return ['notification', this.classes, item.type];
+    },
+    notifyWrapperStyle: function notifyWrapperStyle(item) {
+      return this.isVA ? null : {
+        transition: 'all ' + item.speed + 'ms'
+      };
+    },
+    destroy: function destroy(item) {
+      clearTimeout(item.timer);
+      item.state = STATE.DESTROYED;
+
+      if (!this.isVA) {
+        this.clean();
+      }
+    },
+    destroyAll: function destroyAll() {
+      this.active.forEach(this.destroy);
+    },
+    getAnimation: function getAnimation(index, el) {
+      var animation = this.animation[index];
+
+      return typeof animation === 'function' ? animation.call(this, el) : animation;
+    },
+    enter: function enter(_ref) {
+      var el = _ref.el,
+          complete = _ref.complete;
+
+      var animation = this.getAnimation('enter', el);
+
+      this.velocity(el, animation, {
+        duration: this.speed,
+        complete: complete
+      });
+    },
+    leave: function leave(_ref2) {
+      var el = _ref2.el,
+          complete = _ref2.complete;
+
+      var animation = this.getAnimation('leave', el);
+
+      this.velocity(el, animation, {
+        duration: this.speed,
+        complete: complete
+      });
+    },
+    clean: function clean() {
+      this.list = this.list.filter(function (v) {
+        return v.state !== STATE.DESTROYED;
+      });
+    }
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Component);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'VelocityGroup',
+  methods: {
+    enter: function enter(el, complete) {
+      this.$emit('enter', { el: el, complete: complete });
+    },
+    leave: function leave(el, complete) {
+      this.$emit('leave', { el: el, complete: complete });
+    },
+    afterLeave: function afterLeave() {
+      this.$emit('afterLeave');
+    }
+  }
+});
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  position: ['top', 'right'],
+  cssAnimation: 'vn-fade',
+  velocityAnimation: {
+    enter: function enter(el) {
+      var height = el.clientHeight;
+
+      return {
+        height: [height, 0],
+        opacity: [1, 0]
+      };
+    },
+    leave: {
+      height: 0,
+      opacity: [0, 1]
+    }
+  }
+});
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export parse */
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var floatRegexp = '[-+]?[0-9]*.?[0-9]+';
+
+var types = [{
+  name: 'px',
+  regexp: new RegExp('^' + floatRegexp + 'px$')
+}, {
+  name: '%',
+  regexp: new RegExp('^' + floatRegexp + '%$')
+}, {
+  name: 'px',
+  regexp: new RegExp('^' + floatRegexp + '$')
+}];
+
+var getType = function getType(value) {
+  if (value === 'auto') {
+    return {
+      type: value,
+      value: 0
+    };
+  }
+
+  for (var i = 0; i < types.length; i++) {
+    var type = types[i];
+    if (type.regexp.test(value)) {
+      return {
+        type: type.name,
+        value: parseFloat(value)
+      };
+    }
+  }
+
+  return {
+    type: '',
+    value: value
+  };
+};
+
+var parse = function parse(value) {
+  switch (typeof value === 'undefined' ? 'undefined' : _typeof(value)) {
+    case 'number':
+      return { type: 'px', value: value };
+    case 'string':
+      return getType(value);
+    default:
+      return { type: '', value: value };
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (parse);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Id; });
+/* unused harmony export split */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return listToDirection; });
+var directions = {
+  x: ['left', 'center', 'right'],
+  y: ['top', 'bottom']
+};
+
+var Id = function (i) {
+  return function () {
+    return i++;
+  };
+}(0);
+
+var split = function split(value) {
+  if (typeof value !== 'string') {
+    return [];
+  }
+
+  return value.split(/\s+/gi).filter(function (v) {
+    return v;
+  });
+};
+
+var listToDirection = function listToDirection(value) {
+  if (typeof value === 'string') {
+    value = split(value);
+  }
+
+  var x = null;
+  var y = null;
+
+  value.forEach(function (v) {
+    if (directions.y.indexOf(v) !== -1) {
+      y = v;
+    }
+    if (directions.x.indexOf(v) !== -1) {
+      x = v;
+    }
+  });
+
+  return { x: x, y: y };
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)();
+// imports
+
+
+// module
+exports.push([module.i, ".notifications{display:block;position:fixed;z-index:5000}.notification-wrapper{display:block;overflow:hidden;width:100%;margin:0;padding:0}.notification{display:block;box-sizing:border-box;background:#fff;text-align:left}.notification-title{font-weight:600}.vue-notification{font-size:12px;padding:10px;margin:0 5px 5px;color:#fff;background:#44a4fc;border-left:5px solid #187fe7}.vue-notification.warn{background:#ffb648;border-left-color:#f48a06}.vue-notification.error{background:#e54d42;border-left-color:#b82e24}.vue-notification.success{background:#68cd86;border-left-color:#42a85f}.vn-fade-enter-active,.vn-fade-leave-active,.vn-fade-move{transition:all .5s}.vn-fade-enter,.vn-fade-leave-to{opacity:0}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(4),
+  /* template */
+  __webpack_require__(16),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(6),
+  /* template */
+  __webpack_require__(14),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('transition-group', {
+    attrs: {
+      "css": false
+    },
+    on: {
+      "enter": _vm.enter,
+      "leave": _vm.leave,
+      "after-leave": _vm.afterLeave
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "notifications",
+    style: (_vm.styles)
+  }, [_c(_vm.componentName, {
+    tag: "component",
+    attrs: {
+      "name": _vm.animationName
+    },
+    on: {
+      "enter": _vm.enter,
+      "leave": _vm.leave,
+      "after-leave": _vm.clean
+    }
+  }, _vm._l((_vm.list), function(item) {
+    return (item.state != 2) ? _c('div', {
+      key: item.id,
+      staticClass: "notification-wrapper",
+      style: (_vm.notifyWrapperStyle(item)),
+      attrs: {
+        "data-id": item.id
+      }
+    }, [_vm._t("body", [_c('div', {
+      class: _vm.notifyClass(item),
+      on: {
+        "click": function($event) {
+          _vm.destroy(item)
+        }
+      }
+    }, [(item.title) ? _c('div', {
+      staticClass: "notification-title",
+      domProps: {
+        "innerHTML": _vm._s(item.title)
+      }
+    }) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "notification-content",
+      domProps: {
+        "innerHTML": _vm._s(item.text)
+      }
+    })])], {
+      item: item,
+      close: function () { return _vm.destroy(item); }
+    })], 2) : _vm._e()
+  }))], 1)
+},staticRenderFns: []}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('transition-group', {
+    attrs: {
+      "name": _vm.name
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(10);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(18)("2901aeae", content, true);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(19)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
+
+/***/ })
+/******/ ]);
+});
+//# sourceMappingURL=index.js.map
 
 /***/ })
 /******/ ]);

@@ -172,8 +172,9 @@
                
               axios.post('/addUserResponsable',{responsable:this.responsable,user:this.user}).then(response => {  
                     console.log(response.data.user);   
+                    console.log(response);   
                     console.log('Responsable Bien ajouter !');
-                    this.$router.push({ name: 'ShowResponsables', params: { success: "add"  }});
+                   this.$router.push({ name: 'ShowResponsables', params: { success: "add"  }});
 
                   });
             

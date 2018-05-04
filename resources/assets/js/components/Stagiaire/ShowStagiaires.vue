@@ -106,7 +106,7 @@
                     <hr>
                     <div class="widthTextCard">Prenom : {{ stagiaire.prenom_stagiaire}}</div>
                     <hr>
-                    <div class="widthTextCard">Service : {{stagiaire.service_stagiaire}}</div>
+                    <div class="widthTextCard">Service : {{stagiaire.specialite_stagiaire}}</div>
                     <hr>
                 </div>
                 
