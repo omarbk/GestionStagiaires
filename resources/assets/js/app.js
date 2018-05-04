@@ -14,8 +14,10 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 
-//require('vue-multiselect/dist/vue-multiselect.min.css') 
-
+//multiselect
+import Multiselect from 'vue-multiselect'
+  // register globally
+  Vue.component('multiselect', Multiselect)
 
 
 import swal from 'sweetalert2'
@@ -70,7 +72,11 @@ Vue.component('app-editservice', require('./components/Service/EditService.vue')
 Vue.component('app-addhospitalier', require('./components/Hospitalier/AddHospitalier.vue'));
 Vue.component('app-showhospitaliers', require('./components/Hospitalier/ShowHospitaliers.vue'));
 Vue.component('app-edithospitalier', require('./components/Hospitalier/EditHospitalier.vue'));
-//Vue.component('multiselect', require('./components/Hospitalier/EditHospitalier.vue'));
+
+/* Evaluateur */
+Vue.component('app-addevaluateur', require('./components/Evaluateur/AddEvaluateur.vue'));
+Vue.component('app-showevaluateurs', require('./components/Evaluateur/ShowEvaluateurs.vue'));
+Vue.component('app-editevaluateur', require('./components/Evaluateur/EditEvaluateur.vue'));
 
 
 // afficher un nombre de phrase limité 

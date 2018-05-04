@@ -44,8 +44,7 @@
                     <label class="typo__label col-sm-3">Services</label>
                     <div class="col-sm-6">
 
-  <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="nom_service" track-by="nom_service"  :options="services" :multiple="true" :taggable="true" ></multiselect>
-  <pre class="language-json"><code>{{ value  }}</code></pre>
+  <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="nom_service" track-by="nom_service"  :options="services" :multiple="true"></multiselect>
                       </div>
                 </div>
                 <div>

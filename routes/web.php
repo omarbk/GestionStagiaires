@@ -227,7 +227,7 @@ Route::get('/getArticlePlusVente','DashboardController@getArticlePlusVente');
 
 //----------------------------------------------------------Gestion Stagiaires
 //Responsable
-Route::post('/addUser','ResponsableController@addUser');
+Route::post('/addUserResponsable','ResponsableController@addUserResponsable');
 Route::post('/addResponsable','ResponsableController@addResponsable');
 Route::get('/countUser','ResponsableController@countUser');
 Route::get('/getResponsables','ResponsableController@getResponsables');
@@ -250,11 +250,25 @@ Route::get('/searchService/{search_S}','ServiceController@searchService');
 //Hospitalier
 Route::post('/addHospitalier','HospitalierController@addHospitalier');
 Route::get('/getHospitaliers','HospitalierController@getHospitaliers');
+Route::get('/getHospitaliersH','HospitalierController@getHospitaliersH');
 Route::get('/getHospitalier/{id_hospitalier}','HospitalierController@getHospitalier');
 Route::get('/getService_Hospitalier/{id_hospitalier}','HospitalierController@getService_Hospitalier');
 Route::delete('/deleteHospitalier/{id_hospitalier}','HospitalierController@deleteHospitalier');
 Route::post('/updateHospitalier','HospitalierController@updateHospitalier');
 Route::get('/searchHospitalier/{search_H}','HospitalierController@searchHospitalier');
+
+//Evaluateur
+Route::post('/addUserEvaluateur','EvaluateurController@addUserEvaluateur');
+Route::post('/addEvaluateur','EvaluateurController@addEvaluateur');
+//Route::get('/countUser','EvaluateurController@countUser');
+Route::get('/getEvaluateurs','EvaluateurController@getEvaluateurs');
+Route::get('/getEvaluateur/{id_evaluateur}','EvaluateurController@getEvaluateur');
+Route::delete('/deleteEvaluateur/{fk_user}','EvaluateurController@deleteEvaluateur');
+//Route::post('/updateUser','EvaluateurController@updateUser');
+Route::post('/updateEvaluateur','EvaluateurController@updateEvaluateur');
+Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur');
+
+
 //groupe
 Route::post('/addGroupe','GroupeController@addGroupe');
 Route::get('/getGroupes','GroupeController@getGroupes');

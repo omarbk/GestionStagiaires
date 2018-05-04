@@ -45,7 +45,6 @@
                     <div class="col-sm-6">
 
   <multiselect v-model="value" tag-placeholder="Add this as new tag" @remove="spliceService" placeholder="Search or add a tag" label="nom_service" track-by="id_service"  :options="services" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
-  <pre class="language-json"><code>{{ value  }}</code></pre>
                       </div>
                 </div>
                 <div>
@@ -120,7 +119,7 @@ suppServices :[],
               axios.post('/updateHospitalier',{hospitalier:this.hospitalier,service_hospitaliers:this.value,suppServices:this.suppServices}).then(response => {  
                     console.log(response.data.hospitalier);   
                     console.log('hospitalier Bien ajouter !');
-                    this.$router.push({ name: 'ShowHospitaliers', params: { success: "add"  }});
+                    this.$router.push({ name: 'ShowHospitaliers', params: { success: "edit"  }});
 
                   });
             

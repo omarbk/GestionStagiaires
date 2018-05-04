@@ -19,7 +19,6 @@ class CreateEvaluateursTable extends Migration
             $table->string('prenom_evaluateur')->nullable();
             $table->string('photo_evaluateur')->nullable();
             $table->string('adresse_evaluateur')->nullable();
-            $table->string('email_evaluateur')->nullable();
             $table->string('tel_evaluateur')->nullable();
             $table->date('dateNaissance_evaluateur')->nullable();
             $table->string('service_evaluateur')->nullable();

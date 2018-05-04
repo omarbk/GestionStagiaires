@@ -22,6 +22,13 @@ import EditService from './components/Service/EditService.vue'
 import ShowHospitaliers from './components/Hospitalier/ShowHospitaliers.vue'
 import AddHospitalier from './components/Hospitalier/AddHospitalier.vue'
 import EditHospitalier from './components/Hospitalier/EditHospitalier.vue'
+
+// Evaluateurs 
+import ShowEvaluateurs from './components/Evaluateur/ShowEvaluateurs.vue'
+import AddEvaluateur from './components/Evaluateur/AddEvaluateur.vue'
+import EditEvaluateur from './components/Evaluateur/EditEvaluateur.vue'
+
+//--------------------------------
 //Groupes
 import ShowGroupes from './components/Groupe/ShowGroupes.vue'
 import ShowGroupe from './components/Groupe/ShowGroupe.vue'
@@ -128,7 +135,7 @@ const  router = new VueRouter({
             component: EditResponsable,
            // name: "EditResponsable"
          },
- // Groupe 
+ //----------------------------------- Groupe 
          {
             path:"/ShowGroupes",
             component: ShowGroupes,
@@ -211,7 +218,26 @@ const  router = new VueRouter({
     component: EditStagiaire,
     name: "EditStagiaire"
  },      
-
+ // ----------------Evaluateur
+ {
+    path:"/ShowEvaluateurs",
+    component: ShowEvaluateurs,
+    name:"ShowEvaluateurs"
+ },
+ {
+    path:"/ShowEvaluateurs/:success",
+    component: ShowEvaluateurs,
+ },
+ {
+    path:"/AddEvaluateur",
+    component: AddEvaluateur,
+    name: "AddEvaluateur"
+ },
+ {
+    path:"/EditEvaluateur/:id_evaluateur",
+    component: EditEvaluateur,
+   // name: "EditEvaluateur"
+ },
         
 
 

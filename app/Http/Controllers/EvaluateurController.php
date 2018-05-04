@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 use App\Evaluateur;
+use App\User;
 
 class EvaluateurController extends Controller
 {
@@ -12,7 +16,7 @@ class EvaluateurController extends Controller
         $count ++;
         return Response()->json(['count' => $count]);
     }
-    public function addUser_E(Request $request){
+    public function addUserEvaluateur(Request $request){
         // dd($request);
      $user = new User();
      $user->id = $request->user['id'];
@@ -56,19 +60,21 @@ class EvaluateurController extends Controller
          else  {
              $evaluateur->photo_evaluateur = "";
          }
+         
 
 
         $evaluateur->nom_evaluateur = $request->evaluateur['nom_evaluateur'];
         $evaluateur->prenom_evaluateur = $request->evaluateur['prenom_evaluateur'];
         $evaluateur->adresse_evaluateur = $request->evaluateur['adresse_evaluateur'];
         $evaluateur->tel_evaluateur = $request->evaluateur['tel_evaluateur'];
-        $evaluateur->email_evaluateur = $request->evaluateur['email_evaluateur'];
         $evaluateur->dateNaissance_evaluateur = $request->evaluateur['dateNaissance_evaluateur'];
         $evaluateur->service_evaluateur = $request->evaluateur['service_evaluateur'];
         $evaluateur->specialite_evaluateur = $request->evaluateur['specialite_evaluateur'];
         $evaluateur->type_evaluateur = $request->evaluateur['type_evaluateur'];
-        $evaluateur->fk_hospitalier = $request->evaluateur['fk_user'];
         $evaluateur->fk_user = $request->evaluateur['fk_user'];
+
+        $test=$request->evaluateur['value'];
+        $evaluateur->fk_hospitalier = $test['id_hospitalier'];
 
         $evaluateur->save();
       
@@ -78,7 +84,8 @@ class EvaluateurController extends Controller
 
     }
 
-    public function updateEvaluateur(Request $request){     
+    public function updateEvaluateur(Request $request){  
+        dd($request);   
         $evaluateur = Evaluateur::find($request->evaluateur['id_evaluateur']);
 
         
@@ -108,13 +115,16 @@ class EvaluateurController extends Controller
         $evaluateur->prenom_evaluateur = $request->evaluateur['prenom_evaluateur'];
         $evaluateur->adresse_evaluateur = $request->evaluateur['adresse_evaluateur'];
         $evaluateur->tel_evaluateur = $request->evaluateur['tel_evaluateur'];
-        $evaluateur->email_evaluateur = $request->evaluateur['email_evaluateur'];
         $evaluateur->dateNaissance_evaluateur = $request->evaluateur['dateNaissance_evaluateur'];
         $evaluateur->service_evaluateur = $request->evaluateur['service_evaluateur'];
         $evaluateur->specialite_evaluateur = $request->evaluateur['specialite_evaluateur'];
         $evaluateur->type_evaluateur = $request->evaluateur['type_evaluateur'];
-        $evaluateur->fk_hospitalier = $request->evaluateur['fk_user'];
+        $evaluateur->fk_hospitalier=$request->evaluateur['id_hospitalier'];
         $evaluateur->fk_user = $request->evaluateur['fk_user'];
+
+       /* $test=$request->evaluateur['value'];
+        $evaluateur->fk_hospitalier = $test['id_hospitalier'];*/
+
                  return Response()->json(['etat' => true]);
     }
 
@@ -129,7 +139,8 @@ class EvaluateurController extends Controller
 
     public function getEvaluateur($id_evaluateur){
         $evaluateur = Evaluateur::leftJoin('users', 'evaluateurs.fk_user', '=', 'users.id')
-                    ->select('evaluateurs.*', 'users.*')
+        ->leftJoin('hospitaliers', 'evaluateurs.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
+                    ->select('evaluateurs.*', 'users.*','hospitaliers.*')
                     ->where('evaluateurs.id_evaluateur','=',$id_evaluateur)
                     ->get();
                    // dd($evaluateur);
@@ -137,8 +148,8 @@ class EvaluateurController extends Controller
                  return Response()->json(['evaluateur' => $evaluateur]);
     }
 
-    public function searchEvaluateur($search_R){
-        $evaluateurs = Evaluateur::leftJoin('users', 'evaluateurs.fk_user', '=', 'users.id')->where('service_evaluateur','like', '%' .$search_R . '%')->orWhere('nom_evaluateur','like', '%' .$search_R . '%')->paginate(6);
+    public function searchEvaluateur($search_E){
+        $evaluateurs = Evaluateur::leftJoin('users', 'evaluateurs.fk_user', '=', 'users.id')->where('service_evaluateur','like', '%' .$search_E . '%')->orWhere('nom_evaluateur','like', '%' .$search_E . '%')->paginate(6);
         return Response()->json(['evaluateurs' => $evaluateurs ]);
     }
 

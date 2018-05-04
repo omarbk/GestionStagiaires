@@ -18,7 +18,7 @@ class ResponsableController extends Controller
         return Response()->json(['count' => $count]);
     }
     
-    public function addUser(Request $request){
+    public function addUserResponsable(Request $request){
        // dd($request);
     $user = new User();
     $user->id = $request->user['id'];

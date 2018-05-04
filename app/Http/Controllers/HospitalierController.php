@@ -84,7 +84,12 @@ class HospitalierController extends Controller
                    
                  return Response()->json(['hospitaliers' => $hospitaliers ]);
     }
-
+    public function getHospitaliersH(){
+     
+        $hospitaliers = Hospitalier::get();
+                   
+                 return Response()->json(['hospitaliers' => $hospitaliers ]);
+    }
     public function getHospitalier($id_hospitalier){
         // $devi= Devi::find($id_devis);
        /*  $hospitalier= Hospitalier::leftJoin('service_hospitaliers', 'hospitaliers.id_hospitalier', '=', 'service_hospitaliers.fk_hospitalier')
