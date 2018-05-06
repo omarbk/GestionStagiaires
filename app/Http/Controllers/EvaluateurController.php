@@ -134,8 +134,14 @@ class EvaluateurController extends Controller
                     ->paginate(6);
                  return Response()->json(['evaluateurs' => $evaluateurs ]);
     }
+    public function getAllEvaluateurs(){
+     
+        $evaluateurs = Evaluateur::all();
+                 return Response()->json(['evaluateurs' => $evaluateurs ]);
+    }
 
     public function getEvaluateur($id_evaluateur){
+        
         $evaluateur = Evaluateur::leftJoin('users', 'evaluateurs.fk_user', '=', 'users.id')
         ->leftJoin('hospitaliers', 'evaluateurs.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
                     ->select('evaluateurs.*', 'users.*','hospitaliers.*')

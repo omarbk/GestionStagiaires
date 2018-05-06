@@ -119,7 +119,7 @@
           data: () => ({
             fileName : "Choose file",
             loading: false,
-
+            error:false,
             evaluateur: { 
                     id_evaluateur : 0,
                     nom_evaluateur : "",

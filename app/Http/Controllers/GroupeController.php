@@ -80,6 +80,14 @@ class GroupeController extends Controller
         return Response()->json(['groupes' => $listeGroupes ]);
      }
 
+     public function getAllGroupes(){
+
+        $listeGroupes = Groupe::all();
+        
+        return Response()->json(['groupes' => $listeGroupes ]);
+     }
+     
+
      public function deleteGroupe($id_groupe){
 
         $groupe = Groupe::find($id_groupe)->delete();
@@ -174,8 +182,5 @@ class GroupeController extends Controller
                 $groupe_stagiaire->save();
              }    
          }
-         
- 
-  
       }
 }

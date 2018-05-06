@@ -47,6 +47,12 @@ import AddStagiaire  from './components/Stagiaire/AddStagiaire.vue'
 import EditStagiaire  from './components/Stagiaire/EditStagiaire.vue'
 
 
+//stages 
+import ShowStage from './components/Stage/ShowStage.vue'
+import ShowStages from './components/Stage/ShowStages.vue'
+import AddStage  from './components/Stage/AddStage.vue'
+import EditStage  from './components/Stage/EditStage.vue'
+
 
 
   
@@ -242,6 +248,28 @@ const  router = new VueRouter({
     path:"/EditEvaluateur/:id_evaluateur",
     component: EditEvaluateur,
    // name: "EditEvaluateur"
+ },
+ //stage 
+
+ {
+    path:"/ShowStages",
+    component: ShowStages,
+    name: "ShowStages"
+ },
+ {
+    path:"/ShowStage",
+    component: ShowStage,
+    name: "ShowStage"
+ },
+ {
+    path:"/AddStage",
+    component:AddStage,
+    name: "AddStage"
+ },
+ {
+    path:"/EditStage/:id_stage",
+    component: EditStage,
+    name: "EditStage"
  },
         
  // ----------------Objectif

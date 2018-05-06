@@ -41,7 +41,7 @@
                         </router-link>
                     </li>               
                     <li class="nav-item">
-                      <router-link :to="'/'" class="nav-link active">
+                      <router-link :to="'/ShowStages'" class="nav-link active">
                             <i class="fas fa-briefcase"></i>Stages
                         </router-link>
                     </li>   

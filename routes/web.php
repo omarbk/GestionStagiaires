@@ -256,6 +256,8 @@ Route::get('/getService_Hospitalier/{id_hospitalier}','HospitalierController@get
 Route::delete('/deleteHospitalier/{id_hospitalier}','HospitalierController@deleteHospitalier');
 Route::post('/updateHospitalier','HospitalierController@updateHospitalier');
 Route::get('/searchHospitalier/{search_H}','HospitalierController@searchHospitalier');
+Route::get('/getAllHospitaliers','HospitalierController@getAllHospitaliers');
+
 
 //Evaluateur
 Route::post('/addUserEvaluateur','EvaluateurController@addUserEvaluateur');
@@ -267,6 +269,8 @@ Route::delete('/deleteEvaluateur/{fk_user}','EvaluateurController@deleteEvaluate
 //Route::post('/updateUser','EvaluateurController@updateUser');
 Route::post('/updateEvaluateur','EvaluateurController@updateEvaluateur');
 Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur');
+Route::get('/getAllEvaluateurs','EvaluateurController@getAllEvaluateurs');
+
 
 //Objectif
 Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
@@ -285,6 +289,8 @@ Route::delete('/deleteGroupe/{id_groupe}','GroupeController@deleteGroupe');
 Route::get('/getGroupe/{id_groupe}','GroupeController@getGroupe');
 Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
+Route::get('/getAllGroupes','GroupeController@getAllGroupes');
+
 
 // Stagiaire 
 Route::post('/addUserStagiaire','StagiaireController@addUserStagiaire');
@@ -295,6 +301,13 @@ Route::get('/getStagiaire/{id_stagiaire}','StagiaireController@getStagiaire');
 Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire');
 Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
 Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
+
+// stage 
+Route::post('/addStage','StageController@addStage');
+Route::get('/getStages','StageController@getStages');
+Route::delete('/deleteStage/{id_stage}','StageController@deleteStage');
+Route::get('/getStage/{id_stage}','StageController@getStage');
+Route::post('/updateStage','StageController@updateStage');
 
 
 Auth::routes();

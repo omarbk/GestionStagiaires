@@ -1,7 +1,9 @@
 <template>
     <div class="post" >
       <!-- au cas ajout bien passé afficher ce message -->   
-            
+     <notifications group="foo" 
+      position="bottom right" 
+      classes="vue-notification success"/>       
            
     <div class="loading" v-if="loading">
         
@@ -395,6 +397,7 @@ watch:{
              
                         this.Testopen.testEdit = true;
           }
+          
         },
       updated(){
           if( this.$route.params.success == "add"){
