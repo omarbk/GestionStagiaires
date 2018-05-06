@@ -1,10 +1,10 @@
 <template>
     <div class="post" >
-        <notifications group="foo" 
+            <notifications group="foo" 
       position="bottom right" 
-      classes="vue-notification success"/>
+      classes="vue-notification success"/>    
       <!-- au cas ajout bien passé afficher ce message -->   
-            
+        <h5>Stages </h5>      
            
     <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
@@ -16,7 +16,7 @@
 <div v-if="!loading">
      <div class="row">
         <div class="col">
-    <router-link class="float-right btn btn-secondary" :to="'/AddGroupe'" ><i class="fas fa-plus-circle"/> Ajouter </router-link>
+    <router-link class="float-right btn btn-secondary" :to="'/AddStage'" ><i class="fas fa-plus-circle"/> Ajouter </router-link>
        
   </div>
     </div>
@@ -71,19 +71,20 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Nom Groupe</th>
-                                        <th>année Universitaire</th>                                       
-                                        <th>options</th>
+                                        <th>intitule</th>
+                                        <th>date Debut</th>                                       
+                                        <th>date Fin</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="groupe of groupes.data" :key="groupe.id_groupe" >
-                                        <td>{{groupe.nom_groupe}}</td>
-                                        <td>{{groupe.annee_universitaire_groupe}}</td> 
+                                    <tr  v-for="stage of stages.data" :key="stage.id_stage" >
+                                        <td>{{stage.intitule_stage}}</td>
+                                        <td>{{stage.dateDebut_stage}}</td> 
+                                        <td>{{stage.dateFin_stage}}</td>
                                         <td  class="optionsWidth"> 
-                                            <a href="#"    @click="redirect_To_ShowGroupe(groupe.id_groupe)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
-                                         <router-link class="btn btn-success " :to="'/EditGroupe/'+groupe.id_groupe"><i class="fas fa-edit d-inline-block"></i></router-link>
-                                             <a @click="deleteGroupe(groupe)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></td>                                 
+                                            <a href="#"    @click="redirect_To_ShowStage(stage.id_stage)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
+                                         <router-link class="btn btn-success " :to="'/EditStage/'+stage.id_stage"><i class="fas fa-edit d-inline-block"></i></router-link>
+                                             <a @click="deleteStage(stage)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></td>                                 
                                     </tr>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     </div>
@@ -116,6 +117,7 @@ import  Pagination from '../Pagination.vue';
          },
 
           data: () => ({
+             
              groupe:{
             id_groupe:0,
             nom_groupe: "",
@@ -159,6 +161,14 @@ import  Pagination from '../Pagination.vue';
 
               },
                 groupes:{
+                        total: 0,
+                        per_page: 2,
+                        from: 1,
+                        to: 0,
+                        current_page: 1,
+                        data: [],
+                },
+                   stages:{
                         total: 0,
                         per_page: 2,
                         from: 1,
@@ -219,24 +229,35 @@ import  Pagination from '../Pagination.vue';
                     console.log('handle server error from here');
                 });
           },
-              fetchData () {
-      //this.error = this.post = null
-      this.loading = true
-      // replace `getPost` with your data fetching util / API wrapper
-   
-   axios.get('/getGroupes?page='+this.groupes.current_page+'')
+        getStages(){
+                axios.get('/getStages?page='+this.groupes.current_page+'')
                 .then((response) => {
                  // console.log('shit');
-                    this.groupes = response.data.groupes;
-                    this.loading =  false
+                    this.stages = response.data.stages;
+                  
                 })
                 .catch(() => {
                     console.log('handle server error from here');
                 });
+          },
+              fetchData () {
+      //this.error = this.post = null
+      this.loading = true
+      // replace `getPost` with your data fetching util / API wrapper
+                 axios.get('/getStages?page='+this.groupes.current_page+'')
+                .then((response) => {
+                 // console.log('shit');
+                    this.stages = response.data.stages;
+                  this.loading =false
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+ 
     },
-    deleteGroupe:function(groupe){
+    deleteStage:function(stage){
 
-        console.log(groupe);
+        console.log(stage);
                         this.$swal({
                         title: 'Etes-vous sur?',
                         text: "Vous ne serez pas capable de revenir a cela!",
@@ -247,24 +268,24 @@ import  Pagination from '../Pagination.vue';
                         confirmButtonText: 'Oui, supprimez-le!'
                                                 }).then((result) => {
                         if (result.value) {
-                            axios.delete('/deleteGroupe/'+groupe.id_groupe).then(
+                            axios.delete('/deleteStage/'+stage.id_stage).then(
                                         response => {
                                 
-                                            this.getGroupes();
+                                            this.getStages();
                                         });
                         this.$swal(
                         'Supprimé!',
-                        'Votre groupe a été supprimé',
+                        'Votre  Stage a été supprimé',
                         'success'
                         )
   }
 })
 
         },
-               redirect_To_ShowGroupe(id_groupe){
+               redirect_To_ShowStage(id_stage){
                    //  this.$router.push('/ShowGroupe/'+id_groupe);
                    
-                      this.$router.push({ name: 'ShowGroupe', params: {id_groupe: id_groupe}});
+                      this.$router.push({ name: 'ShowStage', params: {id_stage: id_stage}});
             },
 
 
@@ -273,22 +294,11 @@ import  Pagination from '../Pagination.vue';
            
           if( this.$route.params.success == "addsuccess"){
              
-                       // this.Testopen.testnotifAdd = true;                  
-                                   this.$notify({
-                                      group: 'foo',
-                                      title: 'Succès',
-                                      text: 'Groupe bien ajouter!',
-                                      duration: 1500,
-                                    });
+                        this.Testopen.testnotifAdd = true;
           }
                     if( this.$route.params.success == "editsuccess"){
              
-                             this.$notify({
-                                      group: 'foo',
-                                      title: 'Succès',
-                                      text: 'Groupe bien modifier!',
-                                      duration: 1500,
-                                    });
+                        this.Testopen.testnotifEdit = true;
           }
         },
       updated(){
@@ -433,31 +443,6 @@ table{
   }
   100% {
     transform: rotate(1800deg);
-  }
-}
-.vue-notification {
-  padding: 10px;
-  margin: 0 5px 5px;
-
-  font-size: 12px;
-
-  color: #ffffff;
-  background: #44A4FC;
-  border-left: 5px solid #187FE7;
-
-  &.warn {
-    background: #ffb648;
-    border-left-color: #f48a06;
-  }
-
-  &.error {
-    background: #E54D42;
-    border-left-color: #B82E24;
-  }
-
-  &.success {
-    background: #68CD86;
-    border-left-color: #42A85F;
   }
 }
 

@@ -1,5 +1,7 @@
 <template>
     <div>
+            <notifications group="foo" 
+      position="bottom right"/>
     <div class="row">
         <div class="col">
         <router-link class="btn btn-primary mb-3  float-right " :to="'/ShowGroupes'"> <i class="fas fa-long-arrow-alt-left fontsize"></i> </router-link>
@@ -298,9 +300,28 @@
                      daysInMonth (month, year) {
                          return new Date(year, month, 0).getDate();
                      },
+
+                     
                     pushCalendrier(){
                     console.log();
-                       
+                        
+                      if(this.calendrier.mois_stage_cal == ""){
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Champs vide',
+                                      text: 'Ajouter le mois!',
+                                     duration: 3000,
+                                    });
+                      }
+                      else if(this.calendrier.debut_semaine_cal == ""){
+                                  this.$notify({
+                                      group: 'foo',
+                                      title: 'Champs vide',
+                                      text: 'Ajouter le debut de la semaine!',
+                                      duration: 3000,
+                                    });
+                      }
+                    else {
                     this.calendriers.push({mois_stage_cal:this.calendrier.mois_stage_cal,
                                         debut_semaine_cal: this.calendrier.debut_semaine_cal,
                                         fin_semaine_cal: this.calendrier.fin_semaine_cal,
@@ -331,7 +352,7 @@
                                     fk_groupe:0,
                                     nomMoisDebut:"",
                                     nomMoisFin:""                                   
-                                    }   
+                                    }   }
                 },
                     removeCalendrier(index,calendrier) {
                       this.calendriers.splice(index,1);
@@ -506,11 +527,11 @@
                       nameWithLang ({ nom_stagiaire, prenom_stagiaire }) {
       return `${nom_stagiaire}-${prenom_stagiaire}`
     },
-                             removeStagiaire(removedOption,id){
-                               this.suppStagiaires.push(removedOption);
+            removeStagiaire(removedOption,id){
+              this.suppStagiaires.push(removedOption);
 
-                console.log('---remove')
-                console.log(this.suppStagiaires)
+              console.log('---remove')
+              console.log(this.suppStagiaires)
           },
                                               
                    

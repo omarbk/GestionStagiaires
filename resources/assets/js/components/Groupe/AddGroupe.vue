@@ -1,13 +1,14 @@
 <template>
     <div>
-      <notifications group="foo" />
+      <notifications group="foo" 
+      position="bottom right"/>
     <div class="row">
         <div class="col">
         <router-link class="btn btn-primary mb-3  float-right " :to="'/ShowGroupes'"> <i class="fas fa-long-arrow-alt-left fontsize"></i> </router-link>
         </div>
     </div>   
         <div class="text-center pull-right" >
-    <h2>Ajouter Compte</h2>
+    <h2>Ajouter Groupe</h2>
     <hr>   
     </div>
 
@@ -454,11 +455,6 @@
                         .catch(() => {
                                 console.log('handle server error from here');
                         });
-
-
-
-
-
                     },
                    ferierLundi(calendrier){
                       if(calendrier.lundi_cal !="") calendrier.lundi_cal= "";

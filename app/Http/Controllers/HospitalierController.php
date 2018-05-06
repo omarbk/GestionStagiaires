@@ -84,6 +84,11 @@ class HospitalierController extends Controller
                    
                  return Response()->json(['hospitaliers' => $hospitaliers ]);
     }
+    public function getAllHospitaliers(){
+        $hospitaliers = Hospitalier::all();
+                   
+                 return Response()->json(['hospitaliers' => $hospitaliers ]);
+    }
     public function getHospitaliersH(){
      
         $hospitaliers = Hospitalier::get();

@@ -42,7 +42,7 @@
                 <div class="form-group row">
   <label class="typo__label col-sm-4">Centre</label>
    <div class="col-sm-8">
-  <multiselect v-model="evaluateur.value" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
+  <multiselect v-model="evaluateur.value" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier" required></multiselect>
   <pre class="language-json"><code>{{ evaluateur.value  }}</code></pre>
    </div>
 </div>
