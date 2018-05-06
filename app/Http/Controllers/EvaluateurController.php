@@ -72,9 +72,7 @@ class EvaluateurController extends Controller
         $evaluateur->specialite_evaluateur = $request->evaluateur['specialite_evaluateur'];
         $evaluateur->type_evaluateur = $request->evaluateur['type_evaluateur'];
         $evaluateur->fk_user = $request->evaluateur['fk_user'];
-
-        $test=$request->evaluateur['value'];
-        $evaluateur->fk_hospitalier = $test['id_hospitalier'];
+        $evaluateur->fk_hospitalier =$request->hospitalier['id_hospitalier'];
 
         $evaluateur->save();
       
@@ -85,7 +83,7 @@ class EvaluateurController extends Controller
     }
 
     public function updateEvaluateur(Request $request){  
-        dd($request);   
+       // dd($request->hospitalier['id_hospitalier']);   
         $evaluateur = Evaluateur::find($request->evaluateur['id_evaluateur']);
 
         
@@ -119,12 +117,12 @@ class EvaluateurController extends Controller
         $evaluateur->service_evaluateur = $request->evaluateur['service_evaluateur'];
         $evaluateur->specialite_evaluateur = $request->evaluateur['specialite_evaluateur'];
         $evaluateur->type_evaluateur = $request->evaluateur['type_evaluateur'];
-        $evaluateur->fk_hospitalier=$request->evaluateur['id_hospitalier'];
+        $evaluateur->fk_hospitalier=$request->hospitalier['id_hospitalier'];
         $evaluateur->fk_user = $request->evaluateur['fk_user'];
 
        /* $test=$request->evaluateur['value'];
         $evaluateur->fk_hospitalier = $test['id_hospitalier'];*/
-
+        $evaluateur->save();
                  return Response()->json(['etat' => true]);
     }
 

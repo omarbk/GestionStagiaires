@@ -54,7 +54,12 @@
                       <router-link :to="'/ShowServices'" class="nav-link active">
                             <i class="fas fa-cogs"></i>Services
                         </router-link>
-                    </li>                          
+                    </li> 
+                    <li class="nav-item">
+                      <router-link :to="'/ShowObjectifs'" class="nav-link active">
+                            <i class="far fa-file-alt"></i>Evaluation
+                        </router-link>
+                    </li>                         
                                
                                  
               

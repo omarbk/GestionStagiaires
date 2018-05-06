@@ -13,41 +13,41 @@
      <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
-    <!-- button pour afficher tous les services-->
-    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowServices'">
+    <!-- button pour afficher tous les Objectifs-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowObjectifs'">
         <i class="fas fa-long-arrow-alt-left fontsize"></i>
         </router-link>
         </div>
   
     </div>
-    <h2>Modifier Service</h2>
+    <h2>Modifier Objectif</h2>
     </div>
     <hr>
-  <!-- formulaire pour modifier un service -->
+  <!-- formulaire pour modifier un Objectif -->
   <div class="body">
-          <form   @submit.prevent="updateService">
+          <form   @submit.prevent="updateObjectif">
 
 
    <div class="row" > 
          
               <div class="col-md-9">
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Nom de Service</label>
+                    <label for="objectif" class="col-sm-3" > Objectif</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control" id="service"  v-model="service.nom_service">
+                    <input type="text" class="form-control" id="objectif"  v-model="objectif.objectif">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Besoin</label>
+                    <label for="objectif" class="col-sm-3" > Type Objectif</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control" id="service"  v-model="service.besoin_service">
+                    <input type="text" class="form-control" id="objectif"  v-model="objectif.type_objectif">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Durée(Nb Semaine)</label>
+                    <label for="objectif" class="col-sm-3" > Coefficient</label>
                     <div class="col-sm-6">
-                    <input type="number" class="form-control" id="service"  v-model="service.duree_service">
+                    <input type="number" class="form-control" id="objectif"  v-model="objectif.coefficient">
                     </div>
                 </div>
             </div> 
@@ -69,15 +69,15 @@ export default {
   
   data : () => ({
        fileName : "Choose file",
-            service: { 
-                    id_service : 0,
-                    nom_service : "",
-                    besoin_service : "",
-                    duree_service : "",
+            objectif: { 
+                    id_evaluation_objectif : 0,
+                    objectif : "",
+                    type_objectif : "",
+                    coefficient : "",
                 
               }, 
             
-            services :[],
+            objectifs :[],
         loading: false,
         error:false,
   }),
@@ -85,26 +85,25 @@ export default {
   methods:{
    
 
-       // recupere les donnees d'un service dans le formulaire
+       // recupere les donnees dans le formulaire
     
-   getService(id_service){
-                 //console.log(id_service)
+   getObjectif(id_evaluation_objectif){
 
-                  axios.get('/getService/'+id_service).then(
+                  axios.get('/getObjectif/'+id_evaluation_objectif).then(
                   response => {
                        
-                    this.service= response.data.service[0];
+                    this.objectif= response.data.objectif[0];
                     this.loading = false
-console.log(response.data.service)
-                    this.modalShow = !this.modalShow
+                    console.log(response.data.objectif)
                   });         
     },
-    updateService(){
-            axios.post('/updateService',{service:this.service})
+    updateObjectif(){
+            axios.post('/updateObjectif',{evaluationObjectif:this.objectif})
             .then(response => {  
  
                     if(response.data.etat){
-                        this.$router.push('/ShowServices/edit');
+                      this.$router.push({ name: 'ShowObjectifs', params: { success: "edit"  }});
+
                     }
                 })
                 .catch(error => {
@@ -112,11 +111,10 @@ console.log(response.data.service)
     },
 
       fetchData () {
-      //this.error = this.post = null
-      this.loading = true
-        this.service.id_service=this.$route.params.id_service;
-      console.log(this.$route.params.id_service)
-      this.getService(this.service.id_service); 
+        this.loading = true
+        this.objectif.id_evaluation_objectif=this.$route.params.id_evaluation_objectif;
+      console.log(this.$route.params.id_evaluation_objectif)
+      this.getObjectif(this.objectif.id_evaluation_objectif); 
 
       }
 
@@ -137,15 +135,6 @@ watch:{
  .btnMarge{
      padding-bottom: 10px;
  }
- .widthCard{
-     width: 270px;
-     height: 350px;
-     
- }
- .widthTextCard{
-     width  : 236px;
-     height: 13px;
- }
  a {
   color: #999;
   color: black;
@@ -155,9 +144,7 @@ watch:{
     border: 1px solid #ddd;
     
 }
-.current {
-  color: red;
-}
+
 ul {
   padding: 0;
   list-style-type: none;
@@ -181,32 +168,10 @@ a.last::before {
     margin-right: 0rem!important;
     width:100px;
 }
-.colBackround{
-     background-color: whitesmoke;
-    box-shadow: 1px 1px 3px 4px #d2cfcf;
-}
-.infoClient{
-
-    background-color:  #42a5f529;
-
-}
-.AdressClient{
-    width: 121%;
-}
-
-.noteCondition{
-    width: 77%;
-}
-.calculePadding{
-    padding-left: 50%;
-}
 
 .body{
         margin-left: 20%;
 }
-
-
-
 /*loading*/
 .lds-hourglass {
   display: inline-block;

@@ -277,7 +277,6 @@ import  Pagination from '../Pagination.vue';
                         confirmButtonText: 'Oui, supprimez-le!'
                                                 }).then((result) => {
                         if (result.value) {
-                           // console.log(hospitalier.fk_user)
                             axios.delete('/deleteHospitalier/'+hospitalier.id_hospitalier).then(
                                         response => {
                                 

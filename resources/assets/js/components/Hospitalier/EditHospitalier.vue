@@ -1,16 +1,24 @@
 <template>
   <div>
+         <div class="loading" v-if="loading">
+     <div class="lds-hourglass"></div>
+    </div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
+
+<div v-if="!loading">
           <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
-    <!-- button pour afficher tous les users-->
+    <!-- button pour afficher tous les Hospitaliers-->
     <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowHospitaliers'">
         <i class="fas fa-long-arrow-alt-left fontsize"></i>
         </router-link>
         </div>
   
     </div>
-    <h2>Ajouter un Hospitalier</h2>
+    <h2>Modifier un Hospitalier</h2>
     <hr>   
     </div>   
    
@@ -62,6 +70,7 @@
 </div>
      
   </div>
+  </div>
 </template>
 <script>
     
@@ -70,8 +79,10 @@
     export default{
 
           data:()=>({
-             index:0,
-             nameFile : "Choose file",
+            index:0,
+            nameFile : "Choose file",
+            loading: false,
+
             hospitalier: { 
                     id_hospitalier : 0,
                     nom_hospitalier : "",
@@ -140,6 +151,8 @@ suppServices :[],
                   response => {
                        
                     this.value= response.data.serviceHospitalier;
+                    this.loading = false
+
                                   console.log(this.value)
                     this.modalShow = !this.modalShow
 
@@ -160,13 +173,28 @@ getServicesS(){
                         this.suppServices.push(removedOption);
                         console.log('supp ----------');
                         console.log(this.suppServices)
-        },           
-      },
-mounted(){
-    this.hospitalier.id_hospitalier=this.$route.params.id_hospitalier;
+        },  
+        
+         fetchData () {
+      this.loading = true
+      this.hospitalier.id_hospitalier=this.$route.params.id_hospitalier;
     console.log(this.hospitalier.id_hospitalier);
     this.getServicesS();
     this.getHospitalier(this.$route.params.id_hospitalier);
+
+      }
+      },
+              created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+watch:{
+
+    '$route': 'fetchData',
+},
+mounted(){
+    
 }
     }
     
@@ -241,5 +269,39 @@ a.last::before {
 }
 .body{
         margin-left: 20%;
+}
+
+
+/*loading*/
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }
 </style>

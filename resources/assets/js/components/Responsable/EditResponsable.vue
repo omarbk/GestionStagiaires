@@ -1,21 +1,29 @@
 
 <template>
  <div>
+        <div class="loading" v-if="loading">
+     <div class="lds-hourglass"></div>
+    </div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
+
+<div v-if="!loading">
   <div>
- 
-    <div class="row btnMarge">
+     <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
-    <!-- button pour afficher tous les users-->
-       <router-link :to="'/showResponsables'"  class="float-left btn btn-primary"> Afficher</router-link>
+    <!-- button pour afficher tous les responsables-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/showResponsables'">
+        <i class="fas fa-long-arrow-alt-left fontsize"></i>
+        </router-link>
         </div>
   
     </div>
-
-    <div class="text-center">
     <h2>Modifier Responsable</h2>
-    </div>
     <hr>
-  <!-- formulaire pour modifier un user -->
+    </div>
+  <!-- formulaire pour modifier un responsable -->
           <form   @submit.prevent="updateResponsable">
 
 
@@ -81,20 +89,22 @@
  
 
 
-    <button  class="btn btn-success btn-lg btn-block" >Modifier</button>
+    <button  class="btn btn-success float-right " >Modifier</button>
           </form>
 </div>
 </div>
 
   <!-- fin formulaire -->
-
+ </div>
 </template>
 
 <script>
 export default {
   
   data : () => ({
-       fileName : "Choose file",
+        fileName : "Choose file",
+        loading: false,
+
             responsable: { 
                     id_responsable : 0,
                     nom_responsable : "",
@@ -134,18 +144,17 @@ export default {
     },
     
 
-       // recupere les donnees d'un user dans le formulaire
+       // recupere les donnees d'un responsable dans le formulaire
     
-   getResponsable(id_responsable){
-                 //console.log(id_responsable)
-
+    getResponsable(id_responsable){
                   axios.get('/getResponsable/'+id_responsable).then(
                   response => {
                        
                     this.responsable= response.data.responsable[0];
-                                        this.fileName= response.data.responsable[0].photo_responsable;
+                    this.fileName= response.data.responsable[0].photo_responsable;
+                    this.loading = false
 
-console.log(response.data.responsable)
+                    console.log(response.data.responsable)
                     this.modalShow = !this.modalShow
                   });         
     },
@@ -160,14 +169,60 @@ console.log(response.data.responsable)
                 .catch(error => {
                 })
     },
-
-  },
-
-  mounted(){
+  fetchData () {
+      this.loading = true
       this.responsable.id_responsable=this.$route.params.id_responsable;
       console.log(this.$route.params.id_responsable)
-      this.getResponsable(this.responsable.id_responsable);         
+      this.getResponsable(this.responsable.id_responsable);
+
+      }
+    },
+        created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
   },
+watch:{
+
+    '$route': 'fetchData',
+},
+    mounted(){
+               
+    },
 
 }
 </script>
+<style scoped>
+/*loading*/
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+</style>

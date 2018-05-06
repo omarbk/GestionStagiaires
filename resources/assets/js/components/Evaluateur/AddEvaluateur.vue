@@ -1,6 +1,15 @@
 <template>
   <div>
-          <div class="text-center pull-right" >
+         <div class="text-center pull-right" >
+                  <div class=" btnMarge">
+        <div class="col">
+    <!-- button pour afficher tous les users-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowServices'">
+        <i class="fas fa-long-arrow-alt-left fontsize"></i>
+        </router-link>
+        </div>
+  
+    </div>
     <h2>Ajouter un Evaluateur</h2>
     <hr>   
     </div>   
@@ -42,8 +51,7 @@
                 <div class="form-group row">
   <label class="typo__label col-sm-4">Centre</label>
    <div class="col-sm-8">
-  <multiselect v-model="evaluateur.value" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
-  <pre class="language-json"><code>{{ evaluateur.value  }}</code></pre>
+  <multiselect v-model="hospitalier" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
    </div>
 </div>
             </div> 
@@ -127,7 +135,10 @@
                    password:"",
                },
                hospitaliers:[],
-               
+                hospitalier: {
+                   id_hospitalier:"",
+                   nom_hospitalier:"",
+               },
       }),
  
       methods: { 
@@ -202,7 +213,7 @@
               console.log("test")
            console.log(this.evaluateur);
                
-              axios.post('/addUserEvaluateur',{evaluateur:this.evaluateur,user:this.user}).then(response => {  
+              axios.post('/addUserEvaluateur',{evaluateur:this.evaluateur,hospitalier:this.hospitalier,user:this.user}).then(response => {  
                     console.log(response.data.user);   
                     console.log('evaluateur Bien ajouter !');
                     this.$router.push({ name: 'ShowEvaluateurs', params: { success: "add"  }});

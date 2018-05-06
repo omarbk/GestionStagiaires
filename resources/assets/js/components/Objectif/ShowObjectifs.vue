@@ -1,8 +1,6 @@
 <template>
     <div class="post" >
-      <!-- au cas ajout bien passé afficher ce message -->   
-            
-           
+   
     <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
     </div>
@@ -14,12 +12,12 @@
      <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
-     <b-btn :to="'/AddService'"  class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
+     <b-btn :to="'/AddObjectif'"  class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
 
         </div>
   
     </div>
-    <h2>Liste des Services</h2>
+    <h2>Liste des Objectifs</h2>
     <hr>   
     </div> 
   
@@ -28,16 +26,16 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  <strong>Service Bien Ajouter !</strong>
+  <strong>Objectif Bien Ajouter !</strong>
 </div>
   <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testEdit">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  <strong>Service Bien Modifier !</strong>
+  <strong>Objectif Bien Modifier !</strong>
 </div>
     
-    <!-- formulaire pour Ajouter un service -->
+    <!-- formulaire pour Ajouter un objectif -->
    
    
     
@@ -47,16 +45,15 @@
  <div class="row">
              <div class="card">
 
-       <!-- afficher les services sous formes des cards  -->
       <div class="card-header bg-light">
                             <div class="row btnMarge">
   <div class="col"  >
-    <!-- button pour afficher formulaire de l'ajout d un article -->         
+    <!-- button pour afficher formulaire de l'ajout d un objectif -->         
                 <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
             </div>
-            <input type="text" @keyup.enter="searchService"  class="form-control" v-model="search" placeholder="recherche par Nom ou Service  " aria-label="Username" aria-describedby="basic-addon1" >
+            <input type="text" @keyup.enter="searchObjectif"  class="form-control" v-model="search" placeholder="recherche par Objcetif ou Type  " aria-label="Username" aria-describedby="basic-addon1" >
             </div>
         </div> 
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -68,22 +65,22 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Nom Service</th>
-                                        <th>besoin_service </th>
-                                        <th>Durée Service</th>
+                                        <th>Objectif</th>
+                                        <th>Type Objectif </th>
+                                        <th>Coefficient</th>
                                         <th>Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="service of services.data" :key="service.id_service" >
-                                        <td>{{service.nom_service}}</td>
-                                        <td>{{service.besoin_service}} </td>
-                                        <td>{{ service.duree_service}}</td> 
+                                    <tr  v-for="objectif of objectifs.data" :key="objectif.id_evaluation_objectif" >
+                                        <td>{{objectif.objectif}}</td>
+                                        <td>{{objectif.type_objectif}} </td>
+                                        <td>{{ objectif.coefficient}}</td> 
                                         <td  class="optionsWidth"> 
-                                            <a href="#" @click="redirect_To_EditService(service)"  class="btn btn-success" >
+                                            <a href="#" @click="redirect_To_EditObjectif(objectif)"  class="btn btn-success" >
                                                 <i class="fas fa-edit d-inline-block"></i>
                                             </a>
-                                             <a @click="deleteService(service)" class="btn btn-danger">
+                                             <a @click="deleteObjectif(objectif)" class="btn btn-danger">
                                                  <i class="fas fa-trash-alt d-inline-block"></i>
                                             </a>
                                         </td>                                 
@@ -96,8 +93,8 @@
        
        
           
-    <vue-pagination  :pagination="services"
-                     @paginate="getServices()"
+    <vue-pagination  :pagination="objectifs"
+                     @paginate="getObjectifs()"
                      :offset="4">
     </vue-pagination>
     </div>
@@ -119,9 +116,9 @@ import  Pagination from '../Pagination.vue';
           data: () => ({
              
                  
-                     loading: false,
-      post: null,
-      error: null,
+             loading: false,
+             post: null,
+             error: null,
              modalShow: false,
               //search
               search : '',
@@ -133,20 +130,16 @@ import  Pagination from '../Pagination.vue';
                 testEdit : false,
               },
               
-              // tester l ajout si bien fais 
-              
-              // tester  si affiche services  ou afficher ajouter service 
-              
-              // initialisation d un service 
-              service: { 
-                    id_service : 0,
-                    nom_service : "",
-                    besoin_service : "",
-                    duree_service : "",
+              // initialisation d un objectif 
+              objectif: { 
+                    id_evaluation_objectif : 0,
+                    objectif : "",
+                    type_objectif : "",
+                    coefficient : 0,
                     
                 
               },
-             services:{
+             objectifs:{
                         
                         total: 0,
                         per_page: 2,
@@ -161,28 +154,16 @@ import  Pagination from '../Pagination.vue';
 
           
     fileName : "Choose File",
-    user: {
-      id:0,
-      email:"",
-      password:"",
-      role:"service",
-    
-      
-    },
-
-    users:[],
-            
-             
-             
+          
       }),
  
  methods:{
   
 
-    getServices(){//type_status
-                axios.get('/getServices?page='+this.services.current_page+'')
+    getObjectifs(){
+                axios.get('/getObjectifs?page='+this.objectifs.current_page+'')
                 .then((response) => {
-                    this.services = response.data.services;
+                    this.objectifs = response.data.objectifs;
                     this.loading = false;
 
                })
@@ -191,25 +172,19 @@ import  Pagination from '../Pagination.vue';
                 });
     },
    
-    redirect_To_EditService(service){
-                     this.$router.push('/EditService/'+service.id_service);
-        //this.$router.push({ name: 'EditService', params: {service:this.service}});
-//console.log(service)
+    redirect_To_EditObjectif(objectif){
+                     this.$router.push('/EditObjectif/'+objectif.id_evaluation_objectif);
             },
      
-        searchService(event){
+        searchObjectif(event){
              console.log(this.search);
-             this.services.current_page=1;
+             this.objectifs.current_page=1;
              if(this.search === ""){
-                //console.log('test2');
-                    this.getServices();}
+                    this.getObjectifs();}
                 else {
-                     // console.log('test1');
-                axios.get('/searchService/'+this.search+'?page='+this.services.current_page+'')
+                axios.get('/searchObjectif/'+this.search+'?page='+this.objectifs.current_page+'')
                 .then((response) => {
-                  console.log('searchhhh ')
-                  console.log(response.data.services)
-                    this.services = response.data.services;
+                    this.objectifs = response.data.objectifs;
                   
                 })
                 .catch(() => {
@@ -217,7 +192,7 @@ import  Pagination from '../Pagination.vue';
                 });}
                     
           },
-     deleteService(service){
+     deleteObjectif(objectif){
 
                  this.$swal({
                         title: 'Etes-vous sur?',
@@ -229,10 +204,11 @@ import  Pagination from '../Pagination.vue';
                         confirmButtonText: 'Oui, supprimez-le!'
                                                 }).then((result) => {
                         if (result.value) {
-                            axios.delete('/deleteService/'+service.id_service).then(
+
+                            axios.delete('/deleteObjectif/'+objectif.id_evaluation_objectif).then(
                                         response => {
                                 
-                                            this.getServices();
+                                            this.getObjectifs();
                                         });
                         this.$swal(
                         'Supprimé!',
@@ -243,9 +219,8 @@ import  Pagination from '../Pagination.vue';
 })
      },
 fetchData () {
-      //this.error = this.post = null
       this.loading = true
-      this.getServices();
+      this.getObjectifs();
 
 
       }
@@ -301,15 +276,6 @@ width : 171px;
  .btnMarge{
      padding-bottom: 10px;
  }
- .widthCard{
-     width: 270px;
-     height: 350px;
-     
- }
- .widthTextCard{
-     width  : 236px;
-     height: 13px;
- }
  a {
   color: #999;
   color: black;
@@ -352,16 +318,6 @@ table{
 }
 .card-body{
     background-color: #f8f9fa
-}
-
-.notifresponsable{
-    opacity:0.9;
-    width: 241px;
-    z-index: 100;
-    top: 61px;
-    right: 0;
-    position:  absolute;
-    position :fixed;
 }
 .show{
      opacity:0.9;

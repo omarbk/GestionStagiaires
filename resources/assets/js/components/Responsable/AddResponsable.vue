@@ -1,7 +1,16 @@
 <template>
   <div>
-          <div class="text-center pull-right" >
-    <h2>Ajouter un Responsable</h2>
+             <div class="text-center pull-right" >
+                  <div class=" btnMarge">
+        <div class="col">
+    <!-- button pour afficher tous les responsables-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowResponsables'">
+        <i class="fas fa-long-arrow-alt-left fontsize"></i>
+        </router-link>
+        </div>
+  
+    </div>
+    <h2>Ajouter un Hospitalier</h2>
     <hr>   
     </div>   
    
@@ -123,8 +132,7 @@
                 let vm = this;
                 reader.onload = (e) => {
                         var image = new Image();
-                       image.src=e.target.result;
-                         //console.log("okkkkk111 : "+image.src.length)
+                        image.src=e.target.result;
                         image.onload=function(){
                         //console.log("test222222");
                         //document.getElementById("original-Img").src=image.src;
@@ -140,9 +148,9 @@
                         canvas.height=image.height/8;
                         }
                         else {
-                         canvas.width=image.width; 
+                        
+                        canvas.width=image.width; 
                         canvas.height=image.height;}
-                        //console.log("canvas.width : "+canvas.width)
                         context.drawImage(image,
                             0,
                             0,
@@ -185,19 +193,11 @@
       },
      
 
-   mounted(){
+    mounted(){
             this.user=this.$route.params.user;
             this.responsable.fk_user=this.$route.params.user.id;
-            // this.user.id=this.$route.params.user.id;
             console.log(this.$route.params.user.id)
-
-
-   }  
-       
-        
-      
-
-
-    }
+    }  
+}
     
 </script>

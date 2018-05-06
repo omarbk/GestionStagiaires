@@ -80,6 +80,11 @@ Vue.component('app-addevaluateur', require('./components/Evaluateur/AddEvaluateu
 Vue.component('app-showevaluateurs', require('./components/Evaluateur/ShowEvaluateurs.vue'));
 Vue.component('app-editevaluateur', require('./components/Evaluateur/EditEvaluateur.vue'));
 
+/* Objectif */
+Vue.component('app-addobjectif', require('./components/Objectif/AddObjectif.vue'));
+Vue.component('app-showobjectifs', require('./components/Objectif/ShowObjectifs.vue'));
+Vue.component('app-editobjectif', require('./components/Objectif/EditObjectif.vue'));
+
 
 // afficher un nombre de phrase limité 
 /*Vue.filter('readMore', function (text, length, suffix) {

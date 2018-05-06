@@ -268,6 +268,14 @@ Route::delete('/deleteEvaluateur/{fk_user}','EvaluateurController@deleteEvaluate
 Route::post('/updateEvaluateur','EvaluateurController@updateEvaluateur');
 Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur');
 
+//Objectif
+Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
+Route::get('/getObjectifs','Evaluation_objectifController@getObjectifs');
+
+Route::get('/getObjectif/{id_evaluation_objectif}','Evaluation_objectifController@getObjectif');
+Route::delete('/deleteObjectif/{id_evaluation_objectif}','Evaluation_objectifController@deleteObjectif');
+Route::post('/updateObjectif','Evaluation_objectifController@updateObjectif');
+Route::get('/searchObjectif/{search_O}','Evaluation_objectifController@searchObjectif');
 
 //groupe
 Route::post('/addGroupe','GroupeController@addGroupe');

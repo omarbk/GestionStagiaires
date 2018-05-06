@@ -1,10 +1,26 @@
 <template>
   <div>
-          <div class="text-center pull-right" >
-    <h2>Ajouter un Evaluateur</h2>
-    <hr>   
-    </div>   
-   
+         <div class="loading" v-if="loading">
+     <div class="lds-hourglass"></div>
+    </div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
+
+<div v-if="!loading">
+             <div class="text-center pull-right" >
+                  <div class=" btnMarge">
+        <div class="col">
+    <!-- button pour afficher tous les users-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowEvaluateurs'">
+        <i class="fas fa-long-arrow-alt-left fontsize"></i>
+        </router-link>
+        </div>
+  
+    </div>
+    <h2>Modifier Evaluateurs</h2>
+    </div>
+    <hr>
 
 <div>
         <form @submit.prevent="updateEvaluateur">
@@ -42,8 +58,7 @@
                 <div class="form-group row">
   <label class="typo__label col-sm-4">Centre</label>
    <div class="col-sm-8">
-  <multiselect v-model="evaluateur" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
-  <pre class="language-json"><code>{{ evaluateur  }}</code></pre>
+  <multiselect v-model="hospitalier" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
    </div>
 </div>
             </div> 
@@ -90,7 +105,7 @@
 
      </form>
 </div>
-
+</div>
   </div>
 </template>
 <script>
@@ -102,7 +117,9 @@
         
 
           data: () => ({
-             fileName : "Choose file",
+            fileName : "Choose file",
+            loading: false,
+
             evaluateur: { 
                     id_evaluateur : 0,
                     nom_evaluateur : "",
@@ -130,8 +147,8 @@
                hospitalier: {
                    id_hospitalier:"",
                    nom_hospitalier:"",
-               }
-               
+               },
+               eval:[],
       }),
  
       methods: { 
@@ -164,10 +181,11 @@
     getEvaluateur(id_evaluateur){
                   axios.get('/getEvaluateur/'+id_evaluateur).then(
                   response => {
-                       
-                    this.evaluateur= response.data.evaluateur[0];
+                                           this.evaluateur= response.data.evaluateur[0];
+
+                    this.hospitalier= response.data.evaluateur[0];
                     this.fileName= response.data.evaluateur[0].photo_evaluateur;
-                   // this.value=response.data.evaluateur[0];
+                    this.loading = false
                     console.log("eval-----")
                                   console.log(response)
 
@@ -178,8 +196,10 @@
               console.log("test")
            console.log(this.evaluateur);
                
-              axios.post('/updateEvaluateur',{evaluateur:this.evaluateur}).then(response => {  
+              axios.post('/updateEvaluateur',{evaluateur:this.evaluateur,hospitalier:this.hospitalier}).then(response => {  
                     console.log(response.data.evaluateur);   
+                    console.log(response.data.hospitalier);   
+
                     console.log('evaluateur Bien ajouter !');
                     this.$router.push({ name: 'ShowEvaluateurs', params: { success: "edit"  }});
 
@@ -187,10 +207,25 @@
             
         },
 
- 
+   fetchData () {
+        this.loading = true
+        this.evaluateur.id_evaluateur=this.$route.params.id_evaluateur;
+        console.log(this.evaluateur.id_evaluateur)
+        this.getEvaluateur(this.evaluateur.id_evaluateur);
+        this.getHospitaliersH();
+
+      }
                      
       },
-     
+             created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+watch:{
+
+    '$route': 'fetchData',
+},
 
    mounted(){
             this.evaluateur.id_evaluateur=this.$route.params.id_evaluateur;
@@ -211,3 +246,37 @@
     
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style scoped>
+/*loading*/
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+</style>

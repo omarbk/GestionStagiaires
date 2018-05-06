@@ -1,20 +1,27 @@
 <template>
-    <div class="post" >
-      <!-- au cas ajout bien passé afficher ce message -->   
-            
-           
-    <div class="loading" v-if="loading">
+
+    <div class="post" > 
+         <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
     </div>
     <div v-if="error" class="error">
       {{ error }}
     </div>
 
-<div v-if="!loading">
-   
-     <div class="row">
+<div v-if="!loading">         
+     <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
     <b-btn v-b-modal.modalPrevent class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
+
+        </div>
+  
+    </div>
+    <h2>Liste des Responsables</h2>
+    <hr>   
+    </div> 
+     <div class="row">
+        <div class="col">
        <b-modal id="modalPrevent"
              ref="modal"
              title="+ Compte"
@@ -51,7 +58,7 @@
     </b-modal>
   </div>
     </div>
-    </div>  
+   
             <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testAjout">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -67,12 +74,6 @@
     
     
   
-    <hr>
-    <!-- formulaire pour Ajouter un responsable -->
-   
-   
-    
-    <!-- fin formulaire -->
     <!-- afficher les responsables sous formes des cards  -->
     <div style="width: 75%">
       <div class="card-header bg-light">
@@ -172,6 +173,7 @@
                      :offset="4">
     </vue-pagination>
     </div>
+    </div>
     <!-- fin affiche -->
 </template>
 
@@ -198,12 +200,7 @@ import  Pagination from '../Pagination.vue';
               Testopen:{
                 testAjout : false,
                 testEdit : false,
-              },
-              
-              // tester l ajout si bien fais 
-              
-              // tester  si affiche responsables  ou afficher ajouter responsable 
-              
+              },  
               // initialisation d un responsable 
               responsable: { 
                     id_responsable : 0,
@@ -294,7 +291,7 @@ import  Pagination from '../Pagination.vue';
                   response => {
                        
                     this.responsable= response.data.responsable[0];
-                                  console.log(this.responsable)
+                    console.log(this.responsable)
 
                     this.modalShow = !this.modalShow
                   });         
@@ -314,14 +311,10 @@ import  Pagination from '../Pagination.vue';
              console.log(this.search);
              this.responsables.current_page=1;
              if(this.search === ""){
-                //console.log('test2');
                     this.getResponsables();}
                 else {
-                     // console.log('test1');
                 axios.get('/searchResponsable/'+this.search+'?page='+this.responsables.current_page+'')
                 .then((response) => {
-                  console.log('searchhhh ')
-                  console.log(response.data.responsables)
                     this.responsables = response.data.responsables;
                   
                 })
@@ -342,7 +335,6 @@ import  Pagination from '../Pagination.vue';
                         confirmButtonText: 'Oui, supprimez-le!'
                                                 }).then((result) => {
                         if (result.value) {
-                           // console.log(responsable.fk_user)
                             axios.delete('/deleteResponsable/'+responsable.id).then(
                                         response => {
                                 
@@ -355,15 +347,29 @@ import  Pagination from '../Pagination.vue';
                         )
   }
 })
-     }  
+     }, 
+fetchData () {
+      //this.error = this.post = null
+       this.loading = true
+       this.countUser();
+       this.getResponsables();
 
+
+      }
 
   },
- 
+           created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+watch:{
+
+    '$route': 'fetchData',
+},
    
         mounted(){
-                  this.countUser();
-                  this.getResponsables();
+                 
    
           if( this.$route.params.success == "add"){
              
@@ -477,7 +483,7 @@ table{
 
 
 
-
+/*loading*/
 .lds-hourglass {
   display: inline-block;
   position: relative;

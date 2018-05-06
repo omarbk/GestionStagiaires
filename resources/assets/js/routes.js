@@ -28,6 +28,11 @@ import ShowEvaluateurs from './components/Evaluateur/ShowEvaluateurs.vue'
 import AddEvaluateur from './components/Evaluateur/AddEvaluateur.vue'
 import EditEvaluateur from './components/Evaluateur/EditEvaluateur.vue'
 
+// Objectifs 
+import ShowObjectifs from './components/Objectif/ShowObjectifs.vue'
+import AddObjectif from './components/Objectif/AddObjectif.vue'
+import EditObjectif from './components/Objectif/EditObjectif.vue'
+
 //--------------------------------
 //Groupes
 import ShowGroupes from './components/Groupe/ShowGroupes.vue'
@@ -239,6 +244,23 @@ const  router = new VueRouter({
    // name: "EditEvaluateur"
  },
         
+ // ----------------Objectif
+ {
+    path:"/ShowObjectifs",
+    component: ShowObjectifs,
+    name:"ShowObjectifs"
+},
+
+{
+    path:"/AddObjectif",
+    component: AddObjectif,
+    name: "AddObjectif"
+},
+{
+    path:"/EditObjectif/:id_evaluation_objectif",
+    component: EditObjectif,
+// name: "EditObjectif"
+},
 
 
     ],

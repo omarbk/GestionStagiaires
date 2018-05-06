@@ -4,6 +4,7 @@
             
            
     <div class="loading" v-if="loading">
+        
      <div class="lds-hourglass"></div>
     </div>
     <div v-if="error" class="error">
@@ -11,10 +12,19 @@
     </div>
 
 <div v-if="!loading">
-   
-     <div class="row">
+     <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
     <b-btn v-b-modal.modalPrevent class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
+
+        </div>
+  
+    </div>
+    <h2>Liste des Evaluateurs</h2>
+    <hr>   
+    </div> 
+     <div class="row">
+        <div class="col">
        <b-modal id="modalPrevent"
              ref="modal"
              title="+ Compte"
@@ -41,17 +51,11 @@
                     </div>
                 </div>
    
- 
-
-
-
-      
-      </form>
+         </form>
 
     </b-modal>
   </div>
     </div>
-    </div>  
             <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testAjout">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -64,11 +68,7 @@
   </button>
   <strong>Evaluateur Bien Modifier !</strong>
 </div>
-    
-    
-  
-    <hr>
-    <!-- formulaire pour Ajouter un evaluateur -->
+        <!-- formulaire pour Ajouter un evaluateur -->
    
    
     
@@ -179,6 +179,7 @@
     </vue-pagination>
     </div>
     <!-- fin affiche -->
+    </div>
 </template>
 
 <script>
@@ -363,15 +364,28 @@ import  Pagination from '../Pagination.vue';
                         )
   }
 })
-     }  
+     },
+     fetchData () {
+        this.loading = true
+        this.countUser();
+        this.getEvaluateurs();
+
+      } 
 
 
   },
- 
+           created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+watch:{
+
+    '$route': 'fetchData',
+},
    
         mounted(){
-                  this.countUser();
-                  this.getEvaluateurs();
+               
    
           if( this.$route.params.success == "add"){
              
@@ -485,7 +499,7 @@ table{
 
 
 
-
+/*loading*/
 .lds-hourglass {
   display: inline-block;
   position: relative;

@@ -3,42 +3,42 @@
           <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
-    <!-- button pour afficher tous les services-->
-    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowServices'">
+    <!-- button pour afficher tous les objectifs-->
+    <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowObjectifs'">
         <i class="fas fa-long-arrow-alt-left fontsize"></i>
         </router-link>
         </div>
   
     </div>
-    <h2>Ajouter un Service</h2>
+    <h2>Ajouter un Objectif</h2>
     <hr>   
     </div>   
    
 
 <div class="body">
-        <form @submit.prevent="addService">
+        <form @submit.prevent="addObjectif">
          <div class="row" > 
          
             <div class="col-md-9">
                
 
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Nom de Service</label>
+                    <label for="objectif" class="col-sm-3" > Objectif</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control" id="service"  v-model="service.nom_service">
+                    <input type="text" class="form-control" id="objectif"  v-model="evaluationObjectif.objectif">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Besoin</label>
+                    <label for="objectif" class="col-sm-3" > Type Objectif</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control" id="service"  v-model="service.besoin_service">
+                    <input type="text" class="form-control" id="objectif"  v-model="evaluationObjectif.type_objectif">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="service" class="col-sm-3" > Durée(Nb Semaine)</label>
+                    <label for="objectif" class="col-sm-3" > Coefficient</label>
                     <div class="col-sm-6">
-                    <input type="number" class="form-control" id="service"  v-model="service.duree_service">
+                    <input type="number" class="form-control" id="objectif"  v-model="evaluationObjectif.coefficient">
                     </div>
                 </div>
             </div> 
@@ -51,42 +51,34 @@
   </div>
 </template>
 <script>
-    
-
-
-
     export default{
         
 
           data: () => ({
              nameFile : "Choose file",
-            service: { 
-                    id_service : 0,
-                    nom_service : "",
-                    besoin_service : "",
-                    duree_service : "",
+            evaluationObjectif: { 
+                    id_evaluation_objectif : 0,
+                    objectif : "",
+                    type_objectif : "",
+                    coefficient : "",
                   
                 
               }, 
-               services :[],
-               user:{
-                   id:0,
-                   email:"",
-                   password:"",
-               }
+               evaluationObjectifS :[],
+
       }),
  
       methods: { 
           
          
-          addService(){ 
+          addObjectif(){ 
               console.log("test")
-           console.log(this.service);
+           console.log(this.objectif);
                
-              axios.post('/addService',{service:this.service}).then(response => {  
-                    console.log(response.data.service);   
-                    console.log('service Bien ajouter !');
-                    this.$router.push({ name: 'ShowServices', params: { success: "add"  }});
+              axios.post('/addObjectif',{evaluationObjectif:this.evaluationObjectif}).then(response => {  
+                    //console.log(response.data.objectif);   
+                    console.log('objectif Bien ajouter !');
+                    this.$router.push({ name: 'ShowObjectifs', params: { success: "add"  }});
 
                   });
             
