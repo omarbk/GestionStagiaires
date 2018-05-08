@@ -22,17 +22,17 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      //$role=  Auth::user()->role;
+    {      $role=  Auth::user()->role;
        
-        //return view('Gcommerce',['role' => $role]);
-        return view('Gcommerce',['role' => "Super Admin"]);
+       //dd($role);
+        return view('Gstagiaire',['role' => $role]);
         
-        //return view('Gcommerce');
+        
     }
 
     public function login()
     {
-        
+      
         return view('login');
     }
      

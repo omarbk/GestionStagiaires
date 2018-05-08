@@ -37,9 +37,20 @@
                     <div class="col-sm-8">
                     <input type="text" class="form-control" id="stagiaire"  v-model="stagiaire.annee_universitaire_stagiaire">
                     </div>
-                </div>
-                
-            </div> 
+                    </div>
+                    <div class="form-group row">
+                    <label for="stagiaire" class="col-sm-4" >niveau d'étude:</label>
+                    <div class="col-sm-8">
+   
+                        <select class="form-control custom-select " id="fk_compte" v-model="stagiaire.niveau_etude_stagiaire" >
+                                    <option selected disabled>Choisir Client</option>
+                                    <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
+                        </select>  
+
+                    
+                            </div>
+                        </div> 
+                </div> 
             <div class="col-md-6">
                <div class="form-group row">
                     <label for="stagiaire" class="col-sm-4" > Prénom</label>
@@ -97,6 +108,7 @@
         
 
           data: () => ({
+              listAnneeEtude : ["1er annnée","2eme année","3eme année","4eme année","5eme année","6eme année","7eme année"],
              nameFile : "Choose file",
             stagiaire: { 
                     id_stagiaire : 0,
@@ -109,6 +121,7 @@
                     dateNaissance_stagiaire : "",
                     specialite_stagiaire: "",
                     annee_universitaire_stagiaire: "",	
+                    niveau_etude_stagiaire:"",
                     fk_user : 0,
                 
               }, 

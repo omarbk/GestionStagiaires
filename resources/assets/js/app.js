@@ -50,6 +50,7 @@ Vue.component('app-content', require('./components/Contents.vue'));
 /* Users*/
 
 Vue.component('app-vue', require('./components/App.vue'));
+Vue.component('app-vue-evaluateur', require('./components/AppEvaluateur.vue'));
 Vue.component('app-vue-comptable', require('./components/AppComptable.vue'));
 
 
@@ -125,6 +126,22 @@ Router.beforeEach(
                 if(value == "Expert Comptable"){
                     next({
                         path:'/'
+                    })
+                }
+                else next()
+            });
+        
+        
+
+        }
+        else if(to.matched.some(record => record.meta.Evaluateur)){
+            console.log
+            
+            Promise.resolve(Vue.auth.getProfile()).then(function(value){
+               
+                if(value == "Evaluateur"){
+                    next({
+                        path:'/ShowStagiairesEva'
                     })
                 }
                 else next()
