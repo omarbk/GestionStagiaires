@@ -516,7 +516,7 @@ methods: {
         this.reference_d=this.$route.params.reference_d;
         this.getDevisD(this.$route.params.id_devis);
        
-       this.echeance = 'choix';
+        this.echeance = 'choix';
         this.getarticles();
         this.getClients();
         this.getTvas();

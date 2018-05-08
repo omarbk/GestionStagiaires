@@ -8,22 +8,27 @@ use App\Evaluation_objectif;
 class Evaluation_objectifController extends Controller
 {
     public function addObjectif(Request $request){
-        $eval_objectif = new Evaluation_objectif();
+        //dd($request);
+        for($i=0;$i<count($request->objectifs);$i++) {    
+            $eval_objectif = new Evaluation_objectif();
      
-        $eval_objectif->objectif = $request->evaluationObjectif['objectif'];
-        $eval_objectif->type_objectif = $request->evaluationObjectif['type_objectif'];
-        $eval_objectif->coefficient = $request->evaluationObjectif['coefficient'];
+        $eval_objectif->objectif = $request->objectifs[$i]['objectif'];
+        $eval_objectif->fk_type_objectif = $request->objectifs[$i]['fk_type_objectif'];
+        $eval_objectif->annee_objectif = $request->objectifs[$i]['annee_objectif'];
+        $eval_objectif->coefficient = $request->objectifs[$i]['coefficient'];
 
         $eval_objectif->save();  
+        }
         return Response()->json(['etat' => true ]);
     }
 
     public function updateObjectif(Request $request){
 
-        $eval_objectif = Evaluation_objectif::find($request->evaluationObjectif['id_evaluation_objectif']);
-        $eval_objectif->objectif = $request->evaluationObjectif['objectif'];
-        $eval_objectif->type_objectif = $request->evaluationObjectif['type_objectif'];
-        $eval_objectif->coefficient = $request->evaluationObjectif['coefficient'];
+        $eval_objectif = Evaluation_objectif::find($request->objectif['id_evaluation_objectif']);
+        $eval_objectif->objectif = $request->objectif['objectif'];
+        $eval_objectif->fk_type_objectif = $request->objectif['fk_type_objectif'];
+        $eval_objectif->annee_objectif = $request->objectif['annee_objectif'];
+        $eval_objectif->coefficient = $request->objectif['coefficient'];
 
         $eval_objectif->save();
         return Response()->json(['etat' => true]);
@@ -31,12 +36,29 @@ class Evaluation_objectifController extends Controller
 
     public function getObjectifs(){
      
-        $objectifs = Evaluation_objectif::paginate(10);
+        $objectifs =Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+        ->select('evaluation_objectifs.*', 'type_objectifs.*')
+        ->paginate(10);
                  return Response()->json(['objectifs' => $objectifs ]);
     }
 
+    public function getObjectifsAnnee(){
+     
+        $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+        ->leftJoin('notes', 'evaluation_objectifs.id_evaluation_objectif', '=', 'notes.fk_objectif')
+        ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')
+  
+        ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*')
+        ->where('annee_objectif','=',1)
+        ->get();
+       // dd($objectifs);
+                      return Response()->json(['objectifs' => $objectifs ]);
+    }
+
     public function getObjectif($id_evaluation_objectif){
-        $objectif = Evaluation_objectif::where('id_evaluation_objectif','=',$id_evaluation_objectif)
+        $objectif = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+        ->select('evaluation_objectifs.*', 'type_objectifs.*')
+            ->where('id_evaluation_objectif','=',$id_evaluation_objectif)
                     ->get();
                    // dd($objectif);
 
@@ -44,8 +66,10 @@ class Evaluation_objectifController extends Controller
     }
 
     public function searchObjectif($search_O){
-        $objectifs = Evaluation_objectif::where('objectif','like', '%' .$search_O . '%')
-        ->orWhere('type_objectif','like', '%' .$search_O . '%')
+        $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+        ->select('evaluation_objectifs.*', 'type_objectifs.*')
+        ->where('evaluation_objectifs.objectif','like', '%' .$search_O . '%')
+        ->orWhere('type_objectifs.type_objectif','like', '%' .$search_O . '%')
         ->paginate(10);
         return Response()->json(['objectifs' => $objectifs ]);
     }

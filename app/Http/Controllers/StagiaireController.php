@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 use App\Stagiaire;
+use App\Evaluation;
 
 use App\User;
 
@@ -130,6 +131,7 @@ class StagiaireController extends Controller
                     ->paginate(6);
                  return Response()->json(['stagiaires' => $stagiaires ]);
     }
+    
     public function getAllStagiaires(){
      
         $stagiaires = Stagiaire::all();
@@ -140,6 +142,7 @@ class StagiaireController extends Controller
                 $stagiaire = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
                             ->select('stagiaires.*', 'users.*')
                             ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
+                            
                             ->get();
                            // dd($stagiaire);
 
@@ -163,5 +166,12 @@ class StagiaireController extends Controller
              $stagiaire->delete(); 
         $user = User::where('id','=',$fk_user)->delete(); 
         return Response()->json(['delete' => 'true']);
+    }
+
+    public function getAllStagiairesEval(){
+     
+        $stagiaires = Stagiaire::all();
+        $evaluations = Evaluation::all();
+                 return Response()->json(['stagiaires' => $stagiaires ,'evaluations'=>$evaluations]);
     }
 }

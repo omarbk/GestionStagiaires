@@ -78,6 +78,13 @@ Route::delete('/deleteStatu/{id_status}','ParametresController@deleteStatu');
 Route::post('/addTypePaiement','ParametresController@addTypePaiement');
 Route::get('/getTypePaiement','ParametresController@getTypePaiement');
 Route::delete('/deleteTypePaiement/{id_type_paiement}','ParametresController@deleteTypePaiement');
+
+
+  //type objectif
+  Route::post('/addTypeObjectif','ParametresController@addTypeObjectif');
+  Route::get('/getTypeObjectifs','ParametresController@getTypeObjectifs');
+  Route::get('/getTypeObjectif/{id_type}','ParametresController@getTypeObjectif');
+  Route::delete('/deleteTypeObjectif/{id_type}','ParametresController@deleteTypeObjectif');
  //---------------------------------------------------------------------       
 
                 //Desponsables
@@ -272,9 +279,10 @@ Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur
 Route::get('/getAllEvaluateurs','EvaluateurController@getAllEvaluateurs');
 
 
-//Objectif
+//Objectif 
 Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
 Route::get('/getObjectifs','Evaluation_objectifController@getObjectifs');
+Route::get('/getObjectifsAnnee','Evaluation_objectifController@getObjectifsAnnee');
 
 Route::get('/getObjectif/{id_evaluation_objectif}','Evaluation_objectifController@getObjectif');
 Route::delete('/deleteObjectif/{id_evaluation_objectif}','Evaluation_objectifController@deleteObjectif');
@@ -291,6 +299,8 @@ Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
 Route::get('/getAllGroupes','GroupeController@getAllGroupes');
 
+//Evaluation 
+Route::post('/addEvaluation','NoteController@addEvaluation');
 
 // Stagiaire 
 Route::post('/addUserStagiaire','StagiaireController@addUserStagiaire');
@@ -301,6 +311,8 @@ Route::get('/getStagiaire/{id_stagiaire}','StagiaireController@getStagiaire');
 Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire');
 Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
 Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
+      // pour evaluation
+Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
 
 // stage 
 Route::post('/addStage','StageController@addStage');

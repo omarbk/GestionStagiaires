@@ -15,8 +15,9 @@ class CreateEvaluationOjbectifsTable extends Migration
     {
         Schema::create('evaluation_objectifs', function (Blueprint $table) {
             $table->increments('id_evaluation_objectif');
-            $table->string('type_objectif')->nullable();
+            $table->integer('fk_type_objectif')->nullable();
             $table->string('objectif')->nullable();
+            $table->string('annee_objectif')->nullable();
             $table->integer('coefficient')->nullable();
             $table->softDeletes();
             $table->timestamps();

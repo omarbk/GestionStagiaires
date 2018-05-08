@@ -67,6 +67,7 @@
                                     <tr>
                                         <th>Objectif</th>
                                         <th>Type Objectif </th>
+                                        <th>Année Objectif </th>
                                         <th>Coefficient</th>
                                         <th>Options</th>
                                     </tr>
@@ -75,6 +76,7 @@
                                     <tr  v-for="objectif of objectifs.data" :key="objectif.id_evaluation_objectif" >
                                         <td>{{objectif.objectif}}</td>
                                         <td>{{objectif.type_objectif}} </td>
+                                        <td>{{ objectif.annee_objectif}}</td> 
                                         <td>{{ objectif.coefficient}}</td> 
                                         <td  class="optionsWidth"> 
                                             <a href="#" @click="redirect_To_EditObjectif(objectif)"  class="btn btn-success" >
@@ -134,9 +136,10 @@ import  Pagination from '../Pagination.vue';
               objectif: { 
                     id_evaluation_objectif : 0,
                     objectif : "",
-                    type_objectif : "",
+                    fk_type_objectif : "",
+                    annee_objectif:"",
                     coefficient : 0,
-                    
+                    type_objectif:"",
                 
               },
              objectifs:{

@@ -3,10 +3,10 @@
            <div class="row">
                <div class="col-3">
                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button @click="testAffich.testfamille = true;testAffich.testTVA = false;testAffich.testStatus = false;testAffich.testTypePaiement = false" class="btn btn-primary mb-3 shadawButton">Famille article </button>
-                <button @click="testAffich.testTVA = true;testAffich.testfamille = false;testAffich.testStatus = false;testAffich.testTypePaiement = false" class="btn btn-primary mb-3 shadawButton">TVA </button>
-                <button @click="testAffich.testStatus = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testTypePaiement = false" class="btn btn-primary mb-3 shadawButton ">Statut </button>
-                <button @click="testAffich.testTypePaiement = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testStatus = false" class="btn btn-primary mb-3 shadawButton ">Type paiement</button>
+                <button @click="testAffich.testfamille = true;testAffich.testTVA = false;testAffich.testStatus = false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton">Famille article </button>
+                <button @click="testAffich.testTVA = true;testAffich.testfamille = false;testAffich.testStatus = false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton">TVA </button>
+                <button @click="testAffich.testStatus = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton ">Statut </button>
+                <button @click="testAffich.testTypeObjectif = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testStatus = false" class="btn btn-primary mb-3 shadawButton ">Type Objectif</button>
                 </div>
                </div>
                 <div class="col">
@@ -89,26 +89,26 @@
                      </div>
 
 
-                      <div v-if="testAffich.testTypePaiement"> 
+                      <div v-if="testAffich.testTypeObjectif"> 
                     <div class="row">
                         <div class="col">
-                    <input v-model="typePaiement.type_paiement"  type="text"  placeholder="Entrez Type paiement">
+                    <input v-model="typeObjectif.type_objectif"  type="text"  placeholder="Entrez Type objectif">
                     </div>
                     <div class="col">
-                     <button @click="addTypePaiement" class="btn btn-success">Ajouter </button>
+                     <button @click="addTypeObjectif" class="btn btn-success">Ajouter </button>
                      </div>
                    </div>             
                     <div class="row">
                        <table class="table table-bordered tableau">
                         <thead>
                             <tr>
-                            <th>Type de paiement</th>
+                            <th>Type de objectif</th>
                             </tr>
                         </thead>
                         <tbody>                     
-                            <tr v-for="typePaiement in typePaiements" :key="typePaiement.id_type_paiement">
-                            <th>{{typePaiement.type_paiement}}</th>      
-                            <th><a @click="deleteTypePaiement(typePaiement)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
+                            <tr v-for="typeObjectif in typeObjectifs" :key="typeObjectif.id_type">
+                            <th>{{typeObjectif.type_objectif}}</th>      
+                            <th><a @click="deleteTypeObjectif(typeObjectif)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
                             </tr>
                         </tbody>
                        </table>
@@ -133,7 +133,7 @@
             testfamille:true,
             testTVA:false,
             testStatus:false,
-            testTypePaiement:false,
+            testTypeObjectif:false,
         },
         famille_article:{
             id_famille : 0,
@@ -153,11 +153,11 @@
             colorStatu : "",
         },
         status:[],
-         typePaiement:{
-            id_type_paiement: 0,
-            type_paiement: "",
+         typeObjectif:{
+            id_type: 0,
+            type_objectif: "",
           },
-          typePaiements: [],
+          typeObjectifs: [],
           }),
     
         
@@ -165,7 +165,7 @@
                 this.getfamilles();
                 this.getTvas();
                 this.getStatus();
-                this.getTypePaiement();
+                this.getTypeObjectifs();
           },
         methods:{
                 //-------------------------------------- famille
@@ -307,23 +307,23 @@
                         })
                         },
 
-// type paiement
-                        addTypePaiement(){
-                                axios.post('/addTypePaiement',this.typePaiement).then(response => {     
-                            this.getTypePaiement();
-                            console.log('Type Paiement Bien ajouter !');
+// type objectif
+                        addTypeObjectif(){
+                                axios.post('/addTypeObjectif',this.typeObjectif).then(response => {     
+                            this.getTypeObjectifs();
+                            console.log('Type objectif Bien ajouter !');
                                 });
                         },
-                        getTypePaiement(){
-                            axios.get('/getTypePaiement')
+                        getTypeObjectifs(){
+                            axios.get('/getTypeObjectifs')
                             .then((response) => {                        
-                                this.typePaiements= response.data.listeTypePaiments;
+                                this.typeObjectifs= response.data.listeTypeObjectifs;
                             })
                             .catch(() => {
                                 console.log('handle server error from here');
                             });
           },
-              deleteTypePaiement(typePaiement){
+              deleteTypeObjectif(typeObjectif){
 
 
                         this.$swal({
@@ -336,14 +336,14 @@
                         confirmButtonText: 'Oui, supprimez-le!'
                                                 }).then((result) => {
                         if (result.value) {
-                            axios.delete('/deleteTypePaiement/'+typePaiement.id_type_paiement).then(
+                            axios.delete('/deleteTypeObjectif/'+typeObjectif.id_type).then(
                                         response => {
                                 
-                                           this.getTypePaiement();
+                                           this.getTypeObjectifs();
                                         });
                         this.$swal(
                         'Supprimé!',
-                        'Votre Type paiement a été supprimé',
+                        'Votre Type objectif a été supprimé',
                         'success'
                         )
                         }

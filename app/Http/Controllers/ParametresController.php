@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Famille_article;
 use App\Tva;
 use App\Statu;
-use App\Type_paiement;
+use App\Type_objectif;
 class ParametresController extends Controller
 {
 
@@ -84,27 +84,28 @@ $statu->delete();
 return Response()->json(['delete' => true]);
 }
 
-// type paiement 
+//--------------------------------------- type paiement 
 
-function addTypePaiement (Request $request){
-    $typePaiment  = new  Type_paiement();
-    $typePaiment->type_paiement = $request->type_paiement;
-    $typePaiment->save();
+function addTypeObjectif (Request $request){
+    $typeObjectif  = new  Type_objectif();
+    $typeObjectif->type_objectif = $request->type_objectif;
+    $typeObjectif->save();
     return Response()->json(['etat' => true]);
 }
 
 
-function  getTypePaiement(){
-    $listeTypePaiments = Type_paiement::all();
-    
-    //dd($listeArticles);
-    return Response()->json(['listeTypePaiments' => $listeTypePaiments ]);
+function  getTypeObjectifs(){
+    $listeTypeObjectifs = Type_objectif::all();
+        return Response()->json(['listeTypeObjectifs' => $listeTypeObjectifs ]);
    }
-
-   public function deleteTypePaiement($id_type_paiement){
+   function  getTypeObjectif($id_type){
+    $TypeObjectif = Type_objectif::where('id_type','=',$id_type)->get();
+        return Response()->json(['TypeObjectif' => $TypeObjectif ]);
+   }
+   public function deleteTypeObjectif($id_type){
     // dd($id_article);
-     $typePaiment = Type_paiement::find($id_type_paiement);
-     $typePaiment->delete();
+     $typeObjectif = Type_objectif::find($id_type);
+     $typeObjectif->delete();
      return Response()->json(['delete' => true]);
  }
 

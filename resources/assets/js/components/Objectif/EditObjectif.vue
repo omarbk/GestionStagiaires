@@ -1,67 +1,71 @@
 <template>
- <div>
-         <div class="loading" v-if="loading">
-     <div class="lds-hourglass"></div>
-    </div>
-    <div v-if="error" class="error">
-      {{ error }}
-    </div>
-
-<div v-if="!loading">
   <div>
- 
-     <div class="text-center pull-right" >
+          <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
-    <!-- button pour afficher tous les Objectifs-->
+    <!-- button pour afficher tous les objectifs-->
     <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowObjectifs'">
         <i class="fas fa-long-arrow-alt-left fontsize"></i>
         </router-link>
         </div>
   
     </div>
-    <h2>Modifier Objectif</h2>
-    </div>
-    <hr>
-  <!-- formulaire pour modifier un Objectif -->
-  <div class="body">
-          <form   @submit.prevent="updateObjectif">
+    <h2>Ajouter un Objectif</h2>
+    <hr>   
+    </div>   
+   
 
-
-   <div class="row" > 
+<div >
+        <form @submit.prevent="updateObjectif">
+         <div class="row" > 
          
-              <div class="col-md-9">
-                <div class="form-group row">
-                    <label for="objectif" class="col-sm-3" > Objectif</label>
-                    <div class="col-sm-6">
-                    <input type="text" class="form-control" id="objectif"  v-model="objectif.objectif">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="objectif" class="col-sm-3" > Type Objectif</label>
-                    <div class="col-sm-6">
-                    <input type="text" class="form-control" id="objectif"  v-model="objectif.type_objectif">
-                    </div>
-                </div>
+            <div class="col-md-9">
+               <!--
                 <div class="form-group row">
                     <label for="objectif" class="col-sm-3" > Coefficient</label>
                     <div class="col-sm-6">
                     <input type="number" class="form-control" id="objectif"  v-model="objectif.coefficient">
                     </div>
                 </div>
+                -->
             </div> 
     </div>
- 
 
+   
+     <div class="row">
+           <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Type Objectif</th>
+                                        <th>Objectif</th>
+                                        <th>Annee Objectif</th>                                       
+                                        <th>Coefficient</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr >
+                                        <input class="form-control"  type="text" v-model="objectif.fk_type_objectif" disabled hidden>
+                                        <th>
+                                    <input  class="form-control" type="text"  v-model="objectif.type_objectif" disabled >
 
-    <button  class="btn btn-success " >Modifier</button>
+                                        </th>    
+                                       <th><input type="text" class="form-control" id="email" v-model="objectif.objectif" ></th>
+                                        <th><input type="number" class="form-control" id="fixe" v-model="objectif.annee_objectif" ></th>
+                                        <th><input type="number" class="form-control" id="mobile" v-model="objectif.coefficient"></th> 
+                                        </tr>
+                                      </tbody>
+                                </table>
+                            </div>
+             </div>
+
+     </div>
+                       <button  class="btn mb-3  btn-success">Enregister</button>
+
           </form>
 </div>
-</div>
-</div>
-  <!-- fin formulaire -->
- </div>
+  </div>
 </template>
 
 <script>
@@ -74,9 +78,10 @@ export default {
                     objectif : "",
                     type_objectif : "",
                     coefficient : "",
+                    type_objectif:"",
                 
               }, 
-            
+     
             objectifs :[],
         loading: false,
         error:false,
@@ -93,12 +98,13 @@ export default {
                   response => {
                        
                     this.objectif= response.data.objectif[0];
+                    
                     this.loading = false
                     console.log(response.data.objectif)
                   });         
     },
     updateObjectif(){
-            axios.post('/updateObjectif',{evaluationObjectif:this.objectif})
+            axios.post('/updateObjectif',{objectif:this.objectif})
             .then(response => {  
  
                     if(response.data.etat){
