@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Stagiaire;
 use App\Evaluation;
-
+use App\Stage;
 use App\User;
 
 class StagiaireController extends Controller
@@ -75,6 +75,9 @@ class StagiaireController extends Controller
         $stagiaire->dateNaissance_stagiaire = $request->stagiaire['dateNaissance_stagiaire'];
         $stagiaire->specialite_stagiaire = $request->stagiaire['specialite_stagiaire'];
         $stagiaire->annee_universitaire_stagiaire = $request->stagiaire['annee_universitaire_stagiaire'];
+        $stagiaire->niveau_etude_stagiaire = $request->stagiaire['niveau_etude_stagiaire'];
+
+        
         $stagiaire->fk_user = $request->stagiaire['fk_user'];
 
         $stagiaire->save();
@@ -117,7 +120,8 @@ class StagiaireController extends Controller
          $stagiaire->tel_stagiaire = $request->stagiaire['tel_stagiaire'];
          $stagiaire->specialite_stagiaire = $request->stagiaire['specialite_stagiaire'];
          $stagiaire->annee_universitaire_stagiaire = $request->stagiaire['annee_universitaire_stagiaire'];
-         $stagiaire->fk_user =  $request->stagiaire['fk_user'];;
+         $stagiaire->niveau_etude_stagiaire = $request->stagiaire['niveau_etude_stagiaire'];
+         $stagiaire->fk_user =  $request->stagiaire['fk_user'];
                  $stagiaire->save();
                   return Response()->json(['etat' => true]);
     }
@@ -173,5 +177,18 @@ class StagiaireController extends Controller
         $stagiaires = Stagiaire::all();
         $evaluations = Evaluation::all();
                  return Response()->json(['stagiaires' => $stagiaires ,'evaluations'=>$evaluations]);
+    }
+
+    
+    public function getStagiairesParEvaluateur(){
+      /*  Auth::user()->id;
+
+        $stage  = Stage::leftJoin('stages', 'stages.fk_evaluateur', '=', 'users.id')
+        $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
+                    ->leftJoin('stages', 'stages.fk_evaluateur', '=', 'users.id')
+                    ->select('stagiaires.*', 'users.*')
+                    ->where('users.role','=','stagiaire')
+                    ->paginate(6);
+                 return Response()->json(['stagiaires' => $stagiaires ]);*/
     }
 }

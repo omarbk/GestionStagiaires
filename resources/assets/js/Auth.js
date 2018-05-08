@@ -6,8 +6,8 @@ export default function (Vue){
             .then(response => {let test;
               if(response.data.user[0].role == 'Super Admin')
               test = "Super Admin";
-              else if(response.data.user[0].role == 'Admin')
-              test = "Admin";
+              else if(response.data.user[0].role == 'Evaluateur')
+              test = "Evaluateur";
               else if(response.data.user[0].role == 'Expert Comptable')
               test = "Expert Comptable";
             //  else test = "";

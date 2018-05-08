@@ -24,6 +24,7 @@ class CreateStagiairesTable extends Migration
             $table->date('dateNaissance_stagiaire')->nullable();
             $table->string('specialite_stagiaire')->nullable();
             $table->string('annee_universitaire_stagiaire')->nullable();
+            $table->string('niveau_etude_stagiaire')->nullable();
             $table->integer('fk_user')->nullable();
             $table->softDeletes();
             $table->timestamps();

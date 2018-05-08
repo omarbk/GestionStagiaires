@@ -313,6 +313,8 @@ Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
 Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
       // pour evaluation
 Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
+Route::get('/getStagiairesParEvaluateur','StagiaireController@getStagiairesParEvaluateur');
+
 
 // stage 
 Route::post('/addStage','StageController@addStage');

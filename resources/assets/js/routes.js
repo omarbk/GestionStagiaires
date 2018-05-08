@@ -37,6 +37,11 @@ import EditObjectif from './components/Objectif/EditObjectif.vue'
 import ShowEvaluations from './components/Evaluation/ShowEvaluations.vue'
 import AddEvaluation from './components/Evaluation/AddEvaluation.vue'
 import EditEvaluation from './components/Evaluation/EditEvaluation.vue'
+import ShowStagiairesEva from './components/Evaluation/ShowStagiairesEva.vue'
+
+
+
+
 //--------------------------------
 //Groupes
 import ShowGroupes from './components/Groupe/ShowGroupes.vue'
@@ -81,7 +86,11 @@ const  router = new VueRouter({
         // route gestion de commerce
         {
             path:"/",
-            component: Contents
+            component: Contents,
+            meta:{
+                Evaluateur:true,
+                }
+
         },
        // route d'authentification
         {   
@@ -302,7 +311,9 @@ const  router = new VueRouter({
  {
     path:"/ShowEvaluations",
     component: ShowEvaluations,
-    name:"ShowEvaluations"
+    name:"ShowEvaluations",
+   
+
 },
 
 {
@@ -310,6 +321,16 @@ const  router = new VueRouter({
     component: EditEvaluation,
 // name: "EditEvaluation"
 },
+{
+    path:"/ShowStagiairesEva",
+    component: ShowStagiairesEva,
+    name:"ShowStagiairesEva",
+   
+
+},
+
+
+
 
     ],
    

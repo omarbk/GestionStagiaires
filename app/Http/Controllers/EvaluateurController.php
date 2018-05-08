@@ -22,7 +22,7 @@ class EvaluateurController extends Controller
      $user->id = $request->user['id'];
      $user->email=$request->user['email'];
      $user->role=$request->user['role'];
-     $user->password =  Hash::make($request->password);
+     $user->password =  Hash::make($request->user['password']);
      $user->save();
      $id=$user->id;
      $this->addEvaluateur($request,$id);
@@ -44,7 +44,7 @@ class EvaluateurController extends Controller
     }*/
     public function addEvaluateur(Request $request,$id){
         $evaluateur = new Evaluateur();
-
+        
         if($request->evaluateur['photo_evaluateur'])
         {  
             if(strlen($request->evaluateur['photo_evaluateur']) < 40 ){
@@ -55,10 +55,13 @@ class EvaluateurController extends Controller
            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
           $image2 = \Image::make($request->evaluateur['photo_evaluateur']);     
            Storage::put('images/'.$name, (string) $image2->encode());
-           $evaluateur->photo_evaluateur = $name;}
+           $evaluateur->photo_evaluateur = $name;
+           
+        }
          }
          else  {
              $evaluateur->photo_evaluateur = "";
+             
          }
          
 
@@ -75,8 +78,11 @@ class EvaluateurController extends Controller
         $evaluateur->fk_hospitalier =$request->hospitalier['id_hospitalier'];
 
         $evaluateur->save();
-      
-        
+
+        $user = User::find($id);
+        $user->photo =$evaluateur->photo_evaluateur;
+        $user->save();       
+
         return Response()->json(['etat' => true ]);
         
 
@@ -123,6 +129,10 @@ class EvaluateurController extends Controller
        /* $test=$request->evaluateur['value'];
         $evaluateur->fk_hospitalier = $test['id_hospitalier'];*/
         $evaluateur->save();
+        $user = User::find($evaluateur->fk_user);
+        $user->photo =$evaluateur->photo_evaluateur;
+        $user->save(); 
+        
                  return Response()->json(['etat' => true]);
     }
 
