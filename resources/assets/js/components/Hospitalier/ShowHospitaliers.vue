@@ -313,13 +313,24 @@ watch:{
 },
         mounted(){
    
-          if( this.$route.params.success == "add"){
+                 if( this.$route.params.success == "add"){
              
-                        this.Testopen.testAjout = true;
+                       // this.Testopen.testnotifAdd = true;                  
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien ajouter!',
+                                      duration: 1500,
+                                    });
           }
                     if( this.$route.params.success == "edit"){
              
-                        this.Testopen.testEdit = true;
+                             this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien modifier!',
+                                      duration: 1500,
+                                    });
           }
         },
       updated(){

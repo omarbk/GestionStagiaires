@@ -292,13 +292,24 @@ import  Pagination from '../Pagination.vue';
   },
      mounted(){
            
-          if( this.$route.params.success == "addsuccess"){
+            if( this.$route.params.success == "addsuccess"){
              
-                        this.Testopen.testnotifAdd = true;
+                       // this.Testopen.testnotifAdd = true;                  
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien ajouter!',
+                                      duration: 1500,
+                                    });
           }
                     if( this.$route.params.success == "editsuccess"){
              
-                        this.Testopen.testnotifEdit = true;
+                             this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien modifier!',
+                                      duration: 1500,
+                                    });
           }
         },
       updated(){

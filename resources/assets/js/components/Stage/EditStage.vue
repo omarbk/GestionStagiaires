@@ -2,6 +2,15 @@
     <div>
       <notifications group="foo" 
       position="bottom right"/>
+
+          <div class="loading" v-if="loading">
+     <div class="lds-hourglass"></div>
+    </div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
+
+<div v-if="!loading">
     <div class="row">
         <div class="col">
         <router-link class="btn btn-primary mb-3  float-right " :to="'/ShowStages'"> <i class="fas fa-long-arrow-alt-left fontsize"></i> </router-link>
@@ -81,6 +90,7 @@
           <button  class="btn btn-primary mr-20 btn-success">Enregister</button>
 </form>
     </div>
+    </div>
 </template>
 
 <script>
@@ -88,6 +98,7 @@
     export default{ 
         
           data: () => ({
+              loading: false,
               stage_groupes:[],
             pushEvaluateur:{
                 id_evaluateur:0,
@@ -133,6 +144,16 @@
  
         
                     methods:{
+                         fetchData () {
+                                this.loading=true;
+                        this.stage.id_stage = this.$route.params.id_stage;
+                        this.getStage(this.$route.params.id_stage);
+                      this.getAllEvaluateurs();
+                      this.getAllHospitaliers();
+                      this.getAllStagiaires();
+                      this.getAllGroupes();
+
+                         },
                      
                  
                    
@@ -170,6 +191,7 @@
                     this.groupes = response.data.groupes;
                     console.log('groupes')
                     console.log(this.groupes)
+                    this.loading=false;
                 })
                 .catch(() => {
                     console.log('handle server error from here');
@@ -258,13 +280,11 @@
 
 
                     },
+ created () {
+    this.fetchData()
+  },
                     mounted(){
-                        this.stage.id_stage = this.$route.params.id_stage;
-                        this.getStage(this.$route.params.id_stage);
-                      this.getAllEvaluateurs();
-                      this.getAllHospitaliers();
-                      this.getAllStagiaires();
-                      this.getAllGroupes();
+
                     }
                  
 
@@ -358,4 +378,39 @@ a {
 
     font-size: 1.30rem;
 }
+
+
+
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
 </style>

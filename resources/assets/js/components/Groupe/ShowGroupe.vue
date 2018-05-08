@@ -131,7 +131,7 @@ groupe_stagiaire: [],
   
           methods:{
  fetchData () {
-                    
+                    this.loading = true
                 console.log(this.$route.params.id_groupe)
                this.getGroupe(this.$route.params.id_groupe);
                this.getCalendriers(this.$route.params.id_groupe);
@@ -162,6 +162,7 @@ groupe_stagiaire: [],
                                 
                                 console.log('-------------------calendriers-----------');
                                 console.log(response);
+                                this.loading = false;
                             });     
                     },
         
@@ -231,4 +232,38 @@ a {
      border-color:#d4eddb;
      color:#272727;
  }
+
+
+
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
 </style>

@@ -53,7 +53,7 @@
     </b-modal>
   </div>
     </div>
-    </div>  
+    
             <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testAjout">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -179,6 +179,7 @@
                      @paginate="getStagiaires()"
                      :offset="4">
     </vue-pagination>
+    </div>  
     </div>
     <!-- fin affiche -->
 </template>
@@ -256,8 +257,19 @@ import  Pagination from '../Pagination.vue';
              
              
       }),
+                  created () {
+    this.fetchData()
+  },
  
  methods:{
+     fetchData () {
+      //this.error = this.post = null
+       this.loading = true
+       this.countUser();
+       this.getStagiaires();
+
+
+      },
       onImageChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 this.fileName=files[0].name;
@@ -370,16 +382,26 @@ import  Pagination from '../Pagination.vue';
  
    
         mounted(){
-                  this.countUser();
-                  this.getStagiaires();
+
    
-          if( this.$route.params.success == "add"){
+           if( this.$route.params.success == "add"){
              
-                        this.Testopen.testAjout = true;
+                       // this.Testopen.testnotifAdd = true;                  
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien ajouter!',
+                                      duration: 1500,
+                                    });
           }
                     if( this.$route.params.success == "edit"){
              
-                        this.Testopen.testEdit = true;
+                             this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien modifier!',
+                                      duration: 1500,
+                                    });
           }
         },
       updated(){
