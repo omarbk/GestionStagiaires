@@ -209,7 +209,7 @@ import  Pagination from '../Pagination.vue';
                                                 }).then((result) => {
                         if (result.value) {
 
-                            axios.delete('/deleteObjectif/'+objectif.id_evaluation_objectif).then(
+                            axios.delete('/deleteObjectif/'+objectif.annee_objectif).then(
                                         response => {
                                 
                                             this.getObjectifs();

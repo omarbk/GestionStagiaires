@@ -17,18 +17,18 @@
 
 <div >
         <form @submit.prevent="addObjectif">
-         <div class="row" > 
-            <div class="col-md-9">
-               
-                <div class="form-group row">
-                    <label for="objectif" class="col-sm-3" > Annee</label>
+             <div class="form-group row">
+                    <label for="stagiaire" class="col-sm-3" >niveau d'étude:</label>
                     <div class="col-sm-6">
-  <multiselect v-model="annee" :options="options" :searchable="false" :close-on-select="true" :show-labels="false" placeholder="Selectionner une annee"></multiselect>
-                    </div>
-                </div>
-            
-            </div> 
-    </div>
+   
+                        <select class="form-control custom-select " id="fk_compte" v-model="annee" >
+                                    <option selected disabled>Choisir Client</option>
+                                    <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
+                        </select>  
+
+                    
+                            </div>
+                        </div>
 
    
      <div class="row">
@@ -91,9 +91,11 @@
                    
                   
                 
-              },  annee:"",
-                value: '',
-                options: [1, 2,3,4,5,6,7],
+              },  
+              annee:"",
+              listAnneeEtude : ["1er annnée","2eme année",
+                                "3eme année","4eme année","5eme année",
+                                "6eme année","7eme année"],
    
                objectifs:[],
             type_objectif:{

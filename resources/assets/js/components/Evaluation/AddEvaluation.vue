@@ -22,6 +22,7 @@
     </div>
 </div>
 <hr>
+<!--
 <div class="row">
     <div class="col-md-6 col-sm-12">
             <div class="form-group row">
@@ -40,6 +41,7 @@
     </div>
 </div>
 <hr>
+-->
 <div class="row"> 
     <div class="col">
        <div class="row">
@@ -125,28 +127,9 @@
       
 
 methods: { 
-getAllStagiairesEval(){//type_status
-                axios.get('/getAllStagiairesEval')
-                .then((response) => {
-                    this.loading = false;
-                    this.stagiaires = response.data.stagiaires;
-                 /*   this.evaluations = response.data.evaluations;
-                   this.stagiaires.forEach(function(stagiaire) {
-                       console.log("stagiaire")
-                       this.evaluations.forEach(function(evaluation) {
-                            console.log("eval")
-               if(stagiaire.id_stagiaire != evaluation.fk_stagiaire){
-                    console.log("yeeees")
-               }
-               
-               });
-               });*/
-               }) .catch(() => {
-                    console.log('handle server error from here');
-                });
-    },
-    getObjectifsAnnee(){
- axios.get('/getObjectifsAnnee')
+
+    getObjectifsAnnee(id_stagiaire){
+ axios.get('/getObjectifsAnnee/'+id_stagiaire)
                 .then((response) => {
                     this.loading = false;
                     this.objectifs = response.data.objectifs;
@@ -169,7 +152,9 @@ getAllStagiairesEval(){//type_status
             
         },
     fetchData(){
-        this.getAllStagiairesEval();
+        //this.stagiaire.id_stagiaire=this.$route.params.id_stagiaire;
+        this.evaluation.fk_stagiaire=1;
+        this.getObjectifsAnnee( this.evaluation.fk_stagiaire);
     }
 
 }

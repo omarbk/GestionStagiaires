@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Evaluation_objectif;
 use App\Type_objectif;
+use App\Stagiaire;
+
 class Evaluation_objectifController extends Controller
 {
     public function addObjectif(Request $request){
@@ -65,14 +67,20 @@ class Evaluation_objectifController extends Controller
                  return Response()->json(['objectifs' => $objectifs ]);
     }
 
-    public function getObjectifsAnnee(){
+    public function getObjectifsAnnee($id_stagiaire){
      
-        $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+       /* $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
         ->leftJoin('notes', 'evaluation_objectifs.id_evaluation_objectif', '=', 'notes.fk_objectif')
         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')
   
         ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*')
         ->where('annee_objectif','=',1)
+        ->get();*/
+        $stagiaire=Stagiaire::find($id_stagiaire);
+        $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+  
+        ->select('evaluation_objectifs.*', 'type_objectifs.*')
+        ->where('evaluation_objectifs.annee_objectif','=',$stagiaire->niveau_etude_stagiaire)
         ->get();
        // dd($objectifs);
                       return Response()->json(['objectifs' => $objectifs ]);
@@ -106,8 +114,10 @@ class Evaluation_objectifController extends Controller
         return Response()->json(['objectifs' => $objectifs ]);
     }
 
-    public function deleteObjectif($id_evaluation_objectif){
-        $objectif = Evaluation_objectif::find($id_evaluation_objectif);
+    public function deleteObjectif($annee_objectif){
+       // dd($annee_objectif);
+
+        $objectif = Evaluation_objectif::where('annee_objectif','=',$annee_objectif);
         $objectif->delete();
         return Response()->json(['delete' => 'true']);
     }
