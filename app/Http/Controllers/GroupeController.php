@@ -91,6 +91,7 @@ class GroupeController extends Controller
      public function deleteGroupe($id_groupe){
 
         $groupe = Groupe::find($id_groupe)->delete();
+        $groupe_stagiaires = Groupe_stagiaire::where('fk_groupe','=',$id_groupe)->forceDelete();
         $calendrier = Calendrier::where('fk_groupe','=',$id_groupe)->delete();
         return Response()->json(['delete' => 'true']);
      }
@@ -171,7 +172,7 @@ class GroupeController extends Controller
        
         
         for($i=0;$i<count($request->suppStagiaires);$i++){
-         $calendrier = Groupe_stagiaire::where('fk_stagiaire',$request->suppStagiaires[$i]['id_stagiaire'])->where('fk_groupe', $id_groupe)->delete();
+         $calendrier = Groupe_stagiaire::where('fk_stagiaire',$request->suppStagiaires[$i]['id_stagiaire'])->where('fk_groupe', $id_groupe)->forceDelete();
  
          }
         for($i=0;$i<count($request->pushStagiaire);$i++){
