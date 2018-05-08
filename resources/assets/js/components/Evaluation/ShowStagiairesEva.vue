@@ -317,6 +317,7 @@ import  Pagination from '../Pagination.vue';
                 .then((response) => {
                     this.loading = false;
                     this.stagiaires = response.data.stagiaires;
+                    console.log(response)
                })
                 .catch(() => {
                     console.log('handle server error from here');

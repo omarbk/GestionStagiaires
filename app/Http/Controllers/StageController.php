@@ -58,7 +58,9 @@ class StageController extends Controller
      public function deleteStage($id_stage){
 
         $stage = Stage::find($id_stage)->delete();
-        $stage_groupe = Stage_groupe::where('fk_stage','=',$id_stage)->delete();
+        
+       
+        $stage_groupe = Stage_groupe::where('fk_stage','=',$id_stage)->forceDelete();
         return Response()->json(['delete' => 'true']);
      }
 
@@ -98,7 +100,7 @@ class StageController extends Controller
        
         
         for($i=0;$i<count($request->suppGroupes);$i++){
-         $stagGroupes = Stage_groupe::where('fk_groupe',$request->suppGroupes[$i]['id_groupe'])->where('fk_stage', $id_stage)->delete();
+         $stagGroupes = Stage_groupe::where('fk_groupe',$request->suppGroupes[$i]['id_groupe'])->where('fk_stage', $id_stage)->forceDelete();
  
          }
         for($i=0;$i<count($request->stage_groupes);$i++){

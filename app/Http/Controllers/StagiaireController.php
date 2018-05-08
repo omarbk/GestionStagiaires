@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -12,6 +12,7 @@ use App\Stagiaire;
 use App\Evaluation;
 use App\Stage;
 use App\User;
+use App\Evaluateur;
 
 class StagiaireController extends Controller
 {
@@ -181,14 +182,18 @@ class StagiaireController extends Controller
 
     
     public function getStagiairesParEvaluateur(){
-      /*  Auth::user()->id;
+        $evaluateurs = Evaluateur::select('evaluateurs.*')
+                      ->where('evaluateurs.fk_user', '=', Auth::user()->id)->get();
+                    
+        
+      $stagiaires  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+                      ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+                      ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+                      ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+                      ->select('stagiaires.*')
+                      ->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)->paginate(6);
 
-        $stage  = Stage::leftJoin('stages', 'stages.fk_evaluateur', '=', 'users.id')
-        $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
-                    ->leftJoin('stages', 'stages.fk_evaluateur', '=', 'users.id')
-                    ->select('stagiaires.*', 'users.*')
-                    ->where('users.role','=','stagiaire')
-                    ->paginate(6);
-                 return Response()->json(['stagiaires' => $stagiaires ]);*/
+                 return Response()->json(['stagiaires' => $stagiaires]);
+                 
     }
 }
