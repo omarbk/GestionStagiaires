@@ -2,6 +2,14 @@
     <div>
             <notifications group="foo" 
       position="bottom right"/>
+
+
+          <div class="loading" v-if="loading">
+     <div class="lds-hourglass"></div>
+    </div>
+ 
+
+<div v-if="!loading">
     <div class="row">
         <div class="col">
         <router-link class="btn btn-primary mb-3  float-right " :to="'/ShowGroupes'"> <i class="fas fa-long-arrow-alt-left fontsize"></i> </router-link>
@@ -141,6 +149,7 @@
              
           <button  class="btn btn-primary mr-20 btn-success">Enregister</button>
 </form>
+</div>
     </div>
 </template>
 
@@ -149,6 +158,7 @@
     export default{ 
         
           data: () => ({
+             loading: false,
             stagiaires:[],
             pushStagiaire:[],
             suppStagiaires:[],
@@ -180,6 +190,9 @@
             calendriers: [],
              
       }),
+   created () {
+    this.fetchData()
+  },
       watch:{
 
     'calendrier.debut_semaine_cal':{
@@ -220,6 +233,16 @@
       }, 
         
                     methods:{
+
+       fetchData () {
+    
+                       this.loading = true
+                      this.getAllStagiaires();
+                      this.getGroupe(this.$route.params.id_groupe);
+                      this.getCalendriers(this.$route.params.id_groupe);
+
+
+      },
                       DiffDebutFin2(){
                           console.log('dkhelllllllllllll')
                           let m1 =1
@@ -511,6 +534,7 @@
                                 
                                 console.log('-------------------calendriers-----------');
                                 console.log(response);
+                                this.loading = false
                             });     
                     },
                   updateGroupe: function(){
@@ -538,7 +562,7 @@
      getAllStagiaires(){//type_status
                 axios.get('/getAllStagiaires')
                 .then((response) => {
-                    this.loading = false;
+                   // this.loading = false;
                     this.stagiaires = response.data.stagiaires;
                })
                 .catch(() => {
@@ -546,9 +570,7 @@
                 });
     }, },
                     mounted(){
-                      this.getAllStagiaires();
-                      this.getGroupe(this.$route.params.id_groupe);
-                      this.getCalendriers(this.$route.params.id_groupe);
+
                       
                     }
                  
@@ -642,5 +664,40 @@ a {
 .fontsize{
 
     font-size: 1.30rem;
+}
+
+
+
+
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  height: 20px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 15px solid #fff;
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }
 </style>

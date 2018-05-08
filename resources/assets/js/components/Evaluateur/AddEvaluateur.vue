@@ -51,7 +51,7 @@
                 <div class="form-group row">
   <label class="typo__label col-sm-4">Centre</label>
    <div class="col-sm-8">
-  <multiselect v-model="hospitalier" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier"></multiselect>
+  <multiselect v-model="hospitalier" :options="hospitaliers" :searchable="false" :close-on-select="true" :show-labels="true" label="nom_hospitalier" placeholder="Selectionner un hospitalier" required></multiselect>
    </div>
 </div>
             </div> 
