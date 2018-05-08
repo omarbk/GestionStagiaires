@@ -18,16 +18,15 @@
 <div >
         <form @submit.prevent="addObjectif">
          <div class="row" > 
-         
             <div class="col-md-9">
-               <!--
+               
                 <div class="form-group row">
-                    <label for="objectif" class="col-sm-3" > Coefficient</label>
+                    <label for="objectif" class="col-sm-3" > Annee</label>
                     <div class="col-sm-6">
-                    <input type="number" class="form-control" id="objectif"  v-model="objectif.coefficient">
+  <multiselect v-model="annee" :options="options" :searchable="false" :close-on-select="true" :show-labels="false" placeholder="Selectionner une annee"></multiselect>
                     </div>
                 </div>
-                -->
+            
             </div> 
     </div>
 
@@ -40,19 +39,18 @@
                                     <tr>
                                         <th>Type Objectif</th>
                                         <th>Objectif</th>
-                                        <th>Annee Objectif</th>                                       
                                         <th>Coefficient</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(objectif,index) in objectifs" :key="index">
                                         <input class="form-control"  type="text" v-model="objectif.fk_type_objectif" disabled hidden>
+                                      
                                         <th>
                                     <input  class="form-control" type="text"  v-model="objectif.type" disabled >
 
                                         </th>    
                                        <th><input type="text" class="form-control" id="email" v-model="objectif.objectif" ></th>
-                                        <th><input type="number" class="form-control" id="fixe" v-model="objectif.annee_objectif" ></th>
                                         <th><input type="number" class="form-control" id="mobile" v-model="objectif.coefficient"></th> 
                                             <th><a @click="spliceObjectif(index)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
                                         </tr>
@@ -90,9 +88,13 @@
                     annee_objectif:"",
                     coefficient : "",
                     type:"",
+                   
                   
                 
-              }, 
+              },  annee:"",
+                value: '',
+                options: [1, 2,3,4,5,6,7],
+   
                objectifs:[],
             type_objectif:{
                 id_type:0,
@@ -109,7 +111,7 @@
             this.objectifs.push({ 
                fk_type_objectif:objectif.fk_type_objectif,
                objectif:objectif.objectif,
-               annee_objectif: objectif.annee_objectif,
+               annee_objectif: this.annee,
                coefficient: objectif.coefficient,
                type:objectif.type,
             });
@@ -132,8 +134,8 @@
          
           addObjectif(){ 
               console.log("test")
-           console.log(this.objectif);
-               
+               this.objectif.annee_objectif=this.annee;
+                          console.log(this.objectif.annee_objectif);
               axios.post('/addObjectif',{objectifs:this.objectifs}).then(response => {  
                     //console.log(response.data.objectif);   
                     console.log('objectif Bien ajouter !');
@@ -192,6 +194,8 @@
     }
     
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style scoped>
  .btnMarge{
      padding-bottom: 10px;

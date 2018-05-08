@@ -98,6 +98,7 @@ function  getTypeObjectifs(){
     $listeTypeObjectifs = Type_objectif::all();
         return Response()->json(['listeTypeObjectifs' => $listeTypeObjectifs ]);
    }
+   
    function  getTypeObjectif($id_type){
     $TypeObjectif = Type_objectif::where('id_type','=',$id_type)->get();
         return Response()->json(['TypeObjectif' => $TypeObjectif ]);

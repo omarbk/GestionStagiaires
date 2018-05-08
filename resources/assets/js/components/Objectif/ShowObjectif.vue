@@ -29,39 +29,26 @@
                                         <th>Type Objectif</th>
                                         <th>Objectif</th>
                                         <th>Coefficient</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="(objectif,index) of objectifs" :key="objectif.id_evaluation_objectif" >
+                                    <tr  v-for="objectif of objectifs" :key="objectif.id_evaluation_objectif" >
                                         <input class="form-control"  type="text" v-model="objectif.fk_type_objectif" disabled hidden>
                                         <th>
-                                    <input  class="form-control" type="text"  v-model="objectif.type_objectif" disabled >
-
+                                            {{objectif.type_objectif}}
                                         </th>    
-                                       <th><input type="text" class="form-control" id="email" v-model="objectif.objectif" ></th>
-                                        <th><input type="number" class="form-control" id="mobile" v-model="objectif.coefficient"></th> 
-                                        <th><a @click="spliceObjectif(index,objectif)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
+                                       <th> {{objectif.objectif}}</th>
+                                        <th>{{objectif.coefficient}}</th> 
 
                                         </tr>
                                        
-                                       
-                                         <th>
-                                            <div> 
-                                                <select class="custom-select " id="fk_type_objectif" v-model="objectif.fk_type_objectif" >
-                                                 <option selected disabled>Choisir Type Objectif</option>
-                                                <option v-for="type_objectif in type_objectifs" :key="type_objectif.id_type" :value="type_objectif.id_type">{{type_objectif.type_objectif}}</option>
-                                                </select>                                                                     
-                                            </div>
-                                        </th>                                        
-                                         <th><a    @click="pushObjectif(objectif)"  class="btn btn-success"  ><i class="fas fa-plus-circle"></i></a></th>
-                                   
                                       </tbody>
                                 </table>
                             </div>
              </div>
 
      </div>
-                       <button  class="btn mb-3  btn-success">Enregister</button>
 
           </form>
 </div>
@@ -93,33 +80,7 @@ export default {
   }),
 
   methods:{
-   async pushObjectif(objectif){
-            console.log(this.objectif);
-              var result = await this.getTypeObjectif();
-          var result2 = await this.objectifs.push({ 
-               fk_type_objectif:objectif.fk_type_objectif,
-               objectif:objectif.objectif,
-               annee_objectif: this.annee,
-               coefficient: objectif.coefficient,
-               type_objectif:objectif.type_objectif,
-            });
-            this.objectif = {
-                 id_evaluation_objectif : 0,
-                    objectif : "",
-                    fk_type_objectif : "",
-                    annee_objectif:"",
-                    coefficient : "",
-                    type_objectif:"",
-                
-              };
-            
-    },
 
-    spliceObjectif(index,objectif){
-            this.objectifs.splice(index, 1);
-            this.suppObjectifs.push(objectif);
-
-        },
 
        // recupere les donnees dans le formulaire
     
@@ -134,17 +95,7 @@ export default {
                     console.log(response.data.objectifs)
                   });         
     },
-    getTypeObjectifs(){
-           axios.get('/getTypeObjectifs')
-            .then((response) => {
-                console.log(response.data.listeTypeObjectifs);
-                    this.type_objectifs = response.data.listeTypeObjectifs;
-                  this.loading= false;
-            })
-            .catch(() => {
-                    console.log('handle server error from here');
-        });
- },
+ 
  
       getTypeObjectif(){
        // console.log('-------- type_objectifs ');
@@ -165,25 +116,13 @@ export default {
 
 });
     },
-    updateObjectif(){
-            axios.post('/updateObjectif',{objectifs:this.objectifs,suppObjectifs:this.suppObjectifs})
-            .then(response => {  
- 
-                    if(response.data.etat){
-                      this.$router.push({ name: 'ShowObjectifs', params: { success: "edit"  }});
 
-                    }
-                })
-                .catch(error => {
-                })
-    },
 
       fetchData () {
         this.loading = true
         this.objectif.annee_objectif=this.$route.params.annee_objectif;
          this.annee=this.$route.params.annee_objectif;
       console.log( this.objectif.annee_objectif)
-              this.getTypeObjectifs();
 
       this.getObjectif( this.objectif.annee_objectif); 
 

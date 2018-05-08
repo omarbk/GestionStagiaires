@@ -32,6 +32,7 @@ import EditEvaluateur from './components/Evaluateur/EditEvaluateur.vue'
 import ShowObjectifs from './components/Objectif/ShowObjectifs.vue'
 import AddObjectif from './components/Objectif/AddObjectif.vue'
 import EditObjectif from './components/Objectif/EditObjectif.vue'
+import ShowObjectif from './components/Objectif/ShowObjectif.vue'
 
 // Evaluation 
 import ShowEvaluations from './components/Evaluation/ShowEvaluations.vue'
@@ -289,9 +290,14 @@ const  router = new VueRouter({
     name: "AddObjectif"
 },
 {
-    path:"/EditObjectif/:id_evaluation_objectif",
+    path:"/EditObjectif/:annee_objectif",
     component: EditObjectif,
 // name: "EditObjectif"
+},
+{
+    path:"/ShowObjectif/:annee_objectif",
+    component: ShowObjectif,
+   // name:"ShowObjectif"
 },
 //----------------Evaluation
 {

@@ -65,20 +65,17 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Objectif</th>
-                                        <th>Type Objectif </th>
-                                        <th>Année Objectif </th>
-                                        <th>Coefficient</th>
+                                        <th>Année Objectifs </th>
                                         <th>Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr  v-for="objectif of objectifs.data" :key="objectif.id_evaluation_objectif" >
-                                        <td>{{objectif.objectif}}</td>
-                                        <td>{{objectif.type_objectif}} </td>
                                         <td>{{ objectif.annee_objectif}}</td> 
-                                        <td>{{ objectif.coefficient}}</td> 
                                         <td  class="optionsWidth"> 
+                                            <a href="#"  class="btn btn-primary" @click="redirect_To_ShowObjectif(objectif)"  >
+                                                <i class="fas fa-eye d-inline-block"></i>
+                                            </a>
                                             <a href="#" @click="redirect_To_EditObjectif(objectif)"  class="btn btn-success" >
                                                 <i class="fas fa-edit d-inline-block"></i>
                                             </a>
@@ -176,9 +173,13 @@ import  Pagination from '../Pagination.vue';
     },
    
     redirect_To_EditObjectif(objectif){
-                     this.$router.push('/EditObjectif/'+objectif.id_evaluation_objectif);
+        console.log(objectif)
+                     this.$router.push('/EditObjectif/'+objectif.annee_objectif);
             },
-     
+     redirect_To_ShowObjectif(objectif){
+        console.log(objectif)
+                     this.$router.push('/ShowObjectif/'+objectif.annee_objectif);
+            },
         searchObjectif(event){
              console.log(this.search);
              this.objectifs.current_page=1;
@@ -272,10 +273,7 @@ watch:{
 thead{
     background-color: #efefef;
 }
-.optionsWidth{
-width : 171px;
 
-}
  .btnMarge{
      padding-bottom: 10px;
  }

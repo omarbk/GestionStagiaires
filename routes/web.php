@@ -284,7 +284,7 @@ Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
 Route::get('/getObjectifs','Evaluation_objectifController@getObjectifs');
 Route::get('/getObjectifsAnnee','Evaluation_objectifController@getObjectifsAnnee');
 
-Route::get('/getObjectif/{id_evaluation_objectif}','Evaluation_objectifController@getObjectif');
+Route::get('/getObjectif/{annee_objectif}','Evaluation_objectifController@getObjectif');
 Route::delete('/deleteObjectif/{id_evaluation_objectif}','Evaluation_objectifController@deleteObjectif');
 Route::post('/updateObjectif','Evaluation_objectifController@updateObjectif');
 Route::get('/searchObjectif/{search_O}','Evaluation_objectifController@searchObjectif');

@@ -84,6 +84,7 @@ Vue.component('app-editevaluateur', require('./components/Evaluateur/EditEvaluat
 Vue.component('app-addobjectif', require('./components/Objectif/AddObjectif.vue'));
 Vue.component('app-showobjectifs', require('./components/Objectif/ShowObjectifs.vue'));
 Vue.component('app-editobjectif', require('./components/Objectif/EditObjectif.vue'));
+Vue.component('app-showobjectif', require('./components/Objectif/ShowObjectif.vue'));
 
 /* Evaluation */
 Vue.component('app-addevaluation', require('./components/Evaluation/AddEvaluation.vue'));
