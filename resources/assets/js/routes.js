@@ -35,7 +35,7 @@ import EditObjectif from './components/Objectif/EditObjectif.vue'
 import ShowObjectif from './components/Objectif/ShowObjectif.vue'
 
 // Evaluation 
-import ShowEvaluations from './components/Evaluation/ShowEvaluations.vue'
+import ShowEvaluation from './components/Evaluation/ShowEvaluation.vue'
 import AddEvaluation from './components/Evaluation/AddEvaluation.vue'
 import EditEvaluation from './components/Evaluation/EditEvaluation.vue'
 import ShowStagiairesEva from './components/Evaluation/ShowStagiairesEva.vue'
@@ -315,17 +315,17 @@ const  router = new VueRouter({
     name: "AddEvaluation"
  },
  {
-    path:"/ShowEvaluations",
-    component: ShowEvaluations,
-    name:"ShowEvaluations",
+    path:"/ShowEvaluation",
+    component: ShowEvaluation,
+    name:"ShowEvaluation",
    
 
 },
 
 {
-    path:"/EditEvaluation/:id_note",
+    path:"/EditEvaluation",
     component: EditEvaluation,
-// name: "EditEvaluation"
+ name: "EditEvaluation"
 },
 {
     path:"/ShowStagiairesEva",

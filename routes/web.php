@@ -244,6 +244,7 @@ Route::delete('/deleteResponsable/{fk_user}','ResponsableController@deleteRespon
 Route::post('/updateResponsable','ResponsableController@updateResponsable');
 Route::get('/searchResponsable/{search_R}','ResponsableController@searchResponsable');
 
+
 //Service
 Route::post('/addService','ServiceController@addService');
 Route::get('/getServices','ServiceController@getServices');
@@ -283,12 +284,12 @@ Route::get('/getAllEvaluateurs','EvaluateurController@getAllEvaluateurs');
 Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
 Route::get('/getObjectifs','Evaluation_objectifController@getObjectifs');
 Route::get('/getObjectifsAnnee/{id_stagiaire}','Evaluation_objectifController@getObjectifsAnnee');
+Route::get('/getObjectifsNotes/{id_stagiaire}','Evaluation_objectifController@getObjectifsNotes');
 
 Route::get('/getObjectif/{annee_objectif}','Evaluation_objectifController@getObjectif');
 Route::delete('/deleteObjectif/{annee_objectif}','Evaluation_objectifController@deleteObjectif');
 Route::post('/updateObjectif','Evaluation_objectifController@updateObjectif');
 Route::get('/searchObjectif/{search_O}','Evaluation_objectifController@searchObjectif');
-
 //groupe
 Route::post('/addGroupe','GroupeController@addGroupe');
 Route::get('/getGroupes','GroupeController@getGroupes');
@@ -301,6 +302,7 @@ Route::get('/getAllGroupes','GroupeController@getAllGroupes');
 
 //Evaluation 
 Route::post('/addEvaluation','NoteController@addEvaluation');
+Route::post('/updateNotes','NoteController@updateNotes');
 
 // Stagiaire 
 Route::post('/addUserStagiaire','StagiaireController@addUserStagiaire');
@@ -314,6 +316,9 @@ Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
       // pour evaluation
 Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
 Route::get('/getStagiairesParEvaluateur','StagiaireController@getStagiairesParEvaluateur');
+
+Route::get('/getStagiairesParEvaluation/{id_stagiaire}','StagiaireController@getStagiairesParEvaluation');
+
 
 
 // stage 

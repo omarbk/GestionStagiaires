@@ -155,7 +155,7 @@ export default {
                if(type_objectif.id_type == this1.objectif.fk_type_objectif){
                    console.log('-------- type_objectifs ');
 
-                   this1.type.type_objectif = type_objectif.type_objectif;
+                   this1.objectif.type_objectif = type_objectif.type_objectif;
                                                      console.log(this1.objectif.type_objectif) 
 
                   

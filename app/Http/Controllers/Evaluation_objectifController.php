@@ -78,12 +78,15 @@ class Evaluation_objectifController extends Controller
         ->get();*/
         $stagiaire=Stagiaire::find($id_stagiaire);
         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
-  
         ->select('evaluation_objectifs.*', 'type_objectifs.*')
         ->where('evaluation_objectifs.annee_objectif','=',$stagiaire->niveau_etude_stagiaire)
         ->get();
        // dd($objectifs);
-                      return Response()->json(['objectifs' => $objectifs ]);
+       $notes =[];
+       for($i=0;$i<count($objectifs);$i++){
+            $notes[$i] =0;
+       }
+                      return Response()->json(['objectifs' => $objectifs ,'notes' => $notes]);
     }
 
     public function getObjectif($annee_objectif){
@@ -95,6 +98,30 @@ class Evaluation_objectifController extends Controller
 
                  return Response()->json(['objectifs' => $objectifs]);
     }
+
+    public function getObjectifsNotes($id_stagiaire){
+     
+         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+         ->leftJoin('notes', 'evaluation_objectifs.id_evaluation_objectif', '=', 'notes.fk_objectif')
+         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')
+         ->leftJoin('total_notes', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
+         ->leftJoin('stagiaires', 'evaluations.fk_stagiaire', '=', 'stagiaires.id_stagiaire')
+
+         ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*','total_notes.*')
+         ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
+         ->get();
+       /*  $stagiaire=Stagiaire::find($id_stagiaire);
+         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+         ->select('evaluation_objectifs.*', 'type_objectifs.*')
+         ->where('evaluation_objectifs.annee_objectif','=',$stagiaire->niveau_etude_stagiaire)
+         ->get();
+        // dd($objectifs);
+        $notes =[];
+        for($i=0;$i<count($objectifs);$i++){
+             $notes[$i] =0;
+        }*/
+                       return Response()->json(['objectifs' => $objectifs]);
+     }
   /*  public function getByType(){
         $listeTypeObjectifs = Type_objectif::all();
         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')

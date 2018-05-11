@@ -974,7 +974,7 @@ computed:{
                 this.bonCommande.total_lettre += ' et '+this.$WrittenNumber(res[1], { lang: 'fr'})
             }
             
-            console.log('------ calucul virgule ')
+            console.log('------ calcul virgule ')
             console.log(res[0].toString().split(""))
 
             

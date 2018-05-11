@@ -196,4 +196,21 @@ class StagiaireController extends Controller
                  return Response()->json(['stagiaires' => $stagiaires]);
                  
     }
+
+    // pour evaluationnnnn
+    public function getStagiairesParEvaluation($id_stagiaire){
+       
+      $stagiaires  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+                      ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+                      ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+                      ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+                      ->leftJoin('hospitaliers', 'stages.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
+                      ->leftJoin('evaluateurs', 'stages.fk_evaluateur', '=', 'evaluateurs.id_evaluateur')
+                      ->select('stagiaires.*','groupes.*','stages.*','hospitaliers.*','evaluateurs.*')
+                      ->where('stagiaires.id_stagiaire', '=',$id_stagiaire)
+                      ->get();
+                      
+                 return Response()->json(['stagiaires' => $stagiaires]);
+                 
+    }
 }

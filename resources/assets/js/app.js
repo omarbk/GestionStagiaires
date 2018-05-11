@@ -89,7 +89,7 @@ Vue.component('app-showobjectif', require('./components/Objectif/ShowObjectif.vu
 
 /* Evaluation */
 Vue.component('app-addevaluation', require('./components/Evaluation/AddEvaluation.vue'));
-Vue.component('app-showevaluations', require('./components/Evaluation/ShowEvaluations.vue'));
+Vue.component('app-showevaluation', require('./components/Evaluation/ShowEvaluation.vue'));
 Vue.component('app-editevaluation', require('./components/Evaluation/EditEvaluation.vue'));
 
 // afficher un nombre de phrase limité 
