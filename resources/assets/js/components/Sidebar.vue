@@ -45,11 +45,7 @@
                             <i class="fas fa-briefcase"></i>Stages
                         </router-link>
                     </li>   
-                    <li class="nav-item">
-                      <router-link :to="'/'" class="nav-link active">
-                            <i class="far fa-sticky-note"></i>Etats
-                        </router-link>
-                    </li>  
+ 
                     <li class="nav-item">
                       <router-link :to="'/ShowServices'" class="nav-link active">
                             <i class="fas fa-cogs"></i>Services

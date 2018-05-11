@@ -21,7 +21,7 @@
         </div>
   
     </div>
-    <h2>Liste des Services</h2>
+    <h3>Liste des Services</h3>
     <hr>   
     </div> 
   

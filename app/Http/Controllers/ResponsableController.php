@@ -74,6 +74,9 @@ class ResponsableController extends Controller
         $responsable->fk_user = $request->responsable['fk_user'];
 
         $responsable->save();
+        $user = User::find($id);
+        $user->photo =$responsable->photo_responsable;
+        $user->save();  
       
         
         return Response()->json(['responsable' => $responsable ]);
@@ -115,6 +118,10 @@ class ResponsableController extends Controller
          $responsable->service_responsable = $request->responsable['service_responsable'];
          $responsable->fk_user =  $request->responsable['fk_user'];;
                  $responsable->save();
+
+                 $user = User::find($responsable->fk_user);
+                 $user->photo =$responsable->photo_responsable;
+                 $user->save();          
                   return Response()->json(['etat' => true]);
     }
 

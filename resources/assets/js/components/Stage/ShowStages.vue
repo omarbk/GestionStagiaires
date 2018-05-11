@@ -4,7 +4,7 @@
       position="bottom right" 
       classes="vue-notification success"/>    
       <!-- au cas ajout bien passé afficher ce message -->   
-        <h5>Stages </h5>      
+       
            
     <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
@@ -14,12 +14,18 @@
     </div>
 
 <div v-if="!loading">
-     <div class="row">
+
+      <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
     <router-link class="float-right btn btn-secondary" :to="'/AddStage'" ><i class="fas fa-plus-circle"/> Ajouter </router-link>
-       
-  </div>
+
+        </div>
+  
     </div>
+    <h3>Liste des Stages</h3>
+    <hr>   
+    </div> 
     
             <div v-if="Testopen.testnotifAdd" class="alert alert-success alert-dismissible fade show notifArticle" role="alert">
         <strong>Groupe bien ajouter !</strong> 
@@ -37,7 +43,7 @@
     
     
   
-    <hr>
+  
     <!-- formulaire pour Ajouter un article -->
    
    
@@ -59,9 +65,10 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
             </div>
-            <input type="text" @keyup.enter="searchComptes"  class="form-control" v-model="search" placeholder="recherche par nom du Compte ou responsable " aria-label="Username" aria-describedby="basic-addon1" >
+            <input type="text" @keyup.enter="searchStages"  class="form-control" v-model="search" placeholder="recherche par nom du Compte ou responsable " aria-label="Username" aria-describedby="basic-addon1" >
             </div>
         </div> 
+    
         
     </div>
                        </div>
@@ -74,6 +81,7 @@
                                         <th>intitule</th>
                                         <th>date Debut</th>                                       
                                         <th>date Fin</th>
+                                        <th>Statut</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -81,6 +89,14 @@
                                         <td>{{stage.intitule_stage}}</td>
                                         <td>{{stage.dateDebut_stage}}</td> 
                                         <td>{{stage.dateFin_stage}}</td>
+                                        
+                                        <td v-if="stage.statut_stage == 'Achevé'" >
+                                            <span class="badge badge-pill" style="background-color:red;color:white;font-size:14px"> <b>{{stage.statut_stage}} </b></span> 
+                                            </td>
+                                        <td v-else>
+                                            <span class="badge badge-pill" style="background-color:#3ede01;color:white;font-size:14px"> <b>{{stage.statut_stage}} </b></span> 
+
+                                        </td>
                                         <td  class="optionsWidth"> 
                                             <a href="#"    @click="redirect_To_ShowStage(stage.id_stage)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
                                          <router-link class="btn btn-success " :to="'/EditStage/'+stage.id_stage"><i class="fas fa-edit d-inline-block"></i></router-link>
@@ -217,6 +233,26 @@ import  Pagination from '../Pagination.vue';
       }),
  
  methods:{
+               searchStages(event){
+             console.log(this.search);
+             this.stages.current_page=1;
+             if(this.search === ""){
+                //console.log('test2');
+                    this.getStages();}
+                else {
+                     // console.log('test1');
+                axios.get('/searchStages/'+this.search+'?page='+this.stages.current_page+'')
+                .then((response) => {
+                  console.log('searchhhh ')
+                  console.log(response.data.stages)
+                    this.stages = response.data.stages;
+                  
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });}
+                    
+          },
      
         getGroupes(){
                 axios.get('/getGroupes?page='+this.groupes.current_page+'')
@@ -298,7 +334,7 @@ import  Pagination from '../Pagination.vue';
                                    this.$notify({
                                       group: 'foo',
                                       title: 'Succès',
-                                      text: 'Groupe bien ajouter!',
+                                      text: 'Stage bien ajouter!',
                                       duration: 1500,
                                     });
           }
@@ -307,7 +343,7 @@ import  Pagination from '../Pagination.vue';
                              this.$notify({
                                       group: 'foo',
                                       title: 'Succès',
-                                      text: 'Groupe bien modifier!',
+                                      text: 'Stage bien modifier!',
                                       duration: 1500,
                                     });
           }
@@ -456,7 +492,9 @@ table{
     transform: rotate(1800deg);
   }
 }
-
+.statutA{
+    
+}
 
 </style>
 

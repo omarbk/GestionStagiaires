@@ -49,17 +49,7 @@
                         <i class="fa fa-user"></i> Profile
                     </router-link>
 
-                    <div class="dropdown-header">Gestion Utilisateur</div>
-                        <router-link :to="'/addUsers'" class="dropdown-item" v-if="profile.role =='Super Admin'">
-                        <i class="fas fa-plus"></i> 
-                        Ajouter Utilisateur
-                        </router-link>
-                   
 
-                    <router-link :to="'/getUsers'" class="dropdown-item">
-                        <i class="far fa-file-alt"></i>
-                       Afficher Utilisateurs
-                        </router-link>
                   
 
                     <a href="#" class="dropdown-item" @click="logout">

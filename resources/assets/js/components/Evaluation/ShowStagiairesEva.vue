@@ -16,7 +16,6 @@
    
      <div class="row">
         <div class="col">
-    <b-btn v-b-modal.modalPrevent class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
        <b-modal id="modalPrevent"
              ref="modal"
              title="+ Compte"
@@ -54,6 +53,7 @@
   </div>
     </div>
     
+    
             <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testAjout">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -72,121 +72,79 @@
     <hr>
     <!-- formulaire pour Ajouter un stagiaire -->
    
-   
+   <div class="row">
+                <div class="col-6 col-sm-4">              
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input type="text" @keyup.enter="searchStagiaire"  class="form-control" v-model="searchStage" placeholder="recherche par Stage " aria-label="Username" aria-describedby="basic-addon1" >
+                            </div>
+                 </div>
+  <div class="col-6 col-sm-4">
+                        
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input type="text" @keyup.enter="searchStagiaire"  class="form-control" v-model="searchGroupe" placeholder="recherche par Groupe " aria-label="Username" aria-describedby="basic-addon1" >
+                            </div>
+                
+  </div>
+<div class="col-6 col-sm-4">
+                        <div class="form-group row">
+                        <label for="stagiaire" class="col-sm-4" >niveau d'étude:</label>
+                        <div class="col-sm-8">
     
-    <!-- fin formulaire -->
-    <!-- afficher les stagiaires sous formes des cards  -->
-    <div style="width: 75%">
-      <div class="card-header bg-light">
-                            <div class="row btnMarge">
-  <div class="col"  >
-    <!-- button pour afficher formulaire de l'ajout d un article -->         
-                <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-            </div>
-            <input type="text" @keyup.enter="searchStagiaire"  class="form-control" v-model="search" placeholder="recherche par Nom ou Service  " aria-label="Username" aria-describedby="basic-addon1" >
-            </div>
-        </div> 
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         </div>
-    </div>
-                       </div>
+                            <select class="form-control custom-select " id="fk_compte" v-model="searchNiveauE" @change="searchStagiaire" >
+                                        <option value="" selected>Choisir année</option>
+                                        <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
+                            </select>  
 
-    </div>
-                       <br>
-     <div class="card-body">
-                            <div class="table-responsive">
+                        
+                                </div>
+                            </div>
+</div>
+  <div class="col-12"> <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
+                                        <th>stage</th>
+                                        <th>groupe</th>
                                         <th>Nom</th>
                                         <th>Prenom</th>
-                                        <th>Service</th>
+                                        <th>specialite</th>
+                                        <th>Niveau d'étude</th>
                                         <th>options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="stagiaire of stagiaires.data" :key="stagiaire.id_stagiaire" >
+                                    <tr  v-for="(stagiaire,index) of stagiaires.data" :key="index" >
+                                        <td>{{stagiaire.intitule_stage}}</td>
+                                        <td>{{stagiaire.nom_groupe}}</td>
                                         <td>{{stagiaire.nom_stagiaire}}</td>
                                         <td>{{stagiaire.prenom_stagiaire}}</td>
-                                        <td>{{stagiaire.specialite_stagiaire}}</td>   
+                                        <td>{{stagiaire.specialite_stagiaire}}</td>  
+                                        <td>{{stagiaire.niveau_etude_stagiaire}}</td>  
                                         <td  class="optionsWidth"> 
-                                                 <a href="#"  class="btn btn-primary" @click="getStagiaire(stagiaire)"  ><i class="fas fa-eye d-inline-block"></i></a>
+                                                 <a href="#"  @click="redirect_To_Absences(stagiaire)"   class="btn btn-primary"   ><i class="fab fa-product-hunt"></i></a>
                             
-                  <a href="#"    @click="redirect_To_EditStagiaire(stagiaire)"  class="btn btn-success" ><i class="fas fa-edit d-inline-block "></i></a>
-                    <a href="#" class="btn btn-danger " @click="deleteStagiaire(stagiaire)"><i class="fas fa-trash-alt d-inline-block"></i></a>
+                  <a href="#"     class="btn btn-success" ><i class="far fa-sticky-note"></i></a>
                                           </td>                                  
                                     </tr>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     </div>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
+                            </div></div>
+</div>
+    
+    <!-- fin formulaire -->
+    <!-- afficher les stagiaires sous formes des cards  -->
+   
 
 
-
-
-
-
-
-
-
- <div class="row">
-     
-         <div>
-              
-            </div>
-             <div>
-              
-                <b-modal ok-only  v-model="modalShow" no-fade
-                :title="'Compte : Stagiaire'"
-                :body-bg-variant="+' '+modalShow+''+stagiaire.nom_stagiaire+''+stagiaire.prenom_stagiaire+''+stagiaire.tel_stagiaire+''+stagiaire.email+''+stagiaire.service_stagiaire+''+stagiaire.adresse_stagiaire+''+stagiaire.photo_stagiaire+''">
-                 <div class="row" v-if="modalShow">
-                      
-                         <div class="col">
-                   <span>Nom : </span>{{stagiaire.nom_stagiaire}}
-                   <hr>
-                   <span>Prenom : </span>{{stagiaire.prenom_stagiaire}} 
-                   <hr>
-                   <span>Téléphone : </span>{{stagiaire.tel_stagiaire}}
-                   <hr>
-                   <span>E-mail :  </span>{{stagiaire.email}}
-                   <hr>
-                   <span>Date Naissance :  </span>{{stagiaire.dateNaissance_stagiaire}}
-                   <hr>
-                    <span>Adresse :  </span>{{stagiaire.adresse_stagiaire}}
-                   <hr>
-                   </div>
-                                                   
-                   
-                   <div class="col">
-                       <div class="pull-right">
-                     
-                      <img v-if="stagiaire.photo_stagiaire != ''" class="card-img-top" :src="'storage/images/'+stagiaire.photo_stagiaire" width="150px" height="150px">
-                    <img v-if="stagiaire.photo_stagiaire === ''" class="card-img-top" :src="'storage/images/user0.jpg'"  width="150px" height="150px">
-                    
-                    <hr>
-                   <span>specialite  : {{stagiaire.specialite_stagiaire}}</span>
-                   <hr>
-                    <hr>
-                   <span>annee universitaire : {{stagiaire.annee_universitaire_stagiaire}}</span>
-                   <hr>
-                    
-                     </div>
-                     
-                     </div>
-                     </div>
-                    <div slot="modal-footer" class="w-100">
-                    <p class="float-left"> </p>
-                    <b-btn size="sm" class="float-right" variant="primary" @click="modalShow=false">
-                    Fermer
-                    </b-btn>
-                </div>
-                </b-modal>
-            </div>
-    </div> 
+ 
     
     <vue-pagination  :pagination="stagiaires"
                      @paginate="getStagiairesParEvaluateur()"
@@ -206,6 +164,7 @@ import  Pagination from '../Pagination.vue';
          },
 
           data: () => ({
+               listAnneeEtude : ["1er annnée","2eme année","3eme année","4eme année","5eme année","6eme année","7eme année"],
              
                  
                      loading: false,
@@ -213,7 +172,9 @@ import  Pagination from '../Pagination.vue';
       error: null,
              modalShow: false,
               //search
-              search : '',
+              searchNiveauE:'',
+              searchStage : '',
+              searchGroupe: '',
               //name file 
               nameFile : "Choose file",
               // objet test sur affichage , ajout , recherche
@@ -239,6 +200,7 @@ import  Pagination from '../Pagination.vue';
                     specialite_stagiaire: "",
                     annee_universitaire_stagiaire: "",	
                     fk_user : 0,
+                    niveau_etude_stagiaire:"",
                 
               }, 
              stagiaires:{
@@ -312,7 +274,10 @@ import  Pagination from '../Pagination.vue';
                 });
     },
 
-    getStagiairesParEvaluateur(){//type_status
+    getStagiairesParEvaluateur(){
+
+                
+
                 axios.get('/getStagiairesParEvaluateur?page='+this.stagiaires.current_page+'')
                 .then((response) => {
                     this.loading = false;
@@ -333,8 +298,10 @@ import  Pagination from '../Pagination.vue';
                     this.modalShow = !this.modalShow
                   });         
     },
-    redirect_To_EditStagiaire(stagiaire){
-                     this.$router.push('/EditStagiaire/'+stagiaire.id_stagiaire);
+    redirect_To_Absences(stagiaire){
+        console.log('stgiaires')
+                      console.log(this.stagiaires)
+                     this.$router.push({ name: 'ShowAbsences', params: { stagiaire:stagiaire,fk_evaluateur:this.stagiaires.data[0].fk_evaluateur}});
         //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
 //console.log(stagiaire)
             },
@@ -345,14 +312,18 @@ import  Pagination from '../Pagination.vue';
             
     },
         searchStagiaire(event){
+            console.log('------ annnée -------')
+            console.log(this.searchNiveauE)
              console.log(this.search);
              this.stagiaires.current_page=1;
-             if(this.search === ""){
+             if(this.searchStage === "" && this.searchGroupe === "" && this.searchNiveauE ===""){
                 //console.log('test2');
                     this.getStagiairesParEvaluateur();}
                 else {
                      // console.log('test1');
-                axios.get('/searchStagiaire/'+this.search+'?page='+this.stagiaires.current_page+'')
+  
+  //axios.get('/searchStagiaireParStageGroupe/'+this.searchStage+'/'+this.searchGroupe+'?page='+this.stagiaires.current_page+'')
+                axios.get('/searchStagiaireParStageGroupe',{ params: {page: this.stagiaires.current_page,searchStage: this.searchStage ,searchGroupe:this.searchGroupe,searchNiveauE:this.searchNiveauE} })
                 .then((response) => {
                   console.log('searchhhh ')
                   console.log(response.data.stagiaires)
@@ -553,7 +524,9 @@ table{
     transform: rotate(1800deg);
   }
 }
-
+.searchHight{
+    height: 30px;
+}
 
 </style>
 

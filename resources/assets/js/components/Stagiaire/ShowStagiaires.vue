@@ -14,9 +14,24 @@
 
 <div v-if="!loading">
    
-     <div class="row">
+
+     <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
     <b-btn v-b-modal.modalPrevent class="float-right btn btn-primary" ><i class="fas fa-plus-circle"/> Ajouter</b-btn>
+
+        </div>
+  
+    </div>
+    <h3>Liste des Satgiaires</h3>
+    <hr>   
+    </div> 
+
+
+     <div class="row">
+        <div class="col">
+
+    
        <b-modal id="modalPrevent"
              ref="modal"
              title="+ Compte"
@@ -27,13 +42,13 @@
     <div class="form-group row">
                  <label for="reference" class="col-sm-2 col-form-label">Email: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" />
+                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="reference" class="col-sm-2 col-form-label">Password: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" />
+                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" required/>
                     </div>
                 </div>
      <div class="form-group row">
@@ -69,7 +84,7 @@
     
     
   
-    <hr>
+    
     <!-- formulaire pour Ajouter un stagiaire -->
    
    
@@ -85,7 +100,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
             </div>
-            <input type="text" @keyup.enter="searchStagiaire"  class="form-control" v-model="search" placeholder="recherche par Nom ou Service  " aria-label="Username" aria-describedby="basic-addon1" >
+            <input type="text" @keyup.enter="searchStagiaire"  class="form-control" v-model="search" placeholder="recherche par Nom ou prenom  " aria-label="Username" aria-describedby="basic-addon1" >
             </div>
         </div> 
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,9 +113,9 @@
   
  <div class="row">
        <div class="col-auto" v-for="stagiaire of stagiaires.data" :key="stagiaire.id_stagiaire" >
-            <div class="card widthCard"  >
-            <img v-if="stagiaire.photo_stagiaire != ''" class="card-img-top" :src="'storage/images/'+stagiaire.photo_stagiaire" alt="Card image cap" width="100px" height="150px">
-            <img v-if="stagiaire.photo_stagiaire === ''" class="card-img-top" :src="'storage/images/user0.jpg'" alt="Card image cap" width="100px" height="150px">
+            <div class="card widthCard tailleCards"  >
+            <img v-if="stagiaire.photo_stagiaire != ''" class="card-img-top tailleImage" :src="'storage/images/'+stagiaire.photo_stagiaire" alt="Card image cap" width="100px" height="150px">
+            <img v-if="stagiaire.photo_stagiaire === ''" class="card-img-top tailleImage" :src="'storage/images/user0.jpg'" alt="Card image cap" width="100px" height="150px">
 
             <div class="card-body">
                 <h5 class="card-title">Nom : {{stagiaire.nom_stagiaire}}</h5>
@@ -156,7 +171,7 @@
                     
                     <hr>
                    <span>specialite  : {{stagiaire.specialite_stagiaire}}</span>
-                   <hr>
+                   
                     <hr>
                    <span>annee universitaire : {{stagiaire.annee_universitaire_stagiaire}}</span>
                    <hr>
@@ -540,6 +555,12 @@ table{
   }
 }
 
+.tailleCards{
+    height:292px;
+}
+.tailleImage{
+    height:90px;
+}
 
 </style>
 

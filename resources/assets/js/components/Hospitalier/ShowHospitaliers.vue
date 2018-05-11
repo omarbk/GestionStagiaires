@@ -21,7 +21,7 @@
         </div>
   
     </div>
-    <h2>Liste des Hospitaliers</h2>
+    <h3>Liste des Hospitaliers</h3>
     <hr>   
     </div> 
   

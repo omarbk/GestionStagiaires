@@ -22,7 +22,7 @@
         </div>
   
     </div>
-    <h2>Liste des Evaluateurs</h2>
+    <h3>Liste des Evaluateurs</h3>
     <hr>   
     </div> 
      <div class="row">
@@ -37,13 +37,13 @@
     <div class="form-group row">
                  <label for="reference" class="col-sm-2 col-form-label">Email: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" />
+                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="reference" class="col-sm-2 col-form-label">Password: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" />
+                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" required/>
                     </div>
                 </div>
      <div class="form-group row">
@@ -98,9 +98,9 @@
   
  <div class="row">
        <div class="col-auto" v-for="evaluateur of evaluateurs.data" :key="evaluateur.id_evaluateur" >
-            <div class="card widthCard"  >
-            <img v-if="evaluateur.photo_evaluateur != ''" class="card-img-top" :src="'storage/images/'+evaluateur.photo_evaluateur" alt="Card image cap" width="100px" height="150px">
-            <img v-if="evaluateur.photo_evaluateur === ''" class="card-img-top" :src="'storage/images/responsable0.jpg'" alt="Card image cap" width="100px" height="150px">
+            <div class="card widthCard tailleCards"  >
+            <img v-if="evaluateur.photo_evaluateur != ''" class="card-img-top tailleImage" :src="'storage/images/'+evaluateur.photo_evaluateur" alt="Card image cap" width="100px" height="150px">
+            <img v-if="evaluateur.photo_evaluateur === ''" class="card-img-top tailleImage" :src="'storage/images/responsable0.jpg'" alt="Card image cap" width="100px" height="150px">
 
             <div class="card-body">
                 <h5 class="card-title">Nom : {{evaluateur.nom_evaluateur}}</h5>
@@ -546,7 +546,12 @@ table{
   }
 }
 
-
+.tailleCards{
+    height:292px;
+}
+.tailleImage{
+    height:90px;
+}
 </style>
 
 

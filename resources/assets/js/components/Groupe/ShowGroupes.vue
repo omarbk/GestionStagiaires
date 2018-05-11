@@ -14,13 +14,21 @@
     </div>
 
 <div v-if="!loading">
-     <div class="row">
+
+    
+        <div class="text-center pull-right" >
+                  <div class=" btnMarge">
         <div class="col">
     <router-link class="float-right btn btn-secondary" :to="'/AddGroupe'" ><i class="fas fa-plus-circle"/> Ajouter </router-link>
-       
-  </div>
+
+        </div>
+  
     </div>
-    
+    <h3>Liste des Groupes</h3>
+    <hr>   
+    </div> 
+
+
             <div v-if="Testopen.testnotifAdd" class="alert alert-success alert-dismissible fade show notifArticle" role="alert">
         <strong>Groupe bien ajouter !</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -37,7 +45,6 @@
     
     
   
-    <hr>
     <!-- formulaire pour Ajouter un article -->
    
    
@@ -59,7 +66,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
             </div>
-            <input type="text" @keyup.enter="searchComptes"  class="form-control" v-model="search" placeholder="recherche par nom du Compte ou responsable " aria-label="Username" aria-describedby="basic-addon1" >
+            <input type="text" @keyup.enter="searchGroupes"  class="form-control" v-model="search" placeholder="recherche par nom ou année Universitaire " aria-label="Username" aria-describedby="basic-addon1" >
             </div>
         </div> 
         
@@ -207,6 +214,26 @@ import  Pagination from '../Pagination.vue';
       }),
  
  methods:{
+           searchGroupes(event){
+             console.log(this.search);
+             this.groupes.current_page=1;
+             if(this.search === ""){
+                //console.log('test2');
+                    this.getStages();}
+                else {
+                     // console.log('test1');
+                axios.get('/searchGroupes/'+this.search+'?page='+this.groupes.current_page+'')
+                .then((response) => {
+                  console.log('searchhhh ')
+                  console.log(response.data.groupes)
+                    this.groupes = response.data.groupes;
+                  
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });}
+                    
+          },
      
         getGroupes(){
                 axios.get('/getGroupes?page='+this.groupes.current_page+'')

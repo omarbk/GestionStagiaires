@@ -1,9 +1,9 @@
 <template>
   <div class="page-wrapper">
-      <top-menu>
+      <top-menu-evaluateur>
 
          
-      </top-menu>
+      </top-menu-evaluateur>
     <div class="main-container">
   
        <div class="content">
@@ -17,7 +17,8 @@
 </template>
 <script>
 
-import TopMenu from './TopMenu.vue' 
+
+import TopMenuEvaluateur from './TopMenuEvaluateur.vue' 
 
 import Contents from './Contents.vue' 
 import Pagination from './Pagination.vue' 
@@ -27,9 +28,9 @@ import Pagination from './Pagination.vue'
 
 export default {
    components:{
-     'top-menu':TopMenu,
+  
      'app-contents':Contents,
-
+      'top-menu-evaluateur':TopMenuEvaluateur,
      'app_pagination':Pagination
      
      
