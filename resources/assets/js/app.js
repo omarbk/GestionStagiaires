@@ -51,7 +51,6 @@ Vue.component('app-content', require('./components/Contents.vue'));
 
 Vue.component('app-vue', require('./components/App.vue'));
 Vue.component('app-vue-evaluateur', require('./components/AppEvaluateur.vue'));
-Vue.component('app-vue-comptable', require('./components/AppComptable.vue'));
 
 
 

@@ -20,7 +20,7 @@
         </div>
   
     </div>
-    <h2>Liste des Responsables</h2>
+    <h3>Liste des Responsables</h3>
     <hr>   
     </div> 
      <div class="row">
@@ -35,13 +35,13 @@
     <div class="form-group row">
                  <label for="reference" class="col-sm-2 col-form-label">Email: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" />
+                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="reference" class="col-sm-2 col-form-label">Password: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" />
+                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" required/>
                     </div>
                 </div>
      <div class="form-group row">
@@ -100,9 +100,9 @@
   
  <div class="row">
        <div class="col-auto" v-for="responsable of responsables.data" :key="responsable.id_responsable" >
-            <div class="card widthCard"  >
-            <img v-if="responsable.photo_responsable != ''" class="card-img-top" :src="'storage/images/'+responsable.photo_responsable" alt="Card image cap" width="100px" height="150px">
-            <img v-if="responsable.photo_responsable === ''" class="card-img-top" :src="'storage/images/responsable0.jpg'" alt="Card image cap" width="100px" height="150px">
+            <div class="card widthCard tailleCards"  >
+            <img v-if="responsable.photo_responsable != ''" class="card-img-top tailleImage" :src="'storage/images/'+responsable.photo_responsable" alt="Card image cap" width="100px" height="150px">
+            <img v-if="responsable.photo_responsable === ''" class="card-img-top tailleImage" :src="'storage/images/responsable0.jpg'" alt="Card image cap" width="100px" height="150px">
 
             <div class="card-body">
                 <h5 class="card-title">Nom : {{responsable.nom_responsable}}</h5>
@@ -529,7 +529,12 @@ table{
     transform: rotate(1800deg);
   }
 }
-
+.tailleCards{
+    height:292px;
+}
+.tailleImage{
+    height:90px;
+}
 
 </style>
 

@@ -17,7 +17,7 @@
         </div>
   
     </div>
-    <h2>Liste des Objectifs</h2>
+    <h3>Liste des Objectifs</h3>
     <hr>   
     </div> 
   

@@ -73,6 +73,13 @@ import EditStage  from './components/Stage/EditStage.vue'
 //parametres
 import  Parametres from './components/Parametres.vue' 
 
+// absence 
+
+//Groupes
+import ShowAbsences from './components/Absence/ShowAbsences.vue'
+import AddAbsence from './components/Absence/AddAbsence.vue'
+import EditAbsence from './components/Absence/EditAbsence.vue'
+
 
 
 
@@ -334,6 +341,25 @@ const  router = new VueRouter({
    
 
 },
+
+//----------- Absence 
+{
+    path:"/ShowAbsences",
+    component: ShowAbsences,
+    name: "ShowAbsences"
+ },
+ {
+    path:"/AddAbsence",
+    component: AddAbsence,
+    name: "AddAbsence"
+ },
+ {
+    path:"/EditAbsence",
+    component: EditAbsence,
+    name: "EditAbsence"
+ },
+
+
 
 
 

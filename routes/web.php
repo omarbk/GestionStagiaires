@@ -299,6 +299,8 @@ Route::get('/getGroupe/{id_groupe}','GroupeController@getGroupe');
 Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
 Route::get('/getAllGroupes','GroupeController@getAllGroupes');
+Route::get('/searchGroupes/{search_G}','GroupeController@searchGroupes');
+
 
 //Evaluation 
 Route::post('/addEvaluation','NoteController@addEvaluation');
@@ -313,9 +315,12 @@ Route::get('/getStagiaire/{id_stagiaire}','StagiaireController@getStagiaire');
 Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire');
 Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
 Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
+Route::get('/searchStagiaire/{search_S}','StagiaireController@searchStagiaire');
+
       // pour evaluation
 Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
 Route::get('/getStagiairesParEvaluateur','StagiaireController@getStagiairesParEvaluateur');
+Route::get('/searchStagiaireParStageGroupe','StagiaireController@searchStagiaireParStageGroupe');
 
 Route::get('/getStagiairesParEvaluation/{id_stagiaire}','StagiaireController@getStagiairesParEvaluation');
 
@@ -327,7 +332,16 @@ Route::get('/getStages','StageController@getStages');
 Route::delete('/deleteStage/{id_stage}','StageController@deleteStage');
 Route::get('/getStage/{id_stage}','StageController@getStage');
 Route::post('/updateStage','StageController@updateStage');
+Route::get('/searchStages/{search_Sg}','StageController@searchStages');
+Route::post('/updateStatutStage','StageController@updateStatutStage');
 
+//Absence 
+
+Route::post('/addAbsence','AbsenceController@addAbsence');
+Route::get('/getAbsenceParStagiaire','AbsenceController@getAbsenceParStagiaire');
+Route::delete('/deleteAbsence/{id_absence}','AbsenceController@deleteAbsence');
+Route::get('/getAbsence/{id_absence}','AbsenceController@getAbsence');
+Route::post('/updateAbsence','AbsenceController@updateAbsence');
 
 Auth::routes();
 

@@ -20,6 +20,7 @@ class CreateStagesTable extends Migration
             $table->string('duree_stage')->nullable();
             $table->date('dateDebut_stage')->nullable();
             $table->date('dateFin_stage')->nullable();
+            $table->string('statut_stage')->nullable();
             $table->integer('fk_hospitalier')->nullable();
             $table->integer('fk_evaluateur')->nullable();
             $table->integer('fk_responsable')->nullable();

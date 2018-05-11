@@ -3,55 +3,12 @@
            <div class="row">
                <div class="col-3">
                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button @click="testAffich.testfamille = true;testAffich.testTVA = false;testAffich.testStatus = false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton">Famille article </button>
-                <button @click="testAffich.testTVA = true;testAffich.testfamille = false;testAffich.testStatus = false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton">TVA </button>
-                <button @click="testAffich.testStatus = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testTypeObjectif = false" class="btn btn-primary mb-3 shadawButton ">Statut </button>
+  
                 <button @click="testAffich.testTypeObjectif = true;testAffich.testfamille = false;testAffich.testTVA=false;testAffich.testStatus = false" class="btn btn-primary mb-3 shadawButton ">Type Objectif</button>
                 </div>
                </div>
                 <div class="col">
-                    <div v-if="testAffich.testfamille"> 
-                    
-                    <div class="row">
-                    <input class="mr-4" v-model="famille_article.libelle_famille" type="text"  placeholder="Entrez famille article"><button @click="addFamille" class="btn btn-success">Ajouter </button>
-                    </div>
-                    <div class="row">
-                       <table class="table table-bordered tableau">
-                        <thead>
-                            <tr>
-                            <th>Catégorie</th>
-                            <th>Option</th>
-                            </tr>                           
-                        </thead>
-                        <tbody>                     
-                            <tr v-for="famille in famille_articles" :key="famille.id_famille">
-                            <th>{{famille.libelle_famille}}</th>      
-                            <th><a @click="deleteFamille(famille)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
-                            </tr>
-                        </tbody>
-                       </table>
-                     </div>  
-                     </div>
-                    <div v-if="testAffich.testTVA">                     
-                    <div class="row">
-                    <input   v-model="tva.taux_tva"   class="mr-4" type="text"  placeholder="Entrez Taux TVA"><button @click="addTva"  class="btn btn-success">Ajouter </button>
-                    </div>
-                    <div class="row">
-                       <table class="table table-bordered tableau">
-                        <thead>
-                            <tr>
-                            <th>Taux TVA</th>
-                            </tr>
-                        </thead>
-                        <tbody>                     
-                            <tr v-for="tva in tvas" :key="tva.id_tva">
-                            <th>{{tva.taux_tva}}</th>      
-                            <th><a @click="deleteTva(tva)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></th>
-                            </tr>
-                        </tbody>
-                       </table>
-                     </div>  
-                     </div>
+                   
                      <div v-if="testAffich.testStatus"> 
                     <div class="row">
                         <div class="col">
@@ -89,7 +46,7 @@
                      </div>
 
 
-                      <div v-if="testAffich.testTypeObjectif"> 
+                      <div> 
                     <div class="row">
                         <div class="col">
                     <input v-model="typeObjectif.type_objectif"  type="text"  placeholder="Entrez Type objectif">

@@ -46,7 +46,7 @@
             
 
 
-
+ 
             </div> 
    <div class="col-md-6">
    
@@ -104,7 +104,8 @@
               dateDebut_stage:"",
               dateFin_stage:"",
               fk_hospitalier:0,
-              fk_evaluateur:0,      
+              fk_evaluateur:0,  
+              statut_stage:"",    
               },
             
 
@@ -197,7 +198,7 @@
 
                         this.stage.fk_hospitalier = this.pushHospitalier.id_hospitalier;
                         this.stage.fk_evaluateur = this.pushEvaluateur.id_evaluateur;
-
+                        this.stage.statut_stage = "En cours"   
                          
 
                         console.log('add stage ')

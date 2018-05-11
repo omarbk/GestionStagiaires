@@ -16,11 +16,24 @@
      <div class=" container colBackround">
 
 
-<div class="row">
+<div class="row align-items-center">
     <div class="col">
-        <br>
+        
     <h5><i class="fas fa-address-book"></i> Stage : {{stage.intitule_stage}}  </h5>
     </div>
+    <div class="col">
+            <div class="form-group row  float-right">
+                 <div class="col-8"> 
+                <select class="form-control custom-select mt-3" id="fk_status_d" v-model="stage.statut_stage"  >
+                    <option value="En cours">En cours</option>
+                    <option value="Achevé">Achevé</option>
+                </select>
+                 </div>
+                 <div class="col-4"> 
+                <a href="#" @click="updateStatutStage()"  class="btn btn-info refresh mt-3" style="font-size:10px"><i class="fa fa-undo"></i></a>                                
+                 </div>
+         </div>
+        </div>
 </div>
 <hr>
     
@@ -50,6 +63,7 @@
             </div>
             </div>
         </div>
+        
         <div class="col-sm-6">
            <ul class="list-group">
             <li class="list-group-item active">Liste des Groupes</li>
@@ -57,6 +71,7 @@
            
             </ul>
         </div>
+
    
         </div>
     
@@ -88,6 +103,7 @@
               duree_stage:"",
               dateDebut_stage:"",
               dateFin_stage:"",
+              statut_stage:"ttttt",
               fk_hospitalier:0,
               fk_evaluateur:0,      
               },
@@ -151,7 +167,15 @@ stage_groupes:[],
                                 console.log(response);
                             });     
                     },
-        
+           updateStatutStage(){
+                 console.log('----- fk hospitalier ')
+                  axios.post('/updateStatutStage',{stage: this.stage})
+                  .then( response => {             
+                    this.$router.push({ name: 'ShowStages', params: { success: "editsuccess"  }});
+                  
+                  });
+
+                  },
         
           },
 

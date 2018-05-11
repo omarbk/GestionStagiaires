@@ -9,6 +9,21 @@ use App\Stage_groupe;
 
 class StageController extends Controller
 {
+        public function updateStatutStage(Request $request){
+            $stage = Stage::find($request->stage['id_stage']);
+
+            $stage->statut_stage = $request->stage['statut_stage'];
+          
+           
+            $stage->save();
+            
+            return Response()->json(['etat' => true]);
+        }
+
+    public function searchStages($search_Sg){
+        $stages = Stage::where('intitule_stage','like', '%' .$search_Sg . '%')->orWhere('objectif_stage','like', '%' .$search_Sg . '%')->paginate(6);
+        return Response()->json(['stages' => $stages ]);
+     }
     public function addStage(Request $request)
     { 
  
@@ -23,7 +38,7 @@ class StageController extends Controller
                 $stage->dateFin_stage = $request->stage['dateFin_stage'];
                 $stage->fk_hospitalier = $request->stage['fk_hospitalier'];
                 $stage->fk_evaluateur = $request->stage['fk_evaluateur'];
-               
+                $stage->statut_stage = $request->stage['statut_stage'];
                 $stage->save();
                 $id_stage = $stage->id_stage;
 

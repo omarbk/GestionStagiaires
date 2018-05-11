@@ -9,11 +9,15 @@ use App\Groupe_stagiaire;
 use App\Stagiaire;
 class GroupeController extends Controller
 {
+    public function searchGroupes($search_G){
+        $groupes = Groupe::where('nom_groupe','like', '%' .$search_G . '%')->orWhere('annee_universitaire_groupe','like', '%' .$search_G . '%')->paginate(6);
+        return Response()->json(['groupes' => $groupes ]);
+     }
     public function addGroupe(Request $request)
     { 
       
         
-        $groupe = new Groupe();
+        $groupe = new Groupe();  
  
                 $groupe->nom_groupe = $request->groupe['nom_groupe'];
                 $groupe->annee_universitaire_groupe = $request->groupe['annee_universitaire_groupe'];                

@@ -82,6 +82,10 @@ class StagiaireController extends Controller
         $stagiaire->fk_user = $request->stagiaire['fk_user'];
 
         $stagiaire->save();
+
+        $user = User::find($id);
+        $user->photo =$stagiaire->photo_stagiaire;
+        $user->save();      
       
         
         return Response()->json(['etat' => true ]);
@@ -124,6 +128,10 @@ class StagiaireController extends Controller
          $stagiaire->niveau_etude_stagiaire = $request->stagiaire['niveau_etude_stagiaire'];
          $stagiaire->fk_user =  $request->stagiaire['fk_user'];
                  $stagiaire->save();
+
+        $user = User::find($stagiaire->fk_user);
+        $user->photo =$stagiaire->photo_stagiaire;
+        $user->save(); 
                   return Response()->json(['etat' => true]);
     }
 
@@ -154,8 +162,8 @@ class StagiaireController extends Controller
                          return Response()->json(['stagiaire' => $stagiaire]);
     }
      
-    public function searchStagiaire($search_R){
-        $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('service_stagiaire','like', '%' .$search_R . '%')->orWhere('nom_stagiaire','like', '%' .$search_R . '%')->paginate(6);
+    public function searchStagiaire($search_S){
+        $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('nom_stagiaire','like', '%' .$search_S . '%')->orWhere('prenom_stagiaire','like', '%' .$search_S . '%')->paginate(6);
         return Response()->json(['stagiaires' => $stagiaires ]);
      }
 
@@ -190,27 +198,58 @@ class StagiaireController extends Controller
                       ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
                       ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
                       ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
-                      ->select('stagiaires.*')
-                      ->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)->paginate(6);
+                      ->select('stagiaires.*','stages.intitule_stage','stages.fk_evaluateur','groupes.nom_groupe')
+                      ->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)
+                      ->where('stages.statut_stage','=','En cours')
+                      ->paginate(6);
 
                  return Response()->json(['stagiaires' => $stagiaires]);
                  
     }
-
-    // pour evaluationnnnn
-    public function getStagiairesParEvaluation($id_stagiaire){
-       
+      
+    public function searchStagiaireParStageGroupe(Request $request){
+    //    $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('nom_stagiaire','like', '%' .$search_SG . '%')->orWhere('prenom_stagiaire','like', '%' .$search_SG . '%')->paginate(6);
+        
+                $evaluateurs = Evaluateur::select('evaluateurs.*')
+                      ->where('evaluateurs.fk_user', '=', Auth::user()->id)->get();
+                    
+        
       $stagiaires  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
                       ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
                       ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
                       ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
-                      ->leftJoin('hospitaliers', 'stages.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
-                      ->leftJoin('evaluateurs', 'stages.fk_evaluateur', '=', 'evaluateurs.id_evaluateur')
-                      ->select('stagiaires.*','groupes.*','stages.*','hospitaliers.*','evaluateurs.*')
-                      ->where('stagiaires.id_stagiaire', '=',$id_stagiaire)
-                      ->get();
+                      ->select('stagiaires.*','stages.intitule_stage','stages.fk_evaluateur','groupes.nom_groupe')
+                      ->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)
+                      ->where('stages.statut_stage','=','En cours')
+                      ->where('stages.intitule_stage','like', '%' .$request->searchStage . '%')
+                      ->where('groupes.nom_groupe','like', '%' .$request->searchGroupe . '%')
+                      ->where('stagiaires.niveau_etude_stagiaire','like', '%' .$request->searchNiveauE . '%')
+                      ->paginate(6);
+                      //->orWhere('groupes.nom_groupe','like', '%' .$search_groupe . '%')
+                      //->orWhere('stagiaires.niveau_etude_stagiaire','like', '%' .$search_niveau . '%')
                       
+
                  return Response()->json(['stagiaires' => $stagiaires]);
-                 
-    }
+     }
+    
+
+
+
+
+
+// pour evaluationnnnn
+public function getStagiairesParEvaluation($id_stagiaire){
+    $stagiaires  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+    ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+    ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+    ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+    ->leftJoin('hospitaliers', 'stages.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
+    ->leftJoin('evaluateurs', 'stages.fk_evaluateur', '=', 'evaluateurs.id_evaluateur')
+    ->select('stagiaires.*','groupes.*','stages.*','hospitaliers.*','evaluateurs.*')
+    ->where('stagiaires.id_stagiaire', '=',$id_stagiaire)
+    ->get();
+    
+return Response()->json(['stagiaires' => $stagiaires]);
+
+}
 }

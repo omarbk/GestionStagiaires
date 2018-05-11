@@ -1,5 +1,8 @@
 <template>
   <div>
+            <notifications group="foo" 
+      position="bottom right"/>
+
          <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
@@ -211,14 +214,22 @@
     },
           addEvaluateur(){ 
               console.log("test")
-           console.log(this.evaluateur);
-               
+           console.log(this.hospitalier);
+               if(this.hospitalier.nom_hospitalier === ""){
+                               this.$notify({
+                                      group: 'foo',
+                                      title: 'Champs vide',
+                                      text: 'Ajouter hospitalier!',
+                                      duration: 1500,
+                                    });
+               }
+               else {
               axios.post('/addUserEvaluateur',{evaluateur:this.evaluateur,hospitalier:this.hospitalier,user:this.user}).then(response => {  
                     console.log(response.data.user);   
                     console.log('evaluateur Bien ajouter !');
                     this.$router.push({ name: 'ShowEvaluateurs', params: { success: "add"  }});
 
-                  });
+                  });}
             
         },
 
