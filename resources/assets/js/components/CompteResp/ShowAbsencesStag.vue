@@ -17,17 +17,19 @@
 
 
         <div class="text-center pull-right" >
-                  <div class=" btnMarge">
+        <div class=" btnMarge">
         <div class="col">
-        <a class="float-right btn btn-primary" @click="redirect_To_ShowStagiairesResp(stagiaire)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
+        <a class="float-right btn btn-primary" @click="redirect_To_ShowEvaluationStage(stagiaire)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
 
         </div>
   
     </div>
-    <h3>Liste des Stages</h3>
+    <h2>Liste des Absences</h2>
     <hr>   
     </div> 
 
+
+       
     
     
   
@@ -39,52 +41,110 @@
     <!-- afficher les articles sous formes des cards  -->
     
   
+   <div class=" container colBackround size">
+<br>
 
-
-    <div class="row" id="testdiv">
-             <div class="card">
-                        <div class="card-header bg-light">
-                            <div class="row btnMarge">
- 
-    <div class="col"  >
-    <!-- button pour afficher formulaire de l'ajout d un article -->         
-                <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-            </div>
-            <input type="text" @keyup.enter="searchGroupes"  class="form-control" v-model="search" placeholder="recherche par nom ou année Universitaire " aria-label="Username" aria-describedby="basic-addon1" >
-            </div>
-        </div> 
-        
+<div class="row align-items-center">
+    <div class="col-1">
+             <img v-if="stagiaire.photo_stagiaire != ''" class="card-img-top tailleImage" :src="'storage/images/'+stagiaire.photo_stagiaire" alt="Card image cap" width="100px" height="150px">
+            <img v-if="stagiaire.photo_stagiaire === ''" class="card-img-top tailleImage" :src="'storage/images/user0.jpg'" alt="Card image cap" width="100px" height="150px">
+    
     </div>
-                       </div>
+    <div class="col">
+            <br>
+                 <h5>Information du Stagiaire</h5>
+        
+        </div>
+</div>
+
+<hr>
+
+
+
+
+
+     <div class="row" > 
+         
+            <div class="col-md-6">
+               
+
+
+                 <div class="form-group row">
+                    <label for="responsable" class="col-sm-4" > Prenom :  </label>
+                    <div class="col-sm-8">
+                    <label for="responsable" class="col-sm-4" >{{stagiaire.prenom_stagiaire}} </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="responsable" class="col-sm-4" > Nom : </label>
+                    <div class="col-sm-8">
+                    <label for="responsable" class="col-sm-4" >{{stagiaire.nom_stagiaire}} </label>
+                    </div>
+                </div>
+            
+            
+
+ 
+            </div> 
+   <div class="col-md-6">
+                   <div class="form-group row">
+                    <label for="responsable" class="col-sm-4" > Niveau d étude  : </label>
+                    <div class="col-sm-8">
+                    <label for="responsable" class="col-sm-4" >{{stagiaire.niveau_etude_stagiaire}} </label>
+                    </div>
+                </div>
+            
+   </div>     
+
+
+     <div class="col-md-6 col-sm-12">
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-4 col-form-label">Note Final </label>
+            <div class="col-sm-8">
+         /20
+            </div>
+         </div> 
+            <div class="form-group row">
+            <label for="staticEmail" class="col-sm-4 col-form-label">Etat </label>
+            <div class="col-sm-8">
+        vvvvv
+            </div>
+         </div>  
+     </div>       
+    </div>
+
+    <hr>
+        <div class="text-center pull-right">
+    <h2>Absences</h2>
+    <hr>   
+    </div>
+
+    <div class="row center">
+             <div class="card">
+                      
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                 <table class="table table-bordered">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>stage</th>
-                                        <th>groupe</th>
                                         <th>date Debut</th>
-                                        <th>date Fin</th>
-                                        <th>durée stage</th>
-                                        <th>options</th>
-  
+                                        <th>date Fin</th> 
+                                        <th>cause absence</th>  
+                                        <th>justificatif</th>   
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr  v-for="(stagiaire,index) of stagiaires" :key="index" >
-                                        <td>{{stagiaire.intitule_stage}}</td>
-                                        <td>{{stagiaire.nom_groupe}}</td>
-                                        <td>{{stagiaire.dateDebut_stage}}</td>
-                                        <td>{{stagiaire.dateFin_stage}}</td>
-                                        <td>{{stagiaire.duree_stage}}</td>  
-                                            <td  class="optionsWidth"> 
-                                                 <a href="#"  @click="redirect_To_ShowAbsencesStag(stagiaire)"   class="btn btn-primary"   ><i class="fab fa-product-hunt"></i></a>
-                            
-                  <a href="#"  @click="redirect_To_ShowEvaluationStag(stagiaire)"   class="btn btn-success" ><i class="far fa-sticky-note"></i></a>
-                                          </td>                        
+                                    <tr  v-for="absence of absences.data" :key="absence.id_absence" >
+                                        <td>{{absence.dateDebut_absence}}</td>
+                                        <td>{{absence.dateFin_absence}}</td> 
+                                        <td>{{absence.cause_absence}}</td>
+                                        <td v-if="absence.justificatif_absence == 1">
+                                             <span class="badge badge-pill" style="background-color:#3ede01;color:white;font-size:14px"> <b>Justifié</b></span> 
+                                        </td>
+                                        <td v-else>
+                                            <span class="badge badge-pill" style="background-color:red;color:white;font-size:14px"> <b> Non Justifié</b></span> 
+                                        </td>
                                     </tr>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     </div>
@@ -98,23 +158,25 @@
             </div>
             </div>  
     </div>
-    
+   <!-- 
     <vue-pagination  :pagination="absences"
                      @paginate="getAbsenceParStagiaire()"
                      :offset="4">
     </vue-pagination>
+    -->
+</div>
     </div>
     <!-- fin affiche -->
    
 </template>
 
 <script>
-import  Pagination from '../Pagination.vue';
+//import  Pagination from '../Pagination.vue';
 
     export default{
-         components:{
+       /*  components:{
             'vue-pagination':Pagination,
-         },
+         },*/
 
           data: () => ({
 
@@ -227,8 +289,7 @@ import  Pagination from '../Pagination.vue';
       photo:"",
       
     },
-stagiaires:[],
-stagiaire:{},
+
     users:[],
             
              
@@ -236,56 +297,7 @@ stagiaire:{},
       }),
  
  methods:{
-            redirect_To_ShowAbsencesStag(stagiaire){
-        console.log('stgiaires')
-                      console.log(this.stagiaires)
-                     this.$router.push({ name: 'ShowAbsencesStag', params: { stagiaire:stagiaire,id_stage:this.id_stage,fk_evaluateur:this.stagiaires.fk_evaluateur}});
-        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
-//console.log(stagiaire)
-            },
-            redirect_To_ShowEvaluationStag(stagiaire){
-        console.log('stgiaires')
-        console.log(stagiaire)
-                     this.$router.push({ name: 'ShowEvaluationStag', params: { stagiaire:stagiaire,id_stage:this.id_stage}});
-        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
-//console.log(stagiaire)
-            },
-
-         redirect_To_ShowStagiairesResp(stagiaire){
-        console.log('stagiaire')
-                      console.log(this.stagiaire)
-                     this.$router.push({ name: 'ShowStagiairesResp', params: { stagiaire:stagiaire}});
-        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
-//console.log(stagiaire)
-                          this.loading = false;
-
-          },
-
-
-
-
-
-
-           searchGroupes(event){
-             console.log(this.search);
-             this.groupes.current_page=1;
-             if(this.search === ""){
-                //console.log('test2');
-                    this.getStages();}
-                else {
-                     // console.log('test1');
-                axios.get('/searchGroupes/'+this.search+'?page='+this.groupes.current_page+'')
-                .then((response) => {
-                  console.log('searchhhh ')
-                  console.log(response.data.groupes)
-                    this.groupes = response.data.groupes;
-                  
-                })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });}
-                    
-          },
+     
      
         getGroupes(){
                 axios.get('/getGroupes?page='+this.groupes.current_page+'')
@@ -302,7 +314,7 @@ stagiaire:{},
                   getAbsenceParStagiaire(){
                       
 
-                axios.get('/getAbsenceParStagiaire?page='+this.absences.current_page+'',{ params: {fk_evaluateur:this.$route.params.stagiaire.fk_evaluateur,fk_stagiaire:this.$route.params.stagiaire.id_stagiaire} })
+                axios.get('/getAbsenceParStagiaire?page='+this.absences.current_page+'',{ params: {fk_stagiaire:this.id_stagiaire,fk_stage:this.$route.params.stagiaire.id_stage,fk_evaluateur:this.$route.params.stagiaire.fk_evaluateur} })
                 .then((response) => {
                  // console.log('shit');
                 
@@ -318,15 +330,19 @@ stagiaire:{},
           },
 
               fetchData () {
-                   console.log('====== ok =====')
-        console.log(this.$route.params.stagiaire.fk_evaluateur)
-        this.id_stage=this.$route.params.stagiaire.id_stage;
-      this.stagiaire.id_stagiaire=this.$route.params.stagiaire.id_stagiaire;
+      
       //this.error = this.post = null
       this.loading = true
-      this.getAbsenceParStagiaire(); 
-      this.getStagiaire(this.stagiaire.id_stagiaire);
-         
+       console.log('====== ok =====')
+        this.stagiaire = this.$route.params.stagiaire;
+        console.log(this.$route.params.fk_evaluateur)
+        this.id_stage=this.$route.params.stagiaire.id_stage;
+             //   this.fk_evaluateur=this.$route.params.stagiaire.fk_evaluateur;
+
+        console.log('====== nnnnnnnnnnnnnnnn =====')
+        console.log(this.$route.params.stagiaire)
+        this.id_stagiaire=this.$route.params.stagiaire.id_stagiaire;
+      this.getAbsenceParStagiaire();          
       // replace `getPost` with your data fetching util / API wrapper
    
   /* axios.get('/getGroupes?page='+this.groupes.current_page+'')
@@ -339,37 +355,60 @@ stagiaire:{},
                     console.log('handle server error from here');
                 });*/
     },
-     getStagiaire(id_stagiaire){
- axios.get('/getStagiaire/'+id_stagiaire)
-                .then((response) => {
-                    this.loading = false;
-                    this.stagiaires = response.data.stagiaires;
-                    console.log('response objectifs')
-                    console.log(response)
 
-               })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });
-    },
                redirect_To_ShowGroupe(id_groupe){
                    //  this.$router.push('/ShowGroupe/'+id_groupe);
                    
                       this.$router.push({ name: 'ShowGroupe', params: {id_groupe: id_groupe}});
             },
 
+     redirect_To_ShowEvaluationStage(stagiaire){
+        console.log('stagiaire')
+                      console.log(this.stagiaire)
+                     this.$router.push({ name: 'ShowEvaluationStage', params: { stagiaire:stagiaire,id_stage:this.id_stage}});
+       
+                          this.loading = false;
 
+          },
   },
      mounted(){
          console.log('---- routes ------')
-         if(this.$route.params.stagiaire.id_stagiaire == undefined){
+         if(this.$route.params.stagiaire.fk_evaluateur == undefined){
               this.$router.push({ name: 'ShowStagiairesResp'});
          }
                                    console.log(this.$route.params.fk_evaluateur)
                         console.log(this.$route.params.stagiaire)
-   
+                       
+          if( this.$route.params.success == "addsuccess"){
+             
+                       // this.Testopen.testnotifAdd = true;                  
+                                   this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien ajouter!',
+                                      duration: 1500,
+                                    });
+          }
+                    if( this.$route.params.success == "editsuccess"){
+             
+                             this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'Groupe bien modifier!',
+                                      duration: 1500,
+                                    });
+          }
         },
-
+      updated(){
+          if( this.$route.params.success == "addsuccess"){
+          let this1 = this
+               setTimeout(function () { this1.Testopen.testnotifAdd = false }, 1500);
+               }
+          if( this.$route.params.success == "editsuccess"){
+          let this1 = this
+               setTimeout(function () { this1.Testopen.testnotifEdit = false }, 1500);}               
+            
+      },
         created () {
     // fetch the data when the view is created and the data is
     // already being observed
@@ -392,27 +431,9 @@ stagiaire:{},
 </script>
 
 <style scoped>
-.shadawTr:hover {
-  box-shadow: 1px 1px 1px 1px #888888;
-    }
-thead{
-    background-color: #efefef;
-}
-.optionsWidth{
-width : 171px;
 
-}
  .btnMarge{
      padding-bottom: 10px;
- }
- .widthCard{
-     width: 270px;
-     height: 350px;
-     
- }
- .widthTextCard{
-     width  : 236px;
-     height: 13px;
  }
  a {
   color: #999;
@@ -445,28 +466,58 @@ a.last::before {
 .cardbox:hover{
  box-shadow: 1px 2px 2px 2px #c9ced2;
 }
-span {
-    color: #42a5f5;
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-thead{
-    background-color: #e9ecef;
+a {
+  color: #999;
+  color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    
 }
-table{
-    background-color: white;
+.fontsize{
+
+    font-size: 1.30rem;
 }
-.card-body{
-    background-color: #f8f9fa
+.colBackround{
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 3px 4px #d2cfcf;
+}
+.tailleImage{
+    height:62px;
 }
 
-.notifArticle{
-    opacity:0.9;
-    width: 241px;
-    z-index: 100;
-    top: 61px;
-    right: 0;
-    position:  absolute;
-    position :fixed;
+.center{
+margin-left:240px; 
 }
+.etat{
+        font-size: medium;
+    font-weight: bold;
+}
+.size{
+    width: 1000px;
+}
+.total{
+    margin-left: 140px;
+}
+label{
+    font-weight: bold;
+}
+
+
+
+.shadawTr:hover {
+  box-shadow: 1px 1px 1px 1px #888888;
+    }
+thead{
+    background-color: #efefef;
+}
+
 
 
 
@@ -504,7 +555,6 @@ table{
     transform: rotate(1800deg);
   }
 }
-/*
 .vue-notification {
   padding: 10px;
   margin: 0 5px 5px;
@@ -531,7 +581,7 @@ table{
   }
 }
 
-*/
+
 </style>
 
 

@@ -152,14 +152,19 @@ class StagiaireController extends Controller
     }
               
     public function getStagiaire($id_stagiaire){
-                $stagiaire = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
-                            ->select('stagiaires.*', 'users.*')
+                $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
+                      ->leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+                      ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+                      ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+                      ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+                
+                            ->select('stagiaires.*', 'users.*','stages.*','groupes.*')
                             ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
                             
                             ->get();
                            // dd($stagiaire);
 
-                         return Response()->json(['stagiaire' => $stagiaire]);
+                         return Response()->json(['stagiaires' => $stagiaires]);
     }
      
     public function searchStagiaire($search_S){
@@ -218,7 +223,7 @@ class StagiaireController extends Controller
                       ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
                       ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
                       ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
-                      ->select('stagiaires.*','stages.intitule_stage','stages.fk_evaluateur','groupes.nom_groupe')
+                      ->select('stagiaires.*','stages.intitule_stage','stages.*','groupes.nom_groupe')
                       ->paginate(6);
 
                  return Response()->json(['stagiaires' => $stagiaires]);

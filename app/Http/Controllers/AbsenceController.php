@@ -39,11 +39,13 @@ class AbsenceController extends Controller
         return Response()->json(['etat' => true]);
      }
     public function getAbsenceParStagiaire(Request $request){
+       // dd($request);
         $absences= Absence::select('absences.*')
         ->where('absences.fk_stagiaire','=',$request->fk_stagiaire)
         ->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
         ->where('absences.fk_stage','=',$request->fk_stage)
         ->paginate(10);
+       // dd($absences);
         return Response()->json(['absences' => $absences]);
      }
     

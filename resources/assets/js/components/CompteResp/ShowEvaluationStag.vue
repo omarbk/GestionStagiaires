@@ -331,8 +331,8 @@
 
 methods: { 
 
-      getStagiairesParEvaluation(id_stagiaire){
- axios.get('/getStagiairesParEvaluation/'+id_stagiaire)
+       getStagiairesParEvaluation(stagiaire){
+ axios.get('/getStagiairesParEvaluation/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.id_stage } })
                 .then((response) => {
                                                             this.loading = false;
                     this.stagiaire = response.data.stagiaires[0];
@@ -380,25 +380,13 @@ methods: {
                     console.log('handle server error from here');
         });
  },
-   redirect_To_EditEvaluation(stagiaire){
-        console.log('stagiaire')
-                      console.log(this.stagiaire)
-                     this.$router.push({ name: 'EditEvaluation', params: { stagiaire:stagiaire}});
-        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
-//console.log(stagiaire)
-            },
- redirect_To_AddEvaluation(stagiaire){
-        console.log('stagiaire')
-                     // console.log(this.stagiaires)
-                     this.$router.push({ name: 'AddEvaluation', params: { stagiaire:stagiaire}});
-            },
+
 
               redirect_To_ShowEvaluationStage(stagiaire){
         console.log('stagiaire')
                       console.log(this.stagiaire)
-                     this.$router.push({ name: 'ShowEvaluationStage', params: { stagiaire:stagiaire}});
-        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
-//console.log(stagiaire)
+                     this.$router.push({ name: 'ShowEvaluationStage', params: { stagiaire:stagiaire,id_stage:this.id_stage}});
+       
                           this.loading = false;
 
           },
@@ -406,13 +394,15 @@ methods: {
     fetchData(){
                 this.loading = true
 
-          
+                     console.log('====== ok =====')
+        console.log(this.$route.params.stagiaire.id_stage)
+        this.id_stage=this.$route.params.stagiaire.id_stage;
         
-        console.log('====== ok =====')
-        console.log(this.$route.params.stagiaire)
+        console.log('====== xxxxx =====')
+        console.log(this.$route.params.stagiaire.fk_evaluation)
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();
-        this.getStagiairesParEvaluation(this.evaluation.fk_stagiaire);
+        this.getStagiairesParEvaluation(this.$route.params.stagiaire);
         this.getObjectifsNotesStage(this.$route.params.stagiaire);
     }
 
@@ -420,7 +410,7 @@ methods: {
 
         mounted(){
              if(this.$route.params.stagiaire.id_stagiaire == undefined){
-              this.$router.push({ name: 'ShowStagiairesEva'});
+              this.$router.push({ name: 'ShowStagiairesResp'});
          }
    
            if( this.$route.params.success == "add"){

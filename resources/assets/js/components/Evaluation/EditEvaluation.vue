@@ -421,17 +421,19 @@
 
 methods: { 
 
-      getStagiairesParEvaluation(id_stagiaire){
- axios.get('/getStagiairesParEvaluation/'+id_stagiaire)
+             getStagiairesParEvaluation(stagiaire){
+ axios.get('/getStagiairesParEvaluation/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.$route.params.id_stage } })
                 .then((response) => {
+                                                            this.loading = false;
                     this.stagiaire = response.data.stagiaires[0];
                     console.log('response objectifs')
                     console.log(response)
+
                })
                 .catch(() => {
                     console.log('handle server error from here');
                 });
-    },  
+    }, 
         getObjectifsNotesStage(stagiaire){
  axios.get('/getObjectifsNotesStage/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.$route.params.id_stage } })
       
@@ -540,7 +542,7 @@ console.log(this.evaluation.fk_stage)
         //this.stagiaire.id_stagiaire=this.$route.params.id_stagiaire;
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();
-        this.getStagiairesParEvaluation(this.evaluation.fk_stagiaire);
+        this.getStagiairesParEvaluation(this.$route.params.stagiaire);
        // this.getObjectifsNotes( this.evaluation.fk_stagiaire);
         this.countAbsence(this.evaluation.fk_stagiaire);
         this.getObjectifsNotesStage(this.$route.params.stagiaire);

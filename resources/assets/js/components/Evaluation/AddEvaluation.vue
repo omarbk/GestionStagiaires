@@ -419,17 +419,19 @@ methods: {
                       console.log(this.stagiaire)
                      this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:stagiaire}});
             },
-      getStagiairesParEvaluation(id_stagiaire){
- axios.get('/getStagiairesParEvaluation/'+id_stagiaire)
+         getStagiairesParEvaluation(stagiaire){
+ axios.get('/getStagiairesParEvaluation/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.$route.params.id_stage } })
                 .then((response) => {
+                                                            this.loading = false;
                     this.stagiaire = response.data.stagiaires[0];
                     console.log('response objectifs')
                     console.log(response)
+
                })
                 .catch(() => {
                     console.log('handle server error from here');
                 });
-    },   
+    }, 
         getObjectif(){
  axios.get('/getObjectif/1er annnée')
                 .then((response) => {
@@ -522,7 +524,7 @@ console.log('************** valideeeeeeeeeee')
                  this.evaluation.fk_evaluateur=this.$route.params.stagiaire.fk_evaluateur;
         this.getTypeObjectifs();
         this.getObjectif()
-        this.getStagiairesParEvaluation(this.evaluation.fk_stagiaire);
+        this.getStagiairesParEvaluation(this.$route.params.stagiaire);
         this.countAbsence(this.evaluation.fk_stagiaire);
        // this.getObjectifsNotes( this.evaluation.fk_stagiaire);
     }

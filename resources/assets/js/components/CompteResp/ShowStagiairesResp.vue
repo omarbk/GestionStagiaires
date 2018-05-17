@@ -162,6 +162,7 @@ import  Pagination from '../Pagination.vue';
                     annee_universitaire_stagiaire: "",	
                     fk_user : 0,
                     niveau_etude_stagiaire:"",
+                    id_stage:"",
                 
               }, 
              stagiaires:{

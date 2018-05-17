@@ -45,6 +45,7 @@ import ShowStagiairesEva from './components/Evaluation/ShowStagiairesEva.vue'
 import ShowStagiairesResp from './components/CompteResp/ShowStagiairesResp.vue'
 import ShowEvaluationStage from './components/CompteResp/ShowEvaluationStage.vue'
 import ShowEvaluationStag from './components/CompteResp/ShowEvaluationStag.vue'
+import ShowAbsencesStag from './components/CompteResp/ShowAbsencesStag.vue'
 
 
 //--------------------------------
@@ -389,7 +390,13 @@ const  router = new VueRouter({
 
 },
 
+{
+    path:"/ShowAbsencesStag",
+    component: ShowAbsencesStag,
+    name:"ShowAbsencesStag",
+   
 
+},
     ],
    
 })
