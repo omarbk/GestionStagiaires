@@ -126,10 +126,12 @@
                                         <td>{{stagiaire.prenom_stagiaire}}</td>
                                         <td>{{stagiaire.specialite_stagiaire}}</td>  
                                         <td>{{stagiaire.niveau_etude_stagiaire}}</td>  
+                                        <td>{{stagiaire.id_stage}}</td>  
+
                                         <td  class="optionsWidth"> 
                                                  <a href="#"  @click="redirect_To_Absences(stagiaire)"   class="btn btn-primary"   ><i class="fab fa-product-hunt"></i></a>
                             
-                  <a href="#"     class="btn btn-success" ><i class="far fa-sticky-note"></i></a>
+                  <a href="#"  @click="redirect_To_Evaluation(stagiaire)"   class="btn btn-success" ><i class="far fa-sticky-note"></i></a>
                                           </td>                                  
                                     </tr>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -201,6 +203,7 @@ import  Pagination from '../Pagination.vue';
                     annee_universitaire_stagiaire: "",	
                     fk_user : 0,
                     niveau_etude_stagiaire:"",
+                    id_stage:0,
                 
               }, 
              stagiaires:{
@@ -276,13 +279,12 @@ import  Pagination from '../Pagination.vue';
 
     getStagiairesParEvaluateur(){
 
-                
-
-                axios.get('/getStagiairesParEvaluateur?page='+this.stagiaires.current_page+'')
+            axios.get('/getStagiairesParEvaluateur?page='+this.stagiaires.current_page+'')
                 .then((response) => {
                     this.loading = false;
                     this.stagiaires = response.data.stagiaires;
-                    console.log(response)
+                   console.log('staaaaaaaaaaaaaaaaaaaage')
+                   console.log(response)
                })
                 .catch(() => {
                     console.log('handle server error from here');
@@ -302,6 +304,13 @@ import  Pagination from '../Pagination.vue';
         console.log('stgiaires')
                       console.log(this.stagiaires)
                      this.$router.push({ name: 'ShowAbsences', params: { stagiaire:stagiaire,fk_evaluateur:this.stagiaires.data[0].fk_evaluateur}});
+        //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
+//console.log(stagiaire)
+            },
+            redirect_To_Evaluation(stagiaire){
+        console.log('stgiaires')
+        console.log(stagiaire)
+               this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:stagiaire}});
         //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
 //console.log(stagiaire)
             },

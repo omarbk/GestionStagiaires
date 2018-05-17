@@ -57,6 +57,13 @@ class AbsenceController extends Controller
     
         return Response()->json(['absence' => $absence]);
      }
+//pour etat d'evaluation
+     public function countAbsence($fk_stagiaire){
+        $count= Absence::where('absences.fk_stagiaire','=',$fk_stagiaire)
+        ->where('absences.justificatif_absence','=',0)
+        ->count();
+        return Response()->json(['count' => $count]);
+     }
 
 
 }

@@ -290,6 +290,11 @@ Route::get('/getObjectif/{annee_objectif}','Evaluation_objectifController@getObj
 Route::delete('/deleteObjectif/{annee_objectif}','Evaluation_objectifController@deleteObjectif');
 Route::post('/updateObjectif','Evaluation_objectifController@updateObjectif');
 Route::get('/searchObjectif/{search_O}','Evaluation_objectifController@searchObjectif');
+
+   // pour responsable
+   Route::get('/getObjectifsNotesStage','Evaluation_objectifController@getObjectifsNotesStage');
+
+   
 //groupe
 Route::post('/addGroupe','GroupeController@addGroupe');
 Route::get('/getGroupes','GroupeController@getGroupes');
@@ -324,7 +329,10 @@ Route::get('/searchStagiaireParStageGroupe','StagiaireController@searchStagiaire
 
 Route::get('/getStagiairesParEvaluation/{id_stagiaire}','StagiaireController@getStagiairesParEvaluation');
 
+     // pour responsable
 
+Route::get('/getStagiairesParResponsable','StagiaireController@getStagiairesParResponsable');
+Route::get('/searchStagiaireParStageGroupePrResp','StagiaireController@searchStagiaireParStageGroupePrResp');
 
 // stage 
 Route::post('/addStage','StageController@addStage');
@@ -342,6 +350,8 @@ Route::get('/getAbsenceParStagiaire','AbsenceController@getAbsenceParStagiaire')
 Route::delete('/deleteAbsence/{id_absence}','AbsenceController@deleteAbsence');
 Route::get('/getAbsence/{id_absence}','AbsenceController@getAbsence');
 Route::post('/updateAbsence','AbsenceController@updateAbsence');
+  //---- pour etat d'evaluation
+Route::get('/countAbsence/{fk_stagiaire}','AbsenceController@countAbsence');
 
 Auth::routes();
 

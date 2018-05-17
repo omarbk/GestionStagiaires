@@ -24,7 +24,7 @@ class ResponsableController extends Controller
     $user->id = $request->user['id'];
     $user->email=$request->user['email'];
     $user->role=$request->user['role'];
-    $user->password =  Hash::make($request->password);
+    $user->password =  Hash::make($request->user['password']);
     $user->save();
     $id=$user->id;
     $this->addResponsable($request,$id);

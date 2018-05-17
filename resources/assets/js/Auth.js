@@ -8,6 +8,8 @@ export default function (Vue){
               test = "Super Admin";
               else if(response.data.user[0].role == 'Evaluateur')
               test = "Evaluateur";
+              else if(response.data.user[0].role == 'Responsable')
+              test = "Responsable";
               else if(response.data.user[0].role == 'Expert Comptable')
               test = "Expert Comptable";
             //  else test = "";

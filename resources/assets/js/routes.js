@@ -41,6 +41,10 @@ import EditEvaluation from './components/Evaluation/EditEvaluation.vue'
 import ShowStagiairesEva from './components/Evaluation/ShowStagiairesEva.vue'
 
 
+// show responsable
+import ShowStagiairesResp from './components/CompteResp/ShowStagiairesResp.vue'
+import ShowEvaluationStage from './components/CompteResp/ShowEvaluationStage.vue'
+import ShowEvaluationStag from './components/CompteResp/ShowEvaluationStag.vue'
 
 
 //--------------------------------
@@ -97,9 +101,12 @@ const  router = new VueRouter({
             component: Contents,
             meta:{
                 Evaluateur:true,
+                Responsable:true,
                 }
 
         },
+
+        
        // route d'authentification
         {   
             path:"/login",
@@ -328,7 +335,6 @@ const  router = new VueRouter({
    
 
 },
-
 {
     path:"/EditEvaluation",
     component: EditEvaluation,
@@ -359,9 +365,28 @@ const  router = new VueRouter({
     name: "EditAbsence"
  },
 
+//------------------show responsable
+{
+    path:"/ShowStagiairesResp",
+    component: ShowStagiairesResp,
+    name:"ShowStagiairesResp",
+   
 
+},
+{
+    path:"/ShowEvaluationStage",
+    component: ShowEvaluationStage,
+    name:"ShowEvaluationStage",
+   
 
+},
+{
+    path:"/ShowEvaluationStag",
+    component: ShowEvaluationStag,
+    name:"ShowEvaluationStag",
+   
 
+},
 
 
     ],

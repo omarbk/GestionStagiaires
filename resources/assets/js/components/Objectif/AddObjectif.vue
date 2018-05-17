@@ -182,7 +182,44 @@
         this.getTypeObjectifs();
 
   }
-                     
+               
+      },
+
+            computed:{
+          
+    TotalCoeff(){ 
+
+                      for (let index1 = 0; index1 < this.type_objectifs.length; index1++) {
+           console.log("boucle ============>")
+           //console.log(this.type_objectifs[index].id_type)
+          // console.log(this.objectifs[index].fk_type_objectif)
+          
+                   let sumtype=0;
+            for (let index = 0; index < this.objectifs.length; index++) { 
+            
+                 if(this.type_objectifs[index1].id_type === this.objectifs[index].fk_type_objectif){ 
+
+                               sumtype=this.precisionRound((+sumtype + +parseInt(this.objectifs[index].coefficient)),2);
+
+                 
+                 }
+                 }
+                 console.log("total coeff")
+                 console.log(sumtype);
+                 }
+
+    }
+      }, 
+      watch:{
+  objectifs:{
+            handler: function(){
+                    console.log('objectif watch')
+                    this.TotalCoeff;
+                    //this.noteObejctif;
+
+            },
+                deep : true
+  },
       },
   created () {
     // fetch the data when the view is created and the data is

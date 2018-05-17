@@ -39,6 +39,27 @@
      <script src="{{asset('js/demo.js')}}"></script>
      <script src="{{asset('js/app.js')}}"></script>
     </body>
+
+    @elseif( $role==="Responsable")
+    <body :class="@{{sidebarr}}">
+       <div id="app">    
+       
+       
+     
+        <app-vue-responsable></app-vue-responsable>
+       
+
+         
+       </div>
+     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    
+      
+     <script src="{{asset('js/carbon.js')}}"></script>
+     <script src="{{asset('js/demo.js')}}"></script>
+     <script src="{{asset('js/app.js')}}"></script>
+    </body>
+
+
      @else
     <body :class="@{{sidebarr}}">
        <div id="app">    

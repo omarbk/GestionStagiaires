@@ -95,8 +95,10 @@ class Evaluation_objectifController extends Controller
             ->where('annee_objectif','=',$annee_objectif)
                     ->get();
                     //dd($objectif);
-
-                 return Response()->json(['objectifs' => $objectifs]);
+                    $notes =[];
+                    for($i=0;$i<count($objectifs);$i++){
+                         $notes[$i] =0;}
+                 return Response()->json(['objectifs' => $objectifs , 'notes' =>$notes]);
     }
 
     public function getObjectifsNotes($id_stagiaire){
@@ -110,6 +112,12 @@ class Evaluation_objectifController extends Controller
          ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*','total_notes.*')
          ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
          ->get();
+         $typeObjectifs = Type_objectif::leftJoin('note_types', 'type_objectifs.id_type', '=', 'note_types.fk_type_objectif')
+         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'note_types.fk_evaluation')
+         ->select( 'type_objectifs.*','evaluations.*','note_types.*')
+         ->where('evaluations.fk_stagiaire','=',$id_stagiaire)
+         ->get();
+
        /*  $stagiaire=Stagiaire::find($id_stagiaire);
          $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
          ->select('evaluation_objectifs.*', 'type_objectifs.*')
@@ -120,7 +128,7 @@ class Evaluation_objectifController extends Controller
         for($i=0;$i<count($objectifs);$i++){
              $notes[$i] =0;
         }*/
-                       return Response()->json(['objectifs' => $objectifs]);
+                       return Response()->json(['objectifs' => $objectifs , 'typeObjectifs' => $typeObjectifs ]);
      }
   /*  public function getByType(){
         $listeTypeObjectifs = Type_objectif::all();
@@ -132,6 +140,39 @@ class Evaluation_objectifController extends Controller
 
                  return Response()->json(['objectifs' => $objectifs]);
     }*/
+
+
+    // pour responsable
+    public function getObjectifsNotesStage(Request $request){
+        $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
+        ->leftJoin('notes', 'evaluation_objectifs.id_evaluation_objectif', '=', 'notes.fk_objectif')
+        ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')
+        ->leftJoin('total_notes', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
+        ->leftJoin('stagiaires', 'evaluations.fk_stagiaire', '=', 'stagiaires.id_stagiaire')
+        ->leftJoin('evaluateurs', 'evaluateurs.id_evaluateur', '=', 'evaluations.fk_evaluateur')
+        ->leftJoin('stages', 'evaluateurs.id_evaluateur', '=', 'stages.fk_evaluateur')
+
+        ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*','total_notes.*','stages.*')
+        ->where('stagiaires.id_stagiaire','=',$request->id_stagiaire)
+        ->where('stages.id_stage','=',$request->id_stage)
+        ->get();
+     //   dd($objectifs);
+
+        $typeObjectifs = Type_objectif::leftJoin('note_types', 'type_objectifs.id_type', '=', 'note_types.fk_type_objectif')
+        ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'note_types.fk_evaluation')
+        ->leftJoin('evaluateurs', 'evaluateurs.id_evaluateur', '=', 'evaluations.fk_evaluateur')
+        ->leftJoin('stages', 'evaluateurs.id_evaluateur', '=', 'stages.fk_evaluateur')
+
+        ->select( 'type_objectifs.*','evaluations.*','note_types.*','stages.*')
+        ->where('evaluations.fk_stagiaire','=',$request->id_stagiaire)
+        ->where('stages.id_stage','=',$request->id_stage)
+
+        ->get();
+       // dd($typeObjectifs);
+                      return Response()->json(['objectifs' => $objectifs , 'typeObjectifs' => $typeObjectifs ]);
+    }
+
+
     public function searchObjectif($search_O){
         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
         ->select('evaluation_objectifs.*', 'type_objectifs.*')

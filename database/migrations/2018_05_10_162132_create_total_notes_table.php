@@ -19,7 +19,9 @@ class CreateTotalNotesTable extends Migration
             $table->double('totalNotes');
             $table->double('noteStage');
             $table->double('noteFinal');
-            $table->string('commentaire');
+            $table->integer('nombreAbsence');
+            $table->string('etat');
+            $table->string('commentaire')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
