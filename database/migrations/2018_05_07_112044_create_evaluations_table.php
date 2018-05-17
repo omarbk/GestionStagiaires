@@ -17,6 +17,8 @@ class CreateEvaluationsTable extends Migration
             $table->increments('id_evaluation');
             $table->integer('fk_stagiaire');
             $table->integer('fk_evaluateur');
+            $table->integer('fk_stage');
+
             $table->softDeletes();
             $table->timestamps();
         });

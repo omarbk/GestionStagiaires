@@ -17,7 +17,8 @@ class NoteController extends Controller
      
         $evaluation->fk_stagiaire = $request->evaluation['fk_stagiaire'];
         $evaluation->fk_evaluateur = $request->evaluation['fk_evaluateur'];
-       
+        $evaluation->fk_stage = $request->evaluation['fk_stage'];
+
 
         $evaluation->save();  
         $id=$evaluation->id_evaluation;

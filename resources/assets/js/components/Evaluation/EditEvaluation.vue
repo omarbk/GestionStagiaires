@@ -289,6 +289,7 @@
                objectifs:[],
                evaluation:{
                    fk_stagiaire:"",
+                   fk_stage:"",
                },
              type_objectifs:[],
              type_objectif:{
@@ -430,7 +431,33 @@ methods: {
                 .catch(() => {
                     console.log('handle server error from here');
                 });
-    },   
+    },  
+        getObjectifsNotesStage(stagiaire){
+ axios.get('/getObjectifsNotesStage/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.$route.params.id_stage } })
+      
+                .then((response) => {
+                                                           this.loading = false;
+
+                    console.log(response.data.objectifs.length)
+                    if(response.data.objectifs.length == 0){
+                        this.test =false;
+                        console.log('emptyyyyyyy')
+                    }
+                   else{
+                        this.test =true;
+                    this.objectifs = response.data.objectifs;
+                    this.objectif = response.data.objectifs[0];
+                    this.typeObjectifs = response.data.typeObjectifs;
+
+                   }
+
+                    console.log('response objectifs note')
+                    console.log(response.data.objectifs)
+               })
+                .catch(() => {
+                    console.log('handle server error from here11111');
+                });
+    }, 
     getObjectifsNotes(id_stagiaire){
  axios.get('/getObjectifsNotes/'+id_stagiaire)
                 .then((response) => {
@@ -488,7 +515,7 @@ console.log('************** valideeeeeeeeeee')
               axios.post('/updateNotes',{objectifs:this.objectifs,typeObjectifs:this.typeObjectifs}).then(response => {  
                     //console.log(response.data.objectif);   
                     console.log('objectif Bien ajouter !');
-                    this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:this.stagiaire,success: "edit"  }});
+                    this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:this.stagiaire,id_stage:this.evaluation.fk_stage,success: "edit"  }});
 
                   });
             
@@ -508,12 +535,15 @@ console.log('************** valideeeeeeeeeee')
                          if(this.$route.params.stagiaire.id_stagiaire == undefined){
               this.$router.push({ name: 'ShowStagiairesEva'});
          }
+this.evaluation.fk_stage=this.$route.params.id_stage;
+console.log(this.evaluation.fk_stage)
         //this.stagiaire.id_stagiaire=this.$route.params.id_stagiaire;
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();
         this.getStagiairesParEvaluation(this.evaluation.fk_stagiaire);
-        this.getObjectifsNotes( this.evaluation.fk_stagiaire);
+       // this.getObjectifsNotes( this.evaluation.fk_stagiaire);
         this.countAbsence(this.evaluation.fk_stagiaire);
+        this.getObjectifsNotesStage(this.$route.params.stagiaire);
 
     }
 

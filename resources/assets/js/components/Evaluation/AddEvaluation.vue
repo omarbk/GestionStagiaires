@@ -284,6 +284,7 @@
                objectifs:[],
                evaluation:{
                    fk_stagiaire:"",
+                   fk_stage:"",
                },
              type_objectifs:[],
              type_objectif:{
@@ -497,7 +498,7 @@ console.log('************** valideeeeeeeeeee')
               axios.post('/addEvaluation',{evaluation:this.evaluation,objectifs:this.objectifs,type_objectifs:this.type_objectifs,notes:this.notes,totalNote:this.totalNote,noteType:this.noteType}).then(response => {  
                     //console.log(response.data.objectif);   
                     console.log('objectif Bien ajouter !');
-                    this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:this.stagiaire,success: "add"  }});
+                    this.$router.push({ name: 'ShowEvaluation', params: { stagiaire:this.stagiaire,id_stage:this.evaluation.fk_stage,success: "add"  }});
 
                   });
             
@@ -511,7 +512,11 @@ console.log('************** valideeeeeeeeeee')
               this.$router.push({ name: 'ShowStagiairesEva'});
          }
          console.log('====== ok =====')
-        console.log(this.$route.params.stagiaire)
+       // console.log(this.$route.params.id_stage)
+               // this.evaluation.fk_stage=this.$route.params.stagiaire.id_stage;
+        this.evaluation.fk_stage=this.$route.params.id_stage;
+        console.log(this.evaluation.fk_stage)
+
         //this.stagiaire.id_stagiaire=this.$route.params.id_stagiaire;
                 this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
                  this.evaluation.fk_evaluateur=this.$route.params.stagiaire.fk_evaluateur;
