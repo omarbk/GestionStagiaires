@@ -47,26 +47,23 @@
 <hr>  
 
 <!-- stagiaire --> 
+<div class="container"> 
 <div class="row ">
      
                     
                     <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row">  
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Année Universitaire : </label>
-                        <div class="col-sm-5">
-                        {{stagiaire.annee_universitaire_stagiaire}} 
-                    </div>
+                        <label for="reference_paiement"  class="col-form-label" >Année Universitaire : <span style="font-weight :initial"> {{stagiaire.annee_universitaire_stagiaire}} </span></label>
+     
                          </div> 
 
     </div>
   <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Niveau d'Etude : </label> 
-                        <div class="col-sm-5">
-                             {{stagiaire.niveau_etude_stagiaire}}
-                        </div>
+                        <label for="reference_paiement"  class="col-form-label" >Niveau d'Etude : <span style="font-weight :initial"> {{stagiaire.niveau_etude_stagiaire}} </span></label> 
+                       
 
                    </div>
                                </div> 
@@ -77,27 +74,21 @@
                      <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Nom : </label> 
-                        <div class="col-sm-5">
-                   {{stagiaire.nom_stagiaire}} 
-                    </div>
+                        <label for="reference_paiement"  class="col-form-label" >Nom : <span style="font-weight :initial"> {{stagiaire.nom_stagiaire}} </span> </label> 
+                     
                     </div>
                                </div> 
                                        <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Prénom : </label> 
-                        <div class="col-sm-5">
-                    {{stagiaire.prenom_stagiaire}} 
-                                        </div>
+                        <label for="reference_paiement"  class="col-form-label" >Prénom : <span style="font-weight :initial"> {{stagiaire.prenom_stagiaire}}  </span> </label> 
+               
                                          </div>
                                </div> 
                      <div class="col-md-2 col-sm-4">
                                          <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >N° : </label> 
-                        <div class="col-sm-5">
-                   {{stagiaire.id_stagiaire}} 
-                     </div>
+                        <label for="reference_paiement"  class="col-form-label" >N° : <span style="font-weight :initial"> {{stagiaire.id_stagiaire}} </span> </label> 
+                    
                         </div>
                                </div> 
                 </div>
@@ -106,15 +97,8 @@
                       <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Période de Stage : </label> 
-                        <div class="col-sm-5">
-                    <strong>du </strong>
-                    
-                     {{stagiaire.dateDebut_stage}} <strong> au </strong>
-                        
-                      {{stagiaire.dateFin_stage}}
-                        
-                                             </div>
+                        <label for="reference_paiement"  class="col-form-label" >Période de Stage : <span style="font-weight :initial"> du  {{stagiaire.dateDebut_stage}} au {{stagiaire.dateFin_stage}} </span> </label> 
+       
               
                         </div>
                       </div>
@@ -122,10 +106,8 @@
                                 <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Hospital : </label> 
-                        <div class="col-sm-5">
-                    {{stagiaire.nom_hospitalier}} 
-                      </div>
+                        <label for="reference_paiement"  class="col-form-label" >Hospital : <span style="font-weight :initial"> {{stagiaire.nom_hospitalier}} </span> </label> 
+                     
                                              </div>
               
                         </div>
@@ -134,21 +116,22 @@
                      <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Service : </label> 
-                    {{stagiaire.service_evaluateur}} 
+                        <label for="reference_paiement"  class="col-form-label" >Service : <span style="font-weight :initial"> {{stagiaire.service_evaluateur}} </span>  </label> 
+                    
                     </div>
                               </div>
               
                        <div class="col-md-5 col-sm-10">
 
                 <div class="form-group row"> 
-                        <label for="reference_paiement"  class="col-sm-5 col-form-label" >Nom du MS : </label> 
+                        <label for="reference_paiement"  class="col-form-label" >Nom du MS : <span style="font-weight :initial"> </span> </label> 
                    
 
                        </div>
                                              </div>
               
                         </div>
+  </div>                     
 <hr>
 <div v-if="test==true">
 <div class="text-center pull-right">
@@ -157,7 +140,7 @@
     </div>
     <form  >
 
-<div class="row center"> 
+<div class="row"> 
     <div class="col">
        <div class="row">
            <div class="card-body">
@@ -166,7 +149,7 @@
                                     <thead>
                                         <div v-for="(type_objectif,index) in typeObjectifs" :key="index" >
                  <br>
-                  <h3> Type Objectif :<strong>  {{type_objectif.type_objectif}}</strong></h3>
+                  <h4> <span style="color: #42a5f5;"> {{index+1}}. {{type_objectif.type_objectif}} </span></h4>
 
                                     <tr>
                                     <th>objectifs</th>
@@ -211,62 +194,49 @@
     </div>
 </div>
 <hr>
-<hr>
+<div class="container">
 <div class="row">
 <div class="col-md-6 col-sm-12">
 
                 <div class="form-group row">
-                    <label for="reference_paiement"  class="col-sm-6 col-form-label" >Commentaire : </label>
-                    <div class="col-sm-6">
-                        {{objectif.commentaire}}
-
-                    </div>
-                </div> 
-                 <div class="form-group row">
-                    <label for="reference_paiement"  class="col-sm-6 col-form-label" >Nombre des Absences non Justifié : </label>
-                    <div class="col-sm-6">
-                        {{objectif.nombreAbsence}}
-
-                    </div>
-                </div> 
-                 <div class="form-group row">
-                    <label for="reference_paiement"  class="col-sm-6 col-form-label" >Etat : </label>
+                    <label for="reference_paiement"  class="col-form-label" >Commentaire : <span style="font-weight :initial"> {{objectif.commentaire}} </span></label>
                    
-                    <div class="col-sm-6 etat" v-if="objectif.etat == 'valide'" style="color:rgb(146, 239, 7);" >
-                        {{objectif.etat}}
-                  
-                    </div>
-                      <div class="col-sm-6 etat" v-if="objectif.etat == 'non valide'" style="color:red" >
-                        {{objectif.etat}}
-                  
-                    </div>
+                </div> 
+                 <div class="form-group row">
+                    <label for="reference_paiement"  class="col-form-label" >Nombre des Absences non Justifié : <span style="font-weight :initial">  {{objectif.nombreAbsence}}  </span></label>
+     
+                </div> 
+                 <div class="form-group row">
+                    <label for="reference_paiement"  class="col-form-label" >Etat :
+                         <span class="etat" v-if="objectif.etat == 'valide'" style="color:rgb(146, 239, 7);" > {{objectif.etat}} </span> 
+                   
+                    <span  class="etat" v-if="objectif.etat == 'non valide'" style="color:red"  > {{objectif.etat}} </span></label>
+                      
                 </div> 
 
     </div>
       <div class="col-md-6 col-sm-12">
           <div class="form-group row">
-            <label for="staticEmail" class="col-sm-4 col-form-label">Note Fin de Stage </label>
+            <label for="staticEmail" class="col-form-label">Note Fin de Stage : <span style="font-weight :initial"> {{objectif.noteStage}}/20  </span></label>
             <div class="col-sm-8">
-            {{objectif.noteStage}}/20
+            
             </div>
          </div>
        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-4 col-form-label">Total </label>
+            <label for="staticEmail" class="col-form-label">Total :<span style="font-weight :initial"> {{objectif.totalNotes}}  </span> </label>
             <div class="col-sm-8">
-            {{objectif.totalNotes}} 
+            
             </div>
          </div>
      
           <div class="form-group row">
-            <label for="staticEmail" class="col-sm-4 col-form-label">Moyenne de Stage </label>
-            <div class="col-sm-8">
-            {{objectif.noteFinal}} /20
-            </div>
+            <label for="staticEmail" class="col-form-label">Moyenne de Stage : <span style="font-weight :initial"> {{objectif.noteFinal}} /20  </span></label>
+
          </div>
       
     </div>
 </div>
-
+</div>
    </form>
 </div>
 </div>
