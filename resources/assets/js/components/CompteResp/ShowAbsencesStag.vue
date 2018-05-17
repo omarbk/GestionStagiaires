@@ -61,7 +61,32 @@
 
 
 
+ <div class="row" style="border-style: solid" v-if="objectifs.length > 0"> 
+         
+           
 
+     <div class="col-md-6 col-sm-12" >
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-4 ">Note Final : </label>
+            <div class="col-sm-8">
+        {{objectif.noteFinal}} /20
+            </div>
+         </div>
+     </div>
+          <div class="col-md-6 col-sm-12" >
+ 
+            <div class="form-group row">
+            <label for="staticEmail" class="col-sm-4 ">Etat : </label>
+            <div class="col-sm-8">
+
+                     <span class="etat" v-if="objectif.etat == 'valide'" style="color:rgb(146, 239, 7);" > {{objectif.etat}} </span> 
+                   
+                    <span  class="etat" v-if="objectif.etat == 'non valide'" style="color:red"  > {{objectif.etat}} </span></label>
+                      
+            </div>
+         </div>  
+     </div> 
+ </div>
 
      <div class="row" > 
          
@@ -95,22 +120,7 @@
                 </div>
             
    </div>     
-
-
-     <div class="col-md-6 col-sm-12">
-          <div class="form-group row">
-            <label for="staticEmail" class="col-sm-4 col-form-label">Note Final </label>
-            <div class="col-sm-8">
-         /20
-            </div>
-         </div> 
-            <div class="form-group row">
-            <label for="staticEmail" class="col-sm-4 col-form-label">Etat </label>
-            <div class="col-sm-8">
-        vvvvv
-            </div>
-         </div>  
-     </div>       
+      
     </div>
 
     <hr>
@@ -181,7 +191,8 @@
           data: () => ({
 
 //absences 
-
+            objectifs:[],
+            objectif:{},
             absences:{
                         
                         total: 0,
@@ -298,7 +309,32 @@
  
  methods:{
      
-     
+      getObjectifsNotesStage(stagiaire){
+ axios.get('/getObjectifsNotesStage/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.id_stage } })
+      
+                .then((response) => {
+                                                           this.loading = false;
+
+                    console.log(response.data.objectifs.length)
+                    if(response.data.objectifs.length == 0){
+                        this.test =false;
+                        console.log('emptyyyyyyy')
+                    }
+                   else{
+                        this.test =true;
+                    this.objectifs = response.data.objectifs;
+                    this.objectif = response.data.objectifs[0];
+                    this.typeObjectifs = response.data.typeObjectifs;
+
+                   }
+
+                    console.log('response objectifs note')
+                    console.log(response.data.objectifs)
+               })
+                .catch(() => {
+                    console.log('handle server error from here11111');
+                });
+    },
         getGroupes(){
                 axios.get('/getGroupes?page='+this.groupes.current_page+'')
                 .then((response) => {
@@ -342,7 +378,9 @@
         console.log('====== nnnnnnnnnnnnnnnn =====')
         console.log(this.$route.params.stagiaire)
         this.id_stagiaire=this.$route.params.stagiaire.id_stagiaire;
-      this.getAbsenceParStagiaire();          
+      this.getAbsenceParStagiaire();    
+                     this.getObjectifsNotesStage(this.$route.params.stagiaire);
+      
       // replace `getPost` with your data fetching util / API wrapper
    
   /* axios.get('/getGroupes?page='+this.groupes.current_page+'')
