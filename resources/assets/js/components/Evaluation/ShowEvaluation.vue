@@ -337,8 +337,8 @@
 
 methods: { 
 
-      getStagiairesParEvaluation(id_stagiaire){
- axios.get('/getStagiairesParEvaluation/'+id_stagiaire)
+      getStagiairesParEvaluation(stagiaire){
+ axios.get('/getStagiairesParEvaluation/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.id_stage } })
                 .then((response) => {
                                                             this.loading = false;
                     this.stagiaire = response.data.stagiaires[0];
@@ -390,14 +390,14 @@ methods: {
    redirect_To_EditEvaluation(stagiaire){
         console.log('stagiaire')
                       console.log(this.stagiaire)
-                     this.$router.push({ name: 'EditEvaluation', params: { stagiaire:stagiaire}});
+                     this.$router.push({ name: 'EditEvaluation', params: { stagiaire:stagiaire,id_stage:this.id_stage}});
         //this.$router.push({ name: 'Editstagiaire', params: {stagiaire:this.stagiaire}});
 //console.log(stagiaire)
             },
  redirect_To_AddEvaluation(stagiaire){
         console.log('stagiaire')
                      // console.log(this.stagiaires)
-                     this.$router.push({ name: 'AddEvaluation', params: { stagiaire:stagiaire}});
+                     this.$router.push({ name: 'AddEvaluation', params: { stagiaire:stagiaire,id_stage:this.id_stage}});
             },
 
               redirect_To_ShowStagiairesEva(stagiaire){
@@ -420,7 +420,7 @@ methods: {
         this.id_stage=this.$route.params.stagiaire.id_stage;
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();
-        this.getStagiairesParEvaluation(this.evaluation.fk_stagiaire);
+        this.getStagiairesParEvaluation(this.$route.params.stagiaire);
        // this.getObjectifsNotes( this.evaluation.fk_stagiaire);
                this.getObjectifsNotesStage(this.$route.params.stagiaire);
 

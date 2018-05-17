@@ -24,6 +24,7 @@ class Evaluation_objectifController extends Controller
         return Response()->json(['etat' => true ]);
     }
 
+
     public function updateObjectif(Request $request){
         for($i=0;$i<count($request->suppObjectifs);$i++){
             $eval_objectif = Evaluation_objectif::find($request->suppObjectifs[$i]['id_evaluation_objectif']);
@@ -149,8 +150,7 @@ class Evaluation_objectifController extends Controller
         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')
         ->leftJoin('total_notes', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
         ->leftJoin('stagiaires', 'evaluations.fk_stagiaire', '=', 'stagiaires.id_stagiaire')
-        ->leftJoin('evaluateurs', 'evaluateurs.id_evaluateur', '=', 'evaluations.fk_evaluateur')
-        ->leftJoin('stages', 'evaluateurs.id_evaluateur', '=', 'stages.fk_evaluateur')
+        ->leftJoin('stages', 'evaluations.fk_stage', '=', 'stages.id_stage')
 
         ->select('evaluation_objectifs.*', 'type_objectifs.*','notes.*','evaluations.*','total_notes.*','stages.*')
         ->where('stagiaires.id_stagiaire','=',$request->id_stagiaire)
@@ -160,8 +160,7 @@ class Evaluation_objectifController extends Controller
 
         $typeObjectifs = Type_objectif::leftJoin('note_types', 'type_objectifs.id_type', '=', 'note_types.fk_type_objectif')
         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'note_types.fk_evaluation')
-        ->leftJoin('evaluateurs', 'evaluateurs.id_evaluateur', '=', 'evaluations.fk_evaluateur')
-        ->leftJoin('stages', 'evaluateurs.id_evaluateur', '=', 'stages.fk_evaluateur')
+        ->leftJoin('stages', 'evaluations.fk_stage', '=', 'stages.id_stage')
 
         ->select( 'type_objectifs.*','evaluations.*','note_types.*','stages.*')
         ->where('evaluations.fk_stagiaire','=',$request->id_stagiaire)

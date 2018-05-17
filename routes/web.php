@@ -327,7 +327,7 @@ Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
 Route::get('/getStagiairesParEvaluateur','StagiaireController@getStagiairesParEvaluateur');
 Route::get('/searchStagiaireParStageGroupe','StagiaireController@searchStagiaireParStageGroupe');
 
-Route::get('/getStagiairesParEvaluation/{id_stagiaire}','StagiaireController@getStagiairesParEvaluation');
+Route::get('/getStagiairesParEvaluation','StagiaireController@getStagiairesParEvaluation');
 
      // pour responsable
 

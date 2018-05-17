@@ -126,7 +126,6 @@
                                         <td>{{stagiaire.prenom_stagiaire}}</td>
                                         <td>{{stagiaire.specialite_stagiaire}}</td>  
                                         <td>{{stagiaire.niveau_etude_stagiaire}}</td>  
-                                        <td>{{stagiaire.id_stage}}</td>  
 
                                         <td  class="optionsWidth"> 
                                                  <a href="#"  @click="redirect_To_Absences(stagiaire)"   class="btn btn-primary"   ><i class="fab fa-product-hunt"></i></a>
