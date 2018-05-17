@@ -301,7 +301,7 @@ import  Pagination from '../Pagination.vue';
                   getAbsenceParStagiaire(){
                       
 
-                axios.get('/getAbsenceParStagiaire?page='+this.absences.current_page+'',{ params: {fk_evaluateur:this.$route.params.fk_evaluateur,fk_stagiaire:this.$route.params.stagiaire.id_stagiaire} })
+                axios.get('/getAbsenceParStagiaire?page='+this.absences.current_page+'',{ params: {fk_evaluateur:this.$route.params.fk_evaluateur,fk_stagiaire:this.$route.params.stagiaire.id_stagiaire,fk_stage:this.$route.params.stagiaire.id_stage} })
                 .then((response) => {
                  // console.log('shit');
                 

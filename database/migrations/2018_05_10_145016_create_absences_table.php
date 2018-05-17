@@ -22,6 +22,7 @@ class CreateAbsencesTable extends Migration
             $table->boolean('justificatif_absence')->nullable();
             $table->integer('fk_stagiaire')->nullable();
             $table->integer('fk_evaluateur')->nullable();
+            $table->integer('fk_stage')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

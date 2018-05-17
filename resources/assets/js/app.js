@@ -133,12 +133,14 @@ Router.beforeEach(
         
 
         }
+
        
         else if(to.matched.some(record => record.meta.Responsable)){
             console.log('responsable***********************')
             
             Promise.resolve(Vue.auth.getProfile()).then(function(value){
-               
+               console.log("role --------")
+               console.log(value)
                 if(value == "Responsable"){
                     next({
                         path:'/ShowStagiairesResp'
@@ -166,6 +168,7 @@ Router.beforeEach(
         
 
         }
+  
         
         
         else next()

@@ -18,6 +18,7 @@ class AbsenceController extends Controller
                 $absence->justificatif_absence = $request->absence['justificatif_absence'];
                 $absence->fk_stagiaire = $request->absence['fk_stagiaire'];
                 $absence->fk_evaluateur = $request->absence['fk_evaluateur'];
+                $absence->fk_stage = $request->absence['fk_stage'];
                 $absence->save();
                  return Response()->json(['etat' => true]);
             
@@ -41,6 +42,7 @@ class AbsenceController extends Controller
         $absences= Absence::select('absences.*')
         ->where('absences.fk_stagiaire','=',$request->fk_stagiaire)
         ->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
+        ->where('absences.fk_stage','=',$request->fk_stage)
         ->paginate(10);
         return Response()->json(['absences' => $absences]);
      }

@@ -105,6 +105,7 @@ const  router = new VueRouter({
                 }
 
         },
+        
 
         
        // route d'authentification

@@ -38,6 +38,11 @@ export default {
   data: () => ({
       sidebarr:"sidebar-fixed header-fixed",
   }),
+  created(){
+     this.$router.push({ name: 'ShowStagiairesEva'});
+
+    
+  }
 
 
 }

@@ -137,7 +137,8 @@
                 cause_absence:"",
                 justificatif_absence:false,
                 fk_stagiaire:0,
-                fk_evaluateur:0                     
+                fk_evaluateur:0,
+                fk_stage:0,                    
                 },
                 stagiaire:{},
       
@@ -153,12 +154,14 @@
                  addAbsence(){
                         this.absence.fk_evaluateur=this.$route.params.fk_evaluateur
                         this.absence.fk_stagiaire= this.$route.params.stagiaire.id_stagiaire
+                        this.absence.fk_stage = this.$route.params.stagiaire.id_stage
+                        console.log('----- absence -------')
                         console.log(this.absence)
                          axios.post('/addAbsence',{absence:this.absence})
-                        .then(response => {         
-                                console.log('Absence bien Ajouter ')
-                            this.$router.push({ name: 'ShowAbsences', params: { stagiaire:this.$route.params.stagiaire,fk_evaluateur:this.$route.params.fk_evaluateur}});
-                        })
+                            .then(response => {         
+                                    console.log('Absence bien Ajouter ')
+                                this.$router.push({ name: 'ShowAbsences', params: { stagiaire:this.$route.params.stagiaire,fk_evaluateur:this.$route.params.fk_evaluateur}});
+                            })
                         .catch(() => {
                                 console.log('handle server error from here');
                         });
