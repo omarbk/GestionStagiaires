@@ -16,40 +16,7 @@
    
      <div class="row">
         <div class="col">
-       <b-modal id="modalPrevent"
-             ref="modal"
-             title="+ Compte"
-             @ok="addCompte"
-             ok-title="Suivant" >
-      <form @submit.stop.prevent="handleSubmit">
-
-    <div class="form-group row">
-                 <label for="reference" class="col-sm-2 col-form-label">Email: </label>
-                    <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reference" class="col-sm-2 col-form-label">Password: </label>
-                    <div class="col-sm-10">
-                    <b-form-input  type="password" v-model="user.password" class="form-control" id="password" placeholder="Password" />
-                    </div>
-                </div>
-     <div class="form-group row">
-                    <label for="reference" class="col-sm-2 col-form-label">Role: </label>                    
-                    <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.role" class="form-control" id="Role" placeholder="Role" disabled/>
-                    </div>
-                </div>
-   
- 
-
-
-
       
-      </form>
-
-    </b-modal>
   </div>
     </div>
     

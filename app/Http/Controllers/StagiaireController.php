@@ -241,7 +241,7 @@ class StagiaireController extends Controller
                       ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
                       ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
                       ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
-                      ->select('stagiaires.*','stages.intitule_stage','stages.fk_evaluateur','groupes.nom_groupe')
+                      ->select('stagiaires.*','stages.intitule_stage','stages.fk_evaluateur','groupes.nom_groupe','stages.*')
                       ->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)
                       ->where('stages.statut_stage','=','En cours')
                       ->where('stages.intitule_stage','like', '%' .$request->searchStage . '%')
