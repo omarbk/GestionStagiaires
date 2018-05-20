@@ -325,11 +325,14 @@ import  Pagination from '../Pagination.vue';
                 });
     },
     getStagiaire(stagiaire){
+        console.log('idstagiaire: '+stagiaire.id_stagiaire)
                   axios.get('/getStagiaire/'+stagiaire.id_stagiaire).then(
                   response => {
-                       
-                    this.stagiaire= response.data.stagiaire[0];
+                       console.log('stagiarie trueeeeeee')
+                       console.log(response)
+                    this.stagiaire= response.data.stagiaires[0];
                                   console.log(this.stagiaire)
+                                  console.log('stagiarie falseeeeeee')
 
                     this.modalShow = !this.modalShow
                   });         
