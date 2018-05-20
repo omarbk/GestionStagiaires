@@ -152,7 +152,7 @@ class StagiaireController extends Controller
                  return Response()->json(['stagiaires' => $stagiaires ]);
     }
               
-    public function getStagiaire($id_stagiaire){
+    public function getStagiaire($id_stagiaire){    
                 $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')
                       ->leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
                       ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
@@ -463,6 +463,7 @@ public function PDFevaluation($s,$st){
     PDF::Output('hello_world.pdf');
 
 }
+public function testf(){}
 
 
 }
