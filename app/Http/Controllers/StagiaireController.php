@@ -348,7 +348,7 @@ public function getStagesParStagiaire(Request $request){
                           ->paginate(6);
                           //->orWhere('groupes.nom_groupe','like', '%' .$search_groupe . '%')
                           //->orWhere('stagiaires.niveau_etude_stagiaire','like', '%' .$search_niveau . '%')
-                          
+                      dd()    
     
                      return Response()->json(['stages' => $stages]);
          }

@@ -16,6 +16,7 @@
                   <div class=" btnMarge">
         <div class="col">
         <a class="float-right btn btn-primary" @click="redirect_To_ShowStagiairesEva(stagiaire)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
+                   <a href="#"    @click="PDFevaluation(stagiairePdf)"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
 
         <div v-if="test==true">
             <a href="#" @click="redirect_To_EditEvaluation(stagiaire)" class="float-right btn btn-success"><i class="fas fa-edit d-inline-block"/> Modifier</a>
@@ -259,6 +260,8 @@
                     prenom_stagiaire : "",
 
                 },
+                stagiairePdf:{},
+
         stagiaires:[],
         objectif: { 
                     id_evaluation_objectif : 0,
@@ -306,6 +309,13 @@
       
 
 methods: { 
+    
+      PDFevaluation(stagiaire){
+          
+          window.open('/PDFevaluation/'+this.$route.params.stagiaire.id_stagiaire
++'/'+this.$route.params.stagiaire.id_stage
++'','_blank');
+    }, 
 
       getStagiairesParEvaluation(stagiaire){
  axios.get('/getStagiairesParEvaluation/',{ params: {id_stagiaire:stagiaire.id_stagiaire,id_stage:this.id_stage } })
@@ -384,13 +394,15 @@ methods: {
                 this.loading = true
 
           
-        
+        this.stagiairePdf = this.$route.params.stagiaire;
         console.log('====== ok =====')
         console.log(this.$route.params.stagiaire.id_stage)
         this.id_stage=this.$route.params.stagiaire.id_stage;
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();
         this.getStagiairesParEvaluation(this.$route.params.stagiaire);
+              //  this.PDFevaluation(this.$route.params.stagiaire);
+
        // this.getObjectifsNotes( this.evaluation.fk_stagiaire);
                this.getObjectifsNotesStage(this.$route.params.stagiaire);
 

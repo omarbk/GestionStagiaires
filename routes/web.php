@@ -328,6 +328,7 @@ Route::get('/getStagiairesParEvaluateur','StagiaireController@getStagiairesParEv
 Route::get('/searchStagiaireParStageGroupe','StagiaireController@searchStagiaireParStageGroupe');
 
 Route::get('/getStagiairesParEvaluation','StagiaireController@getStagiairesParEvaluation');
+Route::get('/PDFevaluation/{id_stagiaire}/{id_stage}','StagiaireController@PDFevaluation');
 
      // pour responsable
 
