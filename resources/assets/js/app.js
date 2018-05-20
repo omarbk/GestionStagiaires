@@ -52,6 +52,7 @@ Vue.component('app-content', require('./components/Contents.vue'));
 Vue.component('app-vue', require('./components/App.vue'));
 Vue.component('app-vue-evaluateur', require('./components/AppEvaluateur.vue'));
 Vue.component('app-vue-responsable', require('./components/AppResponsable.vue'));
+Vue.component('app-vue-stagiaire', require('./components/AppStagiaire.vue'));
 
 
 Vue.component('app-addusers', require('./components/User/AddUsers.vue'));
@@ -144,6 +145,23 @@ Router.beforeEach(
                 if(value == "Responsable"){
                     next({
                         path:'/ShowStagiairesResp'
+                    })
+                }
+                else next()
+            });
+        
+        
+
+        }
+        else if(to.matched.some(record => record.meta.Stagiaire)){
+            console.log('responsable***********************')
+            
+            Promise.resolve(Vue.auth.getProfile()).then(function(value){
+               console.log("role --------")
+               console.log(value)
+                if(value == "Stagiaire"){
+                    next({
+                        path:'/ShowStagiairesStagiaire'
                     })
                 }
                 else next()

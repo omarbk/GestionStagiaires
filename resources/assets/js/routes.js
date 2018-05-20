@@ -46,7 +46,12 @@ import ShowStagiairesResp from './components/CompteResp/ShowStagiairesResp.vue'
 import ShowEvaluationStage from './components/CompteResp/ShowEvaluationStage.vue'
 import ShowEvaluationStag from './components/CompteResp/ShowEvaluationStag.vue'
 import ShowAbsencesStag from './components/CompteResp/ShowAbsencesStag.vue'
-
+// show stagiaire
+import ShowStagiairesStagiaire from './components/CompteStagiaire/ShowStagiairesStagiaire.vue'
+import ShowStagesEffectues from './components/CompteStagiaire/ShowStagesEffectues.vue'
+import ShowAbsencesActuel from './components/CompteStagiaire/ShowAbsencesActuel.vue'
+import ShowEvaluationEffectues from './components/CompteStagiaire/ShowEvaluationEffectues.vue'
+import ShowAbsencesEffectues from './components/CompteStagiaire/ShowAbsencesEffectues.vue'
 
 //--------------------------------
 //Groupes
@@ -103,6 +108,7 @@ const  router = new VueRouter({
             meta:{
                 Evaluateur:true,
                 Responsable:true,
+                Stagiaire:true,
                 }
 
         },
@@ -394,6 +400,42 @@ const  router = new VueRouter({
     path:"/ShowAbsencesStag",
     component: ShowAbsencesStag,
     name:"ShowAbsencesStag",
+   
+
+},
+
+//-------------show stagiaire
+{
+    path:"/ShowStagiairesStagiaire",
+    component: ShowStagiairesStagiaire,
+    name:"ShowStagiairesStagiaire",
+   
+
+},
+{
+    path:"/ShowStagesEffectues",
+    component: ShowStagesEffectues,
+    name:"ShowStagesEffectues",
+   
+
+},
+{
+    path:"/ShowAbsencesActuel",
+    component: ShowAbsencesActuel,
+    name:"ShowAbsencesActuel",
+   
+
+},{
+    path:"/ShowEvaluationEffectues",
+    component: ShowEvaluationEffectues,
+    name:"ShowEvaluationEffectues",
+   
+
+},
+{
+    path:"/ShowAbsencesEffectues",
+    component: ShowAbsencesEffectues,
+    name:"ShowAbsencesEffectues",
    
 
 },

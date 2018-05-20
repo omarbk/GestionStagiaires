@@ -28,7 +28,7 @@ class StagiaireController extends Controller
     $user->id = $request->user['id'];
     $user->email=$request->user['email'];
     $user->role=$request->user['role'];
-    $user->password =  Hash::make($request->password);
+    $user->password =  Hash::make($request->user['password']);
     $user->save();
     $id=$user->id;
     $this->addStagiaire($request,$id);
@@ -301,5 +301,56 @@ return Response()->json(['stagiaires' => $stagiaires]);
 
 }
 
+
+// pour stagiaire
+
+public function getStagesParStagiaire(Request $request){
+    //    $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('nom_stagiaire','like', '%' .$search_SG . '%')->orWhere('prenom_stagiaire','like', '%' .$search_SG . '%')->paginate(6);
+        
+                $stagiaire = Stagiaire::select('stagiaires.*')
+                      ->where('stagiaires.fk_user', '=', Auth::user()->id)->get();
+                  //dd($stagiaire['id_stagiaire']) ; 
+        
+      $stages  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+                      ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+                      ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+                      ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+                      ->select('stagiaires.*','stages.*','groupes.nom_groupe')
+                      //->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)
+                    //  ->where('stages.statut_stage','=',$request->statut_stage)
+                      ->where('stages.dateDebut_stage','like', '%' .$request->currentYear . '%')
+                      ->where('stages.dateFin_stage','like', '%' .$request->currentYear . '%')
+                      ->where('stagiaires.id_stagiaire','=', $stagiaire[0]->id_stagiaire)
+                      ->paginate(6);
+                      //->orWhere('groupes.nom_groupe','like', '%' .$search_groupe . '%')
+                      //->orWhere('stagiaires.niveau_etude_stagiaire','like', '%' .$search_niveau . '%')
+                      
+
+                 return Response()->json(['stages' => $stages]);
+     }
+
+     public function getStagesEffectues(Request $request){
+        //    $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('nom_stagiaire','like', '%' .$search_SG . '%')->orWhere('prenom_stagiaire','like', '%' .$search_SG . '%')->paginate(6);
+            
+                    $stagiaire = Stagiaire::select('stagiaires.*')
+                          ->where('stagiaires.fk_user', '=', Auth::user()->id)->get();
+                      //dd($stagiaire['id_stagiaire']) ; 
+            
+          $stages  = Stagiaire::leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+                          ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+                          ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+                          ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+                          ->select('stagiaires.*','stages.*','groupes.nom_groupe')
+                          //->where('stages.fk_evaluateur', '=',$evaluateurs[0]->id_evaluateur)
+                          ->where('stages.statut_stage','=',$request->statut_stage)
+                          ->where('groupes.annee_universitaire_groupe','like', '%' .$request->currentYear . '%')
+                          ->where('stagiaires.id_stagiaire','=', $stagiaire[0]->id_stagiaire)
+                          ->paginate(6);
+                          //->orWhere('groupes.nom_groupe','like', '%' .$search_groupe . '%')
+                          //->orWhere('stagiaires.niveau_etude_stagiaire','like', '%' .$search_niveau . '%')
+                          
+    
+                     return Response()->json(['stages' => $stages]);
+         }
 
 }

@@ -333,6 +333,11 @@ Route::get('/getStagiairesParEvaluation','StagiaireController@getStagiairesParEv
 
 Route::get('/getStagiairesParResponsable','StagiaireController@getStagiairesParResponsable');
 Route::get('/searchStagiaireParStageGroupePrResp','StagiaireController@searchStagiaireParStageGroupePrResp');
+    
+     // pour stagiaire
+Route::get('/getStagesParStagiaire','StagiaireController@getStagesParStagiaire');
+Route::get('/getStagesEffectues','StagiaireController@getStagesEffectues');
+
 
 // stage 
 Route::post('/addStage','StageController@addStage');

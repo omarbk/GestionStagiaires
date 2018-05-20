@@ -10,6 +10,8 @@ export default function (Vue){
               test = "Evaluateur";
               else if(response.data.user[0].role == 'Responsable')
               test = "Responsable";
+              else if(response.data.user[0].role == 'Stagiaire')
+              test = "Stagiaire";
               else if(response.data.user[0].role == 'Expert Comptable')
               test = "Expert Comptable";
             //  else test = "";

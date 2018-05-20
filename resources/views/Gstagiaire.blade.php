@@ -59,7 +59,24 @@
      <script src="{{asset('js/app.js')}}"></script>
     </body>
 
+    @elseif( $role==="Stagiaire")
+    <body :class="@{{sidebarr}}">
+       <div id="app">    
+       
+       
+     
+        <app-vue-stagiaire></app-vue-stagiaire>
+       
 
+         
+       </div>
+     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    
+      
+     <script src="{{asset('js/carbon.js')}}"></script>
+     <script src="{{asset('js/demo.js')}}"></script>
+     <script src="{{asset('js/app.js')}}"></script>
+    </body>
      @else
     <body :class="@{{sidebarr}}">
        <div id="app">    
