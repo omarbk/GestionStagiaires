@@ -176,4 +176,5 @@ class EvaluateurController extends Controller
         $user = User::where('id','=',$fk_user)->delete(); 
         return Response()->json(['delete' => 'true']);
     }
+    public function tt(){}
 }
