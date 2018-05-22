@@ -240,10 +240,12 @@ currentYear:"",
 axios.get('/getStagesParStagiaire',{ params: {page: this.stages.current_page,currentYear: this.currentYear} })
               
                 .then((response) => {
+                    console.log("stag=====")
                     this.loading = false;
+                    if(response.data.stages.data.length !=0){
                     this.stages = response.data.stages;
                     this.stage = response.data.stages.data[0];
-                    console.log(response.data.stages.data[0])
+                    console.log(response.data.stages.data[0])}
                })
                 .catch(() => {
                     console.log('handle server error from here');

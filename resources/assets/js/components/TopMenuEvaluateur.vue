@@ -7,32 +7,40 @@
 
 <div>
     <nav class="navbar page-header">
-
+        <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
+            <i class="fa fa-bars"></i>
+        </a>
 
         <a class="navbar-brand" href="#">
             <img src="storage/images/logoStagiaire.png" alt="logo">
         </a>
 
-      
-        <router-link :to="'/ShowStagiairesEva'" class="nav-link active margLien">
+        <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+            <i class="fa fa-bars"></i>
+        </a>
+     <router-link :to="'/ShowStagiairesEva'" class="nav-link active margLien">
                             <i class="far fa-user-circle fa-lg"> Stagiaires </i>
          </router-link>
+
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-envelope-open"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-
+           
             <li class="nav-item dropdown">
+
+                   <a  href="#" role="button"  @click="MarkNotifRead" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-pill badge-danger">{{nbNotif}}</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                <ul class="list-group scroll">
+                    <li   class="list-group-item"  v-for="(notification,index) of notifications" :key="index" ><i class="far fa-file" :style="[notification.read_at == null ? redColor : blueColor]" ></i> {{notification.data.data}}</li>
+                </ul>
+                </div>
+                
+            </li>
+            <li class="nav-item dropdown">
+             
+
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img v-if="profile.photo != ''" :src="'storage/images/'+profile.photo" class="avatar avatar-sm" alt="logo">
                     <img v-if="profile.photo === ''" :src="'storage/images/user0.jpg'" class="avatar avatar-sm" alt="logo">
@@ -47,7 +55,7 @@
                         <i class="fa fa-user"></i> Profile
                     </router-link>
 
-                 
+
                   
 
                     <a href="#" class="dropdown-item" @click="logout">
@@ -68,6 +76,12 @@
 
  export default {
         data: () => ({
+                         redColor: {
+               color: 'red',
+                },
+            blueColor:{
+                color: 'blue',
+            },
             loading: false,
             error:false,
             isSuperAd:false,
@@ -80,9 +94,53 @@
       photo:"",
       
     },
+        notifications : [],
+    nbNotif :0,
         }),
         
         methods: {
+                 listen(){
+         console.log("ooooook ===")
+        /* Echo.channel('posts')
+              .listen('App.Events.NewComment', () => {
+                  this.pusherr="pusherrrr"
+                  console.log("pusherrrrrr")
+              })*/
+              let this1=this;
+              Echo.channel('posts-channel').listen('NewComment', function(e) {
+                console.log(e);
+                console.log("pusherrrrrr")
+                this1.getNotifications();
+            });
+       
+     },
+                        MarkNotifRead(){
+                axios.get('/MarkNotifRead').then((response) => {
+                                                console.log('all notif read')
+                                               let  this1 = this;
+                                                this.nbNotif =0;
+                                                setTimeout(function(){ this1.getNotifications(); }, 100000);
+                                               console.log('douzzzz')
+                                                })
+                                                .catch(() => {
+                                                    console.log('handle server error from here');
+                                                });
+            },
+               getNotifications(){
+               axios.get('/getNotifications')
+                .then((response) => {
+                console.log("notifications")
+                console.log(response)
+                    
+                  this.notifications = response.data.notifications;
+                  this.nbNotif = response.data.CountnotifNotRead
+
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+                
+          },
             logout:function() {
 
                 axios.get('/logout')
@@ -138,6 +196,8 @@ created(){
 //this.getProfile();
 },
         mounted(){
+            this.listen();
+            this.getNotifications();
                     this.getProfile();
             
           
@@ -150,7 +210,8 @@ created(){
     }
 </script>
 <style scoped>
-.margLien{
-    margin-left: -69px;
+.scroll {
+  height:150px;
+  overflow-y: scroll;
 }
 </style>

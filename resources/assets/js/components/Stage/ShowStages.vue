@@ -100,8 +100,28 @@
                                         <td  class="optionsWidth"> 
                                             <a href="#"    @click="redirect_To_ShowStage(stage.id_stage)"  class="btn btn-primary"  ><i class="fas fa-eye d-inline-block"></i></a>
                                          <router-link class="btn btn-success " :to="'/EditStage/'+stage.id_stage"><i class="fas fa-edit d-inline-block"></i></router-link>
-                                             <a @click="deleteStage(stage)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a></td>                                 
+                                             <a @click="deleteStage(stage)" class="btn btn-danger"><i class="fas fa-trash-alt d-inline-block"></i></a> 
+                                                 <a style="background-color: bisque;color:black;" @click="getStage(stage)" v-b-modal.modalPrevent class="btn" ><i class="far fa-share-square"></i></a></td>
+
+                          
                                     </tr>
+        <b-modal id="modalPrevent"
+             ref="modal"
+             title="-> evaluateur"
+             @ok="addNotification"
+             ok-title="Envoyer" >
+      <form @submit.stop.prevent="handleSubmit">
+
+    <div class="form-group row">
+                 <label for="reference" class="col-sm-3 col-form-label">message: </label>
+                    <div class="col-sm-9">
+                    <b-form-input  type="text" v-model="message" class="form-control" id="Email" placeholder="Email" required/>
+                    </div>
+                </div>
+   
+         </form>
+
+    </b-modal>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     </div>
                                     </tbody>
@@ -133,6 +153,7 @@ import  Pagination from '../Pagination.vue';
          },
 
           data: () => ({
+              message:"",
              
              groupe:{
             id_groupe:0,
@@ -227,12 +248,37 @@ import  Pagination from '../Pagination.vue';
     },
 
     users:[],
+    stage:{},
             
              
              
       }),
  
  methods:{
+     getStage(stage){
+         this.stage = stage;
+         this.message = stage.intitule_stage;
+         console.log("recu stage !!!")
+         console.log(this.stage)
+     },
+     
+        addNotification(){
+         console.log("recu stage2 !!!")
+         console.log(this.stage)
+         axios.get('/addNotification',{params: {intitule_stage: this.stage.intitule_stage,id_evaluateur:this.stage.fk_evaluateur,message:this.message} })
+                                                    .then((response) => {
+                                                    console.log('notif bien ajouter ')
+                                    this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'message bien envoyé!',
+                                      duration: 1500,
+                                    });
+                                                   // that.getNotifications()
+                                                    })
+                                                    .catch(() => {
+                                                        console.log('handle server error from here');
+                                                    });},
                searchStages(event){
              console.log(this.search);
              this.stages.current_page=1;
@@ -387,7 +433,7 @@ thead{
     background-color: #efefef;
 }
 .optionsWidth{
-width : 171px;
+width : 230px;
 
 }
  .btnMarge{

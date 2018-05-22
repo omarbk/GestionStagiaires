@@ -274,6 +274,7 @@ Route::post('/addEvaluateur','EvaluateurController@addEvaluateur');
 Route::get('/getEvaluateurs','EvaluateurController@getEvaluateurs');
 Route::get('/getEvaluateur/{id_evaluateur}','EvaluateurController@getEvaluateur');
 Route::delete('/deleteEvaluateur/{fk_user}','EvaluateurController@deleteEvaluateur');
+
 //Route::post('/updateUser','EvaluateurController@updateUser');
 Route::post('/updateEvaluateur','EvaluateurController@updateEvaluateur');
 Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur');
@@ -358,6 +359,13 @@ Route::get('/getAbsence/{id_absence}','AbsenceController@getAbsence');
 Route::post('/updateAbsence','AbsenceController@updateAbsence');
   //---- pour etat d'evaluation
 Route::get('/countAbsence/{fk_stagiaire}','AbsenceController@countAbsence');
+
+//notification 
+
+Route::get('/addNotification','NotificationController@addNotification');
+Route::get('/getNotifications','NotificationController@getNotifications');
+Route::get('/MarkNotifRead','NotificationController@MarkNotifRead');
+Route::get('/getEvaluateurParStage/{id_evaluateur}','NotificationController@getEvaluateurParStage');
 
 Auth::routes();
 

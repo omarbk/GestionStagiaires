@@ -20,21 +20,12 @@
         </a>
 
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-envelope-open"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-
+            
+         
+        
             <li class="nav-item dropdown">
+             
+
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img v-if="profile.photo != ''" :src="'storage/images/'+profile.photo" class="avatar avatar-sm" alt="logo">
                     <img v-if="profile.photo === ''" :src="'storage/images/user0.jpg'" class="avatar avatar-sm" alt="logo">
@@ -70,6 +61,12 @@
 
  export default {
         data: () => ({
+                         redColor: {
+               color: 'red',
+                },
+            blueColor:{
+                color: 'blue',
+            },
             loading: false,
             error:false,
             isSuperAd:false,
@@ -82,9 +79,53 @@
       photo:"",
       
     },
+        notifications : [],
+    nbNotif :0,
         }),
         
         methods: {
+                 listen(){
+         console.log("ooooook ===")
+        /* Echo.channel('posts')
+              .listen('App.Events.NewComment', () => {
+                  this.pusherr="pusherrrr"
+                  console.log("pusherrrrrr")
+              })*/
+              let this1=this;
+              Echo.channel('posts-channel').listen('NewComment', function(e) {
+                console.log(e);
+                console.log("pusherrrrrr")
+                this1.getNotifications();
+            });
+       
+     },
+                        MarkNotifRead(){
+                axios.get('/MarkNotifRead').then((response) => {
+                                                console.log('all notif read')
+                                               let  this1 = this;
+                                                this.nbNotif =0;
+                                                setTimeout(function(){ this1.getNotifications(); }, 100000);
+                                               console.log('douzzzz')
+                                                })
+                                                .catch(() => {
+                                                    console.log('handle server error from here');
+                                                });
+            },
+               getNotifications(){
+               axios.get('/getNotifications')
+                .then((response) => {
+                console.log("notifications")
+                console.log(response)
+                    
+                  this.notifications = response.data.notifications;
+                  this.nbNotif = response.data.CountnotifNotRead
+
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+                
+          },
             logout:function() {
 
                 axios.get('/logout')
@@ -140,6 +181,8 @@ created(){
 //this.getProfile();
 },
         mounted(){
+          /* this.listen();
+            this.getNotifications();*/
                     this.getProfile();
             
           

@@ -53,6 +53,7 @@
       <div class="card-header bg-light">
                             <div class="row btnMarge">
   <div class="col"  >
+     
     <!-- button pour afficher formulaire de l'ajout d un article -->         
                 <div class="input-group">
             <div class="input-group-prepend">
@@ -173,7 +174,7 @@ import  Pagination from '../Pagination.vue';
     },
 
     users:[],
-            
+     pusherr :"oooook",       
              
              
       }),
@@ -244,6 +245,21 @@ import  Pagination from '../Pagination.vue';
   }
 })
      },
+     listen(){
+         console.log("ooooook ===")
+        /* Echo.channel('posts')
+              .listen('App.Events.NewComment', () => {
+                  this.pusherr="pusherrrr"
+                  console.log("pusherrrrrr")
+              })*/
+              let this1=this;
+              Echo.channel('posts-channel').listen('NewComment', function(e) {
+                console.log(e);
+                console.log("pusherrrrrr")
+                this1.pusherr="pusherrrr"
+            });
+       
+     },
 fetchData () {
       //this.error = this.post = null
       this.loading = true
@@ -264,7 +280,7 @@ watch:{
     '$route': 'fetchData',
 },
         mounted(){
-   
+           // this.listen();
            if( this.$route.params.success == "add"){
              
                        // this.Testopen.testnotifAdd = true;                  
