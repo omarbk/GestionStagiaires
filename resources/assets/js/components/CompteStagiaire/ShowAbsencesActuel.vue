@@ -20,9 +20,9 @@
         <div class=" btnMarge">
         <div class="col">
                     <a class="float-right btn btn-primary" @click="redirect_To_ShowStagiairesStagiaire(stage)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
-
+<div v-if="empty == false">
         <a href="#"  @click="redirect_To_ShowEvaluationActuel(stage)"   class="float-right btn btn-success" ><i class="far fa-sticky-note"></i> Evaluation</a>
-
+</div>
 
         </div>
   
@@ -30,8 +30,10 @@
     <h2>Liste des Absences</h2>
     <hr>   
     </div> 
-
-
+<div v-if="empty == true" class="text-center">
+  <h1 style="color:red"> <strong> aucun stage en cours</strong></h1>
+</div>
+<div v-if="empty == false">
        
     
     
@@ -173,7 +175,7 @@
 </div>
     </div>
     <!-- fin affiche -->
-   
+    </div> 
 </template>
 
 <script>
@@ -231,7 +233,8 @@
 
             
                          eval:"",
-
+statut_stage:"",
+empty :false,
              
       }),
  
@@ -293,16 +296,27 @@ axios.get('/getStagesEffectues',{ params: {page: this.absences.current_page,curr
                     console.log('handle server error from here');
                 });
           },
-                  getAbsenceParStagiaire(){
+                  getAbsenceParStagiaireS(){
                       
-
-                axios.get('/getAbsenceParStagiaire?page='+this.absences.current_page+'',{ params: {fk_stagiaire:this.id_stagiaire,fk_stage:this.$route.params.stage.id_stage,fk_evaluateur:this.$route.params.stage.fk_evaluateur} })
+this.statut_stage="En cours";
+                axios.get('/getAbsenceParStagiaireS?page='+this.absences.current_page+'',{ params: {fk_stagiaire:this.id_stagiaire,fk_evaluateur:this.$route.params.stage.fk_evaluateur,statut_stage:this.statut_stage} })
                 .then((response) => {
-                 // console.log('shit');
-                
-                    this.absences = response.data.absences;
+                  console.log('shit');
+                  console.log(response.data.absences.data.length);
+                               this.absences = response.data.absences;
+                                 if(this.absences.data.length === 0){
+                         this.empty =true;
+console.log("absences  emptyyy")
+                } 
+                                if(this.absences.data.length != 0){
+                                 this.empty=false; 
+                                  console.log("absences not emptyyy")
+                }
+                  
+
                     console.log("all absence ")
                     console.log(this.absences)
+                    console.log(this.empty);
                     this.loading =  false
                      
                 })
@@ -332,7 +346,7 @@ axios.get('/getStagesEffectues',{ params: {page: this.absences.current_page,curr
         console.log('====== nnnnnnnnnnnnnnnn =====')
         console.log(this.$route.params.stage)
         this.id_stagiaire=this.$route.params.stage.id_stagiaire;
-      this.getAbsenceParStagiaire();    
+      this.getAbsenceParStagiaireS();    
                      this.getObjectifsNotesStage(this.$route.params.stage);
             this.getStagesEffectues(); 
 

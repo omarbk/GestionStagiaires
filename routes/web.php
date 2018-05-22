@@ -354,6 +354,8 @@ Route::post('/updateStatutStage','StageController@updateStatutStage');
 
 Route::post('/addAbsence','AbsenceController@addAbsence');
 Route::get('/getAbsenceParStagiaire','AbsenceController@getAbsenceParStagiaire');
+Route::get('/getAbsenceParStagiaireS','AbsenceController@getAbsenceParStagiaireS');
+
 Route::delete('/deleteAbsence/{id_absence}','AbsenceController@deleteAbsence');
 Route::get('/getAbsence/{id_absence}','AbsenceController@getAbsence');
 Route::post('/updateAbsence','AbsenceController@updateAbsence');

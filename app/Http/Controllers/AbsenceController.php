@@ -61,6 +61,22 @@ class AbsenceController extends Controller
     
         return Response()->json(['absence' => $absence]);
      }
+
+     public function getAbsenceParStagiaireS(Request $request){
+        // dd($request);
+         $absences= Absence::leftJoin('stages', 'absences.fk_stage', '=', 'stages.id_stage')
+
+         ->select('absences.*','stages.*')
+         ->where('absences.fk_stagiaire','=',$request->fk_stagiaire)
+         //->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
+        // ->where('absences.fk_stage','=',$request->fk_stage)
+         ->where('stages.statut_stage','=',$request->statut_stage)
+//dd($absences);
+         ->paginate(10);
+        // dd($absences);
+         return Response()->json(['absences' => $absences]);
+      }
+      
 //pour etat d'evaluation
      public function countAbsence($fk_stagiaire){
         $count= Absence::where('absences.fk_stagiaire','=',$fk_stagiaire)
