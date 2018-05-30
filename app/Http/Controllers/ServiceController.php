@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Service;
 
-
+use App\Events\NewComment;
 class ServiceController extends Controller
 {
     public function addService(Request $request){
@@ -14,7 +14,7 @@ class ServiceController extends Controller
      $service->nom_service = $request->service['nom_service'];
      $service->besoin_service=$request->service['besoin_service'];
      $service->duree_service=$request->service['duree_service'];
-     //event(new NewComment());
+     event(new NewComment());
      $service->save();
 
      return Response()->json(['etat'=>true]);

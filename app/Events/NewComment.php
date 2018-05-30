@@ -33,7 +33,7 @@ class NewComment implements ShouldBroadcast
     public function broadcastOn()
     {
     
-        return new Channel('posts-channel');
+        return new Channel('posts-channel'); 
     }
 
     public function broadcastWith(){
