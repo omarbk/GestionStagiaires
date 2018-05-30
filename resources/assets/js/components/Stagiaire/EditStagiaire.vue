@@ -217,8 +217,9 @@
         getStagiaire(id_stagiaire){
                   axios.get('/getStagiaire/'+id_stagiaire).then(
                   response => {
-                       
-                    this.stagiaire= response.data.stagiaire[0];
+                       //console.log('verifie ========> ')
+                      // console.log(response)
+                    this.stagiaire= response.data.stagiaires[0];
                                  
 
                    

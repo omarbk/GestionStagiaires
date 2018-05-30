@@ -19,6 +19,7 @@
         <div class="text-center pull-right" >
         <div class=" btnMarge">
         <div class="col">
+                    <a href="#"    @click="PdfCalendriersParStagiaire"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
                     <a class="float-right btn btn-primary" @click="redirect_To_ShowStagiairesStagiaire(stage)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
 <div v-if="empty == false">
         <a href="#"  @click="redirect_To_ShowEvaluationActuel(stage)"   class="float-right btn btn-success" ><i class="far fa-sticky-note"></i> Evaluation</a>
@@ -304,6 +305,8 @@ this.statut_stage="En cours";
                   console.log('shit');
                   console.log(response.data.absences.data.length);
                                this.absences = response.data.absences;
+                               console.log('absence =============')
+                               console.log(this.absences.data[0])
                                  if(this.absences.data.length === 0){
                          this.empty =true;
 console.log("absences  emptyyy")
@@ -324,6 +327,13 @@ console.log("absences  emptyyy")
                     console.log('handle server error from here');
                 });
           },
+          // calendrier ---------------------
+PdfCalendriersParStagiaire(){
+          window.open('/PdfCalendriersParStagiaire/'+this.id_stagiaire
++'/'+this.id_stage
++'','_blank');
+},
+  
 
              redirect_To_ShowEvaluationActuel(stage){
         console.log('stgiaires')

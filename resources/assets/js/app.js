@@ -14,6 +14,9 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate);
+
 //multiselect
 import Multiselect from 'vue-multiselect'
   // register globally

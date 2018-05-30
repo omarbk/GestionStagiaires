@@ -306,6 +306,7 @@ Route::get('/getCalendriers/{fk_groupe}','GroupeController@getCalendriers');
 Route::post('/updateGroupe','GroupeController@updateGroupe');
 Route::get('/getAllGroupes','GroupeController@getAllGroupes');
 Route::get('/searchGroupes/{search_G}','GroupeController@searchGroupes');
+Route::get('/PdfCalendriersParStagiaire/{id_stagiaire}/{id_stage}','GroupeController@PdfCalendriersParStagiaire');
 
 
 //Evaluation 
@@ -322,6 +323,9 @@ Route::delete('/deleteStagiaire/{fk_user}','StagiaireController@deleteStagiaire'
 Route::post('/updateStagiaire','StagiaireController@updateStagiaire');
 Route::get('/getAllStagiaires','StagiaireController@getAllStagiaires');
 Route::get('/searchStagiaire/{search_S}','StagiaireController@searchStagiaire');
+Route::get('/pdfStagiaire/{id_stagiaire}/{dateDebutStage}','StagiaireController@pdfStagiaire');
+
+
 
       // pour evaluation
 Route::get('/getAllStagiairesEval','StagiaireController@getAllStagiairesEval');
@@ -335,7 +339,7 @@ Route::get('/PDFevaluation/{id_stagiaire}/{id_stage}','StagiaireController@PDFev
 
 Route::get('/getStagiairesParResponsable','StagiaireController@getStagiairesParResponsable');
 Route::get('/searchStagiaireParStageGroupePrResp','StagiaireController@searchStagiaireParStageGroupePrResp');
-    
+  
      // pour stagiaire
 Route::get('/getStagesParStagiaire','StagiaireController@getStagesParStagiaire');
 Route::get('/getStagesEffectues','StagiaireController@getStagesEffectues');
@@ -349,6 +353,8 @@ Route::get('/getStage/{id_stage}','StageController@getStage');
 Route::post('/updateStage','StageController@updateStage');
 Route::get('/searchStages/{search_Sg}','StageController@searchStages');
 Route::post('/updateStatutStage','StageController@updateStatutStage');
+Route::get('/getStageAnnee','StageController@getStageAnnee');
+
 
 //Absence 
 

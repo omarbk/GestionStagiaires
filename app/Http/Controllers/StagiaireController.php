@@ -44,7 +44,7 @@ class StagiaireController extends Controller
         $user->id = $request->stagiaire['id'];
         $user->email=$request->stagiaire['email'];
         $user->role=$request->stagiaire['role'];
-        $user->password =  Hash::make($request->password);
+        $user->password =  Hash::make($request->user['password']);
 
         $user->save();
         //$id = $user->id;
@@ -334,7 +334,44 @@ public function getStagesParStagiaire(Request $request){
 
 public function testf(){}
 
+public function pdfStagiaire($id_stagiaire,$dateDebutStage){
+    $stagiaire =  Stagiaire::leftJoin('users', 'users.id', '=', 'stagiaires.fk_user')
+    ->select('users.email','stagiaires.*')
+    ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
+    ->get();
+   
+    PDF::SetTitle('Evaluation');
+        
+    PDF::AddPage();
+    $logo = public_path().'/storage/images/'.$stagiaire[0]->photo_stagiaire;
+      
+    $headerHtml =  '<div>
+    <img src="'.$logo.'" alt="test alt attribute" width="140" height="70" border="0" />
 
+</div>
+    <br>
+  ';
+    PDF::writeHTMLCell(0, 0,63, 4,"<h1>Identite de l'Etudiant</h1>",0, 1, 0, true, '', true);
+    PDF::writeHTMLCell(0, 0,140, 20,$headerHtml,0, 1, 0, true, '', true);
+
+    PDF::writeHTMLCell(0, 0,'', 25,'Nom : '.$stagiaire[0]->nom_stagiaire,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 32,'Prénom : '.$stagiaire[0]->prenom_stagiaire,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 39,'Numéro de l\'étudiant : '.$stagiaire[0]->id_stagiaire,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 46,'Adresse personnelle : '.$stagiaire[0]->adresse_stagiaire,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 53,'Email : '.$stagiaire[0]->email,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 60,'N° Tél : '.$stagiaire[0]->tel_stagiaire,0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 67,'Date de Début du stage : '.$dateDebutStage,0, 1, 0, true, '', true); 
+    PDF::writeHTMLCell(0, 0,'', 90,'<hr>',0, 1, 0, true, '', true);    
+    PDF::writeHTMLCell(0, 0,'', 98,'Ce carnet est un élément du livret universitaire de l\'étudiant. Il doit 
+    étre conservé <br> soigneusement par celui-ci durant toutes les années des études médicales.<br>
+    A chaque fin de stage , le carnet est a remettre au responsable du stage pour instruction de la partie administrative .<br>
+    <br> Aucun ajout de la part de l\'étudiant ou un ajout quelconque n\'est autorisé .',0, 1, 0, true, '', true); 
+
+    //return Response()->json(['stagiaire' => $stagiaire]);
+
+
+    PDF::Output('stagiaire.pdf');
+}
 
      public function getStagesEffectues(Request $request){
         //    $stagiaires = Stagiaire::leftJoin('users', 'stagiaires.fk_user', '=', 'users.id')->where('nom_stagiaire','like', '%' .$search_SG . '%')->orWhere('prenom_stagiaire','like', '%' .$search_SG . '%')->paginate(6);
@@ -519,7 +556,7 @@ public function testf(){}
                 $y = PDF::getY()+8; 
                 PDF::writeHTMLCell(0, 0,'', $y,$valide,1, 1, 0, true, '', true);
                 
-            PDF::Output('hello_world.pdf');
+            PDF::Output('evaluation.pdf');
         
         }
         

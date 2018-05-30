@@ -6,9 +6,7 @@
           <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
     </div>
-    <div v-if="error" class="error">
-      {{ error }}
-    </div>
+ 
 
 <div v-if="!loading">
     <div class="row">
@@ -52,7 +50,24 @@
                     <input type="date" class="form-control" id="responsable"  v-model="stage.dateFin_stage">
                     </div>
                 </div>
-            
+                   <div class="form-group row">
+                    <label for="responsable" class="col-sm-4" > semestre </label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control" id="responsable"  v-model="stage.semestre_stage">
+                    </div>
+                     </div>
+                               <div class="form-group row">
+                    <label for="stagiaire" class="col-sm-4" >niveau d'étude:</label>
+                    <div class="col-sm-8">
+   
+                        <select class="form-control custom-select " id="fk_compte" v-model="stage.annee_universitaire_stage" >
+                                    <option selected disabled>Choisir niveau</option>
+                                    <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
+                        </select>  
+
+                    
+                            </div>
+                        </div> 
 
 
 
@@ -98,6 +113,8 @@
     export default{ 
         
           data: () => ({
+                          listAnneeEtude : ["1er annnée","2eme année","3eme année","4eme année","5eme année","6eme année","7eme année"],
+
               loading: false,
               stage_groupes:[],
             pushEvaluateur:{
@@ -122,7 +139,9 @@
               dateDebut_stage:"",
               dateFin_stage:"",
               fk_hospitalier:0,
-              fk_evaluateur:0,      
+              fk_evaluateur:0, 
+              semestre_stage:"",    
+              annee_universitaire_stage:"" 
               },
             
 
@@ -270,7 +289,7 @@
                                 console.log('liste groupes')
                                 console.log(this.stage_groupes)
                                 console.log('stage')
-                                console.log(this.pushHospitalier.fk_hospitalier);
+                                console.log(this.stage);
                             });     
                     }, 
      

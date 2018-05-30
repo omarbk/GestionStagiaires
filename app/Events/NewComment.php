@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Events;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -32,13 +32,14 @@ class NewComment implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-    
+        
         return new Channel('posts-channel');
     }
 
-    public function broadcastWith(){
+    /*public function broadcastWith(){
+        Log::info('bakrim');
         return[
             'body'=> 'broadcastingggggg',
         ];
-    }
+    }*/
 }

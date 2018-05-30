@@ -7,6 +7,7 @@ use App\Groupe;
 use App\Calendrier;
 use App\Groupe_stagiaire;
 use App\Stagiaire;
+use PDF;
 class GroupeController extends Controller
 {
     public function searchGroupes($search_G){
@@ -188,4 +189,139 @@ class GroupeController extends Controller
              }    
          }
       }
+      public function PdfCalendriersParStagiaire($id_stagiaire,$id_stage){
+        
+       // $calendriers= Calendrier::where('fk_groupe', $fk_groupe)->get();
+       // return Response()->json(['calendriers' => $calendriers ]);
+        $stagiaires  = Stagiaire::
+        leftJoin('groupe_stagiaires','stagiaires.id_stagiaire','=','groupe_stagiaires.fk_stagiaire')
+        ->leftJoin('groupes', 'groupe_stagiaires.fk_groupe', '=', 'groupes.id_groupe')
+        ->leftJoin('stage_groupes', 'groupes.id_groupe', '=', 'stage_groupes.fk_groupe')
+        ->leftJoin('stages', 'stage_groupes.fk_stage', '=', 'stages.id_stage')
+        ->leftJoin('hospitaliers', 'stages.fk_hospitalier', '=', 'hospitaliers.id_hospitalier')
+        ->leftJoin('evaluateurs', 'stages.fk_evaluateur', '=', 'evaluateurs.id_evaluateur')
+        //->leftJoin('calendriers', 'calendriers.fk_groupe', '=', 'groupes.id_groupe')
+        ->select('stagiaires.*','groupes.*','stages.*','hospitaliers.*','evaluateurs.*')
+        ->where('stagiaires.id_stagiaire','=',$id_stagiaire)
+        ->where('stages.id_stage','=',$id_stage)
+        ->get();
+        PDF::setFooterCallback(function($pdf) {
+            //dd($infoComp);
+           // dd($this->template);
+             // Position at 15 mm from bottom
+            // $pdf->SetY(-15);
+             // Set font
+             $pdf->SetFont('helvetica', 'I', 10);
+             // Page number
+             PDF::writeHTMLCell(0, 0, '',250,'Cachet et signature du chef de service', 0, 1, 0, true, '', true);
+             PDF::writeHTMLCell(0, 0, 130,250,'Cachet et signature des maitres de stage', 0, 1, 0, true, '', true);
+             PDF::writeHTMLCell(0, 0,'',285,'<hr>', 0, 1, 0, true, '', true);
+             PDF::writeHTMLCell(0, 0, '',290,'<span style="color:blue;text-align:right"> Page '.$pdf->getAliasNumPage().'/'.$pdf->getAliasNbPages().'</span>', 0, 1, 0, true, '', true);
+        
+            // $pdf->Cell(0, 10, $this->template.'Page '.$pdf->getAliasNumPage().'/'.$pdf->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        
+         });
+
+        $calendriers= Calendrier::where('fk_groupe', $stagiaires[0]->id_groupe)->get();
+
+       // return Response()->json(['stagiaires' => $stagiaires ,'calendriers' => $calendriers]);
+       $logo = public_path().'/storage/images/Um6ss_logo.png';
+       $headerHtml =  '<div>
+       <img src="'.$logo.'" alt="test alt attribute" width="180" height="70" border="0" />
+  
+        </div>
+       <br>
+        ';
+        $month = array(
+            '01' => 'Janvier',
+            '02' => 'Février',
+            '03' => 'Mars',
+            '04' => 'Avril',
+            '05' => 'Mai',
+            '06' => 'Juin',
+            '07' => 'Juillet',
+            '08' => 'Août',
+            '09' => 'Septembre',
+           '10'=> 'Octobre',
+           '11' => 'Novembre',
+           '12' => 'Décembre'
+       );
+      //dd($month['01']);
+      $dateDebutStage=date_create($stagiaires[0]->dateDebut_stage);
+      $annee = date_format($dateDebutStage,"Y");
+      $moisD = date_format($dateDebutStage,"m");
+      $jourD = date_format($dateDebutStage,"d");
+      $dateFinStage=date_create($stagiaires[0]->dateFin_stage);
+      $moisF = date_format($dateFinStage,"m");
+      $jourF = date_format($dateFinStage,"d");
+
+      $dateFin; 
+     foreach ($month as $i => $value) {
+         $j = (string)$i;
+         if($j === $moisD){
+            $dateFin = $month[$j];}
+    }
+
+      $dateDebut; 
+     foreach ($month as $i => $value) {
+         $j = (string)$i;
+         if($j === $moisD){
+            $dateDebut = $month[$j];}
+    }
+
+
+    $commandesHtml ='<table  border="1" style="padding: 3px 0px;" cellpadding="2">
+            <thead>
+            <tr>
+                   <th align="center"></th>
+                   <th align="center">Semaine</th>
+                   <th align="center">Lundi</th>
+                   <th align="center">Mardi</th>
+                   <th align="center">Mercredi</th>
+                   <th align="center">jeudi</th>
+                   <th align="center">vendredi</th>
+            </tr>
+                    </thead>';
+             $commandesHtml.='<tbody>';
+            foreach ( $calendriers as $calendrier ){
+                $commandesHtml.='
+               
+                <tr>                   
+                <th align="center">'.$calendrier->nomMoisDebut.'</th>
+                <th align="center">Du '.$calendrier->debut_semaine_cal.' '.$calendrier->nomMoisDebut.' au '.$calendrier->fin_semaine_cal.' '.$calendrier->nomMoisFin.'</th>
+                <th align="center">'.$calendrier->lundi_cal.' </th>
+                <th align="center">'.$calendrier->mardi_cal.'</th>
+                <th align="center">'.$calendrier->mercredi_cal.'</th>
+                <th align="center">'.$calendrier->jeudi_cal.'</th>
+                <th align="center">'.$calendrier->vendredi_cal.'</th>
+                        
+                 </tr>
+                 ';}
+                $commandesHtml.='</tbody> </table>';
+        
+        PDF::SetTitle('calendrier');
+
+        PDF::AddPage();
+        PDF::writeHTMLCell(0, 0, 10,'',$headerHtml ,0, 1, 0, true, 'left', true);
+        PDF::writeHTMLCell(0, 0,80, 50,'Année Universitaire : '.$stagiaires[0]->annee_universitaire_groupe.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,77, 57,'Faculté de médecine : '.$stagiaires[0]->niveau_etude_stagiaire.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,74, 64,$stagiaires[0]->intitule_stage.' Du '.$jourD.' '.$dateDebut.' au '.$jourF.' '.$dateFin.' '.$annee,0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(190, 0,'',75,'<center><h3>Fcihe de Présence  '.$stagiaires[0]->nom_hospitalier.' '.$stagiaires[0]->nom_groupe.'</h3></center>',1, 1, 0, true, 'C', true);
+        PDF::writeHTMLCell(0, 0,'', 85,'Nom de l\'étudiant : '.$stagiaires[0]->nom_stagiaire.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 91,'Prénom de l\'étudiant : '.$stagiaires[0]->nom_stagiaire.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 97,'Groupe de stage : '.$stagiaires[0]->nom_groupe.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 103,'Site de stage : '.$stagiaires[0]->nom_hospitalier.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 109,'Discipline : Médecine',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 115,'Affectation : '.$stagiaires[0]->nom_hospitalier.'',0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 121,'Maitre de stage : '.$stagiaires[0]->nom_evaluateur,0, 1, 0, true, '', true);
+        PDF::writeHTMLCell(0, 0,'', 130,$commandesHtml,0, 1, 0, true, '', true); 
+        PDF::Output('calendrier.pdf');
+
+//writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
+
+
+
+     }
+
+  
 }

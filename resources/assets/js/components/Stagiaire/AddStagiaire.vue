@@ -43,7 +43,7 @@
                     <div class="col-sm-8">
    
                         <select class="form-control custom-select " id="fk_compte" v-model="stagiaire.niveau_etude_stagiaire" >
-                                    <option selected disabled>Choisir Client</option>
+                                    <option selected disabled>Choisir niveau</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
 
@@ -202,9 +202,9 @@
             },
          
           addStagiaire(){ 
-              console.log("test")
+              console.log("testttttttt")
            console.log(this.stagiaire);
-               
+               console.log(this.user);
               axios.post('/addUserStagiaire',{stagiaire:this.stagiaire,user:this.user}).then(response => {  
                     console.log(response.data.user);   
                     console.log('stagiaire Bien ajouter !');

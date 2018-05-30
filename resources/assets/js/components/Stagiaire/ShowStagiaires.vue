@@ -133,6 +133,8 @@
                             
                   <a href="#"    @click="redirect_To_EditStagiaire(stagiaire)"  class="btn btn-success" ><i class="fas fa-edit d-inline-block "></i></a>
                     <a href="#" class="btn btn-danger " @click="deleteStagiaire(stagiaire)"><i class="fas fa-trash-alt d-inline-block"></i></a>
+                    <a href="#"    @click="setStagiaire(stagiaire)" v-b-modal.modalPreventDate  class="btn btn-secondary" ><i class="far fa-file-pdf"></i></a>
+
                 </div>
             </div>
             </div>
@@ -141,7 +143,24 @@
               
             </div>
              <div>
-              
+         <b-modal id="modalPreventDate"
+             ref="modal"
+             title="-> date"
+             @ok="pdfStagiaire"
+             ok-title="Envoyer" >
+      <form @submit.stop.prevent="handleSubmit">
+
+    <div class="form-group row">
+                 <label for="reference" class="col-sm-3 col-form-label">Date de début du  stage : </label>
+                    <div class="col-sm-9">
+                    <b-form-input  type="date" v-model="dateDebutStage" class="form-control" id="Email" placeholder="" required/>
+                    </div>
+                </div>
+   
+         </form>
+
+    </b-modal>
+
                 <b-modal ok-only  v-model="modalShow" no-fade
                 :title="'Compte : Stagiaire'"
                 :body-bg-variant="+' '+modalShow+''+stagiaire.nom_stagiaire+''+stagiaire.prenom_stagiaire+''+stagiaire.tel_stagiaire+''+stagiaire.email+''+stagiaire.service_stagiaire+''+stagiaire.adresse_stagiaire+''+stagiaire.photo_stagiaire+''">
@@ -267,6 +286,7 @@ import  Pagination from '../Pagination.vue';
       
     },
 
+dateDebutStage:"",
     users:[],
             
              
@@ -277,6 +297,18 @@ import  Pagination from '../Pagination.vue';
   },
  
  methods:{
+
+     pdfStagiaire(){
+        
+        
+          window.open('/pdfStagiaire/'+this.stagiaire.id_stagiaire
++'/'+this.dateDebutStage
++'','_blank');
+},
+setStagiaire(stagiaire){
+ this.stagiaire = stagiaire;
+},
+
      fetchData () {
       //this.error = this.post = null
        this.loading = true
