@@ -6,7 +6,7 @@
     </div>
 
 <div>
-    <nav class="navbar page-header">
+    <nav class="navbar page-header colorMenu">
         <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
             <i class="fa fa-bars"></i>
         </a>
@@ -194,3 +194,11 @@ created(){
         
     }
 </script>
+<style scoped>
+.colorMenu{
+   background: #b8ebfd;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #b8ebfd);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFFFFF, #6DD5FA,#b8ebfd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+</style>

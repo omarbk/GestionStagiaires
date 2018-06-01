@@ -11,6 +11,7 @@ use App\User;
 
 class EvaluateurController extends Controller
 {
+   
     public function countUser(){
         $count = User::withTrashed()->count();
         $count ++;
