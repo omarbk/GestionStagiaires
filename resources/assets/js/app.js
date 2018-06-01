@@ -14,6 +14,9 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate);
+
 //multiselect
 import Multiselect from 'vue-multiselect'
   // register globally
@@ -91,6 +94,9 @@ Vue.component('app-showobjectif', require('./components/Objectif/ShowObjectif.vu
 Vue.component('app-addevaluation', require('./components/Evaluation/AddEvaluation.vue'));
 Vue.component('app-showevaluation', require('./components/Evaluation/ShowEvaluation.vue'));
 Vue.component('app-editevaluation', require('./components/Evaluation/EditEvaluation.vue'));
+
+/* Activite */
+Vue.component('app-addactivite', require('./components/Activite/AddActivite.vue'));
 
 // afficher un nombre de phrase limité 
 /*Vue.filter('readMore', function (text, length, suffix) {

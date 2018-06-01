@@ -56,7 +56,16 @@
                             <i class="far fa-file-alt"></i>Evaluation
                         </router-link>
                     </li>                         
-                               
+                       <li class="nav-item">
+                      <router-link :to="'/ShowActivites'" class="nav-link active">
+                            <i class="fas fa-tasks"></i> Activites
+                        </router-link>
+                    </li>  
+                    <li class="nav-item">
+                      <router-link :to="'/ShowModules'" class="nav-link active">
+                            <i class="fas fa-boxes"></i> Modules
+                        </router-link>
+                    </li>         
                                  
               
                     

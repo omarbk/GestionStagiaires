@@ -53,6 +53,18 @@ import ShowAbsencesActuel from './components/CompteStagiaire/ShowAbsencesActuel.
 import ShowEvaluationEffectues from './components/CompteStagiaire/ShowEvaluationEffectues.vue'
 import ShowAbsencesEffectues from './components/CompteStagiaire/ShowAbsencesEffectues.vue'
 
+//activite
+import AddActivite from './components/Activite/AddActivite.vue'
+import ShowActivites from './components/Activite/ShowActivites.vue'
+import ShowActivite from './components/Activite/ShowActivite.vue'
+import EditActivite from './components/Activite/EditActivite.vue'
+
+//Module
+import AddModule from './components/Module/AddModule.vue'
+import ShowModules from './components/Module/ShowModules.vue'
+import ShowModule from './components/Module/ShowModule.vue'
+import EditModule from './components/Module/EditModule.vue'
+
 //--------------------------------
 //Groupes
 import ShowGroupes from './components/Groupe/ShowGroupes.vue'
@@ -355,6 +367,50 @@ const  router = new VueRouter({
    
 
 },
+
+//----------------Module
+{
+    path:"/AddModule",
+    component: AddModule,
+    name: "AddModule"
+ },
+ {
+    path:"/ShowModules",
+    component: ShowModules,
+    name: "ShowModules"
+ },
+  {
+    path:"/ShowModule/:niveau_etude",
+    component: ShowModule,
+    name: "ShowModule"
+ },
+ {
+    path:"/EditModule/:niveau_etude",
+    component: EditModule,
+    name: "EditModule"
+ },
+
+ //----------------Activite
+{
+    path:"/AddActivite",
+    component: AddActivite,
+    name: "AddActivite"
+ },
+ {
+    path:"/ShowActivites",
+    component: ShowActivites,
+    name: "ShowActivites"
+ },
+  {
+    path:"/ShowActivite/:niveau_etude",
+    component: ShowActivite,
+    name: "ShowActivite"
+ },
+ {
+    path:"/EditActivite/:niveau_etude",
+    component: EditActivite,
+    name: "EditActivite"
+ },
 
 //----------- Absence 
 {

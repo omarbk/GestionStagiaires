@@ -19,10 +19,11 @@
                    <a href="#"    @click="PDFevaluation(stagiairePdf)"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
 
         <div v-if="test==true">
-            <a href="#" @click="redirect_To_EditEvaluation(stagiaire)" class="float-right btn btn-success"><i class="fas fa-edit d-inline-block"/> Modifier</a>
-        </div>
+            <a href="#" @click="redirect_To_EditEvaluation(stagiaire)" class="float-right btn btn-success"><i class="fas fa-edit d-inline-block"/></a>
+       <!--     <a href="#" @click="deleteEvaluation(stagiaire)" class="float-right btn btn-danger"><i class="fas fa-trash-alt d-inline-block"/></a>
+      -->  </div>
 <div v-if="test==false">
-    <a href="#" @click="redirect_To_AddEvaluation(stagiaire)" class="float-right btn btn-secondary" ><i class="fas fa-plus-circle"/> Ajouter</a>
+    <a href="#" @click="redirect_To_AddEvaluation(stagiaire)" class="float-right btn btn-secondary" ><i class="fas fa-plus-circle"/></a>
 </div>
         </div>
   
@@ -389,14 +390,40 @@ methods: {
                           this.loading = false;
 
           },
+ deleteEvaluation(stagiaire){
 
+        
+                        this.$swal({
+                        title: 'Etes-vous sur?',
+                        text: "Vous ne serez pas capable de revenir a cela!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui, supprimez-le!'
+                                                }).then((result) => {
+                        if (result.value) {
+                            axios.delete('/deleteEvaluation',{params:{id_stagiaire:stagiaire.id_stagiaire,id_stage:stagiaire.id_stage}}).then(
+                                        response => {
+                                
+                     this.$router.push({ name: 'ShowStagiairesEva', params: { stagiaire:stagiaire}});
+                                        });
+                        this.$swal(
+                        'Supprimé!',
+                        'Votre absence a été supprimé',
+                        'success'
+                        )
+  }
+})
+
+        },
     fetchData(){
                 this.loading = true
 
           
         this.stagiairePdf = this.$route.params.stagiaire;
         console.log('====== ok =====')
-        console.log(this.$route.params.stagiaire.id_stage)
+        console.log(this.$route.params.stagiaire)
         this.id_stage=this.$route.params.stagiaire.id_stage;
         this.evaluation.fk_stagiaire=this.$route.params.stagiaire.id_stagiaire;
         this.getTypeObjectifs();

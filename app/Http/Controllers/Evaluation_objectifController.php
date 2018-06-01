@@ -145,6 +145,7 @@ class Evaluation_objectifController extends Controller
 
     // pour responsable
     public function getObjectifsNotesStage(Request $request){
+       // dd($request);
         $objectifs = Evaluation_objectif::leftJoin('type_objectifs', 'evaluation_objectifs.fk_type_objectif', '=', 'type_objectifs.id_type')
         ->leftJoin('notes', 'evaluation_objectifs.id_evaluation_objectif', '=', 'notes.fk_objectif')
         ->leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'notes.fk_evaluation')

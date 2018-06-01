@@ -13,7 +13,8 @@
     </div>
 
 
-        <form @submit.prevent="addStage">
+        
+        <form @submit.prevent="validateForm('formStage')"  data-vv-scope="formStage">
          <div class="row" > 
          
             <div class="col-md-6">
@@ -43,32 +44,51 @@
                     <input type="date" class="form-control" id="responsable"  v-model="stage.dateFin_stage">
                     </div>
                 </div>
-            
+                       <div class="form-group row">
+                    <label for="responsable" class="col-sm-4" > semestre </label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control" id="responsable"  v-model="stage.semestre_stage">
+                    </div>
+                     </div>
+                   <div class="form-group row">
+                    <label for="stagiaire" class="col-sm-4" >niveau d'étude:</label>
+                    <div class="col-sm-8">
+   
+                        <select class="form-control custom-select " id="fk_compte" v-model="stage.annee_universitaire_stage" >
+                                    <option selected disabled>Choisir niveau</option>
+                                    <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
+                        </select>  
 
+                    
+                            </div>
+                        </div> 
 
  
             </div> 
    <div class="col-md-6">
-   
+        
                     <div class="form-group row">
                     <label class="typo__label col-sm-4">Groupes</label>
                     <div class="col-sm-7">
-                    <multiselect   :custom-label="nameWithLangGroupe" tag-position="bottom" v-model="pushGroupes"
+                    <multiselect  name="MultiGroupe" v-validate="'required'"  :custom-label="nameWithLangGroupe" tag-position="bottom" v-model="pushGroupes"
                      tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="id_groupe" 
                     :optionHeight="30" @remove="removeGroupes" :options="groupes" :multiple="true"  ></multiselect>
+                    <div v-show="errors.has('formStage.MultiGroupe')" class="text-danger">Champ obligatoire !</div>
                     </div>
 
                     </div>
         <div class="form-group row">
           <label class="typo__label col-sm-4">Hospitalier</label>
           <div class="col-sm-7">
-          <multiselect v-model="pushHospitalier" :options="hospitaliers"  placeholder="choisir" label="nom_hospitalier" track-by="id_hospitalier"></multiselect>
+          <multiselect  name="MultiHospitalier" v-validate="'required'"  v-model="pushHospitalier" :options="hospitaliers"  placeholder="choisir" label="nom_hospitalier" track-by="id_hospitalier"></multiselect>
+          <div v-show="errors.has('formStage.MultiHospitalier')" class="text-danger">Champ obligatoire !</div>
           </div>
         </div>
          <div class="form-group row">
           <label class="typo__label col-sm-4">Evaluateur</label>
           <div class="col-sm-7">
-          <multiselect placeholder="choisir"  v-model="pushEvaluateur" :custom-label="nameWithLangEvaluateur"  :options="evaluateurs"    track-by="id_evaluateur"></multiselect>
+          <multiselect name="MultiEvaluateur" v-validate="'required'"  placeholder="choisir"  v-model="pushEvaluateur" :custom-label="nameWithLangEvaluateur"  :options="evaluateurs"    track-by="id_evaluateur"></multiselect>
+          <div v-show="errors.has('formStage.MultiEvaluateur')" class="text-danger">Champ obligatoire !</div>
           </div>
         </div>
    </div>              
@@ -88,6 +108,7 @@
     export default{ 
         
           data: () => ({
+            listAnneeEtude : ["1er annnée","2eme année","3eme année","4eme année","5eme année","6eme année","7eme année"],
             pushEvaluateur:[],
             evaluateurs:[],
             hospitaliers:[],
@@ -105,7 +126,9 @@
               dateFin_stage:"",
               fk_hospitalier:0,
               fk_evaluateur:0,  
-              statut_stage:"",    
+              statut_stage:"",  
+              semestre_stage:"", 
+              annee_universitaire_stage:"", 
               },
             
 
@@ -127,7 +150,14 @@
  
         
                     methods:{
-                     
+                       validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addStage();
+        }
+      });
+    },
                  
                    
                    

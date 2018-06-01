@@ -19,6 +19,7 @@
         <div class="text-center pull-right" >
         <div class=" btnMarge">
         <div class="col">
+                    <a href="#"    @click="PdfCalendriersParStagiaire"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
                     <a class="float-right btn btn-primary" @click="redirect_To_ShowStagiairesStagiaire(stage)"> <i class="fas fa-long-arrow-alt-left"></i> </a>
 <div v-if="empty == false">
         <a href="#"  @click="redirect_To_ShowEvaluationActuel(stage)"   class="float-right btn btn-success" ><i class="far fa-sticky-note"></i> Evaluation</a>
@@ -299,18 +300,21 @@ axios.get('/getStagesEffectues',{ params: {page: this.absences.current_page,curr
                   getAbsenceParStagiaireS(){
                       
 this.statut_stage="En cours";
-                axios.get('/getAbsenceParStagiaireS?page='+this.absences.current_page+'',{ params: {fk_stagiaire:this.id_stagiaire,fk_evaluateur:this.$route.params.stage.fk_evaluateur,statut_stage:this.statut_stage} })
+                axios.get('/getAbsenceParStagiaireS?page='+this.absences.current_page+'',{ params: {fk_stagiaire:this.id_stagiaire,fk_evaluateur:this.$route.params.stage.fk_evaluateur,fk_stage:this.$route.params.stage.id_stage,statut_stage:this.statut_stage} })
                 .then((response) => {
                   console.log('shit');
                   console.log(response.data.absences.data.length);
                                this.absences = response.data.absences;
-                                 if(this.absences.data.length === 0){
-                         this.empty =true;
-console.log("absences  emptyyy")
+                               this.stage=response.data.stage;
+                               console.log('absence =============')
+                               console.log(this.stage)
+                                 if(this.stage.data.statut_stage === "En cours"){
+                         this.empty =false;
+console.log("en cours")
                 } 
-                                if(this.absences.data.length != 0){
-                                 this.empty=false; 
-                                  console.log("absences not emptyyy")
+                                else{
+                                 this.empty=true; 
+                                  console.log("noooo")
                 }
                   
 
@@ -324,6 +328,13 @@ console.log("absences  emptyyy")
                     console.log('handle server error from here');
                 });
           },
+          // calendrier ---------------------
+PdfCalendriersParStagiaire(){
+          window.open('/PdfCalendriersParStagiaire/'+this.id_stagiaire
++'/'+this.id_stage
++'','_blank');
+},
+  
 
              redirect_To_ShowEvaluationActuel(stage){
         console.log('stgiaires')
@@ -348,7 +359,7 @@ console.log("absences  emptyyy")
         this.id_stagiaire=this.$route.params.stage.id_stagiaire;
       this.getAbsenceParStagiaireS();    
                      this.getObjectifsNotesStage(this.$route.params.stage);
-            this.getStagesEffectues(); 
+           // this.getStagesEffectues(); 
 
       // replace `getPost` with your data fetching util / API wrapper
    

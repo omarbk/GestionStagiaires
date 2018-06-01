@@ -13,7 +13,7 @@
     </div>
 
 
-        <form @submit.prevent="addGroupe">
+        <form @submit.prevent="validateForm('formGroup')"  data-vv-scope="formGroup">
          <div class="row" > 
          
             <div class="col-md-6">
@@ -35,15 +35,20 @@
    <div class="col-md-6">
    
                     <div class="form-group row">
-                    <label class="typo__label col-sm-4">Stagiaires</label>
+                    <label class="typo__label col-sm-4">Stagiaires *</label>
                     <div class="col-sm-8">
-                    <multiselect   :custom-label="nameWithLang" tag-position="bottom" v-model="pushStagiaire"
+                    <multiselect name="MultiStagiaire" v-validate="'required'"  :custom-label="nameWithLang" tag-position="bottom" v-model="pushStagiaire"
                      tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="prenom_stagiaire" 
                     :optionHeight="30" @remove="removeStagiaire" :options="stagiaires" :multiple="true"  ></multiselect>
+                
+                    <div v-show="errors.has('formGroup.MultiStagiaire')" class="text-danger">Champ obligatoire !</div>
+                       </div> 
+
                     </div>
 
                     </div>
-   </div>              
+
+  
     </div>
      
      <hr>
@@ -221,6 +226,14 @@
       }, 
         
                     methods:{
+  validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addGroupe();
+        }
+      });
+    },
                       DiffDebutFin2(){
                           console.log('dkhelllllllllllll')
                           let m1 =1

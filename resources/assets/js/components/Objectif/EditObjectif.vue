@@ -13,7 +13,7 @@
     <h2>Ajouter un Objectif</h2>
     <hr>   
     </div>   
-  <h3> {{annee}} année </h3>
+  <h3> {{annee}}  </h3>
 
 <div >
         <form @submit.prevent="updateObjectif">

@@ -45,18 +45,23 @@
                 <p class="card-text">
                    
                    <span>Intitule : </span>{{stage.intitule_stage}}
+                     <hr>            
+                     <span>semestre :  </span>{{stage.semestre_stage}}
+                    <hr>
+                                
+                     <span>niveau d'étude: :  </span>{{stage.annee_universitaire_stage}}
                     <hr>
                     <span>Objectif :  </span>{{stage.objectif_stage}}
                     <hr> 
                     <span>DateDebut :  </span>{{stage.dateDebut_stage}}
                     <hr> 
                     <span>DateFin :  </span>{{stage.dateFin_stage}}
-                    <hr>              
-                     
+                    <hr>                            
                     <span>nom hospitalier :  </span>{{stage.nom_hospitalier}}
                     <hr>            
                      <span>nom evaluateur :  </span>{{stage.nom_evaluateur}}
-                    <hr>                               
+                    <hr>        
+
                                      
                 </p>
                 

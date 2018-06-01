@@ -16,7 +16,9 @@
       <div class="text-center">
         <div class=" btnMarge">
         <div class="col">
-        <a class="float-left btn btn-primary" @click="redirect_To_ShowAbsencesActuel(stage)"> Stage Actuel </a>
+        <a class="float-left btn btn-primary" @click="redirect_To_ShowAbsencesActuel()"> Stage Actuel </a>
+                <a class="float-left btn btn-primary" style="background-color:beige" @click="pdfStageAnnee"> <i class="far fa-file-pdf"></i> Stages de l'année courant</a>
+
         <a class="float-right btn btn-primary" @click="redirect_To_ShowStagesEffectues(stage)"> Stages Effectués </a>
 
         </div>
@@ -184,6 +186,10 @@ currentYear:"",
   },
  
  methods:{
+     pdfStageAnnee(){
+         window.open('/getStageAnnee','_blank');
+    
+     },
      fetchData () {
           var today = new Date();
            // var dd = today.getDate();
@@ -251,6 +257,9 @@ axios.get('/getStagesParStagiaire',{ params: {page: this.stages.current_page,cur
                     console.log('handle server error from here');
                 });
     },
+
+
+
     getStagiaire(stagiaire){
                   axios.get('/getStagiaire/'+stagiaire.id_stagiaire).then(
                   response => {
@@ -269,12 +278,37 @@ axios.get('/getStagesParStagiaire',{ params: {page: this.stages.current_page,cur
        
             },
 
-             redirect_To_ShowAbsencesActuel(stage){
+             redirect_To_ShowAbsencesActuel(){
+                   axios.get('/getStagesActuel/',{params:{currentYear: this.currentYear}}).then(
+                  response => {
+                       
+                  this.stagesA = response.data.stages[0];
         console.log('stgiaires')
-        console.log(stage)
-                     this.$router.push({ name: 'ShowAbsencesActuel', params: { stage:stage}});
+        console.log(this.stagesA)
+                     this.$router.push({ name: 'ShowAbsencesActuel', params: { stage:this.stagesA}});
        
-            },
+            })
+},
+
+              getStageAnnee(){
+
+console.log("niveau d etude ")
+console.log()
+/*axios.get('/getStageAnnee',{ params: {page: this.stages.current_page,currentYear: this.currentYear} })
+              
+                .then((response) => {
+                    console.log("stag=====")
+                    this.loading = false;
+                    if(response.data.stages.data.length !=0){
+                    this.stages = response.data.stages;
+                    this.stage = response.data.stages.data[0];
+                    console.log(response.data.stages.data[0])}
+               })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });*/
+
+    },
 
  
     

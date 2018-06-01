@@ -22,7 +22,7 @@
                     <div class="col-sm-6">
    
                         <select class="form-control custom-select " id="fk_compte" v-model="annee" >
-                                    <option selected disabled>Choisir Client</option>
+                                    <option selected disabled>Choisir Niveau Etude</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
 

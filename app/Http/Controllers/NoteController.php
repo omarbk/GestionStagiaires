@@ -137,4 +137,22 @@ class NoteController extends Controller
                                
                            }
                 }
+
+                public function deleteEvaluation(Request $request){
+                               // dd($request);
+                               $evaluation = Evaluation::where('fk_stagiaire','=',$request->id_stagiaire)
+                               ->where('fk_stage','=',$request->id_stage)
+                               ->get();
+                               $evaluation->each->delete();
+                               $total_notes = Total_note::where('fk_evaluation','=',$evaluation[0]->id_evaluation)
+                               ->delete(); 
+                               
+                               $notes = Note::where('fk_evaluation','=',$evaluation[0]->id_evaluation)
+                               ->delete();
+                               $notes_types = Note_type::where('fk_evaluation','=',$evaluation[0]->id_evaluation)
+                               ->delete();
+
+                        //dd($evaluation[0]->id_evaluation);
+                        return Response()->json(['delete' => 'true']);
+                     }
 }

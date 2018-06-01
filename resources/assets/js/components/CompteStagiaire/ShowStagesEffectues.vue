@@ -194,7 +194,7 @@ import  Pagination from '../Pagination.vue';
             redirect_To_ShowAbsencesEffectues(stage){
         console.log('stgiaires')
                       console.log(this.stages)
-                     this.$router.push({ name: 'ShowAbsencesEffectues', params: { stage:stage,id_stage:this.id_stage,fk_evaluateur:this.stages.fk_evaluateur}});
+                     this.$router.push({ name: 'ShowAbsencesEffectues', params: { stage:stage,id_stage:stage.id_stage,fk_evaluateur:stage.fk_evaluateur}});
         //this.$router.push({ name: 'Editstage', params: {stage:this.stage}});
 //console.log(stage)
             },
@@ -202,7 +202,7 @@ import  Pagination from '../Pagination.vue';
         console.log('stgiaires')
         console.log(stage)
         this.eval ='effectue';
-                     this.$router.push({ name: 'ShowEvaluationEffectues', params: { stage:stage,id_stage:this.id_stage,eval:this.eval}});
+                     this.$router.push({ name: 'ShowEvaluationEffectues', params: { stage:stage,id_stage:stage.id_stage,eval:this.eval}});
         //this.$router.push({ name: 'Editstage', params: {stage:this.stage}});
 //console.log(stage)
             },
@@ -277,8 +277,8 @@ axios.get('/getStagesEffectues',{ params: {page: this.stages.current_page,curren
               fetchData () {
                    console.log('====== ok =====')
         console.log(this.$route.params.stage)
-        this.id_stage=this.$route.params.stage.id_stage;
-      this.stage.id_stagiaire=this.$route.params.stage.id_stagiaire;
+       // this.id_stage=this.$route.params.stage.id_stage;
+     // this.stage.id_stagiaire=this.$route.params.stage.id_stagiaire;
       //this.error = this.post = null
       this.loading = true
       this.getStagesEffectues(); 

@@ -374,11 +374,11 @@
        console.log('====== ok =====')
         this.stage = this.$route.params.stage;
         console.log(this.$route.params.fk_evaluateur)
-        this.id_stage=this.$route.params.stage.id_stage;
+        this.id_stage=this.$route.params.id_stage;
              //   this.fk_evaluateur=this.$route.params.stage.fk_evaluateur;
 
         console.log('====== nnnnnnnnnnnnnnnn =====')
-        console.log(this.$route.params.stage)
+        console.log(this.$route.params.id_stage)
         this.id_stagiaire=this.$route.params.stage.id_stagiaire;
       this.getAbsenceParStagiaire();    
                      this.getObjectifsNotesStage(this.$route.params.stage);

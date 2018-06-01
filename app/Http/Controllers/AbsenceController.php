@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Absence;
+use App\Stage;
 class AbsenceController extends Controller
 {
     public function addAbsence(Request $request)
@@ -40,6 +41,7 @@ class AbsenceController extends Controller
      }
     public function getAbsenceParStagiaire(Request $request){
        // dd($request);
+      
         $absences= Absence::select('absences.*')
         ->where('absences.fk_stagiaire','=',$request->fk_stagiaire)
         ->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
@@ -63,18 +65,22 @@ class AbsenceController extends Controller
      }
 
      public function getAbsenceParStagiaireS(Request $request){
-        // dd($request);
+         //dd($request);
+        $stage= Stage::select('stages.*')
+        ->where('stages.id_stage','=',$request->fk_stage)
+        ->get();
+       // dd($stage);
          $absences= Absence::leftJoin('stages', 'absences.fk_stage', '=', 'stages.id_stage')
 
          ->select('absences.*','stages.*')
          ->where('absences.fk_stagiaire','=',$request->fk_stagiaire)
-         //->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
-        // ->where('absences.fk_stage','=',$request->fk_stage)
-         ->where('stages.statut_stage','=',$request->statut_stage)
+         ->where('absences.fk_evaluateur','=',$request->fk_evaluateur)
+         ->where('absences.fk_stage','=',$request->fk_stage)
+         ->where('stages.statut_stage','=',$request->statut_stage);
 //dd($absences);
-         ->paginate(10);
+        // ->paginate(10);
         // dd($absences);
-         return Response()->json(['absences' => $absences]);
+         return Response()->json(['absences' => $absences ,'stage' => $stage]);
       }
       
 //pour etat d'evaluation
