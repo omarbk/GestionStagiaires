@@ -150,6 +150,7 @@ class EvaluateurController extends Controller
         $evaluateurs = Evaluateur::all();
                  return Response()->json(['evaluateurs' => $evaluateurs ]);
     }
+   
 
     public function getEvaluateur($id_evaluateur){
         

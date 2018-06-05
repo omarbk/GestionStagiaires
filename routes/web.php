@@ -48,7 +48,7 @@ Route::delete('/deleteUser/{id}','Auth\RegisterController@destroy');
 Route::get('/editUser/{id}','Auth\RegisterController@editUser');
 //Route::put('/updateUser','Auth\RegisterController@updateUser');
 Route::get('/getProfile','Auth\RegisterController@getProfile');
-
+Route::put('/updateUser','Auth\RegisterController@updateUser');
 
         //compagnie
 Route::post('/addCompagnie','maCompagnieController@store')->name('addCompagnie');
@@ -281,6 +281,7 @@ Route::get('/searchEvaluateur/{search_E}','EvaluateurController@searchEvaluateur
 Route::get('/getAllEvaluateurs','EvaluateurController@getAllEvaluateurs');
 
 
+
 //Objectif 
 Route::post('/addObjectif','Evaluation_objectifController@addObjectif');
 Route::get('/getObjectifs','Evaluation_objectifController@getObjectifs');
@@ -402,6 +403,14 @@ Route::get('/getEvaluateurParStage/{id_evaluateur}','NotificationController@getE
 //dashboard
 Route::get('/getEtatNotes','DashboardController@getEtatNotes');
 
+
+
+
+// Dashboard
+Route::get('/getCountAllEvaluateurs','DashboardController@getCountAllEvaluateurs');
+Route::get('/getCountAllStagiaires','DashboardController@getCountAllStagiaires');
+Route::get('/getCountAllResponsables','DashboardController@getCountAllResponsables');
+Route::get('/getCountAllStages','DashboardController@getCountAllStages');
 
 Auth::routes();
 
