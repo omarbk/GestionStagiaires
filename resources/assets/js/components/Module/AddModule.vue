@@ -16,16 +16,17 @@
    
 
 <div >
-        <form @submit.prevent="addModule">
+        <form @submit.prevent="validateForm('formModule')" data-vv-scope="formModule">
          
     <div class="form-group row">
-                    <label for="stagiaire" class="col-sm-3" >niveau d'étude:</label>
+        <label for="nom_compte" class="require col-sm-3">niveau d'étude:</label>
                     <div class="col-sm-6">
    
-                        <select class="form-control custom-select " id="fk_compte" v-model="niveau" >
+                        <select v-validate="'required'" name="niveau" class="form-control custom-select " id="fk_compte" v-model="niveau" >
                                     <option selected disabled>Choisir Niveau Etude</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
+                        <div v-show="errors.has('formModule.niveau')" class="text-danger">Champ obligatoire !</div>
 
                     
                             </div>
@@ -96,6 +97,14 @@
       }),
  
       methods: { 
+             validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addModule();
+        }
+      });
+    },
 
     pushModule(moduleM){
             console.log(this.moduleM);

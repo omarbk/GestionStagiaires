@@ -1,6 +1,9 @@
 <template>
 
     <div class="post" > 
+                                          <notifications group="foo2" 
+      position="bottom right" 
+      classes="vue-notification error"/>
          <notifications group="foo" 
       position="bottom right" 
       classes="vue-notification success"/>
@@ -305,11 +308,42 @@ import  Pagination from '../Pagination.vue';
 //console.log(responsable)
             },
      // ajouter un user
-    addCompte() {
+        notificationValidation(message,evt){
+         this.$notify({
+                                      group: 'foo2',
+                                      title: 'Succès',
+                                      text: message,
+                                      duration: 1500,
+                                    });
+                                     evt.preventDefault();
+
+     },
+    addCompte(evt) {
+          let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+console.log('addd -------- compte')
+console.log(re.test(this.user.email))
+
+      if(this.user.email == "" || this.user.password == ""){   
+           this.notificationValidation('champs obligatoire!',evt)
+                                    }
+        else if(this.user.password.length <6){
+            this.notificationValidation('password doit contenir plus de 6 caractères!',evt)
+                            
+                                   
+        }
+        else if(!re.test(this.user.email)){
+             this.notificationValidation('email Incorrect!',evt)
+                   
+  }
+      else{
+         this.$router.push({ name: 'AddResponsable', params: { user: this.user }});
+      }
                
-    this.$router.push({ name: 'AddResponsable', params: { user: this.user }});
+   
             
     },
+ 
         searchResponsable(event){
              console.log(this.search);
              this.responsables.current_page=1;

@@ -21,9 +21,11 @@
                
 
                 <div class="form-group row">
-                    <label for="nom_compte" class="col-sm-4"> intitule</label>
+                     <label for="nom_compte" class="require col-sm-4">intitule</label>
+                  
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nom_compte"  v-model="stage.intitule_stage">
+                    <input type="text" v-validate="'required'" name="intitule" class="form-control" id="nom_compte"  v-model="stage.intitule_stage">
+                    <div v-show="errors.has('formStage.intitule')" class="text-danger">Champ obligatoire !</div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -33,32 +35,39 @@
                     </div>
                 </div>
                  <div class="form-group row">
-                    <label for="responsable" class="col-sm-4" > date Debut </label>
+                     <label for="responsable" class="require col-sm-4">date Debut</label>
+
                     <div class="col-sm-8">
-                    <input type="date" class="form-control" id="responsable"  v-model="stage.dateDebut_stage">
+                    <input type="date" class="form-control" v-validate="'required'"  id="responsable" name="dateDebutStage" v-model="stage.dateDebut_stage">
+                    <div v-show="errors.has('formStage.dateDebutStage')" class="text-danger">Champ obligatoire !</div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="responsable" class="col-sm-4" > date Fin </label>
+                     <label for="responsable" class="require col-sm-4">date Fin</label>
+                  
                     <div class="col-sm-8">
-                    <input type="date" class="form-control" id="responsable"  v-model="stage.dateFin_stage">
+                    <input type="date" v-validate="'required'" name="dateFinStage" class="form-control" id="responsable"  v-model="stage.dateFin_stage">
+                    <div v-show="errors.has('formStage.dateFinStage')" class="text-danger">Champ obligatoire !</div>
                     </div>
                 </div>
                        <div class="form-group row">
-                    <label for="responsable" class="col-sm-4" > semestre </label>
+                            <label for="responsable" class="require col-sm-4">semestre</label>
+                   
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="responsable"  v-model="stage.semestre_stage">
+                    <input type="text" v-validate="'required'" name="semestre" class="form-control" id="responsable"  v-model="stage.semestre_stage">
+                    <div v-show="errors.has('formStage.semestre')" class="text-danger">Champ obligatoire !</div>
                     </div>
                      </div>
                    <div class="form-group row">
-                    <label for="stagiaire" class="col-sm-4" >niveau d'étude:</label>
+                        <label for="stagiaire" class="require col-sm-4">niveau d'étude:</label>
+            
                     <div class="col-sm-8">
    
-                        <select class="form-control custom-select " id="fk_compte" v-model="stage.annee_universitaire_stage" >
+                        <select v-validate="'required'"  name="anneeEtude" class="form-control custom-select " id="fk_compte" v-model="stage.annee_universitaire_stage" >
                                     <option selected disabled>Choisir niveau</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
-
+                        <div v-show="errors.has('formStage.anneeEtude')" class="text-danger">Champ obligatoire !</div>
                     
                             </div>
                         </div> 
@@ -68,7 +77,8 @@
    <div class="col-md-6">
         
                     <div class="form-group row">
-                    <label class="typo__label col-sm-4">Groupes</label>
+                        <label for="stagiaire" class=" typo__label  require col-sm-4">Groupes:</label>
+                   
                     <div class="col-sm-7">
                     <multiselect  name="MultiGroupe" v-validate="'required'"  :custom-label="nameWithLangGroupe" tag-position="bottom" v-model="pushGroupes"
                      tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="id_groupe" 
@@ -78,14 +88,15 @@
 
                     </div>
         <div class="form-group row">
-          <label class="typo__label col-sm-4">Hospitalier</label>
+             <label for="stagiaire" class=" typo__label  require col-sm-4">Hospitalier:</label>
+          
           <div class="col-sm-7">
           <multiselect  name="MultiHospitalier" v-validate="'required'"  v-model="pushHospitalier" :options="hospitaliers"  placeholder="choisir" label="nom_hospitalier" track-by="id_hospitalier"></multiselect>
           <div v-show="errors.has('formStage.MultiHospitalier')" class="text-danger">Champ obligatoire !</div>
           </div>
         </div>
          <div class="form-group row">
-          <label class="typo__label col-sm-4">Evaluateur</label>
+               <label for="stagiaire" class=" typo__label  require col-sm-4">Evaluateur:</label>
           <div class="col-sm-7">
           <multiselect name="MultiEvaluateur" v-validate="'required'"  placeholder="choisir"  v-model="pushEvaluateur" :custom-label="nameWithLangEvaluateur"  :options="evaluateurs"    track-by="id_evaluateur"></multiselect>
           <div v-show="errors.has('formStage.MultiEvaluateur')" class="text-danger">Champ obligatoire !</div>

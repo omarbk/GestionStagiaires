@@ -22,7 +22,7 @@
         
     </head>
     @if ( $role==="Super Admin")   
-    <body class="sidebar-fixed header-fixed">
+    <body class="header-fixed">
        <div id="app">    
        
          <app-vue></app-vue>

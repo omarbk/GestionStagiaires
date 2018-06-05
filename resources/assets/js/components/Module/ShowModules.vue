@@ -1,6 +1,9 @@
 <template>
     <div class="post" >
-   
+                <notifications group="foo" 
+      position="bottom right" 
+      classes="vue-notification success"/>   
+      
     <div class="loading" v-if="loading">
      <div class="lds-hourglass"></div>
     </div>
@@ -21,19 +24,7 @@
     <hr>   
     </div> 
   
-   
-            <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testAjout">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <strong>module Bien Ajouter !</strong>
-</div>
-  <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="Testopen.testEdit">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <strong>module Bien Modifier !</strong>
-</div>
+ 
     
     <!-- formulaire pour Ajouter un module -->
    
@@ -242,11 +233,21 @@ watch:{
    
           if( this.$route.params.success == "add"){
              
-                        this.Testopen.testAjout = true;
+                                 this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'module bien ajouter!',
+                                      duration: 1500,
+                                    });
           }
                     if( this.$route.params.success == "edit"){
              
-                        this.Testopen.testEdit = true;
+                                this.$notify({
+                                      group: 'foo',
+                                      title: 'Succès',
+                                      text: 'module bien modifier!',
+                                      duration: 1500,
+                                    });
           }
         },
       updated(){

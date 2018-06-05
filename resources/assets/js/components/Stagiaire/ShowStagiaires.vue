@@ -1,5 +1,8 @@
 <template>
     <div class="post" >
+                            <notifications group="foo2" 
+      position="bottom right" 
+      classes="vue-notification error"/>
       <!-- au cas ajout bien passé afficher ce message -->   
              <notifications group="foo" 
       position="bottom right" 
@@ -38,11 +41,13 @@
              @ok="addCompte"
              ok-title="Suivant" >
       <form @submit.stop.prevent="handleSubmit">
-
+  
     <div class="form-group row">
-                 <label for="reference" class="col-sm-2 col-form-label">Email: </label>
+                 <label for="reference" class=" require col-sm-2 col-form-label">Email: </label>
                     <div class="col-sm-10">
-                    <b-form-input  type="text" v-model="user.email" class="form-control" id="Email" placeholder="Email" required/>
+                   <b-form-group>    <b-form-input name="emaill"  v-validate="'required'"  type="text" v-model="user.email" class="form-control"  placeholder="Email" />
+                 <div v-show="errors.has('formGroup.emaill')" class="text-danger">Champ obligatoire !</div>
+               </b-form-group>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -297,6 +302,16 @@ dateDebutStage:"",
   },
  
  methods:{
+       validateFormUser(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addCompte();
+          console.log('validerrrr')
+        }
+        else console.log("erroooor")
+      });
+    },
 
      pdfStagiaire(){
         
@@ -375,9 +390,39 @@ setStagiaire(stagiaire){
 //console.log(stagiaire)
             },
      // ajouter un user
-    addCompte() {
+     notificationValidation(message,evt){
+         this.$notify({
+                                      group: 'foo2',
+                                      title: 'Succès',
+                                      text: message,
+                                      duration: 1500,
+                                    });
+                                     evt.preventDefault();
+
+     },
+    addCompte(evt) {
+          let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+console.log('addd -------- compte')
+console.log(re.test(this.user.email))
+
+      if(this.user.email == "" || this.user.password == ""){   
+           this.notificationValidation('champs obligatoire!',evt)
+                                    }
+        else if(this.user.password.length <6){
+            this.notificationValidation('password doit contenir plus de 6 caractères!',evt)
+                            
+                                   
+        }
+        else if(!re.test(this.user.email)){
+             this.notificationValidation('email Incorrect!',evt)
+                   
+  }
+      else{
+        this.$router.push({ name: 'AddStagiaire', params: { user: this.user }});
+      }
                
-    this.$router.push({ name: 'AddStagiaire', params: { user: this.user }});
+   
             
     },
         searchStagiaire(event){

@@ -16,17 +16,17 @@
    
 
 <div >
-        <form @submit.prevent="addActivite">
+        <form @submit.prevent="validateForm('formActivite')" data-vv-scope="formActivite">
          
     <div class="form-group row">
-                    <label for="stagiaire" class="col-sm-3" >niveau d'étude:</label>
+         <label for="nom_compte" class="require col-sm-3">niveau d'étude:</label>
                     <div class="col-sm-6">
    
-                        <select class="form-control custom-select " id="fk_compte" v-model="niveau" >
+                        <select v-validate="'required'"  name="niveau" class="form-control custom-select " id="fk_compte" v-model="niveau" >
                                     <option selected disabled>Choisir Niveau Etude</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
-
+                        <div v-show="errors.has('formActivite.niveau')" class="text-danger">Champ obligatoire !</div>
                     
                             </div>
                         </div>
@@ -109,7 +109,14 @@
             this.activites.splice(index, 1);
         },
 
-         
+       validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addActivite();
+        }
+      });
+    },
           addActivite(){ 
               console.log("test")
        this.activite.niveau_etude=this.niveau;

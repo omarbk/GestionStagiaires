@@ -1,5 +1,9 @@
 <template>
     <div>
+       <notifications group="foo2" 
+      position="bottom right" 
+      classes="vue-notification error"/>
+
       <notifications group="foo" 
       position="bottom right"/>
     <div class="row">
@@ -20,25 +24,30 @@
                
 
                 <div class="form-group row">
-                    <label for="nom_compte" class="col-sm-4"> Nom groupe</label>
+                   <label for="nom_compte" class="require col-sm-4"> Nom groupe</label>
+                    
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nom_compte"  v-model="groupe.nom_groupe">
+                    <input type="text" name="Nomgroupe" v-validate="'required'" class="form-control" id="nom_compte"  v-model="groupe.nom_groupe">
+                      <div v-show="errors.has('formGroup.Nomgroupe')" class="text-danger">Champ obligatoire !</div>
+
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="responsable" class="col-sm-4" > année Universitaire</label>
+                   <label for="nom_compte" class="require col-sm-4"> année Universitaire</label>
+                  
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="responsable"  v-model="groupe.annee_universitaire_groupe">
+                    <input type="text" name="anneeUniv" class="form-control" v-validate="'required'" id="responsable"  v-model="groupe.annee_universitaire_groupe">
+                    <div v-show="errors.has('formGroup.anneeUniv')" class="text-danger">Champ obligatoire !</div>
                     </div>
                 </div>
             </div> 
    <div class="col-md-6">
    
                     <div class="form-group row">
-                    <label class="typo__label col-sm-4">Stagiaires *</label>
+                       <label for="stagiaire" class=" typo__label  require col-sm-4">Stagiaires:</label>
                     <div class="col-sm-8">
                     <multiselect name="MultiStagiaire" v-validate="'required'"  :custom-label="nameWithLang" tag-position="bottom" v-model="pushStagiaire"
-                     tag-placeholder="Add this as new tag" placeholder="cherche un groupe"  track-by="prenom_stagiaire" 
+                     tag-placeholder="Add this as new tag" placeholder="cherche un stagiaire"  track-by="prenom_stagiaire" 
                     :optionHeight="30" @remove="removeStagiaire" :options="stagiaires" :multiple="true"  ></multiselect>
                 
                     <div v-show="errors.has('formGroup.MultiStagiaire')" class="text-danger">Champ obligatoire !</div>

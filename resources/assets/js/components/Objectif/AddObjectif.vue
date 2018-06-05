@@ -1,5 +1,8 @@
 <template>
   <div>
+                      <notifications group="foo" 
+      position="bottom right" 
+      classes="vue-notification success"/>  
           <div class="text-center pull-right" >
                   <div class=" btnMarge">
         <div class="col">
