@@ -16,10 +16,9 @@
       <div class="text-center">
         <div class=" btnMarge">
         <div class="col">
-        <a class="float-left btn btn-primary" @click="redirect_To_ShowAbsencesActuel()"> Stage Actuel </a>
-                <a class="float-left btn btn-primary" style="background-color:beige" @click="pdfStageAnnee"> <i class="far fa-file-pdf"></i> Stages de l'année courant</a>
+        <a style="color:white;" class="w-25 float-left btn btn-primary" @click="redirect_To_ShowAbsencesActuel()"> Stage Actuel </a>
 
-        <a class="float-right btn btn-primary" @click="redirect_To_ShowStagesEffectues(stage)"> Stages Effectués </a>
+        <a style="color:white;" class="w-25 float-right btn btn-primary" @click="redirect_To_ShowStagesEffectues(stage)"> Stages Effectués </a>
 
         </div>
   
@@ -29,8 +28,10 @@
 
  
     </div> 
-   <hr>
-  
+   <hr><div class="row"><div class="col">
+                  <a class="float-right btn btn-primary mb-4" style="background-color:beige" @click="pdfStageAnnee"> <i class="far fa-file-pdf"></i> Stages de l'année courant</a>
+                  </div>
+</div>
 <div class="row ">
  <div class="col-md-4 col-sm-8">
                 <div class="form-group row"> 

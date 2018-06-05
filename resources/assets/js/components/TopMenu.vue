@@ -196,9 +196,8 @@ created(){
 </script>
 <style scoped>
 .colorMenu{
-   background: #b8ebfd;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #b8ebfd);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #FFFFFF, #6DD5FA,#b8ebfd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   background: #84c7f4;  /* fallback for old browsers */
+
 height:46px;
 }
 </style>

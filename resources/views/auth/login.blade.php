@@ -19,19 +19,23 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="height: 620px;" >
 			  <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
 				
+					<span class="login100-form-title p-b-30">
+						Gestion des Staigaires
+					</span>
+					<hr>
 					<span class="login100-form-title p-b-34">
-						Account Login
+						Authentification
 					</span>
 					  @csrf
-					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+					<div class="wrap-input100  rs1-wrap-input100 validate-input m-b-20"  data-validate="Type user name">
 					 <input  type="email" class="input100{{ $errors->has('password') ? ' is-invalid' : '' }}  " name="email" value="{{ old('email') }}" aria-describedby="emailHelp" placeholder="Enter Email" required autofocus>
 
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20"  data-validate="Type password">
 				
 						<input id="exampleInputPassword1" type="password" class="input100{{ $errors->has('password') ? ' is-invalid' : '' }} " name="password" placeholder="Password" >
 						<span class="focus-input100"></span>
@@ -45,11 +49,11 @@
 
 					<div class="w-full text-center p-t-27 p-b-239">
 						<span class="txt1">
-							Forgot
+							
 						</span>
 
 						<a href="#" class="txt2">
-							User name / password?
+						
 						</a>
 					</div>
 				  <div class="err">
@@ -73,7 +77,7 @@
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('login3/images/universite2.png');"></div>
+				<div class="login100-more" style="background-image: url('login3/images/universite3.png');"></div>
 			</div>
 		</div>
 	</div>
