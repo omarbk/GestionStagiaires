@@ -10,8 +10,8 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">54</span>
-                                    <span class="font-weight-light">vu par évaluateur</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">{{countEvaluateurs}}</span>
+                                    <span class="font-weight-light">évaluateurs</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -25,8 +25,8 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">40</span>
-                                    <span class="font-weight-light">vu par Etudiants</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">{{countStagiaire}}</span>
+                                    <span class="font-weight-light">stagiaires</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -40,12 +40,12 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">900</span>
-                                    <span class="font-weight-light">Downloads</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">{{countResponsable}}</span>
+                                    <span class="font-weight-light">Responsables</span>
                                 </div>
 
                                 <div class="h2 text-muted">
-                                    <i class="icon icon-cloud-download"></i>
+                                    <i class="icon icon-people"></i>
                                 </div>
                             </div>
                         </div>
@@ -55,12 +55,12 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">32s</span>
-                                    <span class="font-weight-light">Time</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">{{countStage}}</span>
+                                    <span class="font-weight-light">stages</span>
                                 </div>
 
                                 <div class="h2 text-muted">
-                                    <i class="icon icon-clock"></i>
+                                    <i class="fas fa-briefcase"></i>
                                 </div>
                             </div>
                         </div>
@@ -112,16 +112,29 @@ data: () => ({
         labels2 :[],
         votes2:[],
         message: "Vue.js & Chart.js",
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        votes: [12, 19, 3, 5, 40, 70],
-        type : "bar"
+        labels: ["groupe 1", "groupe 3", "groupe 5", "groupe 4"],
+        votes: [120, 60, 40, 100, 40, 70],
+        labels2: ["stage 4", "stage 2", "stage 3", "stage 1", "stage 6", "stage 5"],
+        votes2: [40, 20, 30, 4, 40, 90],
+        labels3: ["validé","non validé"],
+        votes3: [90, 10],
+        type : "bar",
+        countEvaluateurs:"",
+        countStagiaire:"",
+        countResponsable:"",
+        countStage:"",
+
+        
   }),
   created(){
    
 
   },
    mounted () {
-     
+     this.getCountAllEvaluateurs();
+     this.getCountAllStagiaires();
+     this.getCountAllResponsables();
+     this.getCountAllStages();
     var ctx =    document.getElementById("myChart");
     var ctxL =    document.getElementById("myLine");
     var ctxP =    document.getElementById("PieChart");
@@ -129,14 +142,14 @@ data: () => ({
     var myPieChart = new Chart(ctxP ,{
     type: 'pie',
     data: {
-                labels: this.labels,
+                labels: this.labels3,
                     datasets: [
                         {
-                            label: "# Clients",
-                            data: this.votes,
+                            label: "# groupes",
+                            data: this.votes3,
                             backgroundColor: [
-                                "rgba(255, 99, 132, 0.6)",
-                                "rgba(54, 162, 235, 0.6)",
+                                 "rgba(54, 162, 235, 0.6)",
+                               "rgba(255, 99, 132, 0.6)",
                                 "rgba(255, 206, 86, 0.6)",
                                 "rgba(75, 192, 192, 0.6)",
                                 "rgba(153, 102, 255, 0.6)",
@@ -167,11 +180,11 @@ data: () => ({
 var stackedLine = new Chart(ctxL, {
     type: 'line',
     data: {
-        labels: this.labels,
+        labels: this.labels2,
                     datasets: [
                         {
-                            label: "# articles",
-                            data: this.votes,
+                            label: "# stages",
+                            data: this.votes2,
                             backgroundColor: [
                                 "rgba(255, 99, 132, 0.6)",
                                 "rgba(54, 162, 235, 0.6)",
@@ -200,7 +213,7 @@ var stackedLine = new Chart(ctxL, {
         }
     }
 });
-// this.getArticlePlusVente(ctx);
+this.getArticlePlusVente(ctx);
   
             console.log('---- test labels 2 ')
             console.log(this.labels2)
@@ -210,7 +223,7 @@ var stackedLine = new Chart(ctxL, {
          methods: {
 
                        async getArticlePlusVente(ctx){
-                            this.loading= true;
+                           // this.loading= true;
              
                   var stackedChart = await  new Chart(ctx, {
                 type: 'bar',
@@ -218,7 +231,7 @@ var stackedLine = new Chart(ctxL, {
                     labels: this.labels,
                     datasets: [
                         {
-                            label: "# labels",
+                            label: "# groupes",
                             data: this.votes,
                             backgroundColor: [
                                 "rgba(255, 99, 132, 0.6)",
@@ -254,6 +267,42 @@ var stackedLine = new Chart(ctxL, {
             }); 
             
           },
+                       getCountAllEvaluateurs(){
+                 
+                 axios.get('/getCountAllEvaluateurs')
+                .then((response) => { 
+                        console.log("nombre Evaluateurs ========= ")
+                        console.log(response.data.countEvaluateurs)
+                        this.countEvaluateurs = response.data.countEvaluateurs;
+                 });
+             },
+                       getCountAllStagiaires(){
+                 
+                 axios.get('/getCountAllStagiaires')
+                .then((response) => { 
+                        console.log("nombre Stagiaire ========= ")
+                        console.log(response.data.countStagiaire)
+                        this.countStagiaire = response.data.countStagiaire;
+                 });
+             },
+                       getCountAllResponsables(){
+                 
+                 axios.get('/getCountAllResponsables')
+                .then((response) => { 
+                        console.log("nombre responsable ========= ")
+                        console.log(response.data.countResponsable)
+                        this.countResponsable = response.data.countResponsable;
+                 });
+             },
+                       getCountAllStages(){
+                 
+                 axios.get('/getCountAllStages')
+                .then((response) => { 
+                        console.log("nombre Stage ========= ")
+                        console.log(response.data.countStage)
+                        this.countStage = response.data.countStage;
+                 });
+             },
 
         
          },

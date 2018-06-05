@@ -10,7 +10,7 @@
         </div>
   
     </div>
-    <h2>Ajouter des Activites</h2>
+    <h3>Ajouter des Activites</h3>
     <hr>   
     </div>   
    

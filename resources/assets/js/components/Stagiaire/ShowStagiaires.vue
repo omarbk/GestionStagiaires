@@ -123,7 +123,7 @@
                     <hr>
                     <div class="widthTextCard">Prenom : {{ stagiaire.prenom_stagiaire}}</div>
                     <hr>
-                    <div class="widthTextCard">Service : {{stagiaire.specialite_stagiaire}}</div>
+                    <div class="widthTextCard">Specialité : {{stagiaire.specialite_stagiaire}}</div>
                     <hr>
                 </div>
                 

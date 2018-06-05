@@ -47,3 +47,8 @@ export default {
 
 }
 </script>
+<style scoped>
+.content{
+  margin-top: 40px;
+}
+</style>

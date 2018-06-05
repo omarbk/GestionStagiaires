@@ -75,6 +75,9 @@
         </div> 
 </template>
 <style scoped>
+.sidebar{
+    margin-top:45px;
+}
 
 
 

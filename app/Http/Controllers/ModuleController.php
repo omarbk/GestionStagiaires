@@ -141,7 +141,7 @@ class ModuleController extends Controller
     
         PDF::AddPage();
     
-        $headTop = '<h2 style="color:red"> Fiche d\'Activités </h2>';
+        $headTop = '<h2 style="color:red"> Fiche d\'Modules </h2>';
        // $numStage = '<h2 style="color:red">'.$hospitaliers[0]->annee_universitaire_stage.'</h2>';
     
     
