@@ -402,6 +402,8 @@ Route::get('/getEvaluateurParStage/{id_evaluateur}','NotificationController@getE
 
 //dashboard
 Route::get('/getEtatNotes','DashboardController@getEtatNotes');
+Route::get('/getGroupeNombreux','DashboardController@getGroupeNombreux');
+Route::get('/getStagesV','DashboardController@getStagesV');
 
 
 

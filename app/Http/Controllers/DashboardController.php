@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\DB;
 use App\Stagiaire;
 use App\Responsable;
 use App\Stage;
+use App\Groupe;
+use App\Groupe_stagiaire;
+use App\Evaluation;
 class DashboardController extends Controller
 {
    public function getArticlePlusVente(){
@@ -32,7 +35,7 @@ class DashboardController extends Controller
 
    public function getEtatNotes(){
     $etatNotes = Total_note::leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
-    ->select('total_notes.etat',DB::raw("SUM(evaluations.fk_stagiaire) as total"))
+    ->select('total_notes.etat',DB::raw("COUNT(evaluations.fk_stagiaire) as total"))
    // ->where('status.type_status','=','validé')
     ->groupBy('total_notes.etat')
     ->get();
@@ -40,6 +43,28 @@ class DashboardController extends Controller
     return Response()->json(['etatNotes' => $etatNotes ]);
    }
    
+
+   public function getGroupeNombreux(){
+
+    $groupesN = Groupe::leftJoin('groupe_stagiaires','groupe_stagiaires.fk_groupe','=','groupes.id_groupe')
+    ->select('groupes.nom_groupe',DB::raw("COUNT(groupe_stagiaires.fk_stagiaire) as count"))
+   // ->where('commandes.fk_document','like', '%' .'F'. '%')
+    ->groupBy('groupes.id_groupe')->orderBy('count', 'desc')->limit(6)->get();
+    
+    return Response()->json(['groupesN' => $groupesN ]);
+
+   }
+   public function getStagesV(){
+
+    $stagesV = Total_note::leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
+    ->leftJoin('stages','evaluations.fk_stage','=','stages.id_stage')
+    ->select('stages.intitule_stage',DB::raw("COUNT(evaluations.fk_stagiaire) as count"))
+    ->where('total_notes.etat','=','valide')
+    ->groupBy('stages.id_stage')->orderBy('count', 'desc')->limit(6)->get();
+    return Response()->json(['stagesV' => $stagesV ]);
+
+   }
+
    public function getCountAllEvaluateurs(){
      
     $countEvaluateurs = Evaluateur::all()->count();

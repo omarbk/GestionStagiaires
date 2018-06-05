@@ -16,15 +16,16 @@
    
 
 <div >
-        <form @submit.prevent="addObjectif">
+        <form @submit.prevent="validateForm('formObj')"  data-vv-scope="formObj">
              <div class="form-group row">
-                    <label for="stagiaire" class="col-sm-3" >niveau d'étude:</label>
+                    <label for="stagiaire" class="col-sm-3" >niveau d'étude: <strong style="color:red">*</strong></label>
                     <div class="col-sm-6">
    
-                        <select class="form-control custom-select " id="fk_compte" v-model="annee" >
+                        <select name="MultiObj" class="form-control custom-select " v-validate="'required'" id="fk_compte" v-model="annee" >
                                     <option selected disabled>Choisir Niveau Etude</option>
                                     <option v-for="(anneeEtude,index) of listAnneeEtude" :key="index" :value="anneeEtude"> {{anneeEtude}} </option>
                         </select>  
+                    <div v-show="errors.has('formObj.MultiObj')" class="text-danger">Champ obligatoire !</div>
 
                     
                             </div>
@@ -133,7 +134,14 @@
             this.objectifs.splice(index, 1);
         },
 
-         
+         validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          this.addObjectif();
+        }
+      });
+    },
           addObjectif(){ 
               console.log("test")
                this.objectif.annee_objectif=this.annee;

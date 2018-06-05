@@ -114,10 +114,10 @@ data: () => ({
         labels4 :[],
         votes4:[],
         message: "Vue.js & Chart.js",
-        labels: ["groupe 1", "groupe 3", "groupe 5", "groupe 4"],
-        votes: [120, 60, 40, 100, 40, 70],
-        labels2: ["stage 4", "stage 2", "stage 3", "stage 1", "stage 6", "stage 5"],
-        votes2: [40, 20, 30, 4, 40, 90],
+        labels: [],
+        votes: [],
+        labels2: [],
+        votes2: [],
         labels3: ["validé","non validé"],
         votes3: [90, 10],
         type : "bar",
@@ -182,7 +182,73 @@ data: () => ({
 });*/
 
 
-var stackedLine = new Chart(ctxL, {
+/*var stackedLine = new Chart(ctxL, {
+    type: 'line',
+    data: {
+        labels: this.labels,
+                    datasets: [
+                        {
+                            label: "# stages",
+                            data: this.votes,
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.6)",
+                                "rgba(54, 162, 235, 0.6)",
+                                "rgba(255, 206, 86, 0.6)",
+                                "rgba(75, 192, 192, 0.6)",
+                                "rgba(153, 102, 255, 0.6)",
+                                "rgba(255, 159, 64, 0.6)"
+                            ],
+                            borderColor: [
+                                "rgba(255,99,132,1)",
+                                "rgba(54, 162, 235, 1)",
+                                "rgba(255, 206, 86, 1)",
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(153, 102, 255, 1)",
+                                "rgba(255, 159, 64, 1)"
+                            ],
+                            borderWidth: 1
+                        }
+                    ] 
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});*/
+ this.getStagesV(ctxL);
+  this.getEtatNotes(ctxEtat)
+this.getGroupeNombreux(ctx);
+  
+            console.log('---- test labels  ')
+            console.log(this.labels)
+           
+        
+        },
+         methods: {
+ async getStagesV(ctxL){
+                            this.loading= true;
+               let art = await  axios.get('/getStagesV')
+                .then((response) => {
+                 // console.log('shit');
+                
+
+                    this.stagesV = response.data.stagesV;
+      
+                    for(var i=0;i<this.stagesV.length;i++){
+                         this.labels2[i] = this.stagesV[i].intitule_stage
+                      this.votes2[i]= this.stagesV[i].count
+                    
+                     
+                    }  
+                    this.loading = false
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+                var stackedLine = new Chart(ctxL, {
     type: 'line',
     data: {
         labels: this.labels2,
@@ -218,27 +284,37 @@ var stackedLine = new Chart(ctxL, {
         }
     }
 });
-// this.getArticlePlusVente(ctx);
-  this.getEtatNotes(ctxEtat)
-this.getArticlePlusVente(ctx);
-  
-            console.log('---- test labels 2 ')
-            console.log(this.labels2)
-           
-        
-        },
-         methods: {
+            
+          },
+                      
 
-                       async getArticlePlusVente(ctx){
-                           // this.loading= true;
-             
+                  async getGroupeNombreux(ctx){
+                            this.loading= true;
+               let art = await  axios.get('/getGroupeNombreux')
+                .then((response) => {
+                 // console.log('shit');
+                
+
+                    this.groupesN = response.data.groupesN;
+      
+                    for(var i=0;i<this.groupesN.length;i++){
+                         this.labels[i] = this.groupesN[i].nom_groupe
+                      this.votes[i]= this.groupesN[i].count
+                    
+                     
+                    }  
+                    this.loading = false
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
                   var stackedChart = await  new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: this.labels,
                     datasets: [
                         {
-                            label: "# groupes",
+                            label: "# stagiaires",
                             data: this.votes,
                             backgroundColor: [
                                 "rgba(255, 99, 132, 0.6)",
@@ -274,6 +350,7 @@ this.getArticlePlusVente(ctx);
             }); 
             
           },
+
                        getCountAllEvaluateurs(){
                  
                  axios.get('/getCountAllEvaluateurs')
