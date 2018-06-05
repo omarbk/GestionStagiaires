@@ -111,6 +111,8 @@ data: () => ({
     articles: [],
         labels2 :[],
         votes2:[],
+        labels4 :[],
+        votes4:[],
         message: "Vue.js & Chart.js",
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         votes: [12, 19, 3, 5, 40, 70],
@@ -124,9 +126,12 @@ data: () => ({
      
     var ctx =    document.getElementById("myChart");
     var ctxL =    document.getElementById("myLine");
-    var ctxP =    document.getElementById("PieChart");
+    var ctxEtat =    document.getElementById("PieChart");
     
-    var myPieChart = new Chart(ctxP ,{
+
+
+ 
+   /* var myPieChart = new Chart(ctxEtat ,{
     type: 'pie',
     data: {
                 labels: this.labels,
@@ -161,7 +166,7 @@ data: () => ({
             }]
         }
     }
-});
+});*/
 
 
 var stackedLine = new Chart(ctxL, {
@@ -201,7 +206,7 @@ var stackedLine = new Chart(ctxL, {
     }
 });
 // this.getArticlePlusVente(ctx);
-  
+  this.getEtatNotes(ctxEtat)
             console.log('---- test labels 2 ')
             console.log(this.labels2)
            
@@ -255,7 +260,68 @@ var stackedLine = new Chart(ctxL, {
             
           },
 
-        
+        async getEtatNotes(ctxEtat){
+                            this.loading= true;
+               let art = await  axios.get('/getEtatNotes')
+                .then((response) => {
+                 // console.log('shit');
+                
+
+                    this.etatNotes = response.data.etatNotes;
+      
+                    for(var i=0;i<this.etatNotes.length;i++){
+                         this.labels4[i] = this.etatNotes[i].etat
+                      this.votes4[i]= this.etatNotes[i].total
+                    
+                     
+                    }  
+                    this.loading = false
+                })
+                .catch(() => {
+                    console.log('handle server error from here');
+                });
+                  var stackedChart = await  new Chart(ctxEtat, {
+                type: 'pie',
+                data: {
+                    labels: this.labels4,
+                    datasets: [
+                        {
+                            label: "# Clients",
+                            data: this.votes4,
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.6)",
+                                "rgba(54, 162, 235, 0.6)",
+                                "rgba(255, 206, 86, 0.6)",
+                                "rgba(75, 192, 192, 0.6)",
+                                "rgba(153, 102, 255, 0.6)",
+                                "rgba(255, 159, 64, 0.6)"
+                            ],
+                            borderColor: [
+                                "rgba(255,99,132,1)",
+                                "rgba(54, 162, 235, 1)",
+                                "rgba(255, 206, 86, 1)",
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(153, 102, 255, 1)",
+                                "rgba(255, 159, 64, 1)"
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    }
+                }
+            }); 
+            
+          },
          },
         
 

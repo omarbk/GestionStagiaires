@@ -398,6 +398,11 @@ Route::get('/getNotifications','NotificationController@getNotifications');
 Route::get('/MarkNotifRead','NotificationController@MarkNotifRead');
 Route::get('/getEvaluateurParStage/{id_evaluateur}','NotificationController@getEvaluateurParStage');
 
+
+//dashboard
+Route::get('/getEtatNotes','DashboardController@getEtatNotes');
+
+
 Auth::routes();
 
 

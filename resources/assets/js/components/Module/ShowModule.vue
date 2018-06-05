@@ -7,7 +7,7 @@
     <router-link class="btn btn-primary mb-3 retour float-right " :to="'/ShowModules'">
         <i class="fas fa-long-arrow-alt-left fontsize"></i>
         </router-link>
-     <a href="#"    @click="PDFModule(niveau_etude)"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
+     <a href="#"    @click="PDFModule()"  class="btn btn-secondary mb-3  float-right" ><i class="far fa-file-pdf"></i></a>
 
         </div>
   
@@ -86,7 +86,7 @@ export default {
   }),
 
   methods:{
- PDFModule(niveau_etude){
+ PDFModule(){
              var today = new Date();
               var annee = today.getFullYear();
               console.log(annee)

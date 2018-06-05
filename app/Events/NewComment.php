@@ -32,6 +32,7 @@ class NewComment implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        Log::info('bakrim');
         
         return new Channel('posts-channel');
     }

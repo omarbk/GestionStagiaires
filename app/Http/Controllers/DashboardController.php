@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\Facture;
 use App\Commande;
+
+use App\Total_note;
 use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
@@ -22,4 +24,15 @@ class DashboardController extends Controller
 
     //,Commande::raw("SUM(commandes.quantite_cmd) as count")
    }//where('designation','like', '%' .$desig . '%')
+
+
+   public function getEtatNotes(){
+    $etatNotes = Total_note::leftJoin('evaluations', 'evaluations.id_evaluation', '=', 'total_notes.fk_evaluation')
+    ->select('total_notes.etat',DB::raw("SUM(evaluations.fk_stagiaire) as total"))
+   // ->where('status.type_status','=','validé')
+    ->groupBy('total_notes.etat')
+    ->get();
+    //dd($etatNotes);
+    return Response()->json(['etatNotes' => $etatNotes ]);
+   }
 }

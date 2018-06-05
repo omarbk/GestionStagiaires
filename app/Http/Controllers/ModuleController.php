@@ -119,7 +119,7 @@ class ModuleController extends Controller
             ->orwhere('stages.dateFin_stage','like',$annee.'-%');
         })->groupBy('hospitaliers.nom_hospitalier')->get();
 
-    
+   // dd($hospitaliers);
         //dd($hospital);
     
        // 
@@ -184,6 +184,9 @@ width:100px;
 </tr>
 
               ';
+              if(count($hospitaliers) != 0){
+
+             // dd("fffff");
               foreach ( $hospitaliers as $hospitalier ){
             $commandesHtml.='
                  <tr>             
@@ -210,6 +213,7 @@ width:100px;
              </tr> '
            
              ;}
+              }
             $commandesHtml.='</tbody>
             <span style="color:red"><u> Sites des Stages:</u></span>
 
@@ -342,12 +346,15 @@ width:200px;
            
              ';}
             $commandesHtml.='</tbody> </table>';
-            
+            $hosp="";
+            if(count($hospitaliers) != 0){
+                    $hosp=$hospitaliers[0]->annee_universitaire_stage;
+            }
         
             PDF::writeHTMLCell(0, 0,79, 4,$headTop,0, 1, 0, true, '', true);    
             //PDF::writeHTMLCell(0, 0,88, 11,$numStage,0, 1, 0, true, '', true); 
             PDF::writeHTMLCell(0, 0,'', 24,'<hr>',0, 1, 0, true, '', true); 
-            PDF::writeHTMLCell(0, 0, '',28,'<span style="color:red"><u> Sites des Stages:</u> ('.$hospitaliers[0]->annee_universitaire_stage.') </span>', 0, 1, 0, true, '', true);
+            PDF::writeHTMLCell(0, 0, '',28,'<span style="color:red"><u> Sites des Stages:</u> ('.$hosp.') </span>', 0, 1, 0, true, '', true);
             PDF::writeHTMLCell(0, 0,'', 30,$commandesHtml,0, 1, 0, true, '', true);   
     
         PDF::Output('evaluation.pdf');
